@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripted Surprise — Premium HTML Template Marketplace</title>
+    <meta name="description" content="Handcrafted HTML greeting templates for every occasion. Wedding, Birthday, Love, Baby Shower & more. Live interactive preview, instant delivery.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           SCRIPTED SURPRISE v2 — DARK LUXURY MARKETPLACE
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --bg-0:            #05050a;
+            --bg-1:            #0a0a12;
+            --bg-2:            #10101a;
+            --bg-3:            #16162a;
+            --bg-card:         #0e0e1a;
+            --bg-card-h:       #14142a;
+            --bg-glass:        rgba(255,255,255,0.03);
+            --bg-glass-md:     rgba(255,255,255,0.055);
+
+            --gold:            #c9973a;
+            --gold-lt:         #e8c97a;
+            --gold-dk:         #8f6820;
+            --gold-glow:       rgba(201,151,58,0.12);
+            --gold-grad:       linear-gradient(135deg,#e8c97a 0%,#c9973a 50%,#a07428 100%);
+            --gold-text:       linear-gradient(135deg,#f0d990,#c9973a,#8f6820);
+
+            --txt-1:           #ede9df;
+            --txt-2:           #9e9ab0;
+            --txt-3:           #5c596e;
+            --txt-gold:        #e8c97a;
+
+            --border-0:        rgba(255,255,255,0.05);
+            --border-gold:     rgba(201,151,58,0.22);
+
+            --tier-basic:      #5b9cf6;
+            --tier-standard:   #a855f7;
+            --tier-premium:    #c9973a;
+
+            --shadow-sm:       0 2px 10px rgba(0,0,0,0.35);
+            --shadow-md:       0 6px 24px rgba(0,0,0,0.45);
+            --shadow-lg:       0 12px 48px rgba(0,0,0,0.55);
+            --shadow-gold:     0 4px 32px rgba(201,151,58,0.18);
+
+            --hdr:             68px;
+            --max:             1360px;
+            --r-sm:            8px;
+            --r-md:            14px;
+            --r-lg:            22px;
+            --r-xl:            30px;
+            --tax:             0.18;
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+        body {
+            font-family:'DM Sans',system-ui,sans-serif;
+            background:var(--bg-0); color:var(--txt-1);
+            line-height:1.6; overflow-x:hidden; min-height:100vh;
+        }
+        ::selection { background:var(--gold); color:var(--bg-0); }
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-track { background:var(--bg-1); }
+        ::-webkit-scrollbar-thumb { background:var(--gold-dk); border-radius:3px; }
+        ::-webkit-scrollbar-thumb:hover { background:var(--gold); }
+        a { color:inherit; text-decoration:none; }
+        button { font-family:inherit; cursor:pointer; border:none; outline:none; }
+        img { max-width:100%; display:block; }
+        .wrap { max-width:var(--max); margin:0 auto; padding:0 24px; }
+
+        /* ── Background ── */
+        .bg-orbs {
+            position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+        }
+        .bg-orb {
+            position:absolute; border-radius:50%; filter:blur(100px); opacity:0.04;
+            animation:orbDrift 30s ease-in-out infinite;
+        }
+        .bg-orb:nth-child(1){ width:800px;height:800px;background:#c9973a;top:-200px;left:-200px;animation-delay:0s; }
+        .bg-orb:nth-child(2){ width:600px;height:600px;background:#7c3aed;top:40%;right:-150px;animation-delay:-10s; }
+        .bg-orb:nth-child(3){ width:500px;height:500px;background:#2563eb;bottom:-150px;left:40%;animation-delay:-20s; }
+        @keyframes orbDrift {
+            0%,100%{ transform:translate(0,0) scale(1); }
+            33%{ transform:translate(40px,-40px) scale(1.05); }
+            66%{ transform:translate(-30px,30px) scale(0.97); }
+        }
+
+        /* Floating particles */
+        .particles{ position:fixed;inset:0;z-index:0;pointer-events:none; }
+        .particle{
+            position:absolute;border-radius:50%;opacity:0;
+            animation:particleFloat linear infinite;
+        }
+        @keyframes particleFloat {
+            0%{ opacity:0;transform:translateY(100vh) scale(0); }
+            10%{ opacity:0.5; }
+            90%{ opacity:0.5; }
+            100%{ opacity:0;transform:translateY(-10vh) scale(1); }
+        }
+
+        /* ── HEADER ── */
+        .header {
+            position:fixed;top:0;left:0;width:100%;height:var(--hdr);z-index:1000;
+            background:rgba(5,5,10,0.75);
+            backdrop-filter:blur(24px) saturate(160%);
+            -webkit-backdrop-filter:blur(24px) saturate(160%);
+            border-bottom:1px solid var(--border-0);
+            transition:all .4s cubic-bezier(.4,0,.2,1);
+        }
+        .header.scrolled { background:rgba(5,5,10,0.95); box-shadow:0 4px 40px rgba(0,0,0,.6); }
+        .hdr-inner {
+            max-width:var(--max);margin:0 auto;padding:0 24px;
+            height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;
+        }
+
+        /* Logo */
+        .logo { display:flex;align-items:center;gap:12px;flex-shrink:0; }
+        .logo-icon {
+            width:38px;height:38px;background:var(--gold-grad);
+            border-radius:10px;display:flex;align-items:center;justify-content:center;
+            box-shadow:0 2px 16px rgba(201,151,58,.3);
+        }
+        .logo-icon svg { width:22px;height:22px; }
+        .logo-wordmark { display:flex;flex-direction:column;line-height:1; }
+        .logo-name {
+            font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;
+            background:var(--gold-text);-webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;background-clip:text;
+            letter-spacing:.5px;
+        }
+        .logo-sub { font-size:9px;text-transform:uppercase;letter-spacing:2.5px;color:var(--txt-3);margin-top:2px; }
+
+        /* Nav */
+        .nav { display:flex;align-items:center;gap:4px; }
+        .nav-link {
+            padding:7px 16px;border-radius:100px;font-size:13.5px;font-weight:500;
+            color:var(--txt-2);transition:all .25s ease;
+        }
+        .nav-link:hover,.nav-link.active { color:var(--txt-1);background:var(--bg-glass-md); }
+
+        /* Mobile nav toggle */
+        .mob-nav-btn {
+            display:none;width:38px;height:38px;border-radius:10px;
+            background:var(--bg-glass-md);border:1px solid var(--border-0);
+            align-items:center;justify-content:center;color:var(--txt-2);
+        }
+        .mob-nav-btn svg { width:18px;height:18px; }
+
+        /* Search */
+        .hdr-search {
+            flex:1;max-width:280px;
+            display:flex;align-items:center;gap:10px;
+            background:var(--bg-glass);border:1px solid var(--border-0);
+            border-radius:100px;padding:8px 18px;transition:all .3s ease;
+        }
+        .hdr-search:focus-within {
+            border-color:var(--border-gold);
+            box-shadow:0 0 0 3px var(--gold-glow);
+            background:var(--bg-glass-md);
+        }
+        .hdr-search svg { width:15px;height:15px;color:var(--txt-3);flex-shrink:0; }
+        .hdr-search input {
+            border:none;background:none;outline:none;
+            color:var(--txt-1);font-size:13px;width:100%;font-family:'DM Sans',sans-serif;
+        }
+        .hdr-search input::placeholder { color:var(--txt-3); }
+
+        /* Header actions */
+        .hdr-actions { display:flex;align-items:center;gap:6px;flex-shrink:0; }
+        .hdr-btn {
+            width:38px;height:38px;border-radius:50%;
+            display:flex;align-items:center;justify-content:center;
+            background:transparent;color:var(--txt-2);transition:all .25s ease;
+            position:relative;
+        }
+        .hdr-btn:hover { background:var(--bg-glass-md);color:var(--txt-1); }
+        .hdr-btn svg { width:19px;height:19px; }
+        .badge {
+            position:absolute;top:3px;right:3px;
+            width:17px;height:17px;border-radius:50%;
+            background:var(--gold);color:var(--bg-0);
+            font-size:9px;font-weight:700;
+            display:flex;align-items:center;justify-content:center;
+            transform:scale(0);transition:transform .3s cubic-bezier(.68,-.55,.265,1.55);
+            border:2px solid var(--bg-0);
+        }
+        .badge.on { transform:scale(1); }
+
+        /* Mob search panel */
+        .mob-search-panel {
+            position:fixed;top:var(--hdr);left:0;right:0;z-index:999;
+            background:var(--bg-1);border-bottom:1px solid var(--border-0);
+            padding:12px 24px;
+            transform:translateY(-100%);transition:transform .3s ease;
+        }
+        .mob-search-panel.open { transform:translateY(0); }
+        .mob-search-inner {
+            display:flex;align-items:center;gap:10px;
+            background:var(--bg-glass);border:1px solid var(--border-gold);
+            border-radius:100px;padding:10px 20px;
+        }
+        .mob-search-inner svg { width:16px;height:16px;color:var(--txt-3); }
+        .mob-search-inner input { border:none;background:none;outline:none;color:var(--txt-1);font-size:14px;width:100%;font-family:'DM Sans',sans-serif; }
+
+        /* ── HERO ── */
+        .hero {
+            position:relative;z-index:1;
+            min-height:100svh;display:flex;align-items:center;
+            padding:calc(var(--hdr) + 60px) 0 80px;
+        }
+        .hero-wrap { text-align:center;max-width:860px;margin:0 auto;width:100%; }
+        .hero-eyebrow {
+            display:inline-flex;align-items:center;gap:8px;
+            padding:6px 20px;border-radius:100px;
+            background:var(--bg-glass);border:1px solid var(--border-0);
+            font-size:11px;font-weight:500;color:var(--txt-2);
+            text-transform:uppercase;letter-spacing:2px;margin-bottom:28px;
+            animation:fadeUp .8s ease both;
+        }
+        .hero-eyebrow .dot { width:6px;height:6px;border-radius:50%;background:#4ade80;animation:blink 2s infinite; }
+        @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
+
+        .hero h1 {
+            font-family:'Cormorant Garamond',serif;
+            font-size:clamp(40px,6vw,82px);font-weight:700;line-height:1.05;
+            margin-bottom:24px;animation:fadeUp .8s .1s ease both;
+        }
+        .hero h1 em {
+            font-style:italic;
+            background:var(--gold-text);-webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;background-clip:text;
+        }
+        .hero-sub {
+            font-size:17px;color:var(--txt-2);max-width:560px;
+            margin:0 auto 44px;line-height:1.75;
+            animation:fadeUp .8s .2s ease both;
+        }
+        .hero-ctas {
+            display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+            animation:fadeUp .8s .3s ease both;
+        }
+
+        @keyframes fadeUp {
+            from{ opacity:0;transform:translateY(22px); }
+            to{ opacity:1;transform:translateY(0); }
+        }
+
+        /* Stats row */
+        .hero-stats {
+            display:flex;justify-content:center;gap:0;margin-top:72px;
+            border:1px solid var(--border-0);border-radius:var(--r-lg);
+            background:var(--bg-glass);backdrop-filter:blur(12px);
+            overflow:hidden;animation:fadeUp .8s .5s ease both;
+        }
+        .stat {
+            flex:1;padding:24px 20px;text-align:center;
+            border-right:1px solid var(--border-0);
+        }
+        .stat:last-child { border-right:none; }
+        .stat-val {
+            font-family:'Cormorant Garamond',serif;
+            font-size:34px;font-weight:700;
+            background:var(--gold-text);-webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;background-clip:text;
+        }
+        .stat-lbl { font-size:12px;color:var(--txt-3);margin-top:4px; }
+
+        /* How It Works */
+        .how-it-works {
+            position:relative;z-index:1;padding:80px 0;
+        }
+        .how-grid {
+            display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+            border:1px solid var(--border-0);border-radius:var(--r-lg);overflow:hidden;
+            background:var(--border-0);margin-top:48px;
+        }
+        .how-step {
+            background:var(--bg-1);padding:36px 28px;
+            position:relative;overflow:hidden;
+        }
+        .how-step::before {
+            content:'';position:absolute;inset:0;
+            background:linear-gradient(135deg,var(--gold-glow),transparent);
+            opacity:0;transition:opacity .4s;
+        }
+        .how-step:hover::before { opacity:1; }
+        .how-num {
+            font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;
+            background:var(--gold-text);-webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;background-clip:text;
+            opacity:.25;line-height:1;margin-bottom:16px;
+        }
+        .how-icon {
+            width:44px;height:44px;border-radius:12px;
+            background:var(--gold-glow);border:1px solid var(--border-gold);
+            display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+        }
+        .how-icon svg { width:22px;height:22px;color:var(--gold); }
+        .how-step h4 { font-size:16px;font-weight:600;margin-bottom:8px; }
+        .how-step p { font-size:13.5px;color:var(--txt-2);line-height:1.65; }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display:inline-flex;align-items:center;gap:9px;
+            padding:13px 30px;border-radius:100px;
+            font-size:14px;font-weight:600;
+            transition:all .35s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;
+        }
+        .btn svg { width:17px;height:17px; }
+        .btn-gold {
+            background:var(--gold-grad);color:var(--bg-0);box-shadow:var(--shadow-gold);
+        }
+        .btn-gold::before {
+            content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+            transition:left .5s;
+        }
+        .btn-gold:hover { transform:translateY(-2px);box-shadow:0 8px 40px rgba(201,151,58,.35); }
+        .btn-gold:hover::before { left:100%; }
+        .btn-ghost {
+            background:transparent;border:1px solid var(--border-0);color:var(--txt-1);
+        }
+        .btn-ghost:hover { border-color:var(--border-gold);background:var(--gold-glow);transform:translateY(-2px); }
+        .btn-sm { padding:9px 20px;font-size:13px; }
+
+        /* ── SECTION HEADERS ── */
+        .sec-hdr { margin-bottom:40px; }
+        .sec-label { font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--gold);font-weight:600;margin-bottom:10px; }
+        .sec-title { font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;line-height:1.15; }
+        .sec-desc { color:var(--txt-2);margin-top:10px;font-size:15px; }
+        .sec-row { display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px; }
+
+        /* ── CATEGORIES ── */
+        .cat-section { position:relative;z-index:1;padding:32px 0 16px; }
+        .cat-bar {
+            display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:0 24px;
+        }
+        .cat-btn {
+            display:flex;align-items:center;gap:7px;
+            padding:9px 20px;border-radius:100px;
+            background:var(--bg-glass);border:1px solid var(--border-0);
+            color:var(--txt-2);font-size:13px;font-weight:500;
+            transition:all .25s ease;white-space:nowrap;cursor:pointer;
+        }
+        .cat-btn:hover { border-color:var(--border-gold);color:var(--txt-1); }
+        .cat-btn.active {
+            background:var(--gold-grad);color:var(--bg-0);border-color:transparent;
+            box-shadow:var(--shadow-gold);
+        }
+        .cat-btn .icon { font-size:15px; }
+        .cat-count {
+            background:rgba(255,255,255,.1);padding:2px 7px;
+            border-radius:100px;font-size:10px;font-weight:600;
+        }
+        .cat-btn.active .cat-count { background:rgba(0,0,0,.2); }
+
+        /* ── TEMPLATES SECTION ── */
+        .tpl-section { position:relative;z-index:1;padding:60px 0 100px; }
+
+        /* Filters */
+        .filters {
+            display:flex;align-items:center;justify-content:space-between;
+            flex-wrap:wrap;gap:12px;margin-bottom:32px;
+            padding:16px 20px;
+            background:var(--bg-glass);border:1px solid var(--border-0);
+            border-radius:var(--r-md);
+        }
+        .filter-chips { display:flex;gap:8px;flex-wrap:wrap; }
+        .chip {
+            padding:7px 16px;border-radius:100px;font-size:13px;font-weight:500;
+            background:transparent;border:1px solid var(--border-0);color:var(--txt-2);
+            transition:all .25s ease;cursor:pointer;display:flex;align-items:center;gap:5px;
+        }
+        .chip:hover { border-color:var(--border-gold);color:var(--txt-1); }
+        .chip.active {
+            background:var(--bg-3);border-color:var(--border-gold);color:var(--txt-1);
+        }
+        .filter-right { display:flex;align-items:center;gap:12px; }
+        .results-lbl { font-size:13px;color:var(--txt-3); }
+        .sort-sel {
+            background:var(--bg-2);border:1px solid var(--border-0);color:var(--txt-2);
+            padding:7px 12px;border-radius:var(--r-sm);font-size:13px;
+            font-family:'DM Sans',sans-serif;cursor:pointer;outline:none;
+            transition:border-color .25s;
+        }
+        .sort-sel:focus { border-color:var(--border-gold); }
+
+        /* Price range */
+        .price-filter { display:flex;align-items:center;gap:10px;font-size:13px;color:var(--txt-2); }
+        .price-slider { accent-color:var(--gold);cursor:pointer; }
+
+        /* Grid */
+        .grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+            gap:20px;
+        }
+
+        /* Card */
+        .card {
+            background:var(--bg-card);border:1px solid var(--border-0);
+            border-radius:var(--r-lg);overflow:hidden;
+            transition:all .35s cubic-bezier(.4,0,.2,1);
+            cursor:pointer;position:relative;
+        }
+        .card:hover { transform:translateY(-5px);border-color:var(--border-gold);box-shadow:var(--shadow-md),0 0 0 1px var(--border-gold); }
+        .card-img {
+            position:relative;overflow:hidden;
+            background:var(--bg-2);
+            height:210px;
+        }
+        .card-img img { width:100%;height:100%;object-fit:cover;transition:transform .5s ease; }
+        .card:hover .card-img img { transform:scale(1.04); }
+
+        /* Tier badge */
+        .tier {
+            position:absolute;top:12px;left:12px;
+            padding:4px 10px;border-radius:100px;
+            font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+            backdrop-filter:blur(8px);z-index:2;
+        }
+        .tier-basic { background:rgba(91,156,246,.2);color:#5b9cf6;border:1px solid rgba(91,156,246,.3); }
+        .tier-standard { background:rgba(168,85,247,.2);color:#a855f7;border:1px solid rgba(168,85,247,.3); }
+        .tier-premium { background:rgba(201,151,58,.2);color:#e8c97a;border:1px solid rgba(201,151,58,.3); }
+
+        /* Trending badge */
+        .trending-badge {
+            position:absolute;top:12px;right:12px;
+            padding:3px 9px;border-radius:100px;
+            background:rgba(239,68,68,.2);color:#f87171;border:1px solid rgba(239,68,68,.3);
+            font-size:10px;font-weight:700;z-index:2;
+            display:flex;align-items:center;gap:4px;
+        }
+
+        /* Fav btn */
+        .fav-btn {
+            position:absolute;bottom:12px;right:12px;z-index:2;
+            width:34px;height:34px;border-radius:50%;
+            background:rgba(5,5,10,.7);backdrop-filter:blur(8px);
+            border:1px solid var(--border-0);
+            display:flex;align-items:center;justify-content:center;
+            color:var(--txt-3);transition:all .25s ease;
+        }
+        .fav-btn:hover,.fav-btn.active { color:#ef4444;border-color:rgba(239,68,68,.4); }
+        .fav-btn.active { background:rgba(239,68,68,.15); }
+        .fav-btn svg { width:16px;height:16px; }
+        .fav-btn.active svg { fill:#ef4444; }
+
+        /* Card overlay (hover actions) */
+        .card-overlay {
+            position:absolute;inset:0;
+            background:linear-gradient(to top,rgba(5,5,10,.95) 0%,rgba(5,5,10,.4) 60%,transparent 100%);
+            display:flex;align-items:flex-end;justify-content:center;gap:10px;padding:20px;
+            opacity:0;transition:opacity .3s ease;
+        }
+        .card:hover .card-overlay { opacity:1; }
+        .card-action {
+            flex:1;padding:10px;border-radius:var(--r-sm);
+            font-size:12.5px;font-weight:600;
+            display:flex;align-items:center;justify-content:center;gap:6px;
+            transition:all .2s ease;
+        }
+        .card-action-preview {
+            background:rgba(255,255,255,.1);backdrop-filter:blur(8px);
+            border:1px solid rgba(255,255,255,.15);color:#fff;
+        }
+        .card-action-preview:hover { background:rgba(255,255,255,.18); }
+        .card-action-cart {
+            background:var(--gold-grad);color:var(--bg-0);
+        }
+        .card-action-cart:hover { box-shadow:var(--shadow-gold); }
+        .card-action svg { width:14px;height:14px; }
+
+        /* Card body */
+        .card-body { padding:18px 20px 20px; }
+        .card-cat { font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);font-weight:600;margin-bottom:6px; }
+        .card-name { font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;line-height:1.25;margin-bottom:8px; }
+        .card-desc {
+            font-size:13px;color:var(--txt-2);line-height:1.55;margin-bottom:12px;
+            display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+        }
+        .card-meta {
+            display:flex;align-items:center;gap:14px;
+            font-size:12px;color:var(--txt-3);margin-bottom:14px;
+        }
+        .card-meta-item { display:flex;align-items:center;gap:4px; }
+        .card-meta-item svg { width:13px;height:13px; }
+        .card-meta-item.stars { color:#f59e0b; }
+
+        /* WhatsApp share preview chip */
+        .wa-preview {
+            display:flex;align-items:center;gap:6px;
+            padding:5px 10px;border-radius:var(--r-sm);
+            background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);
+            font-size:11px;color:#25d366;margin-bottom:14px;
+        }
+        .wa-preview svg { width:13px;height:13px;flex-shrink:0; }
+
+        /* Price row */
+        .card-foot { display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border-0); }
+        .price { font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700; }
+        .price .cur { font-size:14px;color:var(--gold);margin-right:1px; }
+        .price-old { font-size:13px;color:var(--txt-3);text-decoration:line-through;margin-left:7px;font-family:'DM Sans',sans-serif;font-weight:400; }
+        .disc-tag { font-size:10px;font-weight:700;color:#4ade80;margin-left:6px; }
+        .add-btn {
+            padding:9px 18px;border-radius:100px;
+            background:var(--gold-grad);color:var(--bg-0);
+            font-size:12px;font-weight:700;
+            display:flex;align-items:center;gap:5px;
+            transition:all .25s ease;
+        }
+        .add-btn:hover { transform:scale(1.05);box-shadow:var(--shadow-gold); }
+        .add-btn svg { width:13px;height:13px; }
+
+        /* Empty state */
+        .empty-state {
+            grid-column:1/-1;text-align:center;padding:80px 20px;
+            display:flex;flex-direction:column;align-items:center;gap:16px;
+        }
+        .empty-state svg { width:56px;height:56px;opacity:.2; }
+        .empty-state p { font-size:16px;color:var(--txt-3); }
+
+        /* ── PREVIEW MODAL ── */
+        .modal-bg {
+            position:fixed;inset:0;z-index:2000;
+            background:rgba(0,0,0,.88);backdrop-filter:blur(12px);
+            display:flex;align-items:center;justify-content:center;
+            opacity:0;visibility:hidden;transition:all .35s ease;
+        }
+        .modal-bg.open { opacity:1;visibility:visible; }
+        .modal-bg.open .modal-box { transform:scale(1) translateY(0);opacity:1; }
+
+        .modal-box {
+            display:flex;gap:44px;max-width:1200px;width:95%;
+            max-height:92vh;transform:scale(.95) translateY(20px);
+            opacity:0;transition:all .4s cubic-bezier(.4,0,.2,1);
+            position:relative;
+        }
+        .modal-close {
+            position:absolute;top:-14px;right:-14px;
+            width:44px;height:44px;border-radius:50%;
+            background:var(--bg-2);border:1px solid var(--border-0);
+            display:flex;align-items:center;justify-content:center;
+            color:var(--txt-2);transition:all .25s ease;z-index:10;
+        }
+        .modal-close:hover { background:rgba(239,68,68,.2);color:#ef4444;border-color:rgba(239,68,68,.4); }
+        .modal-close svg { width:18px;height:18px; }
+
+        /* Phone frame */
+        .phone-col { display:flex;flex-direction:column;align-items:center;flex-shrink:0; }
+        .phone-frame {
+            width:300px;height:620px;
+            background:var(--bg-0);
+            border:2px solid rgba(255,255,255,.1);
+            border-radius:40px;overflow:hidden;position:relative;
+            box-shadow:0 24px 80px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.06);
+        }
+        .phone-frame.fs {
+            position:fixed;inset:0;width:100%;height:100%;
+            border-radius:0;z-index:3000;border:none;
+        }
+        .phone-notch {
+            position:absolute;top:0;left:50%;transform:translateX(-50%);
+            width:110px;height:26px;z-index:10;
+            background:var(--bg-0);border-radius:0 0 16px 16px;
+            display:flex;align-items:center;justify-content:center;gap:5px;
+        }
+        .phone-notch .cam { width:9px;height:9px;border-radius:50%;background:var(--bg-2);border:1px solid var(--border-0); }
+        .phone-screen {
+            width:100%;height:100%;overflow-y:auto;overflow-x:hidden;
+            background:var(--bg-1);
+        }
+        .phone-screen::-webkit-scrollbar { width:3px; }
+        .phone-screen::-webkit-scrollbar-thumb { background:var(--gold-dk);border-radius:3px; }
+
+        /* Phone controls */
+        .phone-ctrls { display:flex;gap:10px;margin-top:18px; }
+        .p-ctrl {
+            padding:8px 16px;border-radius:100px;
+            background:var(--bg-glass);border:1px solid var(--border-0);
+            color:var(--txt-2);font-size:12px;font-weight:500;
+            display:flex;align-items:center;gap:6px;transition:all .25s ease;
+        }
+        .p-ctrl:hover { border-color:var(--border-gold);color:var(--txt-1); }
+        .p-ctrl svg { width:14px;height:14px; }
+
+        /* Swipe indicator */
+        .swipe-hint {
+            display:flex;align-items:center;gap:6px;
+            font-size:11px;color:var(--txt-3);margin-top:10px;
+        }
+        .swipe-hint svg { width:12px;height:12px; }
+
+        /* Modal right panel */
+        .modal-right {
+            flex:1;display:flex;flex-direction:column;gap:22px;
+            overflow-y:auto;max-height:90vh;padding-right:6px;
+        }
+        .modal-right::-webkit-scrollbar { width:3px; }
+        .modal-right::-webkit-scrollbar-thumb { background:var(--gold-dk); }
+
+        .m-title { font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;line-height:1.2; }
+        .m-cat { font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:600;margin-top:6px; }
+        .m-desc { font-size:14px;color:var(--txt-2);line-height:1.7; }
+        .m-rating { display:flex;align-items:center;gap:8px;font-size:13px; }
+        .stars { display:flex;gap:2px; }
+        .star { width:15px;height:15px;color:#f59e0b; }
+
+        /* Feature grid */
+        .feat-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+        .feat-item {
+            padding:14px;border-radius:var(--r-md);
+            background:var(--bg-glass);border:1px solid var(--border-0);
+            display:flex;align-items:center;gap:10px;
+        }
+        .feat-ico { width:34px;height:34px;border-radius:10px;background:var(--gold-glow);border:1px solid var(--border-gold);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+        .feat-ico svg { width:15px;height:15px;color:var(--gold); }
+        .feat-lbl { font-size:11px;color:var(--txt-3); }
+        .feat-val { font-size:13px;font-weight:600; }
+
+        /* Price box */
+        .price-box {
+            padding:22px;border-radius:var(--r-lg);
+            background:var(--bg-glass);border:1px solid var(--border-0);
+        }
+        .price-main { display:flex;align-items:baseline;gap:12px;margin-bottom:14px; }
+        .price-big { font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700; }
+        .price-big .cur { font-size:22px;color:var(--gold); }
+        .price-strike { font-size:20px;color:var(--txt-3);text-decoration:line-through; }
+        .price-save { padding:3px 10px;border-radius:6px;background:rgba(74,222,128,.15);color:#4ade80;font-size:12px;font-weight:700; }
+        .price-ctas { display:flex;flex-direction:column;gap:10px; }
+        .cta-primary {
+            width:100%;padding:15px;border-radius:var(--r-md);
+            background:var(--gold-grad);color:var(--bg-0);
+            font-size:15px;font-weight:700;
+            display:flex;align-items:center;justify-content:center;gap:10px;
+            transition:all .3s ease;
+        }
+        .cta-primary:hover { transform:translateY(-2px);box-shadow:0 8px 40px rgba(201,151,58,.3); }
+        .cta-secondary {
+            width:100%;padding:13px;border-radius:var(--r-md);
+            background:transparent;border:1px solid var(--border-0);
+            color:var(--txt-1);font-size:14px;font-weight:600;
+            display:flex;align-items:center;justify-content:center;gap:10px;
+            transition:all .25s ease;
+        }
+        .cta-secondary:hover { border-color:var(--border-gold);background:var(--gold-glow); }
+
+        /* Delivery info */
+        .delivery-row {
+            display:flex;align-items:center;justify-content:center;gap:20px;
+            font-size:12px;color:var(--txt-3);
+        }
+        .d-item { display:flex;align-items:center;gap:5px; }
+        .d-item svg { width:14px;height:14px;color:var(--gold); }
+
+        /* ── CART DRAWER ── */
+        .cart-overlay {
+            position:fixed;inset:0;z-index:2500;
+            background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
+            opacity:0;visibility:hidden;transition:all .3s ease;
+        }
+        .cart-overlay.open { opacity:1;visibility:visible; }
+        .cart-drawer {
+            position:fixed;top:0;right:0;bottom:0;
+            width:420px;max-width:100vw;z-index:2501;
+            background:var(--bg-1);border-left:1px solid var(--border-0);
+            transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);
+            display:flex;flex-direction:column;
+        }
+        .cart-drawer.open { transform:translateX(0); }
+        .cart-hdr {
+            padding:22px 24px;border-bottom:1px solid var(--border-0);
+            display:flex;align-items:center;justify-content:space-between;
+        }
+        .cart-hdr h3 { font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700; }
+        .cart-hdr-sub { font-size:13px;color:var(--txt-3); }
+        .cart-close { background:none;color:var(--txt-3);padding:4px;transition:color .2s; }
+        .cart-close:hover { color:var(--txt-1); }
+        .cart-close svg { width:20px;height:20px; }
+        .cart-items { flex:1;overflow-y:auto;padding:14px 24px; }
+        .cart-item {
+            display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border-0);
+        }
+        .ci-img { width:60px;height:60px;border-radius:var(--r-sm);overflow:hidden;background:var(--bg-2);flex-shrink:0; }
+        .ci-img img { width:100%;height:100%;object-fit:cover; }
+        .ci-info { flex:1; }
+        .ci-name { font-size:13.5px;font-weight:600;margin-bottom:3px; }
+        .ci-cat { font-size:11px;color:var(--txt-3);margin-bottom:7px; }
+        .ci-price { font-size:15px;font-weight:600;color:var(--gold); }
+        .ci-rm { background:none;color:var(--txt-3);padding:4px;transition:color .2s; }
+        .ci-rm:hover { color:#ef4444; }
+        .ci-rm svg { width:15px;height:15px; }
+        .cart-empty-state {
+            flex:1;display:flex;flex-direction:column;
+            align-items:center;justify-content:center;gap:14px;color:var(--txt-3);
+        }
+        .cart-empty-state svg { width:48px;height:48px;opacity:.25; }
+        .cart-empty-state p { font-size:14px; }
+        .cart-foot {
+            padding:22px 24px;border-top:1px solid var(--border-0);background:var(--bg-2);
+        }
+        .cart-row { display:flex;justify-content:space-between;font-size:13.5px;color:var(--txt-2);margin-bottom:7px; }
+        .cart-total-row { display:flex;justify-content:space-between;font-size:20px;font-weight:700;margin-bottom:18px; }
+        .cart-total-row span:last-child { color:var(--gold); }
+        .cart-tax-note { font-size:11px;color:var(--txt-3);text-align:right;margin-bottom:14px;margin-top:-6px; }
+        .checkout-btn {
+            width:100%;padding:15px;border-radius:var(--r-md);
+            background:var(--gold-grad);color:var(--bg-0);
+            font-size:15px;font-weight:700;
+            display:flex;align-items:center;justify-content:center;gap:10px;
+            transition:all .3s ease;
+        }
+        .checkout-btn:hover { transform:translateY(-2px);box-shadow:var(--shadow-gold); }
+
+        /* ── CHAT WIDGET ── */
+        .chat-fab {
+            position:fixed;bottom:24px;right:24px;z-index:1500;
+            width:58px;height:58px;border-radius:50%;
+            background:var(--gold-grad);color:var(--bg-0);
+            display:flex;align-items:center;justify-content:center;
+            box-shadow:0 4px 24px rgba(201,151,58,.45);
+            transition:all .3s ease;cursor:pointer;
+        }
+        .chat-fab:hover { transform:scale(1.1);box-shadow:0 6px 32px rgba(201,151,58,.55); }
+        .chat-fab svg { width:25px;height:25px; }
+        .chat-pulse {
+            position:absolute;inset:-4px;border-radius:50%;
+            border:2px solid var(--gold);animation:pulse 2.5s infinite;
+        }
+        @keyframes pulse { 0%{ transform:scale(1);opacity:.8; } 100%{ transform:scale(1.45);opacity:0; } }
+        .chat-badge {
+            position:absolute;top:-2px;right:-2px;
+            width:20px;height:20px;border-radius:50%;
+            background:#ef4444;color:#fff;
+            font-size:10px;font-weight:700;
+            display:flex;align-items:center;justify-content:center;
+            border:2px solid var(--bg-0);
+        }
+        .chat-win {
+            position:fixed;bottom:94px;right:24px;z-index:1501;
+            width:370px;max-width:calc(100vw - 48px);
+            height:500px;max-height:calc(100vh - 140px);
+            background:var(--bg-1);
+            border:1px solid var(--border-0);border-radius:var(--r-xl);
+            box-shadow:var(--shadow-lg);
+            display:flex;flex-direction:column;
+            opacity:0;visibility:hidden;transform:translateY(20px) scale(.95);
+            transition:all .3s cubic-bezier(.4,0,.2,1);overflow:hidden;
+        }
+        .chat-win.open { opacity:1;visibility:visible;transform:translateY(0) scale(1); }
+        .chat-hdr {
+            padding:16px 18px;background:var(--bg-2);border-bottom:1px solid var(--border-0);
+            display:flex;align-items:center;gap:12px;
+        }
+        .chat-avatar {
+            width:40px;height:40px;border-radius:50%;
+            background:var(--gold-grad);
+            display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+        }
+        .chat-agent { flex:1; }
+        .chat-agent-name { font-size:14px;font-weight:600; }
+        .chat-agent-sub { font-size:11px;color:var(--txt-3);display:flex;align-items:center;gap:5px;margin-top:2px; }
+        .online-dot { width:6px;height:6px;border-radius:50%;background:#4ade80;animation:blink 2s infinite; }
+        .chat-hdr-close { background:none;color:var(--txt-3);transition:color .2s; }
+        .chat-hdr-close:hover { color:var(--txt-1); }
+        .chat-hdr-close svg { width:18px;height:18px; }
+        .chat-msgs { flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:10px; }
+        .chat-msgs::-webkit-scrollbar { width:3px; }
+        .msg {
+            max-width:82%;padding:10px 14px;border-radius:16px;
+            font-size:13.5px;line-height:1.55;position:relative;
+        }
+        .msg.bot {
+            background:var(--bg-3);border:1px solid var(--border-0);
+            border-bottom-left-radius:4px;align-self:flex-start;
+        }
+        .msg.user {
+            background:var(--gold-grad);color:var(--bg-0);
+            border-bottom-right-radius:4px;align-self:flex-end;
+        }
+        .msg-time { font-size:10px;opacity:.5;margin-top:5px; }
+        .msg.user .msg-time { text-align:right; }
+        .quick-replies { display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px; }
+        .qr-btn {
+            padding:6px 13px;border-radius:100px;
+            background:var(--bg-glass);border:1px solid var(--border-gold);
+            color:var(--txt-gold);font-size:12px;font-weight:500;
+            transition:all .2s ease;cursor:pointer;
+        }
+        .qr-btn:hover { background:var(--gold-glow);color:var(--txt-1); }
+        .chat-input-row {
+            display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--border-0);
+            background:var(--bg-2);
+        }
+        .chat-inp {
+            flex:1;background:var(--bg-3);border:1px solid var(--border-0);
+            color:var(--txt-1);padding:10px 14px;border-radius:100px;
+            font-size:13px;font-family:'DM Sans',sans-serif;outline:none;
+            transition:border-color .2s;
+        }
+        .chat-inp:focus { border-color:var(--border-gold); }
+        .chat-inp::placeholder { color:var(--txt-3); }
+        .chat-send {
+            width:38px;height:38px;border-radius:50%;
+            background:var(--gold-grad);color:var(--bg-0);
+            display:flex;align-items:center;justify-content:center;flex-shrink:0;
+            transition:all .25s;
+        }
+        .chat-send:hover { transform:scale(1.08);box-shadow:var(--shadow-gold); }
+        .chat-send svg { width:16px;height:16px; }
+        /* Typing indicator */
+        .typing {
+            display:flex;gap:4px;align-items:center;padding:10px 16px;
+            background:var(--bg-3);border:1px solid var(--border-0);
+            border-radius:16px;border-bottom-left-radius:4px;
+            width:fit-content;
+        }
+        .t-dot { width:7px;height:7px;border-radius:50%;background:var(--txt-3);animation:typingDot 1.2s infinite; }
+        .t-dot:nth-child(2){ animation-delay:.2s; }
+        .t-dot:nth-child(3){ animation-delay:.4s; }
+        @keyframes typingDot { 0%,60%,100%{ transform:translateY(0); } 30%{ transform:translateY(-6px); } }
+
+        /* ── CUSTOM ORDER SECTION ── */
+        .custom-sec { position:relative;z-index:1;padding:80px 0; }
+        .custom-card {
+            background:var(--bg-card);border:1px solid var(--border-0);
+            border-radius:var(--r-xl);padding:64px;text-align:center;
+            position:relative;overflow:hidden;
+        }
+        .custom-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold-grad); }
+        .custom-card::after {
+            content:'';position:absolute;top:-200px;right:-200px;
+            width:400px;height:400px;border-radius:50%;
+            background:radial-gradient(circle,var(--gold-glow),transparent 70%);pointer-events:none;
+        }
+        .custom-card h2 { font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;margin-bottom:14px;position:relative; }
+        .custom-card p { font-size:16px;color:var(--txt-2);max-width:520px;margin:0 auto 32px;position:relative; }
+        .custom-feats { display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-bottom:36px;position:relative; }
+        .custom-feat { display:flex;align-items:center;gap:8px;font-size:14px;color:var(--txt-2); }
+        .custom-feat svg { width:17px;height:17px;color:var(--gold); }
+        .custom-pricing {
+            display:inline-flex;align-items:center;gap:8px;
+            padding:8px 20px;border-radius:100px;
+            background:var(--gold-glow);border:1px solid var(--border-gold);
+            font-size:13px;color:var(--txt-gold);font-weight:500;margin-bottom:28px;
+        }
+
+        /* ── TOAST ── */
+        .toast-container { position:fixed;bottom:90px;right:24px;z-index:3000;display:flex;flex-direction:column;gap:8px; }
+        .toast {
+            padding:12px 18px;border-radius:var(--r-md);
+            background:var(--bg-3);border:1px solid var(--border-0);
+            box-shadow:var(--shadow-lg);
+            display:flex;align-items:center;gap:10px;
+            font-size:13.5px;min-width:260px;
+            animation:toastIn .4s ease, toastOut .4s ease 2.6s forwards;
+        }
+        @keyframes toastIn{ from{ opacity:0;transform:translateX(100px); } to{ opacity:1;transform:translateX(0); } }
+        @keyframes toastOut{ from{ opacity:1; } to{ opacity:0;transform:translateX(100px); } }
+        .toast-ico { width:19px;height:19px;flex-shrink:0; }
+        .toast.success .toast-ico { color:#4ade80; }
+        .toast.info .toast-ico { color:var(--gold); }
+        .toast.error .toast-ico { color:#ef4444; }
+
+        /* ── FOOTER ── */
+        .footer {
+            position:relative;z-index:1;
+            border-top:1px solid var(--border-0);padding:64px 0 32px;
+        }
+        .foot-grid {
+            display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;
+        }
+        .foot-brand p { font-size:14px;color:var(--txt-2);margin-top:16px;line-height:1.7;max-width:280px; }
+        .socials { display:flex;gap:10px;margin-top:20px; }
+        .social {
+            width:36px;height:36px;border-radius:50%;
+            background:var(--bg-glass);border:1px solid var(--border-0);
+            display:flex;align-items:center;justify-content:center;
+            color:var(--txt-2);transition:all .25s ease;
+        }
+        .social:hover { border-color:var(--border-gold);color:var(--gold);background:var(--gold-glow); }
+        .social svg { width:16px;height:16px; }
+        .foot-col h4 { font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--txt-2);margin-bottom:18px; }
+        .foot-col ul { list-style:none; }
+        .foot-col li { margin-bottom:10px; }
+        .foot-col a { font-size:14px;color:var(--txt-3);transition:color .2s; }
+        .foot-col a:hover { color:var(--txt-gold); }
+        .foot-bottom {
+            padding-top:28px;border-top:1px solid var(--border-0);
+            display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+        }
+        .foot-legal { display:flex;gap:20px; }
+        .foot-legal a { font-size:12px;color:var(--txt-3);transition:color .2s; }
+        .foot-legal a:hover { color:var(--txt-2); }
+        .foot-copy { font-size:12px;color:var(--txt-3); }
+
+        /* ── MOBILE MENU ── */
+        .mob-menu {
+            position:fixed;top:var(--hdr);left:0;right:0;bottom:0;z-index:990;
+            background:var(--bg-0);border-top:1px solid var(--border-0);
+            transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+            padding:24px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;
+        }
+        .mob-menu.open { transform:translateX(0); }
+        .mob-nav-link {
+            padding:14px 18px;border-radius:var(--r-md);font-size:16px;font-weight:500;
+            color:var(--txt-2);transition:all .2s;border:1px solid transparent;
+        }
+        .mob-nav-link:hover { color:var(--txt-1);background:var(--bg-glass);border-color:var(--border-0); }
+        .mob-nav-divider { height:1px;background:var(--border-0);margin:8px 0; }
+
+        /* ── ANIMATIONS ── */
+        .fade-in { opacity:0;transform:translateY(18px);transition:all .55s ease; }
+        .fade-in.visible { opacity:1;transform:translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:1100px) {
+            .hdr-search { display:none; }
+            .mob-nav-btn { display:flex; }
+            .nav { display:none; }
+            .foot-grid { grid-template-columns:1fr 1fr; }
+            .modal-box { flex-direction:column;align-items:center;max-height:85vh; }
+            .modal-right { max-height:none;width:100%; }
+            .how-grid { grid-template-columns:1fr; }
+        }
+        @media(max-width:768px) {
+            :root { --hdr:60px; }
+            .hero h1 { font-size:clamp(34px,8vw,52px); }
+            .hero-stats { flex-direction:column;gap:0; }
+            .stat { border-right:none;border-bottom:1px solid var(--border-0);padding:18px; }
+            .stat:last-child { border-bottom:none; }
+            .grid { grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); }
+            .phone-frame { width:260px;height:560px; }
+            .custom-card { padding:36px 22px; }
+            .foot-grid { grid-template-columns:1fr; }
+            .foot-bottom { flex-direction:column;align-items:center;text-align:center; }
+        }
+        @media(max-width:480px) {
+            .grid { grid-template-columns:1fr; }
+            .hero-ctas { flex-direction:column;align-items:center; }
+            .feat-grid { grid-template-columns:1fr; }
+            .filters { flex-direction:column;align-items:flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═ BACKGROUND ═ -->
+<div class="bg-orbs">
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+</div>
+<div class="particles" id="particles"></div>
+
+<!-- ═ HEADER ═ -->
+<header class="header" id="header">
+    <div class="hdr-inner">
+        <a href="#" class="logo" aria-label="Scripted Surprise Home">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#05050a" stroke-width="2.2" stroke-linecap="round">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+            </div>
+            <div class="logo-wordmark">
+                <span class="logo-name">Scripted Surprise</span>
+                <span class="logo-sub">Template Marketplace</span>
+            </div>
+        </a>
+
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <a href="#hero" class="nav-link active">Home</a>
+            <a href="#templates" class="nav-link">Templates</a>
+            <a href="#custom" class="nav-link">Custom Order</a>
+            <a href="#footer" class="nav-link">About</a>
+        </nav>
+
+        <div class="hdr-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="searchInput" placeholder="Search templates…" oninput="handleSearch(this.value)" aria-label="Search templates">
+        </div>
+
+        <div class="hdr-actions">
+            <button class="hdr-btn" id="mobSearchBtn" onclick="toggleMobSearch()" aria-label="Search" style="display:none">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </button>
+            <button class="hdr-btn" onclick="toggleWishlist()" aria-label="Wishlist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span class="badge" id="wishBadge">0</span>
+            </button>
+            <button class="hdr-btn" onclick="toggleCart()" aria-label="Shopping cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                <span class="badge" id="cartBadge">0</span>
+            </button>
+            <button class="mob-nav-btn" onclick="toggleMobMenu()" aria-label="Menu" aria-expanded="false" id="menuBtn">
+                <svg id="menuIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile search panel -->
+<div class="mob-search-panel" id="mobSearchPanel">
+    <div class="mob-search-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search templates…" oninput="handleSearch(this.value)" aria-label="Search templates">
+    </div>
+</div>
+
+<!-- Mobile menu -->
+<div class="mob-menu" id="mobMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="#hero" class="mob-nav-link" onclick="closeMobMenu()">🏠 Home</a>
+    <a href="#templates" class="mob-nav-link" onclick="closeMobMenu()">🎨 Templates</a>
+    <a href="#custom" class="mob-nav-link" onclick="closeMobMenu()">✨ Custom Order</a>
+    <a href="#footer" class="mob-nav-link" onclick="closeMobMenu()">ℹ️ About</a>
+    <div class="mob-nav-divider"></div>
+    <a href="#" class="mob-nav-link" onclick="closeMobMenu();openChat()">💬 Contact Us</a>
+</div>
+
+<!-- ═ HERO ═ -->
+<section class="hero" id="hero">
+    <div class="wrap">
+        <div class="hero-wrap">
+            <div class="hero-eyebrow">
+                <span class="dot"></span>
+                New Templates Added Daily
+            </div>
+            <h1>
+                Premium HTML Greetings<br>
+                for <em>Every Occasion</em>
+            </h1>
+            <p class="hero-sub">
+                Handcrafted digital greeting templates that open beautifully on any phone.
+                Browse, preview live, and get delivered instantly.
+            </p>
+            <div class="hero-ctas">
+                <a href="#templates" class="btn btn-gold">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                    Browse Templates
+                </a>
+                <a href="#custom" class="btn btn-ghost">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                    Request Custom
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-val" data-target="150" data-suffix="+">150+</div>
+                    <div class="stat-lbl">Premium Templates</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" data-target="12">12</div>
+                    <div class="stat-lbl">Occasions</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val" data-target="500" data-suffix="+">500+</div>
+                    <div class="stat-lbl">Happy Customers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-val">⚡ 5min</div>
+                    <div class="stat-lbl">Avg. Delivery</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═ HOW IT WORKS ═ -->
+<section class="how-it-works">
+    <div class="wrap">
+        <div class="sec-hdr" style="text-align:center">
+            <div class="sec-label">Simple Process</div>
+            <h2 class="sec-title">How It Works</h2>
+        </div>
+        <div class="how-grid">
+            <div class="how-step">
+                <div class="how-num">01</div>
+                <div class="how-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <h4>Browse & Preview</h4>
+                <p>Explore templates by occasion. Click Preview to interact with the live template in a phone frame — exactly as your recipient will see it.</p>
+            </div>
+            <div class="how-step">
+                <div class="how-num">02</div>
+                <div class="how-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                </div>
+                <h4>Order via Chat</h4>
+                <p>Add to cart and checkout — our chat bot collects your details and I personally follow up within minutes to confirm and process payment.</p>
+            </div>
+            <div class="how-step">
+                <div class="how-num">03</div>
+                <div class="how-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h4>Receive & Share</h4>
+                <p>Your personalized HTML file lands with you in minutes. Share the link and watch your recipient's face light up when they open it.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═ CATEGORIES ═ -->
+<section class="cat-section" id="catSection">
+    <div class="cat-bar" id="catBar"><!-- Populated by JS --></div>
+</section>
+
+<!-- ═ TEMPLATES SECTION ═ -->
+<section class="tpl-section" id="templates">
+    <div class="wrap">
+        <div class="sec-row sec-hdr">
+            <div>
+                <div class="sec-label">Our Collection</div>
+                <h2 class="sec-title">Explore Templates</h2>
+                <p class="sec-desc">Discover handcrafted templates for every celebration</p>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-chips">
+                <button class="chip active" onclick="filterTier('all',this)">All Tiers</button>
+                <button class="chip" onclick="filterTier('Basic',this)">
+                    <span style="color:var(--tier-basic)">●</span> Basic
+                </button>
+                <button class="chip" onclick="filterTier('Standard',this)">
+                    <span style="color:var(--tier-standard)">●</span> Standard
+                </button>
+                <button class="chip" onclick="filterTier('Premium',this)">
+                    <span style="color:var(--tier-premium)">●</span> Premium
+                </button>
+            </div>
+            <div class="filter-right">
+                <span class="results-lbl" id="resultsCount">12 templates</span>
+                <select class="sort-sel" onchange="sortTemplates(this.value)" aria-label="Sort templates">
+                    <option value="popular">Most Popular</option>
+                    <option value="newest">Newest First</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Top Rated</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid" id="grid"><!-- Populated by JS --></div>
+    </div>
+</section>
+
+<!-- ═ CUSTOM ORDER ═ -->
+<section class="custom-sec" id="custom">
+    <div class="wrap">
+        <div class="custom-card fade-in">
+            <div class="sec-label">Made For You</div>
+            <h2>Need Something <span style="background:var(--gold-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Unique?</span></h2>
+            <p>Can't find the perfect template? I'll craft a custom HTML greeting tailored to your exact vision, colours, and occasion — delivered in 24 hours.</p>
+            <div class="custom-pricing">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Custom orders start at ₹599
+            </div>
+            <div class="custom-feats">
+                <div class="custom-feat">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    100% Unique Design
+                </div>
+                <div class="custom-feat">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    Delivered in 24 Hours
+                </div>
+                <div class="custom-feat">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    Unlimited Revisions
+                </div>
+            </div>
+            <button class="btn btn-gold" onclick="openChat()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                Start Custom Order
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ═ FOOTER ═ -->
+<footer class="footer" id="footer">
+    <div class="wrap">
+        <div class="foot-grid">
+            <div class="foot-brand">
+                <a href="#" class="logo" aria-label="Scripted Surprise">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#05050a" stroke-width="2.2" stroke-linecap="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    </div>
+                    <div class="logo-wordmark">
+                        <span class="logo-name">Scripted Surprise</span>
+                        <span class="logo-sub">Template Marketplace</span>
+                    </div>
+                </a>
+                <p>Premium HTML greeting templates crafted with care. Making every celebration unforgettable with stunning digital experiences.</p>
+                <div class="socials">
+                    <a href="#" class="social" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                    <a href="#" class="social" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                    <a href="#" class="social" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+                </div>
+            </div>
+            <div class="foot-col">
+                <h4>Templates</h4>
+                <ul>
+                    <li><a href="#">Wedding</a></li>
+                    <li><a href="#">Birthday</a></li>
+                    <li><a href="#">Anniversary</a></li>
+                    <li><a href="#">Love & Romance</a></li>
+                    <li><a href="#">Baby Shower</a></li>
+                    <li><a href="#">Graduation</a></li>
+                </ul>
+            </div>
+            <div class="foot-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div class="foot-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Delivery Info</a></li>
+                    <li><a href="#">Custom Orders</a></li>
+                    <li><a href="#">Payment Methods</a></li>
+                    <li><a href="#" onclick="openChat()">Live Chat</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <p class="foot-copy">© 2025 Scripted Surprise. All rights reserved. Made with ♥ for every celebration.</p>
+            <div class="foot-legal">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Refunds</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ═ PREVIEW MODAL ═ -->
+<div class="modal-bg" id="previewModal" role="dialog" aria-modal="true" aria-label="Template preview">
+    <div class="modal-box" id="modalBox">
+        <button class="modal-close" onclick="closePreview()" aria-label="Close preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+
+        <!-- Phone Column -->
+        <div class="phone-col">
+            <div class="phone-frame" id="phoneFrame">
+                <div class="phone-notch"><div class="cam"></div></div>
+                <div class="phone-screen" id="phoneScreen"><!-- template loaded here --></div>
+            </div>
+            <div class="phone-ctrls">
+                <button class="p-ctrl" onclick="toggleFullscreen()" id="fsBtn" aria-label="Toggle fullscreen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                    Fullscreen
+                </button>
+                <button class="p-ctrl" onclick="scrollPhone(0)" aria-label="Scroll to top">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    Top
+                </button>
+                <button class="p-ctrl" onclick="scrollPhone(9999)" aria-label="Scroll to bottom">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    Bottom
+                </button>
+            </div>
+            <p class="swipe-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                Scroll inside the phone to interact
+            </p>
+        </div>
+
+        <!-- Info Column -->
+        <div class="modal-right" id="modalRight">
+            <div>
+                <div class="m-cat" id="mCat"></div>
+                <h2 class="m-title" id="mTitle"></h2>
+                <div class="m-rating" style="margin-top:10px">
+                    <div class="stars" id="mStars"></div>
+                    <span id="mRating" style="font-size:14px;font-weight:600"></span>
+                    <span id="mOrders" style="font-size:13px;color:var(--txt-3)"></span>
+                </div>
+            </div>
+            <p class="m-desc" id="mDesc"></p>
+            <div class="feat-grid" id="mFeats"></div>
+
+            <div class="price-box">
+                <div class="price-main">
+                    <div class="price-big"><span class="cur">₹</span><span id="mPrice"></span></div>
+                    <span class="price-strike" id="mPriceOld"></span>
+                    <span class="price-save" id="mDisc"></span>
+                </div>
+                <div class="delivery-row" style="margin-bottom:16px">
+                    <div class="d-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                        Instant delivery
+                    </div>
+                    <div class="d-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                        HTML file
+                    </div>
+                    <div class="d-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Secure payment
+                    </div>
+                </div>
+                <div class="price-ctas">
+                    <button class="cta-primary" onclick="addToCartFromPreview()" aria-label="Add to cart">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        Add to Cart
+                    </button>
+                    <button class="cta-secondary" onclick="openChat()" aria-label="Buy now via chat">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                        Buy Now via Chat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═ CART DRAWER ═ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<aside class="cart-drawer" id="cartDrawer" role="complementary" aria-label="Shopping cart">
+    <div class="cart-hdr">
+        <div>
+            <h3>Your Cart</h3>
+            <div class="cart-hdr-sub" id="cartCount">0 items</div>
+        </div>
+        <button class="cart-close" onclick="toggleCart()" aria-label="Close cart">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <div class="cart-empty-state" id="cartEmpty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            <p>Your cart is empty</p>
+            <a href="#templates" onclick="toggleCart()" class="btn btn-ghost btn-sm">Browse Templates</a>
+        </div>
+    </div>
+    <div class="cart-foot" id="cartFoot" style="display:none">
+        <div class="cart-row"><span>Subtotal</span><span id="cartSub">₹0</span></div>
+        <div class="cart-row"><span>GST (18%)</span><span id="cartTax">₹0</span></div>
+        <div class="cart-total-row"><span>Total</span><span id="cartTotal">₹0</span></div>
+        <div class="cart-tax-note">GST included in final pricing</div>
+        <button class="checkout-btn" onclick="handleCheckout()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            Proceed to Checkout
+        </button>
+    </div>
+</aside>
+
+<!-- ═ CHAT WIDGET ═ -->
+<button class="chat-fab" onclick="toggleChat()" aria-label="Open chat" id="chatFab">
+    <div class="chat-pulse"></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+    </svg>
+    <span class="chat-badge" id="chatBadge" style="display:none">1</span>
+</button>
+
+<div class="chat-win" id="chatWin" role="dialog" aria-modal="true" aria-label="Chat support">
+    <div class="chat-hdr">
+        <div class="chat-avatar">✦</div>
+        <div class="chat-agent">
+            <div class="chat-agent-name">Scripted Support</div>
+            <div class="chat-agent-sub"><span class="online-dot"></span> Online · Usually replies in minutes</div>
+        </div>
+        <button class="chat-hdr-close" onclick="toggleChat()" aria-label="Close chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+    </div>
+    <div class="chat-msgs" id="chatMsgs"><!-- Messages rendered by JS --></div>
+    <div class="quick-replies" id="quickReplies">
+        <button class="qr-btn" onclick="sendQuick('🎂 Birthday')">🎂 Birthday</button>
+        <button class="qr-btn" onclick="sendQuick('💍 Wedding')">💍 Wedding</button>
+        <button class="qr-btn" onclick="sendQuick('💰 Pricing')">💰 Pricing</button>
+        <button class="qr-btn" onclick="sendQuick('✨ Custom order')">✨ Custom</button>
+    </div>
+    <div class="chat-input-row">
+        <input class="chat-inp" id="chatInp" type="text" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendMsg()" aria-label="Chat message">
+        <button class="chat-send" onclick="sendMsg()" aria-label="Send message">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+    </div>
+</div>
+
+<!-- ═ TOAST ═ -->
+<div class="toast-container" id="toasts" aria-live="polite"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
+const TAX_RATE = 0.18;
+
+const categories = [
+    { id:'all',        name:'All Templates', icon:'✦', count:12 },
+    { id:'wedding',    name:'Wedding',        icon:'💍', count:3  },
+    { id:'birthday',   name:'Birthday',       icon:'🎂', count:2  },
+    { id:'anniversary',name:'Anniversary',    icon:'❤️', count:1  },
+    { id:'love',       name:'Love',           icon:'🌹', count:2  },
+    { id:'baby',       name:'Baby Shower',    icon:'👶', count:1  },
+    { id:'graduation', name:'Graduation',     icon:'🎓', count:1  },
+    { id:'engagement', name:'Engagement',     icon:'💎', count:1  },
+    { id:'congrats',   name:'Congrats',       icon:'🏆', count:1  },
+];
+
+// ── EMBEDDED SAMPLE TEMPLATES (HTML string per template) ──
+// These are used in the phone preview. Replace with real template HTML later.
+const templateHTMLs = {
+1: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0010;font-family:Georgia,serif;min-height:100vh;overflow-x:hidden}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}.petal{position:fixed;top:-10px;font-size:16px;animation:fall linear infinite;opacity:.7}@keyframes fall{to{top:110vh;transform:rotate(360deg)}}.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;padding:40px 20px 20px}.crown{font-size:50px;animation:float 3s ease-in-out infinite}.title{font-size:28px;font-weight:700;color:#f0d78c;margin:16px 0 8px;text-shadow:0 0 20px rgba(240,215,140,.4)}.subtitle{font-size:14px;color:#c9a96e;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px}.divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,#d4a843,transparent);margin:0 auto 20px}.msg{color:#e0d0c0;font-size:16px;line-height:1.8;max-width:320px;margin:0 auto 32px;font-style:italic}.names{display:flex;align-items:center;justify-content:center;gap:16px;margin:24px 0}.name-box{text-align:center}.nm{font-size:26px;color:#f0d78c;font-weight:700}.role{font-size:10px;color:#a08060;letter-spacing:2px;text-transform:uppercase;margin-top:4px}.amp{font-size:36px;color:#d4a843;font-style:italic;opacity:.7}.date-sec{text-align:center;padding:24px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);border-radius:16px;margin:0 20px 24px}.date-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#a08060;margin-bottom:8px}.date{font-size:20px;color:#f0d78c;font-weight:700}.venue{font-size:13px;color:#c9a96e;margin-top:6px}.footer-msg{text-align:center;padding:20px;font-size:12px;color:#706050;font-style:italic}</style></head><body>
+<div class="petal" style="left:10%;animation-duration:8s;animation-delay:0s">🌸</div>
+<div class="petal" style="left:30%;animation-duration:6s;animation-delay:2s">🌺</div>
+<div class="petal" style="left:60%;animation-duration:9s;animation-delay:1s">✿</div>
+<div class="petal" style="left:80%;animation-duration:7s;animation-delay:3s">🌸</div>
+<div class="hero">
+  <div class="crown">👑</div>
+  <div class="title">Together Forever</div>
+  <div class="subtitle">Wedding Invitation</div>
+  <div class="divider"></div>
+  <p class="msg">"Two souls, one heart. We joyfully invite you to celebrate the beginning of our forever."</p>
+  <div class="names">
+    <div class="name-box"><div class="nm">Aanya</div><div class="role">The Bride</div></div>
+    <div class="amp">&</div>
+    <div class="name-box"><div class="nm">Rohan</div><div class="role">The Groom</div></div>
+  </div>
+</div>
+<div class="date-sec">
+  <div class="date-lbl">Save the Date</div>
+  <div class="date">14th February 2025</div>
+  <div class="venue">📍 The Grand Ballroom, Mumbai</div>
+</div>
+<div class="footer-msg">We can't wait to celebrate with you ✦</div>
+</body></html>`,
+
+2: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0d0520;font-family:'Georgia',serif;min-height:100vh;overflow-x:hidden}@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}.spark{position:fixed;font-size:12px;animation:sparkle 2s ease-in-out infinite}.hero{text-align:center;padding:60px 24px 30px}.badge{display:inline-block;padding:4px 16px;border-radius:100px;background:rgba(168,85,247,.2);border:1px solid rgba(168,85,247,.4);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#c084fc;margin-bottom:24px}.age{font-size:80px;font-weight:700;background:linear-gradient(135deg,#f0d78c,#d4a843);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px}.title{font-size:22px;color:#e0d0ff;margin-bottom:16px}.msg{color:#a0909f;font-size:15px;line-height:1.8;max-width:300px;margin:0 auto 32px;font-style:italic}.cake{font-size:60px;display:block;text-align:center;animation:bounce 1s ease-in-out infinite}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}.wishes{padding:20px 24px;background:rgba(168,85,247,.08);border-top:1px solid rgba(168,85,247,.2);border-bottom:1px solid rgba(168,85,247,.2);text-align:center;font-size:14px;color:#c084fc;line-height:1.7}.confetti-row{display:flex;justify-content:center;gap:8px;padding:20px;font-size:24px}.footer{text-align:center;padding:16px;font-size:11px;color:#504060;font-style:italic}</style></head><body>
+<div class="spark" style="left:5%;top:20%;animation-delay:0s">✦</div>
+<div class="spark" style="left:90%;top:10%;animation-delay:.5s">★</div>
+<div class="spark" style="left:15%;top:70%;animation-delay:1s">✧</div>
+<div class="spark" style="left:85%;top:60%;animation-delay:1.5s">✦</div>
+<div class="hero">
+  <div class="badge">🎉 Happy Birthday</div>
+  <div class="age">25</div>
+  <div class="title">A Quarter Century of Awesome!</div>
+  <p class="msg">"May your day be as bright as your smile and as wonderful as you make every day for everyone around you."</p>
+  <span class="cake">🎂</span>
+</div>
+<div class="wishes">
+  Wishing you a day filled with laughter, love,<br>and all the things that make you happy! 🎊
+</div>
+<div class="confetti-row">🎈 🎉 🎁 🎊 🥳</div>
+<div class="footer">Made with love, just for you ✦</div>
+</body></html>`,
+
+3: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0008;font-family:'Georgia',serif;min-height:100vh;overflow-x:hidden}@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}.heart-bg{position:fixed;inset:0;z-index:0;overflow:hidden}.heart-float{position:absolute;font-size:20px;opacity:.15;animation:floatUp linear infinite}@keyframes floatUp{from{transform:translateY(100vh) rotate(0deg)}to{transform:translateY(-10vh) rotate(360deg)}}.content{position:relative;z-index:1;text-align:center;padding:50px 24px 30px}.rose{font-size:64px;animation:heartbeat 1.5s ease-in-out infinite;display:block;margin-bottom:24px}.title{font-size:26px;color:#ffb3c6;margin-bottom:8px;font-style:italic}.subtitle{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#8a4060;margin-bottom:24px}.msg{color:#e0a0b0;font-size:15px;line-height:1.85;max-width:300px;margin:0 auto 32px;font-style:italic}.to-from{display:flex;justify-content:space-around;padding:20px 24px;background:rgba(255,100,150,.06);border-top:1px solid rgba(255,100,150,.2)}.tf-item{text-align:center}.tf-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#6a3050;margin-bottom:6px}.tf-name{font-size:20px;color:#ffb3c6;font-weight:700}.bottom{text-align:center;padding:20px;font-size:20px}</style></head><body>
+<div class="heart-bg">
+  <div class="heart-float" style="left:10%;animation-duration:7s;animation-delay:0s">💕</div>
+  <div class="heart-float" style="left:40%;animation-duration:9s;animation-delay:3s">❤</div>
+  <div class="heart-float" style="left:70%;animation-duration:6s;animation-delay:1s">💗</div>
+  <div class="heart-float" style="left:85%;animation-duration:8s;animation-delay:4s">💕</div>
+</div>
+<div class="content">
+  <span class="rose">🌹</span>
+  <div class="title">You Are My Everything</div>
+  <div class="subtitle">A Love Letter</div>
+  <p class="msg">"Every moment with you is a treasure I keep close to my heart. You are the reason I smile, the reason I believe in magic, and my forever person."</p>
+</div>
+<div class="to-from">
+  <div class="tf-item"><div class="tf-lbl">To</div><div class="tf-name">My Love</div></div>
+  <div style="font-size:28px;align-self:center">💝</div>
+  <div class="tf-item"><div class="tf-lbl">From</div><div class="tf-name">Always Yours</div></div>
+</div>
+<div class="bottom">💌 💕 💌</div>
+</body></html>`,
+
+4: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a1a;font-family:'Georgia',serif;min-height:100vh}.hero{text-align:center;padding:60px 24px 32px;background:radial-gradient(ellipse at 50% 0%,rgba(147,197,253,.08),transparent 70%)}.duck{font-size:60px;display:block;animation:wobble 2s ease-in-out infinite}@keyframes wobble{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}.title{font-size:24px;color:#bae6fd;margin:20px 0 8px;font-weight:700}.subtitle{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#4a7a9a;margin-bottom:20px}.msg{color:#90b0c0;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px}.details{padding:20px;background:rgba(147,197,253,.06);border:1px solid rgba(147,197,253,.15);border-radius:16px;margin:0 20px 24px;text-align:center}.d-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#4a7a9a;margin-bottom:10px}.d-val{font-size:16px;color:#bae6fd;margin-bottom:4px}.icons{display:flex;justify-content:center;gap:12px;padding:20px;font-size:28px}</style></head><body>
+<div class="hero">
+  <span class="duck">🍼</span>
+  <div class="title">A New Star is Born!</div>
+  <div class="subtitle">Baby Shower Celebration</div>
+  <p class="msg">"Little hands and tiny toes, a beautiful new baby grows. Get ready to welcome the sweetest addition to your family!"</p>
+</div>
+<div class="details">
+  <div class="d-lbl">Join Us For</div>
+  <div class="d-val">Priya's Baby Shower 🎀</div>
+  <div style="font-size:13px;color:#4a7a9a;margin-top:4px">Sunday, March 9th · 4:00 PM</div>
+  <div style="font-size:12px;color:#3a6080;margin-top:4px">📍 The Garden Party Hall, Delhi</div>
+</div>
+<div class="icons">👶 🍭 🧸 🌙 ⭐</div>
+</body></html>`,
+
+5: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#050b10;font-family:'Georgia',serif;min-height:100vh}.hero{text-align:center;padding:60px 24px 30px}.cap{font-size:64px;display:block;animation:toss 2s ease-in-out infinite}@keyframes toss{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-15px) rotate(10deg)}}.title{font-size:24px;color:#fbbf24;margin:16px 0 8px;font-weight:700}.name{font-size:32px;font-weight:700;background:linear-gradient(135deg,#fde68a,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}.subtitle{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#7a6020;margin-bottom:20px}.msg{color:#d0b060;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px;font-style:italic}.quote{padding:20px 24px;border-left:3px solid #f59e0b;margin:0 20px 24px;background:rgba(251,191,36,.06)}.q-text{color:#d0b060;font-size:14px;line-height:1.7;font-style:italic}.q-attr{font-size:11px;color:#7a6020;margin-top:8px;text-align:right}.confetti{display:flex;justify-content:center;gap:10px;padding:20px;font-size:22px}</style></head><body>
+<div class="hero">
+  <span class="cap">🎓</span>
+  <div class="subtitle">Class of 2025</div>
+  <div class="title">Congratulations,</div>
+  <div class="name">Arjun! 🏅</div>
+  <p class="msg">"Your journey doesn't end here — it's just beginning. Go forth and make the world proud!"</p>
+</div>
+<div class="quote">
+  <div class="q-text">"The tassel was worth the hassle. Now go change the world — one dream at a time."</div>
+  <div class="q-attr">— With Pride & Love</div>
+</div>
+<div class="confetti">🎊 🥇 📜 🎉 🚀</div>
+</body></html>`,
+
+6: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#06060a;font-family:'Georgia',serif;min-height:100vh;overflow:hidden}.sparkles{position:fixed;inset:0}.sp{position:absolute;width:3px;height:3px;background:#e8c97a;border-radius:50%;animation:sp linear infinite}@keyframes sp{0%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0)}}.content{position:relative;z-index:1;text-align:center;padding:60px 24px}.ring{font-size:64px;display:block;animation:glow 2s ease-in-out infinite}@keyframes glow{0%,100%{filter:drop-shadow(0 0 8px rgba(232,201,122,.4))}50%{filter:drop-shadow(0 0 20px rgba(232,201,122,.8))}}.badge{display:inline-block;padding:4px 18px;border-radius:100px;background:rgba(201,151,58,.2);border:1px solid rgba(201,151,58,.3);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#e8c97a;margin:16px 0}.title{font-size:28px;color:#f0e8d0;margin-bottom:8px;font-weight:700}.names{font-size:22px;color:#e8c97a;margin-bottom:20px;font-style:italic}.msg{color:#c0a870;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px;font-style:italic}.rings{display:flex;justify-content:center;gap:-8px;margin:20px 0;font-size:36px}.date{text-align:center;padding:16px;border-top:1px solid rgba(201,151,58,.2);font-size:13px;color:#908050}</style></head><body>
+<div class="sparkles">
+  <div class="sp" style="left:20%;top:30%;animation-duration:2s;animation-delay:0s"></div>
+  <div class="sp" style="left:70%;top:20%;animation-duration:3s;animation-delay:.5s;width:4px;height:4px"></div>
+  <div class="sp" style="left:40%;top:70%;animation-duration:2.5s;animation-delay:1s"></div>
+  <div class="sp" style="left:80%;top:65%;animation-duration:2s;animation-delay:1.5s;width:5px;height:5px"></div>
+</div>
+<div class="content">
+  <span class="ring">💍</span>
+  <div class="badge">✦ Engagement ✦</div>
+  <div class="title">They Said Yes!</div>
+  <div class="names">Nisha & Vikram</div>
+  <p class="msg">"From this day forward, two hearts become one story. We are overjoyed to announce our engagement and can't wait to celebrate with you all!"</p>
+  <div class="rings">💍 💎 💍</div>
+</div>
+<div class="date">📅 Engaged · 14th February 2025</div>
+</body></html>`,
+
+7: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:linear-gradient(135deg,#1a0535 0%,#0f0025 100%);font-family:'Georgia',serif;min-height:100vh}.glass-card{margin:30px 16px;padding:32px 24px;background:rgba(255,255,255,.05);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);border-radius:24px}.badge{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}.title{font-size:26px;color:#f0e8ff;font-weight:700;margin-bottom:8px}.msg{color:rgba(255,255,255,.6);font-size:14px;line-height:1.8;margin-bottom:24px}.timer-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}.t-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;text-align:center}.t-num{font-size:30px;font-weight:700;color:#e8c97a}.t-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:4px}.details{padding:16px;background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.2);border-radius:14px;text-align:center;font-size:13px;color:#c9973a}.footer{text-align:center;padding:20px;font-size:20px}</style></head><body>
+<div class="glass-card">
+  <div class="badge">💎 Premium Wedding</div>
+  <div class="title">Frosted Glass Elegance</div>
+  <p class="msg">"Join us as we celebrate the beginning of our forever journey together with our closest family and friends."</p>
+  <div class="timer-grid">
+    <div class="t-box"><div class="t-num" id="d">00</div><div class="t-lbl">Days</div></div>
+    <div class="t-box"><div class="t-num" id="h">00</div><div class="t-lbl">Hours</div></div>
+    <div class="t-box"><div class="t-num" id="m">00</div><div class="t-lbl">Mins</div></div>
+    <div class="t-box"><div class="t-num" id="s">00</div><div class="t-lbl">Secs</div></div>
+  </div>
+  <div class="details">💍 Meera & Aryan · Feb 14, 2025<br>📍 Crystal Palace, Mumbai</div>
+</div>
+<div class="footer">💜 ✦ 💜</div>
+<script>function tick(){const t=new Date('2025-06-01')-new Date();if(t<0)return;const s=Math.floor(t/1e3);document.getElementById('d').textContent=String(Math.floor(s/86400)).padStart(2,'0');document.getElementById('h').textContent=String(Math.floor(s%86400/3600)).padStart(2,'0');document.getElementById('m').textContent=String(Math.floor(s%3600/60)).padStart(2,'0');document.getElementById('s').textContent=String(s%60).padStart(2,'0');}tick();setInterval(tick,1000);<\/script>
+</body></html>`,
+
+8: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#030d08;font-family:'Georgia',serif;min-height:100vh}.hero{text-align:center;padding:60px 24px 30px}.trophy{font-size:70px;display:block;filter:drop-shadow(0 0 20px rgba(74,222,128,.4))}.title{font-size:24px;color:#4ade80;margin:16px 0 8px;font-weight:700}.badge-row{display:flex;justify-content:center;gap:8px;margin:12px 0 20px;flex-wrap:wrap}.b{padding:4px 12px;border-radius:100px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);font-size:11px;color:#4ade80}.msg{color:#608060;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px;font-style:italic}.award-box{margin:0 20px 24px;padding:20px;background:rgba(201,151,58,.06);border:1px solid rgba(201,151,58,.2);border-radius:16px;text-align:center}.aw-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#8a7030;margin-bottom:8px}.aw-name{font-size:20px;color:#e8c97a;font-weight:700}.icons{display:flex;justify-content:center;gap:12px;padding:20px;font-size:22px}</style></head><body>
+<div class="hero">
+  <span class="trophy">🏆</span>
+  <div class="title">Golden Achievement Award</div>
+  <div class="badge-row">
+    <span class="b">🥇 Excellence</span>
+    <span class="b">⭐ Outstanding</span>
+    <span class="b">🏅 Champion</span>
+  </div>
+  <p class="msg">"Your dedication, hard work, and exceptional performance have made you truly outstanding. This achievement is just the beginning!"</p>
+</div>
+<div class="award-box">
+  <div class="aw-lbl">Presented To</div>
+  <div class="aw-name">Rohan Sharma</div>
+  <div style="font-size:12px;color:#7a6020;margin-top:4px">For Outstanding Performance · 2025</div>
+</div>
+<div class="icons">🌟 🏆 🌟 🥇 🌟</div>
+</body></html>`,
+
+9: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#100800;font-family:'Georgia',serif;min-height:100vh}.sepia-overlay{position:fixed;inset:0;background:rgba(80,40,0,.15);pointer-events:none;z-index:0}.content{position:relative;z-index:1;text-align:center;padding:50px 24px 30px}.yr{display:inline-block;padding:4px 18px;border-radius:100px;background:rgba(201,151,58,.15);border:1px solid rgba(201,151,58,.3);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c9973a;margin-bottom:20px}.title{font-size:26px;color:#f0d0a0;font-weight:700;margin-bottom:8px;font-style:italic}.names{font-size:20px;color:#c9973a;margin-bottom:20px}.msg{color:#a08060;font-size:14.5px;line-height:1.85;max-width:300px;margin:0 auto 28px;font-style:italic}.memories{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 20px 24px}.mem{padding:14px;background:rgba(201,151,58,.06);border:1px solid rgba(201,151,58,.15);border-radius:12px;text-align:center;font-size:20px}.mem p{font-size:11px;color:#7a5030;margin-top:6px}.footer{text-align:center;padding:20px;font-size:22px}</style></head><body>
+<div class="sepia-overlay"></div>
+<div class="content">
+  <div class="yr">✦ 10 Years ✦</div>
+  <div class="title">A Decade of Love</div>
+  <div class="names">Priya & Amit</div>
+  <p class="msg">"Ten years of laughter, adventure, and growing together. Here's to the love that grows stronger with every passing year."</p>
+  <div class="memories">
+    <div class="mem">🌅<p>First Date</p></div>
+    <div class="mem">💍<p>Proposal</p></div>
+    <div class="mem">👶<p>Family</p></div>
+    <div class="mem">🏡<p>Our Home</p></div>
+  </div>
+</div>
+<div class="footer">❤️ 10 Years ❤️</div>
+</body></html>`,
+
+10: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0520;font-family:'Georgia',serif;min-height:100vh;overflow-x:hidden}.balloon{position:fixed;font-size:24px;animation:rise linear infinite}@keyframes rise{from{transform:translateY(100vh)}to{transform:translateY(-10vh)}}.hero{text-align:center;padding:60px 24px 30px}.emoji{font-size:60px;display:block;animation:wiggle 1s ease-in-out infinite}@keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}.title{font-size:26px;color:#f0c0f0;font-weight:700;margin:16px 0 8px}.msg{color:#c090c0;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px;font-style:italic}.fun-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 20px 24px}.fun-item{padding:16px;background:rgba(240,100,240,.06);border:1px solid rgba(240,100,240,.15);border-radius:14px;text-align:center;font-size:28px}.fun-item p{font-size:12px;color:#9060a0;margin-top:6px}.icons{display:flex;justify-content:center;gap:8px;padding:20px;font-size:22px}</style></head><body>
+<div class="balloon" style="left:8%;animation-duration:8s">🎈</div>
+<div class="balloon" style="left:75%;animation-duration:6s;animation-delay:2s">🎀</div>
+<div class="balloon" style="left:45%;animation-duration:9s;animation-delay:4s">🎈</div>
+<div class="hero">
+  <span class="emoji">🎂</span>
+  <div class="title">Whimsical Birthday Dream</div>
+  <p class="msg">"Today is all about you! May your day be filled with magical moments, sweet surprises, and all the love you deserve!"</p>
+</div>
+<div class="fun-grid">
+  <div class="fun-item">🎁<p>Gifts Galore</p></div>
+  <div class="fun-item">🍰<p>Cake Time!</p></div>
+  <div class="fun-item">🎵<p>Dance All Day</p></div>
+  <div class="fun-item">✨<p>Make Wishes</p></div>
+</div>
+<div class="icons">🥳 🎊 🎉 🎈 💫</div>
+</body></html>`,
+
+11: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#05050a;font-family:'Georgia',serif;min-height:100vh}.hero{text-align:center;padding:80px 32px 40px}.line{width:40px;height:1px;background:rgba(201,151,58,.4);margin:0 auto 32px}.title{font-size:30px;color:#f0ece0;font-weight:400;letter-spacing:4px;text-transform:uppercase;margin-bottom:6px}.amp{font-size:48px;color:#c9973a;font-style:italic;margin:12px 0}.names{font-size:24px;color:#e0d8c0;letter-spacing:2px;margin-bottom:32px}.msg{color:#706860;font-size:14px;line-height:1.9;max-width:280px;margin:0 auto 40px;letter-spacing:.5px}.date-box{display:inline-block;padding:16px 32px;border:1px solid rgba(201,151,58,.25);border-radius:4px}.date-top{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#806850;margin-bottom:8px}.date-val{font-size:16px;color:#c9973a;letter-spacing:2px}.venue{font-size:11px;color:#504840;margin-top:6px;letter-spacing:1px}.bottom-line{width:80px;height:1px;background:rgba(201,151,58,.25);margin:32px auto 0}</style></head><body>
+<div class="hero">
+  <div class="line"></div>
+  <div class="title">Together We Begin</div>
+  <div class="amp">&</div>
+  <div class="names">SARA · ARYAN</div>
+  <p class="msg">With hearts full of joy and love, we invite you to witness the beginning of our greatest adventure.</p>
+  <div class="date-box">
+    <div class="date-top">Save the Date</div>
+    <div class="date-val">14 · FEB · 2025</div>
+    <div class="venue">The Ritz Carlton, New Delhi</div>
+  </div>
+  <div class="bottom-line"></div>
+</div>
+</body></html>`,
+
+12: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0008;font-family:'Georgia',serif;min-height:100vh}.bg{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(150,50,100,.12),transparent 70%)}.content{position:relative;z-index:1;text-align:center;padding:80px 28px 40px}.ht{font-size:50px;animation:hb 1.8s ease-in-out infinite;display:block}@keyframes hb{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}.title{font-size:24px;color:#f0c0d8;margin:20px 0 8px;font-style:italic}.subtitle{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#7a4060;margin-bottom:28px}.msg{color:#d0a0b8;font-size:15.5px;line-height:1.9;max-width:300px;margin:0 auto 32px;font-style:italic}.signature{padding:20px;border-top:1px solid rgba(240,100,150,.15);font-size:18px;color:#b08090;font-style:italic}.ps{font-size:12px;color:#604050;margin-top:8px}</style></head><body>
+<div class="bg"></div>
+<div class="content">
+  <span class="ht">❤️</span>
+  <div class="title">Soulmate Confession</div>
+  <div class="subtitle">A Message From The Heart</div>
+  <p class="msg">"In a world full of noise, you are my silence. In a life full of chaos, you are my peace. I knew you were the one from the very first moment."</p>
+  <div class="signature">
+    — Always Yours 💌
+    <div class="ps">P.S. You make every day feel like a gift.</div>
+  </div>
+</div>
+</body></html>`
+};
+
+const products = [
+    { id:1,  name:'Royal Wedding Invitation',    category:'wedding',    tier:'Premium',  price:499, oldPrice:749, discount:'33% OFF', desc:'Luxury dark-theme wedding invitation with floating floral petals, animated name reveals, and elegant Cormorant typography.', features:{'Style':'Royal Luxury','Animations':'12','Sections':'10','Countdown':'No'}, orders:120, rating:4.9, trending:true },
+    { id:2,  name:'Glitter Birthday Blast',       category:'birthday',   tier:'Standard', price:299, oldPrice:449, discount:'33% OFF', desc:'Bold birthday template with sparkle effects, animated age reveal, confetti burst, and vibrant purple-gold palette.', features:{'Style':'Bold Fun','Animations':'8','Sections':'7','Countdown':'No'}, orders:88, rating:4.7, trending:false },
+    { id:3,  name:'Rose Gold Love Letter',         category:'love',       tier:'Premium',  price:499, oldPrice:699, discount:'29% OFF', desc:'Romantic love message with floating heart particles, rose gold accents, and intimate typography on deep burgundy.', features:{'Style':'Rose Gold','Animations':'10','Sections':'8','Countdown':'No'}, orders:95, rating:4.9, trending:true },
+    { id:4,  name:'Dreamy Baby Shower',            category:'baby',       tier:'Standard', price:299, oldPrice:399, discount:'25% OFF', desc:'Soft pastel accents on dark slate. Cute baby elements with a modern layout and gentle animations for shower celebrations.', features:{'Style':'Cute Modern','Animations':'5','Sections':'7','Countdown':'No'}, orders:42, rating:4.8, trending:false },
+    { id:5,  name:"Scholar's Triumph",             category:'graduation', tier:'Standard', price:299, oldPrice:449, discount:'33% OFF', desc:'Sleek graduation congratulations with navy & gold palette, animated diploma, and confetti celebration burst.', features:{'Style':'Elegant','Animations':'6','Sections':'8','Countdown':'No'}, orders:53, rating:4.7, trending:false },
+    { id:6,  name:'Diamond Engagement Reveal',     category:'engagement', tier:'Premium',  price:499, oldPrice:699, discount:'29% OFF', desc:'Luxury engagement announcement with diamond sparkle effects and champagne gold accents. Sophisticated typography.', features:{'Style':'Luxury','Animations':'9','Sections':'11','Countdown':'No'}, orders:71, rating:4.8, trending:true },
+    { id:7,  name:'Frosted Glass Elegance',        category:'wedding',    tier:'Premium',  price:499, oldPrice:749, discount:'33% OFF', desc:'Stunning glassmorphism design with frosted glass cards on deep purple gradient. Includes live countdown timer.', features:{'Style':'Glassmorphism','Animations':'7','Sections':'9','Countdown':'Yes'}, orders:68, rating:4.9, trending:true },
+    { id:8,  name:'Golden Achievement Award',      category:'congrats',   tier:'Basic',    price:199, oldPrice:299, discount:'33% OFF', desc:'Celebrate achievements with emerald & gold template. Trophy elements with premium metallic accent design.', features:{'Style':'Bold','Animations':'3','Sections':'5','Countdown':'No'}, orders:38, rating:4.5, trending:false },
+    { id:9,  name:'Vintage Love Story',            category:'anniversary',tier:'Standard', price:299, oldPrice:449, discount:'33% OFF', desc:'A warm anniversary tribute with retro typography, sepia-toned feel, and elegant gold borders on charcoal black.', features:{'Style':'Retro Elegant','Animations':'4','Sections':'7','Countdown':'No'}, orders:59, rating:4.6, trending:false },
+    { id:10, name:'Whimsical Birthday Dream',      category:'birthday',   tier:'Basic',    price:199, oldPrice:299, discount:'33% OFF', desc:'Playful birthday template with balloon animations, confetti bursts, and cheerful pastel accents on dark purple.', features:{'Style':'Cute','Animations':'5','Sections':'6','Countdown':'No'}, orders:47, rating:4.4, trending:false },
+    { id:11, name:'Minimalist Wedding Suite',      category:'wedding',    tier:'Basic',    price:199, oldPrice:349, discount:'43% OFF', desc:'Clean, minimalist wedding invitation with subtle gold line art on premium black. Modern typography, timeless feel.', features:{'Style':'Minimal','Animations':'2','Sections':'4','Countdown':'No'}, orders:55, rating:4.3, trending:false },
+    { id:12, name:'Soulmate Confession',           category:'love',       tier:'Basic',    price:199, oldPrice:299, discount:'33% OFF', desc:'Simple yet heartfelt love message with warm gradients, animated hearts, and intimate clean typography.', features:{'Style':'Text-Only','Animations':'3','Sections':'4','Countdown':'No'}, orders:62, rating:4.5, trending:false },
+];
+
+// ── Placeholder thumbnails (colored SVGs per category) ──
+const thumbColors = { wedding:'#c9973a', birthday:'#a855f7', anniversary:'#ef4444', love:'#f43f5e', baby:'#38bdf8', graduation:'#f59e0b', engagement:'#c9973a', congrats:'#4ade80' };
+function cardThumb(p) {
+    const col = thumbColors[p.category] || '#c9973a';
+    const icons = { wedding:'💍', birthday:'🎂', anniversary:'❤️', love:'🌹', baby:'👶', graduation:'🎓', engagement:'💍', congrats:'🏆' };
+    return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${col}" stop-opacity=".15"/><stop offset="100%" stop-color="${col}" stop-opacity=".04"/></linearGradient></defs><rect fill="%2310101a" width="400" height="240"/><rect fill="url(%23g)" width="400" height="240"/><text x="200" y="110" font-size="48" text-anchor="middle" dominant-baseline="middle">${icons[p.category]||'✦'}</text><text x="200" y="160" fill="${col}" font-size="15" text-anchor="middle" font-family="Georgia,serif">${p.name}</text><text x="200" y="182" fill="${col}" font-size="11" text-anchor="middle" font-family="sans-serif" opacity=".5">${p.tier}</text></svg>`)}`;
+}
+
+// ── STATE ──
+let cart = JSON.parse(localStorage.getItem('ss_cart') || '[]');
+let wishlist = new Set(JSON.parse(localStorage.getItem('ss_wish') || '[]'));
+let activeCat = 'all', activeTier = 'all', searchQ = '', sortBy = 'popular';
+let currentProduct = null, chatOpen = false, isFS = false, mobMenuOpen = false;
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+    renderCats();
+    renderGrid();
+    createParticles();
+    initScroll();
+    animateStats();
+    updateCartUI();
+    updateWishUI();
+    // Show chat badge after 4s
+    setTimeout(() => { document.getElementById('chatBadge').style.display = 'flex'; }, 4000);
+    // Initial chat message
+    setTimeout(() => { addBotMsg("👋 Hey! Welcome to Scripted Surprise. I can help you find the perfect template or answer any questions. What's the occasion?"); }, 500);
+    // Mobile search button visibility
+    if (window.innerWidth <= 1100) document.getElementById('mobSearchBtn').style.display = 'flex';
+});
+
+window.addEventListener('resize', () => {
+    const btn = document.getElementById('mobSearchBtn');
+    if (btn) btn.style.display = window.innerWidth <= 1100 ? 'flex' : 'none';
+});
+
+// ── PARTICLES ──
+function createParticles() {
+    const c = document.getElementById('particles');
+    for (let i = 0; i < 25; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 3 + 1;
+        p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;background:${Math.random()>.7?'#c9973a':'rgba(201,151,58,.4)'};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s`;
+        c.appendChild(p);
+    }
+}
+
+// ── SCROLL ──
+function initScroll() {
+    window.addEventListener('scroll', () => {
+        document.getElementById('header').classList.toggle('scrolled', scrollY > 40);
+        const secs = ['hero','templates','custom','footer'];
+        const links = document.querySelectorAll('.nav-link');
+        let cur = '';
+        secs.forEach(id => { const el = document.getElementById(id); if (el && scrollY >= el.offsetTop - 200) cur = id; });
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#'+cur));
+        document.querySelectorAll('.fade-in').forEach(el => {
+            if (el.getBoundingClientRect().top < innerHeight - 40) el.classList.add('visible');
+        });
+    });
+}
+
+// ── STATS ANIMATION ──
+function animateStats() {
+    document.querySelectorAll('.stat-val[data-target]').forEach(el => {
+        const target = +el.dataset.target;
+        const suffix = el.dataset.suffix || '';
+        let cur = 0;
+        const step = Math.ceil(target / 50);
+        const iv = setInterval(() => {
+            cur = Math.min(cur + step, target);
+            el.textContent = cur + suffix;
+            if (cur >= target) clearInterval(iv);
+        }, 25);
+    });
+}
+
+// ── CATEGORIES ──
+function renderCats() {
+    document.getElementById('catBar').innerHTML = categories.map(c => `
+        <button class="cat-btn ${c.id===activeCat?'active':''}" onclick="filterCat('${c.id}')" aria-label="Filter by ${c.name}">
+            <span class="icon">${c.icon}</span> ${c.name}
+            <span class="cat-count">${c.count}</span>
+        </button>`).join('');
+}
+
+function filterCat(id) {
+    activeCat = id;
+    renderCats();
+    renderGrid();
+    document.getElementById('templates').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+// ── RENDER GRID ──
+function getFiltered() {
+    let p = [...products];
+    if (activeCat !== 'all') p = p.filter(x => x.category === activeCat);
+    if (activeTier !== 'all') p = p.filter(x => x.tier === activeTier);
+    if (searchQ) {
+        const q = searchQ.toLowerCase();
+        p = p.filter(x => x.name.toLowerCase().includes(q) || x.desc.toLowerCase().includes(q) || x.tier.toLowerCase().includes(q) || x.category.toLowerCase().includes(q));
+    }
+    switch(sortBy) {
+        case 'price-low': p.sort((a,b)=>a.price-b.price); break;
+        case 'price-high': p.sort((a,b)=>b.price-a.price); break;
+        case 'newest': p.sort((a,b)=>b.id-a.id); break;
+        case 'rating': p.sort((a,b)=>b.rating-a.rating); break;
+        default: p.sort((a,b)=>b.orders-a.orders);
+    }
+    return p;
+}
+
+function renderGrid() {
+    const grid = document.getElementById('grid');
+    const filtered = getFiltered();
+    document.getElementById('resultsCount').textContent = `${filtered.length} template${filtered.length!==1?'s':''}`;
+    if (!filtered.length) {
+        grid.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><p>No templates found for your search</p><button class="btn btn-ghost btn-sm" onclick="resetFilters()">Clear Filters</button></div>`;
+        return;
+    }
+    grid.innerHTML = filtered.map((p,i) => {
+        const inWish = wishlist.has(p.id);
+        const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating%1?'½':'');
+        return `
+        <div class="card fade-in" style="transition-delay:${i*.04}s" onclick="openPreview(${p.id})" role="button" tabindex="0" aria-label="Preview ${p.name}">
+            <div class="card-img">
+                <img src="${cardThumb(p)}" alt="${p.name}" loading="lazy">
+                <span class="tier tier-${p.tier.toLowerCase()}">${p.tier}</span>
+                ${p.trending?`<span class="trending-badge">🔥 Trending</span>`:''}
+                <button class="fav-btn ${inWish?'active':''}" onclick="event.stopPropagation();toggleWish(${p.id},this)" aria-label="${inWish?'Remove from':'Add to'} wishlist">
+                    <svg viewBox="0 0 24 24" fill="${inWish?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <div class="card-overlay">
+                    <button class="card-action card-action-preview" onclick="event.stopPropagation();openPreview(${p.id})">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        Live Preview
+                    </button>
+                    <button class="card-action card-action-cart" onclick="event.stopPropagation();addToCart(${p.id})">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-cat">${categories.find(c=>c.id===p.category)?.name||p.category}</div>
+                <h3 class="card-name">${p.name}</h3>
+                <p class="card-desc">${p.desc}</p>
+                <div class="card-meta">
+                    <div class="card-meta-item stars">${stars} <span style="color:var(--txt-2)">${p.rating}</span></div>
+                    <div class="card-meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        ${p.orders} sold
+                    </div>
+                    <div class="card-meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16"/><path d="M14 2v6h6"/></svg>
+                        HTML
+                    </div>
+                </div>
+                <div class="wa-preview">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a11.73 11.73 0 00-4.956 1.176 11.815 11.815 0 00-3.48 8.413C.157 11.892 5.495 6.557 12.05 6.557a11.882 11.882 0 015.683 1.448L24 6.305l-1.632 6.148A11.877 11.877 0 0123.943 12c0 6.557-5.335 11.892-11.893 11.892a11.877 11.877 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374A9.86 9.86 0 012.17 13.1z"/></svg>
+                    Shares beautifully on WhatsApp
+                </div>
+                <div class="card-foot">
+                    <div>
+                        <span class="price"><span class="cur">₹</span>${p.price}</span>
+                        <span class="price-old">₹${p.oldPrice}</span>
+                        <span class="disc-tag">${p.discount}</span>
+                    </div>
+                    <button class="add-btn" onclick="event.stopPropagation();addToCart(${p.id})" aria-label="Add ${p.name} to cart">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                        Add
+                    </button>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+    setTimeout(() => document.querySelectorAll('.card.fade-in').forEach(el=>el.classList.add('visible')), 80);
+}
+
+// ── FILTERS ──
+function filterTier(tier, el) {
+    activeTier = tier;
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    renderGrid();
+}
+function handleSearch(v) { searchQ = v.trim(); renderGrid(); }
+function sortTemplates(v) { sortBy = v; renderGrid(); }
+function resetFilters() {
+    activeCat = 'all'; activeTier = 'all'; searchQ = ''; sortBy = 'popular';
+    document.getElementById('searchInput').value = '';
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    document.querySelector('.chip').classList.add('active');
+    renderCats(); renderGrid();
+}
+
+// ── PREVIEW MODAL ──
+function openPreview(id) {
+    const p = products.find(x=>x.id===id);
+    if (!p) return;
+    currentProduct = p;
+    document.getElementById('mCat').textContent = categories.find(c=>c.id===p.category)?.name || p.category;
+    document.getElementById('mTitle').textContent = p.name;
+    document.getElementById('mDesc').textContent = p.desc;
+    document.getElementById('mPrice').textContent = p.price;
+    document.getElementById('mPriceOld').textContent = '₹'+p.oldPrice;
+    document.getElementById('mDisc').textContent = p.discount;
+    document.getElementById('mRating').textContent = p.rating;
+    document.getElementById('mOrders').textContent = ` · ${p.orders} sold`;
+    // Stars
+    const full = Math.floor(p.rating);
+    document.getElementById('mStars').innerHTML = Array(5).fill(0).map((_,i)=>`<svg class="star" viewBox="0 0 24 24" fill="${i<full?'#f59e0b':'none'}" stroke="#f59e0b" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`).join('');
+    // Features
+    const icons = {
+        Style:`<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>`,
+        Animations:`<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,
+        Sections:`<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>`,
+        Countdown:`<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>`,
+    };
+    document.getElementById('mFeats').innerHTML = Object.entries(p.features).map(([k,v])=>`
+        <div class="feat-item">
+            <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${icons[k]||''}</svg></div>
+            <div><div class="feat-lbl">${k}</div><div class="feat-val">${v}</div></div>
+        </div>`).join('');
+    // Load template in phone
+    const phone = document.getElementById('phoneScreen');
+    const html = templateHTMLs[p.id];
+    if (html) {
+        // Use srcdoc in an iframe for proper isolation
+        phone.innerHTML = `<iframe srcdoc="${html.replace(/"/g,'&quot;').replace(/'/g,'&#39;')}" style="width:100%;height:100%;border:none;display:block;" title="Template preview for ${p.name}" scrolling="yes"></iframe>`;
+    } else {
+        phone.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:16px;padding:32px;text-align:center"><div style="font-size:48px">${categories.find(c=>c.id===p.category)?.icon||'✦'}</div><div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--txt-gold)">${p.name}</div><div style="font-size:12px;color:var(--txt-3)">Live preview will load here</div></div>`;
+    }
+    document.getElementById('previewModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePreview() {
+    document.getElementById('previewModal').classList.remove('open');
+    document.body.style.overflow = '';
+    if (isFS) toggleFullscreen();
+    // Clear iframe
+    setTimeout(()=>{ document.getElementById('phoneScreen').innerHTML=''; }, 400);
+}
+
+function scrollPhone(pos) {
+    const iframe = document.querySelector('#phoneScreen iframe');
+    if (iframe) {
+        try { iframe.contentWindow.scrollTo({ top:pos, behavior:'smooth' }); } catch(e) {}
+    }
+}
+
+function toggleFullscreen() {
+    const frame = document.getElementById('phoneFrame');
+    const btn = document.getElementById('fsBtn');
+    isFS = !isFS;
+    frame.classList.toggle('fs', isFS);
+    btn.innerHTML = isFS
+        ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="17" y2="7"/><line x1="3" y1="21" x2="10" y2="14"/></svg> Exit`
+        : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> Fullscreen`;
+}
+
+function addToCartFromPreview() {
+    if (currentProduct) addToCart(currentProduct.id);
+}
+
+// ── WISHLIST ──
+function toggleWish(id, btn) {
+    if (wishlist.has(id)) { wishlist.delete(id); showToast('Removed from wishlist','info'); }
+    else { wishlist.add(id); showToast('Added to wishlist ♥','success'); }
+    btn.classList.toggle('active', wishlist.has(id));
+    btn.querySelector('svg').setAttribute('fill', wishlist.has(id)?'currentColor':'none');
+    btn.setAttribute('aria-label', (wishlist.has(id)?'Remove from':'Add to')+' wishlist');
+    localStorage.setItem('ss_wish', JSON.stringify([...wishlist]));
+    updateWishUI();
+}
+function updateWishUI() {
+    const b = document.getElementById('wishBadge');
+    b.textContent = wishlist.size;
+    b.classList.toggle('on', wishlist.size > 0);
+}
+function toggleWishlist() {
+    if (wishlist.size === 0) { showToast('No items in wishlist yet','info'); return; }
+    showToast(`${wishlist.size} item${wishlist.size>1?'s':''} in your wishlist`,'info');
+}
+
+// ── CART ──
+function addToCart(id) {
+    const p = products.find(x=>x.id===id);
+    if (!p) return;
+    if (cart.find(c=>c.id===id)) { showToast('Already in cart!','info'); return; }
+    cart.push({...p});
+    localStorage.setItem('ss_cart', JSON.stringify(cart));
+    updateCartUI();
+    showToast(`"${p.name}" added to cart!`,'success');
+}
+function removeFromCart(id) {
+    cart = cart.filter(c=>c.id!==id);
+    localStorage.setItem('ss_cart', JSON.stringify(cart));
+    updateCartUI();
+}
+function updateCartUI() {
+    const badge = document.getElementById('cartBadge');
+    const count = cart.length;
+    badge.textContent = count;
+    badge.classList.toggle('on', count > 0);
+    document.getElementById('cartCount').textContent = `${count} item${count!==1?'s':''}`;
+    const itemsEl = document.getElementById('cartItems');
+    const emptyEl = document.getElementById('cartEmpty');
+    const footEl = document.getElementById('cartFoot');
+    if (count === 0) {
+        itemsEl.innerHTML = '';
+        itemsEl.appendChild(emptyEl);
+        emptyEl.style.display = 'flex';
+        footEl.style.display = 'none';
+        return;
+    }
+    emptyEl.style.display = 'none';
+    footEl.style.display = 'block';
+    itemsEl.innerHTML = cart.map(item=>`
+        <div class="cart-item">
+            <div class="ci-img"><img src="${cardThumb(item)}" alt="${item.name}"></div>
+            <div class="ci-info">
+                <div class="ci-name">${item.name}</div>
+                <div class="ci-cat">${item.tier} · ${categories.find(c=>c.id===item.category)?.name||item.category}</div>
+                <div class="ci-price">₹${item.price}</div>
+            </div>
+            <button class="ci-rm" onclick="removeFromCart(${item.id})" aria-label="Remove ${item.name} from cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>`).join('');
+    const sub = cart.reduce((s,c)=>s+c.price,0);
+    const tax = Math.round(sub * TAX_RATE);
+    document.getElementById('cartSub').textContent = '₹'+sub;
+    document.getElementById('cartTax').textContent = '₹'+tax;
+    document.getElementById('cartTotal').textContent = '₹'+(sub+tax);
+}
+function toggleCart() {
+    const overlay = document.getElementById('cartOverlay');
+    const drawer = document.getElementById('cartDrawer');
+    const isOpen = drawer.classList.contains('open');
+    overlay.classList.toggle('open', !isOpen);
+    drawer.classList.toggle('open', !isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+function handleCheckout() {
+    if (!cart.length) return;
+    const total = cart.reduce((s,c)=>s+c.price,0);
+    const tax = Math.round(total*TAX_RATE);
+    showToast(`Total ₹${total+tax} · Opening chat to complete order…`,'info');
+    toggleCart();
+    setTimeout(()=>openChat(),500);
+    setTimeout(()=>{
+        addBotMsg(`🛒 I can see you'd like to order ${cart.length} template${cart.length>1?'s':''}. Total comes to <strong>₹${total+tax}</strong> (incl. 18% GST). Please share your name and the occasion details so I can get this ready for you!`);
+    }, 1200);
+}
+
+// ── CHAT ──
+function toggleChat() {
+    chatOpen = !chatOpen;
+    document.getElementById('chatWin').classList.toggle('open', chatOpen);
+    if (chatOpen) {
+        document.getElementById('chatBadge').style.display = 'none';
+        document.getElementById('chatInp').focus();
+    }
+}
+function openChat() { if (!chatOpen) toggleChat(); }
+
+function sendQuick(text) {
+    addUserMsg(text);
+    document.getElementById('quickReplies').style.display = 'none';
+    setTimeout(()=>botReply(text), 700);
+}
+function sendMsg() {
+    const inp = document.getElementById('chatInp');
+    const text = inp.value.trim();
+    if (!text) return;
+    addUserMsg(text);
+    inp.value = '';
+    document.getElementById('quickReplies').style.display = 'none';
+    showTyping();
+    setTimeout(()=>{ hideTyping(); botReply(text); }, 900);
+}
+
+function addBotMsg(text) {
+    const c = document.getElementById('chatMsgs');
+    const now = new Date();
+    const t = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+    const d = document.createElement('div');
+    d.className = 'msg bot';
+    d.innerHTML = `${text}<div class="msg-time">${t}</div>`;
+    c.appendChild(d);
+    c.scrollTop = c.scrollHeight;
+}
+function addUserMsg(text) {
+    const c = document.getElementById('chatMsgs');
+    const now = new Date();
+    const t = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+    const d = document.createElement('div');
+    d.className = 'msg user';
+    d.innerHTML = `${text}<div class="msg-time">${t}</div>`;
+    c.appendChild(d);
+    c.scrollTop = c.scrollHeight;
+}
+let typingEl = null;
+function showTyping() {
+    const c = document.getElementById('chatMsgs');
+    typingEl = document.createElement('div');
+    typingEl.className = 'typing';
+    typingEl.innerHTML = '<div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>';
+    c.appendChild(typingEl);
+    c.scrollTop = c.scrollHeight;
+}
+function hideTyping() { if (typingEl) { typingEl.remove(); typingEl=null; } }
+
+function botReply(txt) {
+    const t = txt.toLowerCase();
+    let reply = '';
+    if (t.includes('birthday'))
+        reply = "🎂 Great choice! Our Birthday templates range from playful & colourful to sleek & sophisticated. For Premium (₹499) you get up to 12 animations. Want me to filter the gallery to show only birthday templates?";
+    else if (t.includes('wedding'))
+        reply = "💍 Weddings are our specialty! We have minimalist, glassmorphism, and royal luxury styles. All are mobile-optimised and share beautifully on WhatsApp. Prices start at ₹199. Want to see the collection?";
+    else if (t.includes('price') || t.includes('cost') || t.includes('pricing') || t.includes('₹'))
+        reply = "Our pricing is simple:<br><br>🔵 <strong>Basic — ₹199</strong><br>Clean, text-focused designs<br><br>🟣 <strong>Standard — ₹299</strong><br>Images + animations<br><br>🟡 <strong>Premium — ₹499</strong><br>Luxury, fully animated<br><br>Custom orders start at ₹599 and are delivered in 24 hours.";
+    else if (t.includes('custom'))
+        reply = "✨ Custom orders are my favourite! Tell me: What occasion? Any specific colour theme? Any name or date to include? I'll get back to you with a design plan within 30 minutes.";
+    else if (t.includes('pay') || t.includes('upi') || t.includes('payment'))
+        reply = "We accept <strong>UPI, bank transfer, and major wallets</strong>. Once you select your template, I'll send you the payment details directly. Your file is delivered within 5 minutes of confirmation!";
+    else if (t.includes('deliver') || t.includes('how long') || t.includes('time'))
+        reply = "⚡ Pre-made templates are delivered <strong>within 5 minutes</strong> of payment confirmation — I send the HTML file directly to you. Custom orders take up to 24 hours.";
+    else if (t.includes('refund') || t.includes('return'))
+        reply = "Since these are digital files, we don't offer refunds after delivery. However, if there's any issue with your file or it doesn't match the preview, I'll make it right — always.";
+    else if (t.includes('hi') || t.includes('hello') || t.includes('hey'))
+        reply = "Hey there! 👋 How can I help you today? Looking for a template for a specific occasion, or do you have questions about pricing or custom orders?";
+    else if (t.includes('thank'))
+        reply = "You're welcome! Feel free to browse the collection and click Preview on anything that catches your eye. I'm here whenever you're ready! 😊";
+    else
+        reply = "Thanks for your message! I'll review this and get back to you very shortly. In the meantime, feel free to browse and use the Preview button on any template — it shows you the exact live template as a recipient would see it.";
+
+    addBotMsg(reply);
+    const msgCount = document.querySelectorAll('.msg.user').length;
+    if (msgCount >= 3) {
+        setTimeout(()=>addBotMsg("📌 I've been notified and will personally follow up. If urgent, you can also reach me directly via WhatsApp using the button in the footer."), 2500);
+    }
+}
+
+// ── MOBILE MENU ──
+function toggleMobMenu() {
+    mobMenuOpen = !mobMenuOpen;
+    document.getElementById('mobMenu').classList.toggle('open', mobMenuOpen);
+    document.getElementById('menuBtn').setAttribute('aria-expanded', mobMenuOpen);
+    document.body.style.overflow = mobMenuOpen ? 'hidden' : '';
+}
+function closeMobMenu() {
+    mobMenuOpen = false;
+    document.getElementById('mobMenu').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// ── MOBILE SEARCH ──
+function toggleMobSearch() {
+    document.getElementById('mobSearchPanel').classList.toggle('open');
+}
+
+// ── TOAST ──
+function showToast(message, type='info') {
+    const c = document.getElementById('toasts');
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    const icons = {
+        success:`<svg class="toast-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>`,
+        info:`<svg class="toast-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>`,
+        error:`<svg class="toast-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>`,
+    };
+    t.innerHTML = `${icons[type]||icons.info}<span>${message}</span>`;
+    c.appendChild(t);
+    setTimeout(()=>t.remove(), 3200);
+}
+
+// ── KEYBOARD ──
+document.addEventListener('keydown', e => {
+    if (e.key==='Escape') {
+        if (isFS) toggleFullscreen();
+        else if (document.getElementById('previewModal').classList.contains('open')) closePreview();
+        else if (document.getElementById('cartDrawer').classList.contains('open')) toggleCart();
+        else if (chatOpen) toggleChat();
+        else if (mobMenuOpen) closeMobMenu();
+    }
+});
+
+// ── CLICK OUTSIDE MODAL ──
+document.getElementById('previewModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('previewModal')) closePreview();
+});
+
+// ── KEYBOARD CARD ACCESS ──
+document.getElementById('grid').addEventListener('keydown', e => {
+    if (e.key==='Enter'||e.key===' ') {
+        const card = e.target.closest('.card');
+        if (card) { e.preventDefault(); const id = parseInt(card.querySelector('.add-btn')?.getAttribute('onclick')?.match(/\d+/)?.[0]); if (id) openPreview(id); }
+    }
+});
+</script>
+</body>
+</html>
