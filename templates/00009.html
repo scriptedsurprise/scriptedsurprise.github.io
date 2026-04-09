@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Celebration - The Infinite Isometric Vow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+<style>
+:root {
+--primary: #046307;
+--secondary: #52b788;
+--bg: #f0fff0;
+--white: #ffffff;
+--gold: #d4af37;
+--iso-shadow: rgba(4, 99, 7, 0.15);
+}
+    html {
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+    *, *::before, *::after {
+        box-sizing: inherit;
+    }
+
+    body {
+        margin: 0 auto;
+        padding: 0;
+        max-width: 430px;
+        overflow-x: hidden;
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        font-family: 'DM Sans', sans-serif;
+        background-color: var(--bg);
+        color: var(--primary);
+        line-height: 1.6;
+    }
+
+    /* --- Animations --- */
+    @keyframes floatCube {
+        0% { transform: translateY(20px) rotateX(-35deg) rotateY(45deg); opacity: 0; }
+        100% { transform: translateY(0) rotateX(-35deg) rotateY(45deg); opacity: 1; }
+    }
+
+    @keyframes assembly {
+        from { transform: translate(-100px, -100px) scale(0); opacity: 0; }
+        to { transform: translate(0, 0) scale(1); opacity: 1; }
+    }
+
+    @keyframes goldShimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    @keyframes lineGrow {
+        from { height: 0; }
+        to { height: 100%; }
+    }
+
+    @keyframes revealUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Isometric Layout --- */
+    .iso-container {
+        position: relative;
+        padding: 4rem 1.5rem;
+        perspective: 1000px;
+    }
+
+    .staircase-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+        position: relative;
+        margin-top: 50px;
+    }
+
+    .staircase-wrapper::before {
+        content: '';
+        position: absolute;
+        left: 20px;
+        top: 0;
+        width: 2px;
+        height: 0;
+        background: linear-gradient(to bottom, var(--secondary), var(--primary));
+        z-index: -1;
+        transition: height 1s ease;
+    }
+
+    .staircase-wrapper.scrolled::before {
+        animation: lineGrow 2s forwards ease-out;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 2rem;
+        position: relative;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        line-height: 0.9;
+        margin: 0;
+        letter-spacing: -2px;
+        text-transform: uppercase;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+        font-weight: 400;
+        margin-top: 1rem;
+        color: var(--secondary);
+    }
+
+    /* --- Isometric Altar --- */
+    .altar-box {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 40px auto;
+        transform-style: preserve-3d;
+        transform: rotateX(-35deg) rotateY(45deg);
+    }
+
+    .cube {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: var(--primary);
+        opacity: 0;
+    }
+
+    .cube-1 { top: 0; left: 0; animation: floatCube 1s forwards 0.2s; background: var(--primary); }
+    .cube-2 { top: 30px; left: 30px; animation: floatCube 1s forwards 0.5s; background: var(--secondary); }
+    .cube-3 { top: 60px; left: 0; animation: floatCube 1s forwards 0.8s; background: var(--primary); }
+
+    .cube::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.1);
+        transform: rotateX(90deg) translateZ(30px);
+    }
+
+    /* --- Sections --- */
+    .section {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .block-card {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: 4px;
+        box-shadow: 15px 15px 0px var(--iso-shadow);
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid var(--secondary);
+        margin-left: 40px;
+    }
+
+    .block-card:active {
+        transform: translate(4px, 4px);
+        box-shadow: 5px 5px 0px var(--iso-shadow);
+    }
+
+    .block-card.active {
+        border-color: var(--gold);
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .block-label {
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        background: var(--primary);
+        color: var(--white);
+        padding: 5px 12px;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+
+    /* --- Message --- */
+    .message-wall {
+        padding: 4rem 2rem;
+        text-align: left;
+    }
+
+    .message-line {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        display: block;
+        opacity: 0;
+    }
+
+    .is-visible .message-line:nth-child(1) { animation: revealUp 0.8s forwards 0.1s; }
+    .is-visible .message-line:nth-child(2) { animation: revealUp 0.8s forwards 0.3s; }
+    .is-visible .message-line:nth-child(3) { animation: revealUp 0.8s forwards 0.5s; }
+    .is-visible .message-line:nth-child(4) { animation: revealUp 0.8s forwards 0.7s; }
+    .is-visible .message-line:nth-child(5) { animation: revealUp 0.8s forwards 0.9s; }
+    .is-visible .message-line:nth-child(6) { animation: revealUp 0.8s forwards 1.1s; }
+
+    /* --- Countdown --- */
+    .timer-container {
+        background: var(--primary);
+        color: var(--white);
+        margin: 4rem 1.5rem;
+        padding: 3rem 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #timer {
+        font-size: 1.8rem;
+        font-weight: 800;
+        text-align: center;
+        padding: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .timer-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 150%;
+        height: 150%;
+        background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+        transform: translate(-50%, -50%);
+        opacity: 0.3;
+    }
+
+    /* --- Button --- */
+    .cta-wrapper {
+        padding: 2rem;
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    #celebrate-btn {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        padding: 1.2rem 2.5rem;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #celebrate-btn:hover {
+        background: var(--primary);
+        color: var(--white);
+    }
+
+    /* --- Confetti --- */
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        pointer-events: none;
+        z-index: 999;
+    }
+
+    .hidden-content {
+        display: none;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+        color: #666;
+        font-style: italic;
+    }
+
+    .active .hidden-content {
+        display: block;
+        animation: revealUp 0.4s ease;
+    }
+
+    /* --- Decoration --- */
+    .iso-dot {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--secondary);
+        border-radius: 50%;
+    }
+</style>
+</head>
+<body>
+<section class="hero">
+    <div class="iso-dot" style="top:10%; left:20%;"></div>
+    <div class="iso-dot" style="top:15%; left:80%;"></div>
+    <div class="iso-dot" style="top:60%; left:10%;"></div>
+    
+    <div class="altar-box">
+        <div class="cube cube-1"></div>
+        <div class="cube cube-2"></div>
+        <div class="cube cube-3"></div>
+    </div>
+
+    <h1>[Your Name]<br>& [Partner's Name]</h1>
+    <h2>Are building a lifetime together</h2>
+    <div style="margin-top: 2rem; font-size: 0.8rem; letter-spacing: 4px; opacity: 0.6;">MAY 24, 2026</div>
+</section>
+
+<div class="iso-container">
+    <div class="staircase-wrapper">
+        
+        <section class="section block-card" onclick="toggleBlock(this)">
+            <div class="block-label">01 / FOUNDATION</div>
+            <strong>The First Blueprint</strong>
+            <div class="hidden-content">
+                It all began with a simple conversation that laid the cornerstones of our world.
+            </div>
+        </section>
+
+        <section class="section block-card" onclick="toggleBlock(this)" style="margin-left: 80px;">
+            <div class="block-label">02 / STRUCTURE</div>
+            <strong>Rising Together</strong>
+            <div class="hidden-content">
+                Through every season, we built walls of trust and windows of shared dreams.
+            </div>
+        </section>
+
+        <section class="section block-card" onclick="toggleBlock(this)" style="margin-left: 20px;">
+            <div class="block-label">03 / INTERIOR</div>
+            <strong>Heart & Hearth</strong>
+            <div class="hidden-content">
+                The quiet moments in between are what make this house a home.
+            </div>
+        </section>
+
+        <section class="section block-card" onclick="toggleBlock(this)" style="margin-left: 60px;">
+            <div class="block-label">04 / THE VOW</div>
+            <strong>The Infinite Capstone</strong>
+            <div class="hidden-content">
+                On [Date], we place the final piece and begin our forever.
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<section class="section message-wall">
+    <p class="message-line">A union is more than a single day;</p>
+    <p class="message-line">it is an architectural marvel of the soul.</p>
+    <p class="message-line">We have gathered the stones of kindness,</p>
+    <p class="message-line">and the mortar of unwavering friendship.</p>
+    <p class="message-line">Please join us as we celebrate the completion</p>
+    <p class="message-line">of our most beautiful design yet.</p>
+    <p class="message-line">Two lives, one singular vision.</p>
+</section>
+
+<div class="timer-container">
+    <div class="timer-glow"></div>
+    <div id="timer">00d 00h 00m 00s</div>
+</div>
+
+<div class="cta-wrapper">
+    <button id="celebrate-btn">✨ Celebrate! ✨</button>
+</div>
+
+<script>
+    // Countdown Logic
+    (function(){
+        var ed=new Date("2026-05-24T10:00:00");
+        function tick(){
+            var diff=ed-new Date(),el=document.getElementById('timer');
+            if(!el)return;
+            if(diff<=0){el.textContent='🎉 The day is here!';return;}
+            var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),
+                m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+            el.textContent=d+'d '+h+'h '+m+'m '+s+'s';
+            setTimeout(tick,1000);
+        }
+        tick();
+    })();
+
+    // Scroll Observer
+    const observerOptions = {
+        threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                if(entry.target.parentElement.classList.contains('staircase-wrapper')) {
+                    entry.target.parentElement.classList.add('scrolled');
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
+
+    // Interactive Feature: Block Toggle
+    function toggleBlock(el) {
+        el.classList.toggle('active');
+    }
+
+    // Confetti Logic
+    const btn = document.getElementById('celebrate-btn');
+    btn.addEventListener('click', () => {
+        for(let i=0; i<50; i++) {
+            createConfetti();
+        }
+    });
+
+    function createConfetti() {
+        const colors = ['#d4af37', '#ffffff', '#52b788'];
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-10px';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        
+        document.body.appendChild(confetti);
+
+        const animation = confetti.animate([
+            { transform: `translate3d(0,0,0) rotate(0deg)`, opacity: 1 },
+            { transform: `translate3d(${(Math.random()-0.5)*200}px, 100vh, 0) rotate(${Math.random()*360}deg)`, opacity: 0 }
+        ], {
+            duration: Math.random() * 3000 + 2000,
+            easing: 'cubic-bezier(0, .9, .57, 1)'
+        });
+
+        animation.onfinish = () => confetti.remove();
+    }
+</script>
+
+<footer style="opacity:0.25;font-size:12px;text-align:center;padding:1rem;">Template #00009</footer>
+</body>
+</html>
