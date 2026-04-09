@@ -44,50 +44,6 @@
     "added": "2026-04-09"
   },
   {
-    "id": 3,
-    "filename": "00007.html",
-    "name": "A Forever Kind of Love",
-    "url": "templates/00007.html",
-    "category": "uncategorized",
-    "tier": "Standard",
-    "price": 299,
-    "oldPrice": 449,
-    "discount": "33% OFF",
-    "desc": "A Forever Kind of Love",
-    "features": {
-      "Style": "Custom",
-      "Animations": "?",
-      "Sections": "?",
-      "Countdown": "No"
-    },
-    "orders": 0,
-    "rating": 5.0,
-    "trending": false,
-    "added": "2026-04-09"
-  },
-  {
-    "id": 4,
-    "filename": "00008.html",
-    "name": "Neon Milestone Celebration",
-    "url": "templates/00008.html",
-    "category": "uncategorized",
-    "tier": "Standard",
-    "price": 299,
-    "oldPrice": 449,
-    "discount": "33% OFF",
-    "desc": "Neon Milestone Celebration",
-    "features": {
-      "Style": "Custom",
-      "Animations": "?",
-      "Sections": "?",
-      "Countdown": "No"
-    },
-    "orders": 0,
-    "rating": 5.0,
-    "trending": false,
-    "added": "2026-04-09"
-  },
-  {
     "id": 5,
     "filename": "00009.html",
     "name": "Wedding Celebration - The Infinite Isometric Vow",
