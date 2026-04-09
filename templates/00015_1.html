@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celestial Union — Wedding Anniversary</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* mobile reset and base */
+html{box-sizing:border-box;scroll-behavior:smooth;}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0 auto;padding:0;max-width:430px;overflow-x:hidden;font-size:16px;-webkit-font-smoothing:antialiased;background:#0a0a0f;color:#f0e6e8;font-family:'Cormorant Garamond',Georgia,serif;}
+img{max-width:100%;height:auto;display:block;}
+
+
+/* CSS Variables */
+:root{
+  --gold:#d4af37;
+  --rose:#b76e79;
+  --blush:#f4c2c2;
+  --dark:#0a0a0f;
+  --dark2:#12121a;
+  --light-rose:#f8e8ea;
+}
+
+
+/* Confetti keyframes */
+@keyframes confettiFall{
+  0%{transform:translateY(-10px) rotate(0deg);opacity:1;}
+  100%{transform:translateY(100vh) rotate(720deg);opacity:0;}
+}
+
+
+@keyframes glowPulse{
+  0%,100%{box-shadow:0 0 8px var(--gold),0 0 20px rgba(212,175,55,0.3);}
+  50%{box-shadow:0 0 16px var(--gold),0 0 40px rgba(212,175,55,0.5);}
+}
+
+
+@keyframes constellationDraw{
+  0%{stroke-dashoffset:1000;}
+  100%{stroke-dashoffset:0;}
+}
+
+
+@keyframes starTwinkle{
+  0%,100%{opacity:0.3;transform:scale(0.8);}
+  50%{opacity:1;transform:scale(1.2);}
+}
+
+
+@keyframes celestialMerge{
+  0%{border-radius:50%;opacity:0.8;}
+  50%{border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;opacity:1;}
+  100%{border-radius:50%;opacity:0.9;}
+}
+
+
+@keyframes moonRotate{
+  0%{transform:rotateX(0deg);}
+  100%{transform:rotateX(360deg);}
+}
+
+
+@keyframes floatUp{
+  0%{transform:translateY(0) scale(1);opacity:0.7;}
+  50%{transform:translateY(-15px) scale(1.05);opacity:1;}
+  100%{transform:translateY(0) scale(1);opacity:0.7;}
+}
+
+
+/* Confetti pieces */
+.confetti-container{
+  position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;
+}
+
+
+.confetti-piece{
+  position:absolute;
+  width:8px;height:8px;
+  top:-10px;
+  animation:confettiFall linear forwards;
+}
+
+
+.confetti-piece.gold{background:var(--gold);border-radius:1px;}
+.confetti-piece.white{background:#fff;opacity:0.8;border-radius:50%;}
+.confetti-piece.blush{background:var(--blush);border-radius:2px;}
+
+
+/* Background stars layer */
+.stars-layer{
+  position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;
+}
+
+
+.star-dot{
+  position:absolute;
+  width:2px;height:2px;
+  background:#fff;
+  border-radius:50%;
+  animation:starTwinkle var(--dur) ease-in-out infinite;
+  animation-delay:var(--delay);
+}
+
+
+/* Hero section */
+.hero-section{
+  position:relative;
+  z-index:1;
+  padding:2rem 1.5rem 1rem;
+  text-align:center;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+
+.hero-section h1{
+  font-family:'Cinzel',serif;
+  font-weight:900;
+  font-size:2.2rem;
+  color:var(--gold);
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  margin:0 0 0.5rem;
+  line-height:1.2;
+  text-shadow:0 0 30px rgba(212,175,55,0.3);
+}
+
+
+.hero-section h2{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;
+  font-style:italic;
+  font-size:1.15rem;
+  color:var(--blush);
+  margin:0 0 1.5rem;
+  letter-spacing:0.08em;
+}
+
+
+/* Moon Phase */
+.moon-container{
+  position:relative;
+  width:80px;height:80px;
+  margin:1rem auto 1.5rem;
+  perspective:200px;
+}
+
+
+.moon-body{
+  width:80px;height:80px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#f5f0c1,#d4af37,#8a7230);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 0 25px rgba(212,175,55,0.4),0 0 50px rgba(212,175,55,0.15);
+  animation:glowPulse 3s ease-in-out infinite;
+}
+
+
+.moon-shadow{
+  position:absolute;
+  top:-2px;left:-2px;
+  width:84px;height:84px;
+  border-radius:50%;
+  background:var(--dark);
+  transition:transform 0.8s ease;
+}
+
+
+/* Celestial bodies */
+.celestial-bodies{
+  position:relative;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:1rem 0;
+  gap:0;
+}
+
+
+.celestial-orb{
+  width:40px;height:40px;
+  border-radius:50%;
+  animation:celestialMerge 4s ease-in-out infinite, floatUp 3s ease-in-out infinite;
+}
+
+
+.celestial-orb.rose{
+  background:radial-gradient(circle at 30% 30%,var(--blush),var(--rose),#7a3d47);
+  box-shadow:0 0 15px rgba(183,110,121,0.5);
+}
+
+
+.celestial-orb.gold{
+  background:radial-gradient(circle at 30% 30%,#f5e6a3,var(--gold),#8a7230);
+  box-shadow:0 0 15px rgba(212,175,55,0.5);
+  animation-delay:0.5s;
+}
+
+
+.celestial-bridge{
+  width:20px;height:2px;
+  background:linear-gradient(90deg,var(--rose),var(--gold));
+  opacity:0.5;
+  animation:floatUp 3s ease-in-out infinite 0.25s;
+}
+
+
+/* Hero image */
+.hero-image-wrap{
+  position:relative;
+  margin:1rem 0;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+
+.hero-image-wrap::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:80px;
+  background:linear-gradient(transparent,var(--dark));
+  pointer-events:none;
+}
+
+
+/* Constellation timeline */
+.timeline-section{
+  position:relative;
+  z-index:1;
+  padding:2rem 1.5rem;
+}
+
+
+.timeline-section h2{
+  font-family:'Cinzel',serif;
+  font-weight:700;
+  font-size:1.3rem;
+  color:var(--gold);
+  text-align:center;
+  letter-spacing:0.1em;
+  margin:0 0 2rem;
+}
+
+
+.constellation-svg{
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:60px;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+}
+
+
+.constellation-line{
+  stroke:var(--gold);
+  stroke-width:1;
+  fill:none;
+  opacity:0.3;
+  stroke-dasharray:1000;
+  animation:constellationDraw 3s ease forwards;
+}
+
+
+.constellation-dot{
+  fill:var(--gold);
+  filter:drop-shadow(0 0 4px var(--gold));
+}
+
+
+.timeline-item{
+  position:relative;
+  z-index:1;
+  margin-bottom:2.5rem;
+  padding-left:3.5rem;
+}
+
+
+.timeline-item:last-child{margin-bottom:0;}
+
+
+.timeline-node{
+  position:absolute;
+  left:1.15rem;
+  top:0.3rem;
+  width:12px;height:12px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 10px var(--gold),0 0 20px rgba(212,175,55,0.3);
+  animation:glowPulse 2.5s ease-in-out infinite;
+}
+
+
+.timeline-node.rose-node{
+  background:var(--rose);
+  box-shadow:0 0 10px var(--rose),0 0 20px rgba(183,110,121,0.3);
+}
+
+
+.timeline-date{
+  font-family:'Cinzel',serif;
+  font-size:0.75rem;
+  color:var(--gold);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  margin-bottom:0.3rem;
+}
+
+
+.timeline-text{
+  font-size:1.05rem;
+  color:var(--light-rose);
+  line-height:1.6;
+  font-weight:300;
+}
+
+
+/* Message section */
+.message-section{
+  position:relative;
+  z-index:1;
+  padding:2rem 1.5rem;
+  text-align:center;
+}
+
+
+.message-section::before{
+  content:'\201C';
+  font-family:'Cinzel',serif;
+  font-size:4rem;
+  color:var(--rose);
+  opacity:0.3;
+  display:block;
+  margin-bottom:-1.5rem;
+  line-height:1;
+}
+
+
+.message-prose{
+  font-size:1.08rem;
+  line-height:1.85;
+  color:var(--light-rose);
+  font-weight:300;
+  font-style:italic;
+  max-width:360px;
+  margin:0 auto;
+}
+
+
+/* Gallery section */
+.gallery-section{
+  position:relative;
+  z-index:1;
+  padding:1.5rem;
+  display:flex;
+  gap:4%;
+  justify-content:center;
+}
+
+
+.gallery-section img{
+  border-radius:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.4);
+  transition:transform 0.4s ease,box-shadow 0.4s ease;
+}
+
+
+.gallery-section img:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 8px 30px rgba(183,110,121,0.3);
+}
+
+
+/* Divider */
+.section-divider{
+  width:60px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:1rem auto;
+  position:relative;
+  z-index:1;
+}
+
+
+.section-divider::after{
+  content:'✦';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  color:var(--gold);
+  font-size:0.6rem;
+  background:var(--dark);
+  padding:0 8px;
+}
+
+
+/* Countdown section */
+.countdown-section{
+  position:relative;
+  z-index:1;
+  padding:2rem 1.5rem;
+  text-align:center;
+}
+
+
+.countdown-section h2{
+  font-family:'Cinzel',serif;
+  font-weight:700;
+  font-size:1.1rem;
+  color:var(--blush);
+  letter-spacing:0.1em;
+  margin:0 0 0.5rem;
+}
+
+
+#timer{
+  font-family:'Cinzel',serif;
+  font-size:1.8rem;
+  font-weight:800;
+  text-align:center;
+  padding:1rem;
+  color:var(--gold);
+  text-shadow:0 0 15px rgba(212,175,55,0.3);
+}
+
+
+.timer-sub{
+  font-size:0.85rem;
+  color:var(--rose);
+  opacity:0.7;
+  margin-top:-0.5rem;
+}
+
+
+/* Celebrate button */
+.celebrate-section{
+  position:relative;
+  z-index:1;
+  padding:1rem 1.5rem 2rem;
+  text-align:center;
+}
+
+
+#celebrate-btn{
+  font-family:'Cinzel',serif;
+  font-size:1rem;
+  font-weight:700;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--dark);
+  background:linear-gradient(135deg,var(--gold),#e8c84a,var(--gold));
+  border:none;
+  padding:1rem 2.5rem;
+  border-radius:50px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.4s cubic-bezier(0.23,1,0.32,1);
+  box-shadow:0 4px 20px rgba(212,175,55,0.3),0 0 0 0 rgba(212,175,55,0);
+}
+
+
+#celebrate-btn:hover{
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 8px 35px rgba(212,175,55,0.5),0 0 0 4px rgba(212,175,55,0.15);
+}
+
+
+#celebrate-btn:active{
+  transform:translateY(0) scale(0.98);
+  box-shadow:0 2px 10px rgba(212,175,55,0.3);
+}
+
+
+#celebrate-btn::before{
+  content:'';
+  position:absolute;
+  top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  transition:left 0.6s ease;
+}
+
+
+#celebrate-btn:hover::before{
+  left:100%;
+}
+
+
+/* Scroll indicator */
+.scroll-hint{
+  position:absolute;
+  bottom:2rem;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.3rem;
+  animation:floatUp 2s ease-in-out infinite;
+}
+
+
+.scroll-hint span{
+  font-size:0.65rem;
+  color:var(--gold);
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  font-family:'Cinzel',serif;
+  opacity:0.5;
+}
+
+
+.scroll-arrow{
+  width:16px;height:16px;
+  border-right:1px solid var(--gold);
+  border-bottom:1px solid var(--gold);
+  transform:rotate(45deg);
+  opacity:0.4;
+}
+
+
+/* Ambient glow */
+.ambient-glow{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(80px);
+  pointer-events:none;
+  z-index:0;
+}
+
+
+.glow-rose{
+  width:200px;height:200px;
+  background:var(--rose);
+  opacity:0.06;
+  top:20%;left:-50px;
+}
+
+
+.glow-gold{
+  width:180px;height:180px;
+  background:var(--gold);
+  opacity:0.05;
+  top:50%;right:-40px;
+}
+
+
+.glow-blush{
+  width:150px;height:150px;
+  background:var(--blush);
+  opacity:0.04;
+  bottom:10%;left:30%;
+}
+
+
+/* Ring merge animation */
+.ring-merge{
+  position:relative;
+  width:90px;height:90px;
+  margin:0 auto 1rem;
+}
+
+
+.ring-merge .ring-outer{
+  position:absolute;
+  inset:0;
+  border:2px solid var(--gold);
+  border-radius:50%;
+  opacity:0.4;
+  animation:glowPulse 3s ease-in-out infinite;
+}
+
+
+.ring-merge .ring-inner{
+  position:absolute;
+  inset:15px;
+  border:1px solid var(--rose);
+  border-radius:50%;
+  opacity:0.5;
+  animation:glowPulse 3s ease-in-out infinite 0.5s;
+}
+
+
+.ring-merge .ring-core{
+  position:absolute;
+  inset:30px;
+  background:radial-gradient(circle,var(--gold),var(--rose));
+  border-radius:50%;
+  opacity:0.6;
+}
+
+
+</style>
+</head>
+<body>
+
+
+<!-- Ambient background glows -->
+<div class="ambient-glow glow-rose"></div>
+<div class="ambient-glow glow-gold"></div>
+<div class="ambient-glow glow-blush"></div>
+
+
+<!-- Parallax stars layer -->
+<div class="stars-layer" id="starsLayer"></div>
+
+
+<!-- Confetti container -->
+<div class="confetti-container" id="confettiContainer"></div>
+
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+  <div class="moon-container" id="moonContainer">
+    <div class="moon-body">
+      <div class="moon-shadow" id="moonShadow"></div>
+    </div>
+  </div>
+
+
+  <h1>Celestial Union</h1>
+  <h2>A love written in the stars</h2>
+
+
+  <div class="celestial-bodies">
+    <div class="celestial-orb rose"></div>
+    <div class="celestial-bridge"></div>
+    <div class="celestial-orb gold"></div>
+  </div>
+
+
+  <div class="hero-image-wrap">
+    <img src="https://picsum.photos/seed/wedding973772/600/800" style="width:100%;height:260px;object-fit:cover;display:block;" alt="Wedding Anniversary">
+  </div>
+
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+
+<!-- CONSTELLATION TIMELINE -->
+<section class="timeline-section">
+  <h2>Our Constellation</h2>
+
+
+  <svg class="constellation-svg" viewBox="0 0 60 500" preserveAspectRatio="none">
+    <line class="constellation-line" x1="30" y1="0" x2="30" y2="120" />
+    <line class="constellation-line" x1="30" y1="120" x2="15" y2="240" style="animation-delay:0.5s" />
+    <line class="constellation-line" x1="30" y1="120" x2="45" y2="240" style="animation-delay:0.5s" />
+    <line class="constellation-line" x1="30" y1="240" x2="30" y2="360" style="animation-delay:1s" />
+    <line class="constellation-line" x1="30" y1="360" x2="20" y2="480" style="animation-delay:1.5s" />
+    <circle class="constellation-dot" cx="30" cy="0" r="3" />
+    <circle class="constellation-dot" cx="30" cy="120" r="3" />
+    <circle class="constellation-dot" cx="15" cy="240" r="2.5" />
+    <circle class="constellation-dot" cx="45" cy="240" r="2.5" />
+    <circle class="constellation-dot" cx="30" cy="360" r="3" />
+    <circle class="constellation-dot" cx="20" cy="480" r="3" />
+  </svg>
+
+
+  <div class="timeline-item">
+    <div class="timeline-node"></div>
+    <div class="timeline-date">The Beginning</div>
+    <div class="timeline-text">Two orbits aligned under the same sky, and the universe paused to take notice. [Your Name] and [Partner's Name] found each other among the infinite stars.</div>
+  </div>
+
+
+  <div class="timeline-item">
+    <div class="timeline-node rose-node"></div>
+    <div class="timeline-date">[Date] — The Vow</div>
+    <div class="timeline-text">Beneath a canopy of light, two souls promised forever. Every word was a constellation drawn in the night, marking the map of a shared life.</div>
+  </div>
+
+
+  <div class="timeline-item">
+    <div class="timeline-node"></div>
+    <div class="timeline-date">The Years Between</div>
+    <div class="timeline-text">Seasons turned like celestial clockwork. Through calm skies and stormy nebulas, your love remained the one fixed point in an ever-shifting universe.</div>
+  </div>
+
+
+  <div class="timeline-item">
+    <div class="timeline-node rose-node"></div>
+    <div class="timeline-date">This Moment</div>
+    <div class="timeline-text">Today, the stars shine a little brighter because two hearts continue to orbit as one — a union as ancient and enduring as the cosmos itself.</div>
+  </div>
+</section>
+
+
+<div class="section-divider"></div>
+
+
+<!-- MESSAGE SECTION -->
+<section class="message-section">
+  <p class="message-prose">
+    To [Your Name] and [Partner's Name],<br><br>
+    Some love stories are not merely lived — they are
+    celestial events, rare alignments that the universe
+    holds its breath to witness. Yours is one of them.<br><br>
+    Every shared sunrise is a new star born. Every
+    whispered word is light traveling across the
+    silence between galaxies. Every laugh is a
+    supernova of joy.<br><br>
+    On this anniversary, may the constellations
+    rearrange themselves to spell out what words
+    cannot — that some unions are eternal, written
+    not in ink, but in starlight.
+  </p>
+</section>
+
+
+<div class="section-divider"></div>
+
+
+<!-- RING MERGE SYMBOL -->
+<div style="position:relative;z-index:1;padding:1.5rem 0;text-align:center;">
+  <div class="ring-merge">
+    <div class="ring-outer"></div>
+    <div class="ring-inner"></div>
+    <div class="ring-core"></div>
+  </div>
+  <p style="font-family:'Cinzel',serif;font-size:0.7rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;">Eternally Bound</p>
+</div>
+
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <img src="https://picsum.photos/seed/bride373269/700/500" style="width:48%;height:160px;object-fit:cover;" alt="memory">
+  <img src="https://picsum.photos/seed/wedding683563/800/600" style="width:48%;height:160px;object-fit:cover;" alt="memory">
+</section>
+
+
+<div class="section-divider"></div>
+
+
+<!-- COUNTDOWN -->
+<section class="countdown-section">
+  <h2>Awaiting the Next Celebration</h2>
+  <div id="timer" style="font-size:1.8rem;font-weight:800;text-align:center;padding:1rem;">00d 00h 00m 00s</div>
+  <p class="timer-sub">[Date]</p>
+</section>
+
+
+<div class="section-divider"></div>
+
+
+<!-- CELEBRATE BUTTON -->
+<section class="celebrate-section">
+  <button id="celebrate-btn">✨ Celebrate! ✨</button>
+</section>
+
+
+<!-- FOOTER -->
+<footer style="opacity:0.25;font-size:12px;text-align:center;padding:1rem;">Template #00015</footer>
+
+
+<script>
+// Generate background stars
+(function(){
+  var layer=document.getElementById('starsLayer');
+  var count=50;
+  for(var i=0;i<count;i++){
+    var star=document.createElement('div');
+    star.className='star-dot';
+    star.style.left=Math.random()*100+'%';
+    star.style.top=Math.random()*100+'%';
+    star.style.setProperty('--dur',(2+Math.random()*4)+'s');
+    star.style.setProperty('--delay',(Math.random()*3)+'s');
+    var size=1+Math.random()*2;
+    star.style.width=size+'px';
+    star.style.height=size+'px';
+    layer.appendChild(star);
+  }
+})();
+
+
+// Gyroscope parallax for stars
+(function(){
+  var layer=document.getElementById('starsLayer');
+  var supported=false;
+  function handleOrientation(e){
+    if(!supported)return;
+    var x=(e.gamma||0)/45;
+    var y=(e.beta||0)/90;
+    layer.style.transform='translate('+(-x*12)+'px,'+(-y*12)+'px)';
+  }
+  if(typeof DeviceOrientationEvent!=='undefined'){
+    if(typeof DeviceOrientationEvent.requestPermission==='function'){
+      document.addEventListener('click',function reqPerm(){
+        DeviceOrientationEvent.requestPermission().then(function(state){
+          if(state==='granted'){
+            supported=true;
+            window.addEventListener('deviceorientation',handleOrientation);
+          }
+        });
+        document.removeEventListener('click',reqPerm);
+      },{once:true});
+    }else{
+      supported=true;
+      window.addEventListener('deviceorientation',handleOrientation);
+    }
+  }
+})();
+
+
+// Moon phase calculation based on wedding date
+(function(){
+  var weddingDate=new Date("2024-06-21T10:00:00");
+  var knownNewMoon=new Date("2000-01-06T18:14:00");
+  var synodicMonth=29.53058867;
+  var diffDays=(weddingDate-knownNewMoon)/(1000*60*60*24);
+  var phase=diffDays%synodicMonth;
+  var fraction=phase/synodicMonth;
+  var shadow=document.getElementById('moonShadow');
+  if(!shadow)return;
+  var illumination=fraction<0.5?fraction*2:(1-fraction)*2;
+  var offset=(illumination-0.5)*84;
+  shadow.style.transform='translateX('+offset+'px)';
+})();
+
+
+// Confetti launcher
+function launchConfetti(){
+  var container=document.getElementById('confettiContainer');
+  var colors=['gold','white','blush'];
+  for(var i=0;i<60;i++){
+    var piece=document.createElement('div');
+    piece.className='confetti-piece '+colors[Math.floor(Math.random()*colors.length)];
+    piece.style.left=Math.random()*100+'%';
+    piece.style.animationDuration=(2+Math.random()*3)+'s';
+    piece.style.animationDelay=(Math.random()*0.8)+'s';
+    var size=4+Math.random()*8;
+    piece.style.width=size+'px';
+    piece.style.height=size*(0.4+Math.random()*0.6)+'px';
+    piece.style.opacity=0.6+Math.random()*0.4;
+    container.appendChild(piece);
+    (function(el){
+      setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},5000);
+    })(piece);
+  }
+}
+
+
+// Celebrate button
+document.getElementById('celebrate-btn').addEventListener('click',function(){
+  launchConfetti();
+});
+
+
+// Countdown timer
+(function(){
+  var ed=new Date("2026-06-21T10:00:00");
+  function tick(){
+    var diff=ed-new Date(),el=document.getElementById('timer');
+    if(!el)return;
+    if(diff<=0){el.textContent='🎉 The day is here!';return;}
+    var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),
+        m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+    el.textContent=d+'d '+h+'h '+m+'m '+s+'s';
+    setTimeout(tick,1000);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>
