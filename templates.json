@@ -174,5 +174,27 @@
     "rating": 5.0,
     "trending": false,
     "added": "2026-04-09"
+  },
+  {
+    "id": 11,
+    "filename": "00020.html",
+    "name": "Neon Arcade Birthday Celebration",
+    "url": "templates/00020.html",
+    "category": "uncategorized",
+    "tier": "Standard",
+    "price": 299,
+    "oldPrice": 449,
+    "discount": "33% OFF",
+    "desc": "Neon Arcade Birthday Celebration",
+    "features": {
+      "Style": "Custom",
+      "Animations": "?",
+      "Sections": "?",
+      "Countdown": "No"
+    },
+    "orders": 0,
+    "rating": 5.0,
+    "trending": false,
+    "added": "2026-04-09"
   }
 ]
