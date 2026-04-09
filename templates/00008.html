@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neon Milestone Celebration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg-color: #0a0a0a;
+--primary-neon: #7c3aed;
+--secondary-neon: #a78bfa;
+--accent-cyan: #06b6d4;
+--glow-shadow: 0 0 10px rgba(124, 58, 237, 0.7), 0 0 20px rgba(124, 58, 237, 0.4);
+--text-glow: 0 0 8px rgba(167, 139, 250, 0.8);
+}
+    html {
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+    }
+
+    *, *::before, *::after {
+        box-sizing: inherit;
+    }
+
+    body {
+        margin: 0 auto;
+        padding: 0;
+        max-width: 430px;
+        overflow-x: hidden;
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        background-color: var(--bg-color);
+        color: #ffffff;
+        font-family: 'Orbitron', sans-serif;
+        position: relative;
+    }
+
+    /* CRT Scanline Overlay */
+    body::before {
+        content: " ";
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        z-index: 999;
+        background-size: 100% 4px, 3px 100%;
+        pointer-events: none;
+    }
+
+    /* Animations */
+    @keyframes float {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
+        100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    @keyframes neonPulse {
+        0%, 100% { opacity: 1; text-shadow: var(--text-glow); }
+        50% { opacity: 0.8; text-shadow: 0 0 15px var(--primary-neon), 0 0 25px var(--primary-neon); }
+    }
+
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scaleUp {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes backgroundShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Layout - Centered Card with Shadow */
+    .main-container {
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .hero-card {
+        background: rgba(20, 20, 20, 0.8);
+        border: 2px solid var(--primary-neon);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--glow-shadow);
+        width: 100%;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+        animation: scaleUp 1s ease-out forwards;
+    }
+
+    /* Decorative CSS Art - Balloons */
+    .balloon-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 1.5rem;
+    }
+
+    .balloon {
+        width: 30px;
+        height: 40px;
+        background: var(--primary-neon);
+        border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        position: relative;
+        animation: float 4s ease-in-out infinite;
+        box-shadow: inset -5px -5px 10px rgba(0,0,0,0.5);
+    }
+
+    .balloon:nth-child(2) { background: var(--secondary-neon); animation-delay: 0.5s; }
+    .balloon:nth-child(3) { background: var(--accent-cyan); animation-delay: 1.2s; }
+    .balloon:nth-child(4) { background: var(--primary-neon); animation-delay: 0.8s; }
+
+    .balloon::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 14px;
+        width: 2px;
+        height: 15px;
+        background: rgba(255,255,255,0.3);
+    }
+
+    /* Typography */
+    h1 {
+        font-size: 3.5rem;
+        margin: 0;
+        text-transform: uppercase;
+        line-height: 0.9;
+        color: #fff;
+        text-align: center;
+        animation: neonPulse 2s infinite;
+    }
+
+    .milestone-num {
+        display: block;
+        font-size: 5rem;
+        font-weight: 900;
+        color: var(--accent-cyan);
+        text-shadow: 0 0 10px var(--accent-cyan);
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        color: var(--secondary-neon);
+        text-align: center;
+        margin-top: 1rem;
+        letter-spacing: 2px;
+    }
+
+    /* Message Section */
+    .message-section {
+        width: 100%;
+        padding: 2rem;
+        border-left: 4px solid var(--primary-neon);
+        background: linear-gradient(90deg, rgba(124, 58, 237, 0.1), transparent);
+        margin: 2rem 0;
+    }
+
+    .message-text {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #e2e2e2;
+        font-style: italic;
+    }
+
+    /* Timer Section */
+    .timer-container {
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 15px;
+        padding: 1.5rem;
+        width: 100%;
+        position: relative;
+        box-shadow: inset 0 0 15px rgba(0,0,0,1);
+    }
+
+    .timer-label {
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--accent-cyan);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-bottom: 0.5rem;
+    }
+
+    #timer {
+        font-family: 'Orbitron', sans-serif;
+        color: #fff;
+        text-shadow: 0 0 10px var(--primary-neon);
+        border-bottom: 2px solid var(--primary-neon);
+        display: inline-block;
+        width: 100%;
+    }
+
+    /* Button Styling */
+    #celebrate-btn {
+        background: transparent;
+        color: #fff;
+        border: 2px solid var(--accent-cyan);
+        padding: 1rem 2rem;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 50px;
+        margin-top: 3rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+        outline: none;
+        position: relative;
+        z-index: 1000;
+    }
+
+    #celebrate-btn:active {
+        transform: scale(0.95);
+        background: var(--accent-cyan);
+        box-shadow: 0 0 30px var(--accent-cyan);
+    }
+
+    /* Canvas for confetti */
+    #confetti-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1001;
+    }
+
+    .grid-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            linear-gradient(rgba(124, 58, 237, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(124, 58, 237, 0.1) 1px, transparent 1px);
+        background-size: 30px 30px;
+        z-index: -1;
+        transform: perspective(500px) rotateX(60deg);
+        transform-origin: top;
+        animation: gridMove 10s linear infinite;
+    }
+
+    @keyframes gridMove {
+        from { background-position: 0 0; }
+        to { background-position: 0 30px; }
+    }
+
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<div class="main-container">
+    
+    <header class="hero-card">
+        <div class="balloon-container">
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+        </div>
+        <h1>Level <span class="milestone-num">21</span></h1>
+        <h2>Unlocked by [Your Name]</h2>
+    </header>
+
+    <section class="message-section reveal">
+        <div class="message-text">
+            Today marks the dawn of a spectacular new era.<br>
+            Two decades of memories, growth, and pure magic,<br>
+            all leading to this moment of electric celebration.<br>
+            May your path be lit by the brightest neon dreams,<br>
+            and your heart stay as vibrant as this very night.<br>
+            The universe is waiting for your unique rhythm.<br>
+            Happy Birthday to an absolute legend!<br>
+            Stay bold, stay bright, stay you.
+        </div>
+    </section>
+
+    <section class="timer-container reveal">
+        <div class="timer-label">Commencing Protocol In</div>
+        <div id="timer" style="font-size:1.8rem;font-weight:800;text-align:center;padding:1rem;">00d 00h 00m 00s</div>
+    </section>
+
+    <button id="celebrate-btn" class="reveal">✨ Celebrate! ✨</button>
+
+</div>
+
+<footer style="opacity:0.25;font-size:12px;text-align:center;padding:1rem;">Template #00008</footer>
+
+<script>
+    // Countdown Timer
+    (function(){
+        var ed = new Date("2026-07-06T10:00:00");
+        function tick(){
+            var diff = ed - new Date(), el = document.getElementById('timer');
+            if(!el) return;
+            if(diff <= 0){
+                el.textContent = '🎉 The day is here!';
+                return;
+            }
+            var d = Math.floor(diff / 86400000),
+                h = Math.floor(diff % 86400000 / 3600000),
+                m = Math.floor(diff % 3600000 / 60000),
+                s = Math.floor(diff % 60000 / 1000);
+            
+            el.textContent = d + 'd ' + h + 'h ' + m + 'm ' + s + 's';
+            setTimeout(tick, 1000);
+        }
+        tick();
+    })();
+
+    // Intersection Observer for Scroll Reveals
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Confetti Interactive Feature
+    const btn = document.getElementById('celebrate-btn');
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.x = canvas.width / 2;
+            this.y = canvas.height / 2;
+            this.size = Math.random() * 8 + 4;
+            this.speedX = Math.random() * 10 - 5;
+            this.speedY = Math.random() * -15 - 5;
+            this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+            this.gravity = 0.4;
+        }
+        update() {
+            this.speedY += this.gravity;
+            this.x += this.speedX;
+            this.y += this.speedY;
+        }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.size, this.size);
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+            if (particles[i].y > canvas.height) {
+                particles.splice(i, 1);
+                i--;
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    btn.addEventListener('click', () => {
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Particle());
+        }
+    });
+
+    animate();
+</script>
+</body>
+</html>
+Sources
