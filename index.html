@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scripted Surprise — Premium HTML Template Marketplace</title>
+    <title>Scripted Surprise -- Premium HTML Template Marketplace</title>
     <meta name="description" content="Handcrafted HTML greeting templates for every occasion. Wedding, Birthday, Love, Baby Shower & more. Live interactive preview, instant delivery.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         /* ═══════════════════════════════════════════════════════════════
-           SCRIPTED SURPRISE v2 — DARK LUXURY MARKETPLACE
+           SCRIPTED SURPRISE v2 -- DARK LUXURY MARKETPLACE
            ═══════════════════════════════════════════════════════════════ */
         :root {
             --bg-0:            #05050a;
@@ -1049,7 +1049,7 @@
             </div>
             <div class="hero-stats">
                 <div class="stat">
-                    <div class="stat-val" data-target="150" data-suffix="+">150+</div>
+                    <div class="stat-val" id="statCount" data-target="150" data-suffix="+">150+</div>
                     <div class="stat-lbl">Premium Templates</div>
                 </div>
                 <div class="stat">
@@ -1083,7 +1083,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 </div>
                 <h4>Browse & Preview</h4>
-                <p>Explore templates by occasion. Click Preview to interact with the live template in a phone frame — exactly as your recipient will see it.</p>
+                <p>Explore templates by occasion. Click Preview to interact with the live template in a phone frame -- exactly as your recipient will see it.</p>
             </div>
             <div class="how-step">
                 <div class="how-num">02</div>
@@ -1091,7 +1091,7 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
                 </div>
                 <h4>Order via Chat</h4>
-                <p>Add to cart and checkout — our chat bot collects your details and I personally follow up within minutes to confirm and process payment.</p>
+                <p>Add to cart and checkout -- our chat bot collects your details and I personally follow up within minutes to confirm and process payment.</p>
             </div>
             <div class="how-step">
                 <div class="how-num">03</div>
@@ -1156,7 +1156,7 @@
         <div class="custom-card fade-in">
             <div class="sec-label">Made For You</div>
             <h2>Need Something <span style="background:var(--gold-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Unique?</span></h2>
-            <p>Can't find the perfect template? I'll craft a custom HTML greeting tailored to your exact vision, colours, and occasion — delivered in 24 hours.</p>
+            <p>Can't find the perfect template? I'll craft a custom HTML greeting tailored to your exact vision, colours, and occasion -- delivered in 24 hours.</p>
             <div class="custom-pricing">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 Custom orders start at ₹599
@@ -1417,239 +1417,7 @@ const categories = [
     { id:'congrats',   name:'Congrats',       icon:'🏆', count:1  },
 ];
 
-// ── EMBEDDED SAMPLE TEMPLATES (HTML string per template) ──
-// These are used in the phone preview. Replace with real template HTML later.
-const templateHTMLs = {
-1: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0010;font-family:Georgia,serif;min-height:100vh;overflow-x:hidden}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}.petal{position:fixed;top:-10px;font-size:16px;animation:fall linear infinite;opacity:.7}@keyframes fall{to{top:110vh;transform:rotate(360deg)}}.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;padding:40px 20px 20px}.crown{font-size:50px;animation:float 3s ease-in-out infinite}.title{font-size:28px;font-weight:700;color:#f0d78c;margin:16px 0 8px;text-shadow:0 0 20px rgba(240,215,140,.4)}.subtitle{font-size:14px;color:#c9a96e;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px}.divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,#d4a843,transparent);margin:0 auto 20px}.msg{color:#e0d0c0;font-size:16px;line-height:1.8;max-width:320px;margin:0 auto 32px;font-style:italic}.names{display:flex;align-items:center;justify-content:center;gap:16px;margin:24px 0}.name-box{text-align:center}.nm{font-size:26px;color:#f0d78c;font-weight:700}.role{font-size:10px;color:#a08060;letter-spacing:2px;text-transform:uppercase;margin-top:4px}.amp{font-size:36px;color:#d4a843;font-style:italic;opacity:.7}.date-sec{text-align:center;padding:24px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.2);border-radius:16px;margin:0 20px 24px}.date-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#a08060;margin-bottom:8px}.date{font-size:20px;color:#f0d78c;font-weight:700}.venue{font-size:13px;color:#c9a96e;margin-top:6px}.footer-msg{text-align:center;padding:20px;font-size:12px;color:#706050;font-style:italic}</style></head><body>
-<div class="petal" style="left:10%;animation-duration:8s;animation-delay:0s">🌸</div>
-<div class="petal" style="left:30%;animation-duration:6s;animation-delay:2s">🌺</div>
-<div class="petal" style="left:60%;animation-duration:9s;animation-delay:1s">✿</div>
-<div class="petal" style="left:80%;animation-duration:7s;animation-delay:3s">🌸</div>
-<div class="hero">
-  <div class="crown">👑</div>
-  <div class="title">Together Forever</div>
-  <div class="subtitle">Wedding Invitation</div>
-  <div class="divider"></div>
-  <p class="msg">"Two souls, one heart. We joyfully invite you to celebrate the beginning of our forever."</p>
-  <div class="names">
-    <div class="name-box"><div class="nm">Aanya</div><div class="role">The Bride</div></div>
-    <div class="amp">&</div>
-    <div class="name-box"><div class="nm">Rohan</div><div class="role">The Groom</div></div>
-  </div>
-</div>
-<div class="date-sec">
-  <div class="date-lbl">Save the Date</div>
-  <div class="date">14th February 2025</div>
-  <div class="venue">📍 The Grand Ballroom, Mumbai</div>
-</div>
-<div class="footer-msg">We can't wait to celebrate with you ✦</div>
-</body></html>`,
-
-2: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0d0520;font-family:'Georgia',serif;min-height:100vh;overflow-x:hidden}@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}.spark{position:fixed;font-size:12px;animation:sparkle 2s ease-in-out infinite}.hero{text-align:center;padding:60px 24px 30px}.badge{display:inline-block;padding:4px 16px;border-radius:100px;background:rgba(168,85,247,.2);border:1px solid rgba(168,85,247,.4);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#c084fc;margin-bottom:24px}.age{font-size:80px;font-weight:700;background:linear-gradient(135deg,#f0d78c,#d4a843);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px}.title{font-size:22px;color:#e0d0ff;margin-bottom:16px}.msg{color:#a0909f;font-size:15px;line-height:1.8;max-width:300px;margin:0 auto 32px;font-style:italic}.cake{font-size:60px;display:block;text-align:center;animation:bounce 1s ease-in-out infinite}@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}.wishes{padding:20px 24px;background:rgba(168,85,247,.08);border-top:1px solid rgba(168,85,247,.2);border-bottom:1px solid rgba(168,85,247,.2);text-align:center;font-size:14px;color:#c084fc;line-height:1.7}.confetti-row{display:flex;justify-content:center;gap:8px;padding:20px;font-size:24px}.footer{text-align:center;padding:16px;font-size:11px;color:#504060;font-style:italic}</style></head><body>
-<div class="spark" style="left:5%;top:20%;animation-delay:0s">✦</div>
-<div class="spark" style="left:90%;top:10%;animation-delay:.5s">★</div>
-<div class="spark" style="left:15%;top:70%;animation-delay:1s">✧</div>
-<div class="spark" style="left:85%;top:60%;animation-delay:1.5s">✦</div>
-<div class="hero">
-  <div class="badge">🎉 Happy Birthday</div>
-  <div class="age">25</div>
-  <div class="title">A Quarter Century of Awesome!</div>
-  <p class="msg">"May your day be as bright as your smile and as wonderful as you make every day for everyone around you."</p>
-  <span class="cake">🎂</span>
-</div>
-<div class="wishes">
-  Wishing you a day filled with laughter, love,<br>and all the things that make you happy! 🎊
-</div>
-<div class="confetti-row">🎈 🎉 🎁 🎊 🥳</div>
-<div class="footer">Made with love, just for you ✦</div>
-</body></html>`,
-
-3: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0008;font-family:'Georgia',serif;min-height:100vh;overflow-x:hidden}@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}.heart-bg{position:fixed;inset:0;z-index:0;overflow:hidden}.heart-float{position:absolute;font-size:20px;opacity:.15;animation:floatUp linear infinite}@keyframes floatUp{from{transform:translateY(100vh) rotate(0deg)}to{transform:translateY(-10vh) rotate(360deg)}}.content{position:relative;z-index:1;text-align:center;padding:50px 24px 30px}.rose{font-size:64px;animation:heartbeat 1.5s ease-in-out infinite;display:block;margin-bottom:24px}.title{font-size:26px;color:#ffb3c6;margin-bottom:8px;font-style:italic}.subtitle{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#8a4060;margin-bottom:24px}.msg{color:#e0a0b0;font-size:15px;line-height:1.85;max-width:300px;margin:0 auto 32px;font-style:italic}.to-from{display:flex;justify-content:space-around;padding:20px 24px;background:rgba(255,100,150,.06);border-top:1px solid rgba(255,100,150,.2)}.tf-item{text-align:center}.tf-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#6a3050;margin-bottom:6px}.tf-name{font-size:20px;color:#ffb3c6;font-weight:700}.bottom{text-align:center;padding:20px;font-size:20px}</style></head><body>
-<div class="heart-bg">
-  <div class="heart-float" style="left:10%;animation-duration:7s;animation-delay:0s">💕</div>
-  <div class="heart-float" style="left:40%;animation-duration:9s;animation-delay:3s">❤</div>
-  <div class="heart-float" style="left:70%;animation-duration:6s;animation-delay:1s">💗</div>
-  <div class="heart-float" style="left:85%;animation-duration:8s;animation-delay:4s">💕</div>
-</div>
-<div class="content">
-  <span class="rose">🌹</span>
-  <div class="title">You Are My Everything</div>
-  <div class="subtitle">A Love Letter</div>
-  <p class="msg">"Every moment with you is a treasure I keep close to my heart. You are the reason I smile, the reason I believe in magic, and my forever person."</p>
-</div>
-<div class="to-from">
-  <div class="tf-item"><div class="tf-lbl">To</div><div class="tf-name">My Love</div></div>
-  <div style="font-size:28px;align-self:center">💝</div>
-  <div class="tf-item"><div class="tf-lbl">From</div><div class="tf-name">Always Yours</div></div>
-</div>
-<div class="bottom">💌 💕 💌</div>
-</body></html>`,
-
-4: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a1a;font-family:'Georgia',serif;min-height:100vh}.hero{text-align:center;padding:60px 24px 32px;background:radial-gradient(ellipse at 50% 0%,rgba(147,197,253,.08),transparent 70%)}.duck{font-size:60px;display:block;animation:wobble 2s ease-in-out infinite}@keyframes wobble{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}.title{font-size:24px;color:#bae6fd;margin:20px 0 8px;font-weight:700}.subtitle{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#4a7a9a;margin-bottom:20px}.msg{color:#90b0c0;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px}.details{padding:20px;background:rgba(147,197,253,.06);border:1px solid rgba(147,197,253,.15);border-radius:16px;margin:0 20px 24px;text-align:center}.d-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#4a7a9a;margin-bottom:10px}.d-val{font-size:16px;color:#bae6fd;margin-bottom:4px}.icons{display:flex;justify-content:center;gap:12px;padding:20px;font-size:28px}</style></head><body>
-<div class="hero">
-  <span class="duck">🍼</span>
-  <div class="title">A New Star is Born!</div>
-  <div class="subtitle">Baby Shower Celebration</div>
-  <p class="msg">"Little hands and tiny toes, a beautiful new baby grows. Get ready to welcome the sweetest addition to your family!"</p>
-</div>
-<div class="details">
-  <div class="d-lbl">Join Us For</div>
-  <div class="d-val">Priya's Baby Shower 🎀</div>
-  <div style="font-size:13px;color:#4a7a9a;margin-top:4px">Sunday, March 9th · 4:00 PM</div>
-  <div style="font-size:12px;color:#3a6080;margin-top:4px">📍 The Garden Party Hall, Delhi</div>
-</div>
-<div class="icons">👶 🍭 🧸 🌙 ⭐</div>
-</body></html>`,
-
-5: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#050b10;font-family:'Georgia',serif;min-height:100vh}.hero{text-align:center;padding:60px 24px 30px}.cap{font-size:64px;display:block;animation:toss 2s ease-in-out infinite}@keyframes toss{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-15px) rotate(10deg)}}.title{font-size:24px;color:#fbbf24;margin:16px 0 8px;font-weight:700}.name{font-size:32px;font-weight:700;background:linear-gradient(135deg,#fde68a,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}.subtitle{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#7a6020;margin-bottom:20px}.msg{color:#d0b060;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px;font-style:italic}.quote{padding:20px 24px;border-left:3px solid #f59e0b;margin:0 20px 24px;background:rgba(251,191,36,.06)}.q-text{color:#d0b060;font-size:14px;line-height:1.7;font-style:italic}.q-attr{font-size:11px;color:#7a6020;margin-top:8px;text-align:right}.confetti{display:flex;justify-content:center;gap:10px;padding:20px;font-size:22px}</style></head><body>
-<div class="hero">
-  <span class="cap">🎓</span>
-  <div class="subtitle">Class of 2025</div>
-  <div class="title">Congratulations,</div>
-  <div class="name">Arjun! 🏅</div>
-  <p class="msg">"Your journey doesn't end here — it's just beginning. Go forth and make the world proud!"</p>
-</div>
-<div class="quote">
-  <div class="q-text">"The tassel was worth the hassle. Now go change the world — one dream at a time."</div>
-  <div class="q-attr">— With Pride & Love</div>
-</div>
-<div class="confetti">🎊 🥇 📜 🎉 🚀</div>
-</body></html>`,
-
-6: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#06060a;font-family:'Georgia',serif;min-height:100vh;overflow:hidden}.sparkles{position:fixed;inset:0}.sp{position:absolute;width:3px;height:3px;background:#e8c97a;border-radius:50%;animation:sp linear infinite}@keyframes sp{0%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0)}}.content{position:relative;z-index:1;text-align:center;padding:60px 24px}.ring{font-size:64px;display:block;animation:glow 2s ease-in-out infinite}@keyframes glow{0%,100%{filter:drop-shadow(0 0 8px rgba(232,201,122,.4))}50%{filter:drop-shadow(0 0 20px rgba(232,201,122,.8))}}.badge{display:inline-block;padding:4px 18px;border-radius:100px;background:rgba(201,151,58,.2);border:1px solid rgba(201,151,58,.3);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#e8c97a;margin:16px 0}.title{font-size:28px;color:#f0e8d0;margin-bottom:8px;font-weight:700}.names{font-size:22px;color:#e8c97a;margin-bottom:20px;font-style:italic}.msg{color:#c0a870;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px;font-style:italic}.rings{display:flex;justify-content:center;gap:-8px;margin:20px 0;font-size:36px}.date{text-align:center;padding:16px;border-top:1px solid rgba(201,151,58,.2);font-size:13px;color:#908050}</style></head><body>
-<div class="sparkles">
-  <div class="sp" style="left:20%;top:30%;animation-duration:2s;animation-delay:0s"></div>
-  <div class="sp" style="left:70%;top:20%;animation-duration:3s;animation-delay:.5s;width:4px;height:4px"></div>
-  <div class="sp" style="left:40%;top:70%;animation-duration:2.5s;animation-delay:1s"></div>
-  <div class="sp" style="left:80%;top:65%;animation-duration:2s;animation-delay:1.5s;width:5px;height:5px"></div>
-</div>
-<div class="content">
-  <span class="ring">💍</span>
-  <div class="badge">✦ Engagement ✦</div>
-  <div class="title">They Said Yes!</div>
-  <div class="names">Nisha & Vikram</div>
-  <p class="msg">"From this day forward, two hearts become one story. We are overjoyed to announce our engagement and can't wait to celebrate with you all!"</p>
-  <div class="rings">💍 💎 💍</div>
-</div>
-<div class="date">📅 Engaged · 14th February 2025</div>
-</body></html>`,
-
-7: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:linear-gradient(135deg,#1a0535 0%,#0f0025 100%);font-family:'Georgia',serif;min-height:100vh}.glass-card{margin:30px 16px;padding:32px 24px;background:rgba(255,255,255,.05);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);border-radius:24px}.badge{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}.title{font-size:26px;color:#f0e8ff;font-weight:700;margin-bottom:8px}.msg{color:rgba(255,255,255,.6);font-size:14px;line-height:1.8;margin-bottom:24px}.timer-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}.t-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;text-align:center}.t-num{font-size:30px;font-weight:700;color:#e8c97a}.t-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:4px}.details{padding:16px;background:rgba(201,151,58,.08);border:1px solid rgba(201,151,58,.2);border-radius:14px;text-align:center;font-size:13px;color:#c9973a}.footer{text-align:center;padding:20px;font-size:20px}</style></head><body>
-<div class="glass-card">
-  <div class="badge">💎 Premium Wedding</div>
-  <div class="title">Frosted Glass Elegance</div>
-  <p class="msg">"Join us as we celebrate the beginning of our forever journey together with our closest family and friends."</p>
-  <div class="timer-grid">
-    <div class="t-box"><div class="t-num" id="d">00</div><div class="t-lbl">Days</div></div>
-    <div class="t-box"><div class="t-num" id="h">00</div><div class="t-lbl">Hours</div></div>
-    <div class="t-box"><div class="t-num" id="m">00</div><div class="t-lbl">Mins</div></div>
-    <div class="t-box"><div class="t-num" id="s">00</div><div class="t-lbl">Secs</div></div>
-  </div>
-  <div class="details">💍 Meera & Aryan · Feb 14, 2025<br>📍 Crystal Palace, Mumbai</div>
-</div>
-<div class="footer">💜 ✦ 💜</div>
-<script>function tick(){const t=new Date('2025-06-01')-new Date();if(t<0)return;const s=Math.floor(t/1e3);document.getElementById('d').textContent=String(Math.floor(s/86400)).padStart(2,'0');document.getElementById('h').textContent=String(Math.floor(s%86400/3600)).padStart(2,'0');document.getElementById('m').textContent=String(Math.floor(s%3600/60)).padStart(2,'0');document.getElementById('s').textContent=String(s%60).padStart(2,'0');}tick();setInterval(tick,1000);<\/script>
-</body></html>`,
-
-8: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#030d08;font-family:'Georgia',serif;min-height:100vh}.hero{text-align:center;padding:60px 24px 30px}.trophy{font-size:70px;display:block;filter:drop-shadow(0 0 20px rgba(74,222,128,.4))}.title{font-size:24px;color:#4ade80;margin:16px 0 8px;font-weight:700}.badge-row{display:flex;justify-content:center;gap:8px;margin:12px 0 20px;flex-wrap:wrap}.b{padding:4px 12px;border-radius:100px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);font-size:11px;color:#4ade80}.msg{color:#608060;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px;font-style:italic}.award-box{margin:0 20px 24px;padding:20px;background:rgba(201,151,58,.06);border:1px solid rgba(201,151,58,.2);border-radius:16px;text-align:center}.aw-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#8a7030;margin-bottom:8px}.aw-name{font-size:20px;color:#e8c97a;font-weight:700}.icons{display:flex;justify-content:center;gap:12px;padding:20px;font-size:22px}</style></head><body>
-<div class="hero">
-  <span class="trophy">🏆</span>
-  <div class="title">Golden Achievement Award</div>
-  <div class="badge-row">
-    <span class="b">🥇 Excellence</span>
-    <span class="b">⭐ Outstanding</span>
-    <span class="b">🏅 Champion</span>
-  </div>
-  <p class="msg">"Your dedication, hard work, and exceptional performance have made you truly outstanding. This achievement is just the beginning!"</p>
-</div>
-<div class="award-box">
-  <div class="aw-lbl">Presented To</div>
-  <div class="aw-name">Rohan Sharma</div>
-  <div style="font-size:12px;color:#7a6020;margin-top:4px">For Outstanding Performance · 2025</div>
-</div>
-<div class="icons">🌟 🏆 🌟 🥇 🌟</div>
-</body></html>`,
-
-9: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#100800;font-family:'Georgia',serif;min-height:100vh}.sepia-overlay{position:fixed;inset:0;background:rgba(80,40,0,.15);pointer-events:none;z-index:0}.content{position:relative;z-index:1;text-align:center;padding:50px 24px 30px}.yr{display:inline-block;padding:4px 18px;border-radius:100px;background:rgba(201,151,58,.15);border:1px solid rgba(201,151,58,.3);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c9973a;margin-bottom:20px}.title{font-size:26px;color:#f0d0a0;font-weight:700;margin-bottom:8px;font-style:italic}.names{font-size:20px;color:#c9973a;margin-bottom:20px}.msg{color:#a08060;font-size:14.5px;line-height:1.85;max-width:300px;margin:0 auto 28px;font-style:italic}.memories{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 20px 24px}.mem{padding:14px;background:rgba(201,151,58,.06);border:1px solid rgba(201,151,58,.15);border-radius:12px;text-align:center;font-size:20px}.mem p{font-size:11px;color:#7a5030;margin-top:6px}.footer{text-align:center;padding:20px;font-size:22px}</style></head><body>
-<div class="sepia-overlay"></div>
-<div class="content">
-  <div class="yr">✦ 10 Years ✦</div>
-  <div class="title">A Decade of Love</div>
-  <div class="names">Priya & Amit</div>
-  <p class="msg">"Ten years of laughter, adventure, and growing together. Here's to the love that grows stronger with every passing year."</p>
-  <div class="memories">
-    <div class="mem">🌅<p>First Date</p></div>
-    <div class="mem">💍<p>Proposal</p></div>
-    <div class="mem">👶<p>Family</p></div>
-    <div class="mem">🏡<p>Our Home</p></div>
-  </div>
-</div>
-<div class="footer">❤️ 10 Years ❤️</div>
-</body></html>`,
-
-10: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0f0520;font-family:'Georgia',serif;min-height:100vh;overflow-x:hidden}.balloon{position:fixed;font-size:24px;animation:rise linear infinite}@keyframes rise{from{transform:translateY(100vh)}to{transform:translateY(-10vh)}}.hero{text-align:center;padding:60px 24px 30px}.emoji{font-size:60px;display:block;animation:wiggle 1s ease-in-out infinite}@keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}.title{font-size:26px;color:#f0c0f0;font-weight:700;margin:16px 0 8px}.msg{color:#c090c0;font-size:14.5px;line-height:1.8;max-width:300px;margin:0 auto 28px;font-style:italic}.fun-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 20px 24px}.fun-item{padding:16px;background:rgba(240,100,240,.06);border:1px solid rgba(240,100,240,.15);border-radius:14px;text-align:center;font-size:28px}.fun-item p{font-size:12px;color:#9060a0;margin-top:6px}.icons{display:flex;justify-content:center;gap:8px;padding:20px;font-size:22px}</style></head><body>
-<div class="balloon" style="left:8%;animation-duration:8s">🎈</div>
-<div class="balloon" style="left:75%;animation-duration:6s;animation-delay:2s">🎀</div>
-<div class="balloon" style="left:45%;animation-duration:9s;animation-delay:4s">🎈</div>
-<div class="hero">
-  <span class="emoji">🎂</span>
-  <div class="title">Whimsical Birthday Dream</div>
-  <p class="msg">"Today is all about you! May your day be filled with magical moments, sweet surprises, and all the love you deserve!"</p>
-</div>
-<div class="fun-grid">
-  <div class="fun-item">🎁<p>Gifts Galore</p></div>
-  <div class="fun-item">🍰<p>Cake Time!</p></div>
-  <div class="fun-item">🎵<p>Dance All Day</p></div>
-  <div class="fun-item">✨<p>Make Wishes</p></div>
-</div>
-<div class="icons">🥳 🎊 🎉 🎈 💫</div>
-</body></html>`,
-
-11: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#05050a;font-family:'Georgia',serif;min-height:100vh}.hero{text-align:center;padding:80px 32px 40px}.line{width:40px;height:1px;background:rgba(201,151,58,.4);margin:0 auto 32px}.title{font-size:30px;color:#f0ece0;font-weight:400;letter-spacing:4px;text-transform:uppercase;margin-bottom:6px}.amp{font-size:48px;color:#c9973a;font-style:italic;margin:12px 0}.names{font-size:24px;color:#e0d8c0;letter-spacing:2px;margin-bottom:32px}.msg{color:#706860;font-size:14px;line-height:1.9;max-width:280px;margin:0 auto 40px;letter-spacing:.5px}.date-box{display:inline-block;padding:16px 32px;border:1px solid rgba(201,151,58,.25);border-radius:4px}.date-top{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#806850;margin-bottom:8px}.date-val{font-size:16px;color:#c9973a;letter-spacing:2px}.venue{font-size:11px;color:#504840;margin-top:6px;letter-spacing:1px}.bottom-line{width:80px;height:1px;background:rgba(201,151,58,.25);margin:32px auto 0}</style></head><body>
-<div class="hero">
-  <div class="line"></div>
-  <div class="title">Together We Begin</div>
-  <div class="amp">&</div>
-  <div class="names">SARA · ARYAN</div>
-  <p class="msg">With hearts full of joy and love, we invite you to witness the beginning of our greatest adventure.</p>
-  <div class="date-box">
-    <div class="date-top">Save the Date</div>
-    <div class="date-val">14 · FEB · 2025</div>
-    <div class="venue">The Ritz Carlton, New Delhi</div>
-  </div>
-  <div class="bottom-line"></div>
-</div>
-</body></html>`,
-
-12: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0008;font-family:'Georgia',serif;min-height:100vh}.bg{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(150,50,100,.12),transparent 70%)}.content{position:relative;z-index:1;text-align:center;padding:80px 28px 40px}.ht{font-size:50px;animation:hb 1.8s ease-in-out infinite;display:block}@keyframes hb{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}.title{font-size:24px;color:#f0c0d8;margin:20px 0 8px;font-style:italic}.subtitle{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#7a4060;margin-bottom:28px}.msg{color:#d0a0b8;font-size:15.5px;line-height:1.9;max-width:300px;margin:0 auto 32px;font-style:italic}.signature{padding:20px;border-top:1px solid rgba(240,100,150,.15);font-size:18px;color:#b08090;font-style:italic}.ps{font-size:12px;color:#604050;margin-top:8px}</style></head><body>
-<div class="bg"></div>
-<div class="content">
-  <span class="ht">❤️</span>
-  <div class="title">Soulmate Confession</div>
-  <div class="subtitle">A Message From The Heart</div>
-  <p class="msg">"In a world full of noise, you are my silence. In a life full of chaos, you are my peace. I knew you were the one from the very first moment."</p>
-  <div class="signature">
-    — Always Yours 💌
-    <div class="ps">P.S. You make every day feel like a gift.</div>
-  </div>
-</div>
-</body></html>`
-};
-
-const products = [
-    { id:1,  name:'Royal Wedding Invitation',    category:'wedding',    tier:'Premium',  price:499, oldPrice:749, discount:'33% OFF', desc:'Luxury dark-theme wedding invitation with floating floral petals, animated name reveals, and elegant Cormorant typography.', features:{'Style':'Royal Luxury','Animations':'12','Sections':'10','Countdown':'No'}, orders:120, rating:4.9, trending:true },
-    { id:2,  name:'Glitter Birthday Blast',       category:'birthday',   tier:'Standard', price:299, oldPrice:449, discount:'33% OFF', desc:'Bold birthday template with sparkle effects, animated age reveal, confetti burst, and vibrant purple-gold palette.', features:{'Style':'Bold Fun','Animations':'8','Sections':'7','Countdown':'No'}, orders:88, rating:4.7, trending:false },
-    { id:3,  name:'Rose Gold Love Letter',         category:'love',       tier:'Premium',  price:499, oldPrice:699, discount:'29% OFF', desc:'Romantic love message with floating heart particles, rose gold accents, and intimate typography on deep burgundy.', features:{'Style':'Rose Gold','Animations':'10','Sections':'8','Countdown':'No'}, orders:95, rating:4.9, trending:true },
-    { id:4,  name:'Dreamy Baby Shower',            category:'baby',       tier:'Standard', price:299, oldPrice:399, discount:'25% OFF', desc:'Soft pastel accents on dark slate. Cute baby elements with a modern layout and gentle animations for shower celebrations.', features:{'Style':'Cute Modern','Animations':'5','Sections':'7','Countdown':'No'}, orders:42, rating:4.8, trending:false },
-    { id:5,  name:"Scholar's Triumph",             category:'graduation', tier:'Standard', price:299, oldPrice:449, discount:'33% OFF', desc:'Sleek graduation congratulations with navy & gold palette, animated diploma, and confetti celebration burst.', features:{'Style':'Elegant','Animations':'6','Sections':'8','Countdown':'No'}, orders:53, rating:4.7, trending:false },
-    { id:6,  name:'Diamond Engagement Reveal',     category:'engagement', tier:'Premium',  price:499, oldPrice:699, discount:'29% OFF', desc:'Luxury engagement announcement with diamond sparkle effects and champagne gold accents. Sophisticated typography.', features:{'Style':'Luxury','Animations':'9','Sections':'11','Countdown':'No'}, orders:71, rating:4.8, trending:true },
-    { id:7,  name:'Frosted Glass Elegance',        category:'wedding',    tier:'Premium',  price:499, oldPrice:749, discount:'33% OFF', desc:'Stunning glassmorphism design with frosted glass cards on deep purple gradient. Includes live countdown timer.', features:{'Style':'Glassmorphism','Animations':'7','Sections':'9','Countdown':'Yes'}, orders:68, rating:4.9, trending:true },
-    { id:8,  name:'Golden Achievement Award',      category:'congrats',   tier:'Basic',    price:199, oldPrice:299, discount:'33% OFF', desc:'Celebrate achievements with emerald & gold template. Trophy elements with premium metallic accent design.', features:{'Style':'Bold','Animations':'3','Sections':'5','Countdown':'No'}, orders:38, rating:4.5, trending:false },
-    { id:9,  name:'Vintage Love Story',            category:'anniversary',tier:'Standard', price:299, oldPrice:449, discount:'33% OFF', desc:'A warm anniversary tribute with retro typography, sepia-toned feel, and elegant gold borders on charcoal black.', features:{'Style':'Retro Elegant','Animations':'4','Sections':'7','Countdown':'No'}, orders:59, rating:4.6, trending:false },
-    { id:10, name:'Whimsical Birthday Dream',      category:'birthday',   tier:'Basic',    price:199, oldPrice:299, discount:'33% OFF', desc:'Playful birthday template with balloon animations, confetti bursts, and cheerful pastel accents on dark purple.', features:{'Style':'Cute','Animations':'5','Sections':'6','Countdown':'No'}, orders:47, rating:4.4, trending:false },
-    { id:11, name:'Minimalist Wedding Suite',      category:'wedding',    tier:'Basic',    price:199, oldPrice:349, discount:'43% OFF', desc:'Clean, minimalist wedding invitation with subtle gold line art on premium black. Modern typography, timeless feel.', features:{'Style':'Minimal','Animations':'2','Sections':'4','Countdown':'No'}, orders:55, rating:4.3, trending:false },
-    { id:12, name:'Soulmate Confession',           category:'love',       tier:'Basic',    price:199, oldPrice:299, discount:'33% OFF', desc:'Simple yet heartfelt love message with warm gradients, animated hearts, and intimate clean typography.', features:{'Style':'Text-Only','Animations':'3','Sections':'4','Countdown':'No'}, orders:62, rating:4.5, trending:false },
-];
+// ── templateHTMLs loaded live via iframe src from templates/ folder ──
 
 // ── Placeholder thumbnails (colored SVGs per category) ──
 const thumbColors = { wedding:'#c9973a', birthday:'#a855f7', anniversary:'#ef4444', love:'#f43f5e', baby:'#38bdf8', graduation:'#f59e0b', engagement:'#c9973a', congrats:'#4ade80' };
@@ -1666,20 +1434,50 @@ let activeCat = 'all', activeTier = 'all', searchQ = '', sortBy = 'popular';
 let currentProduct = null, chatOpen = false, isFS = false, mobMenuOpen = false;
 
 // ── INIT ──
-document.addEventListener('DOMContentLoaded', () => {
-    renderCats();
-    renderGrid();
+document.addEventListener('DOMContentLoaded', async () => {
     createParticles();
     initScroll();
     animateStats();
     updateCartUI();
     updateWishUI();
-    // Show chat badge after 4s
-    setTimeout(() => { document.getElementById('chatBadge').style.display = 'flex'; }, 4000);
-    // Initial chat message
-    setTimeout(() => { addBotMsg("👋 Hey! Welcome to Scripted Surprise. I can help you find the perfect template or answer any questions. What's the occasion?"); }, 500);
-    // Mobile search button visibility
     if (window.innerWidth <= 1100) document.getElementById('mobSearchBtn').style.display = 'flex';
+    setTimeout(() => { document.getElementById('chatBadge').style.display = 'flex'; }, 4000);
+    setTimeout(() => { addBotMsg("👋 Hey! Welcome to Scripted Surprise. I can help you find the perfect template or answer any questions. What's the occasion?"); }, 500);
+
+    // Show loading state
+    document.getElementById('grid').innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--txt-3)">
+            <div style="font-size:32px;margin-bottom:16px">✦</div>
+            <p style="font-size:15px">Loading templates...</p>
+        </div>`;
+
+    // Fetch live templates from GitHub
+    try {
+        const r = await fetch('templates.json?v=' + Date.now());
+        if (r.ok) {
+            products = await r.json();
+            // Update hero stat
+            const statEl = document.querySelector('.stat-val[data-target]');
+            if (statEl) { statEl.dataset.target = products.length; }
+        } else {
+            products = [];
+        }
+    } catch(e) {
+        console.warn('Could not load templates.json:', e);
+        products = [];
+    }
+
+    // Update category counts from live data
+    categories.forEach(c => {
+        if (c.id === 'all') c.count = products.length;
+        else c.count = products.filter(p => p.category === c.id).length;
+    });
+
+    renderCats();
+    renderGrid();
+
+    // Update live stats
+    document.getElementById('statCount').textContent = products.length + '+';
 });
 
 window.addEventListener('resize', () => {
@@ -1876,14 +1674,13 @@ function openPreview(id) {
             <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${icons[k]||''}</svg></div>
             <div><div class="feat-lbl">${k}</div><div class="feat-val">${v}</div></div>
         </div>`).join('');
-    // Load template in phone
+    // Load real template in phone via iframe src
     const phone = document.getElementById('phoneScreen');
-    const html = templateHTMLs[p.id];
-    if (html) {
-        // Use srcdoc in an iframe for proper isolation
-        phone.innerHTML = `<iframe srcdoc="${html.replace(/"/g,'&quot;').replace(/'/g,'&#39;')}" style="width:100%;height:100%;border:none;display:block;" title="Template preview for ${p.name}" scrolling="yes"></iframe>`;
+    if (p.url) {
+        phone.innerHTML = `<iframe src="${p.url}?v=${Date.now()}" style="width:100%;height:100%;border:none;display:block;" title="Preview: ${p.name}" scrolling="yes" loading="lazy"></iframe>`;
     } else {
-        phone.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:16px;padding:32px;text-align:center"><div style="font-size:48px">${categories.find(c=>c.id===p.category)?.icon||'✦'}</div><div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--txt-gold)">${p.name}</div><div style="font-size:12px;color:var(--txt-3)">Live preview will load here</div></div>`;
+        const catIcon = categories.find(c=>c.id===p.category)?.icon || '✦';
+        phone.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:16px;padding:32px;text-align:center"><div style="font-size:48px">${catIcon}</div><div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--txt-gold)">${p.name}</div><div style="font-size:12px;color:var(--txt-3)">Preview not available</div></div>`;
     }
     document.getElementById('previewModal').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -2075,21 +1872,21 @@ function botReply(txt) {
     else if (t.includes('wedding'))
         reply = "💍 Weddings are our specialty! We have minimalist, glassmorphism, and royal luxury styles. All are mobile-optimised and share beautifully on WhatsApp. Prices start at ₹199. Want to see the collection?";
     else if (t.includes('price') || t.includes('cost') || t.includes('pricing') || t.includes('₹'))
-        reply = "Our pricing is simple:<br><br>🔵 <strong>Basic — ₹199</strong><br>Clean, text-focused designs<br><br>🟣 <strong>Standard — ₹299</strong><br>Images + animations<br><br>🟡 <strong>Premium — ₹499</strong><br>Luxury, fully animated<br><br>Custom orders start at ₹599 and are delivered in 24 hours.";
+        reply = "Our pricing is simple:<br><br>🔵 <strong>Basic -- ₹199</strong><br>Clean, text-focused designs<br><br>🟣 <strong>Standard -- ₹299</strong><br>Images + animations<br><br>🟡 <strong>Premium -- ₹499</strong><br>Luxury, fully animated<br><br>Custom orders start at ₹599 and are delivered in 24 hours.";
     else if (t.includes('custom'))
         reply = "✨ Custom orders are my favourite! Tell me: What occasion? Any specific colour theme? Any name or date to include? I'll get back to you with a design plan within 30 minutes.";
     else if (t.includes('pay') || t.includes('upi') || t.includes('payment'))
         reply = "We accept <strong>UPI, bank transfer, and major wallets</strong>. Once you select your template, I'll send you the payment details directly. Your file is delivered within 5 minutes of confirmation!";
     else if (t.includes('deliver') || t.includes('how long') || t.includes('time'))
-        reply = "⚡ Pre-made templates are delivered <strong>within 5 minutes</strong> of payment confirmation — I send the HTML file directly to you. Custom orders take up to 24 hours.";
+        reply = "⚡ Pre-made templates are delivered <strong>within 5 minutes</strong> of payment confirmation -- I send the HTML file directly to you. Custom orders take up to 24 hours.";
     else if (t.includes('refund') || t.includes('return'))
-        reply = "Since these are digital files, we don't offer refunds after delivery. However, if there's any issue with your file or it doesn't match the preview, I'll make it right — always.";
+        reply = "Since these are digital files, we don't offer refunds after delivery. However, if there's any issue with your file or it doesn't match the preview, I'll make it right -- always.";
     else if (t.includes('hi') || t.includes('hello') || t.includes('hey'))
         reply = "Hey there! 👋 How can I help you today? Looking for a template for a specific occasion, or do you have questions about pricing or custom orders?";
     else if (t.includes('thank'))
         reply = "You're welcome! Feel free to browse the collection and click Preview on anything that catches your eye. I'm here whenever you're ready! 😊";
     else
-        reply = "Thanks for your message! I'll review this and get back to you very shortly. In the meantime, feel free to browse and use the Preview button on any template — it shows you the exact live template as a recipient would see it.";
+        reply = "Thanks for your message! I'll review this and get back to you very shortly. In the meantime, feel free to browse and use the Preview button on any template -- it shows you the exact live template as a recipient would see it.";
 
     addBotMsg(reply);
     const msgCount = document.querySelectorAll('.msg.user').length;
