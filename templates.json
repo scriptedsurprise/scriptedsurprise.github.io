@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "filename": "00007.html",
+    "name": "A Forever Kind of Love",
+    "url": "templates/00007.html",
+    "category": "uncategorized",
+    "tier": "Standard",
+    "price": 299,
+    "oldPrice": 449,
+    "discount": "33% OFF",
+    "desc": "A Forever Kind of Love",
+    "features": {
+      "Style": "Custom",
+      "Animations": "?",
+      "Sections": "?",
+      "Countdown": "No"
+    },
+    "orders": 0,
+    "rating": 5.0,
+    "trending": false,
+    "added": "2026-04-09"
+  }
+]
