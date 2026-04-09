@@ -86,5 +86,27 @@
     "rating": 5.0,
     "trending": false,
     "added": "2026-04-09"
+  },
+  {
+    "id": 7,
+    "filename": "00015_1.html",
+    "name": "Celestial Union — Wedding Anniversary",
+    "url": "templates/00015_1.html",
+    "category": "uncategorized",
+    "tier": "Standard",
+    "price": 299,
+    "oldPrice": 449,
+    "discount": "33% OFF",
+    "desc": "Celestial Union — Wedding Anniversary",
+    "features": {
+      "Style": "Custom",
+      "Animations": "?",
+      "Sections": "?",
+      "Countdown": "No"
+    },
+    "orders": 0,
+    "rating": 5.0,
+    "trending": false,
+    "added": "2026-04-09"
   }
 ]
