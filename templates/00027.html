@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Milestone Celebration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+ --primary: #006994;
+ --secondary: #48cae4;
+ --accent: #004b6b;
+ --bg: #f0f8ff;
+ --glass-bg: rgba(255, 255, 255, 0.25);
+ --glass-border: rgba(255, 255, 255, 0.45);
+ --glass-shadow: 0 10px 35px rgba(0, 105, 148, 0.12);
+ --text-dark: #0a2a3a;
+ --text-light: #ffffff;
+ --font-main: 'Cormorant Garamond', serif;
+ --container-padding: 20px;
+ --panel-radius: 18px;
+}
+html {
+ box-sizing: border-box;
+ scroll-behavior: smooth;
+}
+*,
+*::before,
+*::after {
+ box-sizing: inherit;
+}
+body {
+ margin: 0 auto;
+ padding: 0;
+ max-width: 430px;
+ overflow-x: hidden;
+ font-size: 16px;
+ -webkit-font-smoothing: antialiased;
+ background: var(--bg);
+ font-family: var(--font-main);
+ color: var(--text-dark);
+ line-height: 1.65;
+ position: relative;
+}
+img {
+ max-width: 100%;
+ height: auto;
+ display: block;
+}
+.mesh-background {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100vw;
+ height: 100vh;
+ z-index: -2;
+ background: radial-gradient(circle at 20% 20%, #e6f4ff 0%, var(--bg) 50%, #dbe9f1 100%);
+ overflow: hidden;
+}
+.mesh-orb {
+ position: absolute;
+ border-radius: 50%;
+ filter: blur(70px);
+ opacity: 0.65;
+ animation: orb-drift 18s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+ pointer-events: none;
+}
+.mesh-orb-1 { width: 320px; height: 320px; background: var(--secondary); top: -8%; left: -12%; }
+.mesh-orb-2 { width: 280px; height: 280px; background: var(--primary); top: 35%; right: -15%; animation-delay: -5s; }
+.mesh-orb-3 { width: 240px; height: 240px; background: #90e0ef; bottom: 5%; left: 15%; animation-delay: -12s; }
+.mesh-orb-4 { width: 180px; height: 180px; background: #caf0f8; top: 60%; right: 30%; animation-delay: -8s; }
+@keyframes orb-drift {
+ 0% { transform: translate(0px, 0px) scale(1); }
+ 50% { transform: translate(25px, -20px) scale(1.05); }
+ 100% { transform: translate(-15px, 35px) scale(0.95); }
+}
+.app-wrapper {
+ position: relative;
+ z-index: 1;
+ min-height: 100vh;
+ padding: 24px var(--container-padding);
+ display: flex;
+ flex-direction: column;
+ gap: 32px;
+}
+/* Glass Panel Base */
+.glass-panel {
+ background: var(--glass-bg);
+ backdrop-filter: blur(14px);
+ -webkit-backdrop-filter: blur(14px);
+ border: 1px solid var(--glass-border);
+ border-radius: var(--panel-radius);
+ box-shadow: var(--glass-shadow);
+ padding: 28px 22px;
+ position: relative;
+ transform: translateY(20px);
+ opacity: 0;
+ transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.35, 1), opacity 0.8s ease;
+ animation: glass-float 6s ease-in-out infinite alternate;
+}
+.glass-panel.in-view {
+ transform: translateY(0);
+ opacity: 1;
+}
+.glass-panel:nth-child(odd) { animation-delay: 0.3s; }
+.glass-panel:nth-child(even) { animation-delay: 1.5s; transform: translateY(15px) rotate(-0.5deg); }
+.glass-panel:nth-child(3) { animation-delay: 0.7s; transform: translateY(25px) rotate(0.3deg); }
+@keyframes glass-float {
+ 0% { transform: translateY(0) rotate(var(--r, 0deg)); }
+ 100% { transform: translateY(-8px) rotate(var(--r, 0deg)); }
+}
+/* Typography & Kinetic Text */
+.hero-section {
+ text-align: center;
+ padding-top: 40px;
+ padding-bottom: 40px;
+}
+.kinetic-h1 {
+ font-size: 3.6rem;
+ font-weight: 700;
+ line-height: 1.05;
+ letter-spacing: -0.02em;
+ color: var(--primary);
+ margin: 0 0 8px;
+ overflow: hidden;
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+}
+.char-span {
+ display: inline-block;
+ animation: text-breathe 2.5s ease-in-out infinite;
+ transform-origin: bottom center;
+ color: var(--primary);
+}
+.char-span:nth-child(2n) { animation-delay: 0.15s; color: var(--accent); }
+.char-span:nth-child(3n) { animation-delay: 0.3s; }
+.char-span:nth-child(4n) { animation-delay: 0.45s; color: var(--secondary); }
+.char-span:nth-child(5n) { animation-delay: 0.6s; }
+.char-span:nth-child(6n) { animation-delay: 0.75s; }
+.char-span.space { width: 0.35em; animation: none; }
+@keyframes text-breathe {
+ 0%, 100% { transform: translateY(0) scaleY(1); letter-spacing: -0.02em; opacity: 0.95; }
+ 50% { transform: translateY(-6px) scaleY(1.05); letter-spacing: 0.05em; opacity: 1; }
+}
+.tagline {
+ font-size: 1.25rem;
+ font-weight: 400;
+ font-style: italic;
+ color: var(--accent);
+ margin: 0;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ animation: subtle-fade-in 1.5s ease-out forwards;
+ opacity: 0;
+ animation-delay: 0.5s;
+}
+@keyframes subtle-fade-in {
+ from { opacity: 0; transform: translateY(8px); }
+ to { opacity: 1; transform: translateY(0); }
+}
+/* Decorative Elements */
+.deco-container {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin: 10px 0 20px;
+}
+.deco-emoji {
+ font-size: 2rem;
+ filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+ animation: emoji-float 3.5s ease-in-out infinite alternate;
+}
+.deco-emoji:nth-child(2) { animation-delay: -1s; font-size: 2.4rem; }
+.deco-emoji:nth-child(3) { animation-delay: -2s; }
+@keyframes emoji-float {
+ 0% { transform: translateY(0) rotate(-3deg); }
+ 100% { transform: translateY(-12px) rotate(3deg); }
+}
+.svg-wave-divider {
+ width: 100%;
+ height: 40px;
+ margin: 15px 0;
+ opacity: 0.8;
+}
+.svg-path {
+ stroke: var(--secondary);
+ stroke-width: 2;
+ fill: none;
+ stroke-dasharray: 600;
+ stroke-dashoffset: 600;
+ animation: svg-draw 4s ease forwards infinite;
+}
+@keyframes svg-draw {
+ 0% { stroke-dashoffset: 600; opacity: 0; }
+ 20% { opacity: 1; }
+ 80% { stroke-dashoffset: 0; opacity: 1; }
+ 100% { stroke-dashoffset: 600; opacity: 0; }
+}
+/* Message Section */
+.message-section {
+ font-size: 1.35rem;
+ line-height: 1.75;
+ color: #1a3b4c;
+ padding: 32px 24px;
+}
+.prose-text {
+ margin: 0 0 16px;
+ font-weight: 400;
+}
+.signature-line {
+ font-style: italic;
+ color: var(--primary);
+ font-weight: 600;
+ margin-top: 24px;
+ display: flex;
+ align-items: center;
+ gap: 8px;
+}
+.signature-dash {
+ width: 24px;
+ height: 2px;
+ background: var(--secondary);
+ display: block;
+}
+/* Countdown Container */
+.countdown-section {
+ text-align: center;
+ padding: 30px 20px;
+ position: relative;
+ overflow: hidden;
+}
+.countdown-section::before {
+ content: '';
+ position: absolute;
+ top: -50%;
+ left: -50%;
+ width: 200%;
+ height: 200%;
+ background: radial-gradient(circle, rgba(72, 202, 228, 0.15) 0%, transparent 60%);
+ animation: rotate-glow 15s linear infinite;
+ z-index: -1;
+}
+@keyframes rotate-glow {
+ 0% { transform: rotate(0deg); }
+ 100% { transform: rotate(360deg); }
+}
+#timer {
+ font-size: 1.8rem;
+ font-weight: 800;
+ text-align: center;
+ padding: 1rem;
+ color: var(--primary);
+ background: rgba(255,255,255,0.35);
+ border-radius: 12px;
+ border: 1px solid rgba(255,255,255,0.6);
+ box-shadow: 0 0 15px rgba(72, 202, 228, 0.4);
+ letter-spacing: 0.08em;
+ margin-top: 10px;
+}
+.countdown-label {
+ display: block;
+ font-size: 1rem;
+ text-transform: uppercase;
+ letter-spacing: 0.2em;
+ color: var(--accent);
+ margin-bottom: 8px;
+ font-weight: 600;
+}
+/* Button */
+.celebrate-section {
+ display: flex;
+ justify-content: center;
+ padding: 20px 20px 35px;
+ background: transparent !important;
+ backdrop-filter: none !important;
+ border: none !important;
+ box-shadow: none !important;
+ animation: none !important;
+ transform: none !important;
+}
+#celebrate-btn {
+ background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+ color: #ffffff;
+ border: none;
+ padding: 16px 32px;
+ font-size: 1.15rem;
+ font-family: var(--font-main);
+ font-weight: 600;
+ letter-spacing: 0.1em;
+ border-radius: 50px;
+ cursor: pointer;
+ position: relative;
+ overflow: hidden;
+ transition: transform 0.2s ease, box-shadow 0.3s ease;
+ box-shadow: 0 6px 20px rgba(0, 105, 148, 0.35);
+ z-index: 10;
+ touch-action: manipulation;
+}
+#celebrate-btn:active {
+ transform: scale(0.95);
+ box-shadow: 0 2px 10px rgba(0, 105, 148, 0.2);
+}
+#celebrate-btn::after {
+ content: '';
+ position: absolute;
+ top: -50%;
+ left: -50%;
+ width: 200%;
+ height: 200%;
+ background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+ opacity: 0;
+ transform: scale(0.5);
+ transition: opacity 0.4s, transform 0.4s;
+}
+#celebrate-btn:active::after {
+ opacity: 1;
+ transform: scale(1);
+ transition: 0s;
+}
+/* Canvas/Particles Container */
+.particle-container {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ pointer-events: none;
+ z-index: 9999;
+ overflow: hidden;
+}
+.burst-particle {
+ position: absolute;
+ width: 8px;
+ height: 8px;
+ border-radius: 50%;
+ animation: particle-explode 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+@keyframes particle-explode {
+ 0% { transform: translate(0, 0) scale(1); opacity: 1; }
+ 100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+/* Footer */
+footer {
+ opacity: 0.25;
+ font-size: 12px;
+ text-align: center;
+ padding: 1rem;
+ width: 100%;
+ color: var(--accent);
+}
+/* Responsive Adjustments */
+@media (max-width: 360px) {
+ .kinetic-h1 { font-size: 2.9rem; }
+ .message-section { font-size: 1.25rem; padding: 24px 18px; }
+ #timer { font-size: 1.5rem; }
+ .glass-panel { padding: 22px 16px; }
+}
+@media (min-width: 400px) {
+ .mesh-background { filter: blur(40px); }
+}
+</style>
+</head>
+<body>
+
+<div class="mesh-background">
+ <div class="mesh-orb mesh-orb-1"></div>
+ <div class="mesh-orb mesh-orb-2"></div>
+ <div class="mesh-orb mesh-orb-3"></div>
+ <div class="mesh-orb mesh-orb-4"></div>
+</div>
+
+<main class="app-wrapper">
+
+ <!-- HERO -->
+ <section class="glass-panel hero-section reveal">
+ <svg class="svg-wave-divider" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true">
+ <path class="svg-path" d="M10,20 Q75,0 150,20 T290,20" />
+ </svg>
+ <h1 class="kinetic-h1">
+ <span class="char-span">M</span><span class="char-span">i</span><span class="char-span">l</span><span class="char-span">e</span><span class="char-span">s</span><span class="char-span">t</span><span class="char-span">o</span><span class="char-span">n</span><span class="char-span">e</span><span class="char-span space"></span><span class="char-span">B</span><span class="char-span">i</span><span class="char-span">r</span><span class="char-span">t</span><span class="char-span">h</span><span class="char-span">d</span><span class="char-span">a</span><span class="char-span">y</span><span class="char-span">!</span>
+ </h1>
+ <h2 class="tagline">A milestone written in the stars for [Your Name]</h2>
+ <svg class="svg-wave-divider" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true">
+ <path class="svg-path" d="M10,20 Q75,40 150,20 T290,20" />
+ </svg>
+ </section>
+
+ <!-- DECORATIVE -->
+ <section class="glass-panel decorative-section reveal" style="text-align: center; padding: 16px;">
+ <div class="deco-container">
+ <div class="deco-emoji">🌊</div>
+ <div class="deco-emoji">✨</div>
+ <div class="deco-emoji">🎈</div>
+ </div>
+ <div style="font-size: 0.95rem; letter-spacing: 0.15em; color: var(--secondary); font-weight: 600; margin-top: 8px;">
+ CELEBRATING YEARS OF MAGIC & MOMENTS
+ </div>
+ </section>
+
+ <!-- MESSAGE -->
+ <section class="glass-panel message-section reveal">
+ <p class="prose-text">
+ Another chapter begins as you step into this beautiful new era of your life. The journey behind you has been woven with quiet courage, radiant laughter, and the kind of grace that leaves a lasting mark on every soul you meet. As the calendar turns to [Date], we honor not just the years that have passed, but the brilliant spirit that continues to light up the world around you.
+ </p>
+ <p class="prose-text">
+ May this next season bring deeper tides of joy, wider skies of possibility, and the steady warmth of knowing exactly how cherished you are. You are stepping into your brightest hour, [Your Name]. Let every moment ahead echo with the promise of what you’ve already proven: you are limitless, you are loved, and you are exactly where you are meant to be.
+ </p>
+ <div class="signature-line">
+ <span class="signature-dash"></span>
+ With endless warmth and admiration
+ </div>
+ </section>
+
+ <!-- COUNTDOWN -->
+ <section class="glass-panel countdown-section reveal">
+ <span class="countdown-label">Countdown Begins</span>
+ <div id="timer" style="font-size:1.8rem;font-weight:800;text-align:center;padding:1rem;">00d 00h 00m 00s</div>
+ <script>
+(function(){
+ var ed=new Date("2026-06-21T10:00:00");
+ function tick(){
+ var diff=ed-new Date(),el=document.getElementById('timer');
+ if(!el)return;
+ if(diff<=0){el.textContent='🎉 The day is here!';return;}
+ var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),
+ m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+ el.textContent=d+'d '+h+'h '+m+'m '+s+'s';
+ setTimeout(tick,1000);
+ }
+ tick();
+})();
+</script>
+ </section>
+
+ <!-- CELEBRATE -->
+ <section class="glass-panel celebrate-section reveal" style="background: transparent; border: none; box-shadow: none; backdrop-filter: none;">
+ <button id="celebrate-btn">✨ Celebrate! ✨</button>
+ </section>
+
+</main>
+
+<footer style="opacity:0.25;font-size:12px;text-align:center;padding:1rem;">Template #00027</footer>
+
+<div class="particle-container" id="particle-box" aria-hidden="true"></div>
+
+<script>
+(function(){
+ var observer=new IntersectionObserver(function(entries){
+ entries.forEach(function(entry){
+ if(entry.isIntersecting){
+ entry.target.classList.add('in-view');
+ observer.unobserve(entry.target);
+ }
+ });
+ },{threshold:0.15,rootMargin:'0px 0px -30px 0px'});
+ document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
+})();
+
+(function(){
+ var btn=document.getElementById('celebrate-btn');
+ if(!btn)return;
+ btn.addEventListener('click',function(e){
+ var box=document.getElementById('particle-box');
+ var rect=btn.getBoundingClientRect();
+ var cx=rect.left+rect.width/2;
+ var cy=rect.top+rect.height/2;
+ var colors=['#006994','#48cae4','#90e0ef','#caf0f8','#ffffff'];
+ for(var i=0;i<36;i++){
+ var p=document.createElement('div');
+ p.classList.add('burst-particle');
+ var angle=(i/36)*Math.PI*2;
+ var velocity=40+Math.random()*90;
+ var tx=Math.cos(angle)*velocity;
+ var ty=Math.sin(angle)*velocity;
+ p.style.left=cx+'px';
+ p.style.top=cy+'px';
+ p.style.setProperty('--tx',tx+'px');
+ p.style.setProperty('--ty',ty+'px');
+ p.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
+ box.appendChild(p);
+ (function(el){setTimeout(function(){el.remove();},1250);})(p);
+ }
+ });
+})();
+</script>
+
+</body>
+</html>
