@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <title>Scripted Surprise -- Premium HTML Template Marketplace</title>
 <meta name="description" content="Handcrafted HTML greeting templates for every occasion. Wedding, Birthday, Love, Baby Shower & more. Live preview, instant delivery.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════
-   SCRIPTED SURPRISE v3 -- MOBILE-FIRST LUXURY MARKETPLACE
+   SCRIPTED SURPRISE v3.1 -- MOBILE-FIRST LUXURY MARKETPLACE
+   FIXED: Scaling, Tax, Race Conditions, Error Boundaries
 ═══════════════════════════════════════════════════════ */
 :root {
   --bg-0:#05050a; --bg-1:#0a0a12; --bg-2:#10101a; --bg-3:#16162a;
@@ -87,7 +88,7 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 .mob-search-inner input{border:none;background:none;outline:none;color:var(--txt-1);font-size:14px;width:100%;font-family:'DM Sans',sans-serif;}
 
 /* ── MOB MENU ── */
-.mob-menu{position:fixed;top:var(--hdr);left:0;right:0;bottom:0;z-index:990;background:var(--bg-0);border-top:1px solid var(--border-0);transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);padding:20px 16px;display:flex;flex-direction:column;gap:6px;}
+.mob-menu{position:fixed;top:var(--hdr);left:0;right:0;bottom:0;z-index:990;background:var(--bg-0);border-top:1px solid var(--border-0);transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);padding:20px 16px;display:flex;flex-direction:column;gap:6px;overflow-y:auto;}
 .mob-menu.open{transform:translateX(0);}
 .mob-nav-link{padding:12px 16px;border-radius:var(--r-md);font-size:15px;font-weight:500;color:var(--txt-2);transition:all .2s;border:1px solid transparent;}
 .mob-nav-link:hover{color:var(--txt-1);background:var(--bg-glass);border-color:var(--border-0);}
@@ -228,9 +229,8 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
   width:375px;height:812px;border:none;
   transform-origin:top left;
   position:absolute;top:0;left:0;
-  transform:scale(var(--thumb-scale,0.25));
   pointer-events:none;
-  /* Always-on scroll animation */
+  /* Scale applied via JS */
   animation:thumbScroll 8s ease-in-out infinite;
   animation-play-state:running;
 }
@@ -448,8 +448,8 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 @keyframes typingDot{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-5px);}}
 
 /* ── TOAST ── */
-.toast-container{position:fixed;bottom:80px;right:16px;z-index:3000;display:flex;flex-direction:column;gap:6px;}
-.toast{padding:10px 14px;border-radius:var(--r-md);background:var(--bg-3);border:1px solid var(--border-0);box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:8px;font-size:12.5px;min-width:220px;max-width:280px;animation:toastIn .3s ease,toastOut .3s ease 2.7s forwards;}
+.toast-container{position:fixed;bottom:80px;right:16px;z-index:3000;display:flex;flex-direction:column;gap:6px;pointer-events:none;}
+.toast{padding:10px 14px;border-radius:var(--r-md);background:var(--bg-3);border:1px solid var(--border-0);box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:8px;font-size:12.5px;min-width:220px;max-width:280px;animation:toastIn .3s ease,toastOut .3s ease 2.7s forwards;pointer-events:auto;}
 @keyframes toastIn{from{opacity:0;transform:translateX(80px);}to{opacity:1;transform:translateX(0);}}
 @keyframes toastOut{from{opacity:1;}to{opacity:0;transform:translateX(80px);}}
 .toast-ico{width:16px;height:16px;flex-shrink:0;}
@@ -488,13 +488,11 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
   .mob-nav-btn{display:flex;}
   .nav{display:none;}
   .foot-grid{grid-template-columns:1fr 1fr;gap:28px;}
-  /* Modal stacked on tablet */
   .modal-box{flex-direction:column;align-items:center;overflow-y:auto;}
   .modal-right{max-height:none;width:100%;}
 }
 @media(max-width:768px){
   :root{--hdr:52px;}
-  /* Hero compact */
   .hero{padding:calc(var(--hdr) + 20px) 0 20px;}
   .hero h1{font-size:clamp(22px,6vw,36px);}
   .hero-sub{font-size:13px;margin-bottom:16px;}
@@ -502,28 +500,22 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
   .stat{padding:10px 6px;}
   .stat-val{font-size:18px;}
   .stat-lbl{font-size:9px;}
-  /* Phone frame smaller */
   .phone-frame{width:240px;height:500px;}
-  /* Custom section */
   .custom-card{padding:32px 20px;}
   .custom-card h2{font-size:24px;}
-  /* Footer */
   .foot-grid{grid-template-columns:1fr;gap:24px;}
   .foot-bottom{flex-direction:column;align-items:center;text-align:center;}
-  /* Modal full screen on mobile */
   .modal-bg{align-items:flex-end;}
   .modal-box{width:100%;max-width:100%;max-height:95vh;border-radius:20px 20px 0 0;margin:0;gap:0;flex-direction:column;overflow-y:auto;}
   .modal-close{top:12px;right:12px;}
   .phone-col{padding:20px 20px 0;width:100%;}
   .phone-frame{width:100%;max-width:260px;margin:0 auto;}
   .modal-right{padding:16px 20px 24px;width:100%;}
-  /* Chat window full-ish */
   .chat-win{width:calc(100vw - 28px);right:14px;}
 }
 @media(max-width:480px){
   .hero-ctas{flex-direction:column;align-items:center;}
   .feat-grid{grid-template-columns:1fr 1fr;}
-  /* 2 col grid even on smallest screens */
   .grid{grid-template-columns:repeat(2,1fr);gap:8px;padding:0 12px;}
   .card-body{padding:8px 10px 10px;}
   .card-name{font-size:12px;}
@@ -555,7 +547,7 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
     </nav>
     <div class="hdr-search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="text" id="searchInput" placeholder="Search templates…" oninput="handleSearch(this.value)" aria-label="Search">
+      <input type="text" id="searchInput" placeholder="Search templates…" oninput="handleSearchDebounced(this.value)" aria-label="Search">
     </div>
     <div class="hdr-actions">
       <button class="hdr-btn" id="mobSearchBtn" onclick="toggleMobSearch()" aria-label="Search" style="display:none">
@@ -579,7 +571,7 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 <div class="mob-search-panel" id="mobSearchPanel">
   <div class="mob-search-inner">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-    <input type="text" placeholder="Search templates…" oninput="handleSearch(this.value)" aria-label="Search">
+    <input type="text" placeholder="Search templates…" oninput="handleSearchDebounced(this.value)" aria-label="Search">
   </div>
 </div>
 
@@ -623,7 +615,6 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 
 <!-- ═ TEMPLATES ═ -->
 <section class="tpl-section" id="templates">
-  <!-- Filter row -->
   <div class="filter-row">
     <button class="filter-btn" id="filterBtn" onclick="openFilterDrawer()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
@@ -636,7 +627,6 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
     <span class="results-lbl" id="resultsCount">--</span>
   </div>
 
-  <!-- Grid -->
   <div class="grid" id="grid"><!-- JS --></div>
 </section>
 
@@ -836,9 +826,15 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 <div class="toast-container" id="toasts" aria-live="polite"></div>
 
 <script>
-const TAX_RATE = 0.18;
+'use strict';
 
-// ── CATEGORY DEFINITIONS (icons only -- counts come from live data) ──
+// ═══════════════════════════════════════════════════════
+// CONSTANTS & CONFIG
+// ═══════════════════════════════════════════════════════
+const TAX_RATE = 0.18;
+const DEBOUNCE_DELAY = 300;
+
+// Category metadata
 const CAT_META = {
   all:          {name:'All',         icon:'✦'},
   wedding:      {name:'Wedding',     icon:'💍'},
@@ -853,400 +849,960 @@ const CAT_META = {
   festival:     {name:'Festival',    icon:'🎆'},
 };
 
+const sortCycle = ['popular', 'newest', 'price-low', 'price-high', 'rating'];
+const sortLabels = {
+  popular: '🔥 Popular',
+  newest: '✦ Newest',
+  'price-low': '₹ Low→High',
+  'price-high': '₹ High→Low',
+  rating: '⭐ Top Rated'
+};
+
+// ═══════════════════════════════════════════════════════
+// GLOBAL STATE
+// ═══════════════════════════════════════════════════════
 let products = [];
 let categories = [];
+let cart = [];
+let wishlist = new Set();
+let activeCat = 'all', activeTier = 'all', searchQ = '', sortBy = 'popular', maxPrice = 500;
+let currentProduct = null, isFS = false, mobMenuOpen = false, chatOpen = false;
+let drawerTier = 'all', drawerSort = 'popular', drawerPrice = 500;
+let sortCycleIdx = 0;
+let searchDebounceTimer = null;
+let scrollYPosition = 0;
 
-function isNew(d){if(!d)return false;return(Date.now()-new Date(d))/86400000<=14;}
+// ═══════════════════════════════════════════════════════
+// UTILITIES
+// ═══════════════════════════════════════════════════════
+function isNew(d) {
+  if (!d) return false;
+  return (Date.now() - new Date(d)) / 86400000 <= 14;
+}
 
-// ── STATE ──
-let cart=JSON.parse(localStorage.getItem('ss_cart')||'[]');
-let wishlist=new Set(JSON.parse(localStorage.getItem('ss_wish')||'[]'));
-let activeCat='all',activeTier='all',searchQ='',sortBy='popular',maxPrice=500;
-let currentProduct=null,chatOpen=false,isFS=false,mobMenuOpen=false;
-// Drawer pending state (applied on close)
-let drawerTier='all',drawerSort='popular',drawerPrice=500;
-// Quick sort cycle
-const sortCycle=['popular','newest','price-low','price-high','rating'];
-const sortLabels={popular:'🔥 Popular',newest:'✦ Newest','price-low':'₹ Low→High','price-high':'₹ High→Low',rating:'⭐ Top Rated'};
-let sortCycleIdx=0;
+function safeJsonParse(str, fallback = null) {
+  try { return JSON.parse(str); } 
+  catch (e) { return fallback; }
+}
 
-// ── INIT ──
-document.addEventListener('DOMContentLoaded', async()=>{
-  initScroll(); animateStats(); updateCartUI(); updateWishUI();
-  if(window.innerWidth<=1100) document.getElementById('mobSearchBtn').style.display='flex';
-  setTimeout(()=>{document.getElementById('chatBadge').style.display='flex';},4000);
-  setTimeout(()=>{addBotMsg("👋 Hey! Welcome to Scripted Surprise. How can I help you today?");},500);
+function formatPrice(price) {
+  return `₹${price.toLocaleString('en-IN')}`;
+}
 
-  // Skeleton loading
-  showSkeletons(6);
-
-  try{
-    const r=await fetch('templates.json?v='+Date.now());
-    if(r.ok) products=await r.json();
-  }catch(e){console.warn('templates.json fetch failed',e);}
-
-  // Build categories from live data -- hide uncategorized if 0 visible items
-  buildCategories();
-  renderCats();
-  renderGrid();
-
-  const sc=document.getElementById('statCount');
-  if(sc) sc.textContent=products.length+'+';
-  const scats=document.getElementById('statCats');
-  if(scats) scats.textContent=categories.filter(c=>c.id!=='all'&&c.count>0).length;
-});
-
-window.addEventListener('resize',()=>{
-  const btn=document.getElementById('mobSearchBtn');
-  if(btn) btn.style.display=window.innerWidth<=1100?'flex':'none';
-  // Recalc thumb scale
-  document.querySelectorAll('.card-thumb-wrap iframe').forEach(setThumbScale);
-});
-
-// ── THUMBNAIL SCALE ── dynamically set based on card width
-function setThumbScale(iframe){
-  const wrap=iframe.closest('.card-img');
-  if(!wrap) return;
-  const w=wrap.offsetWidth;
-  const scale=(w/375).toFixed(3);
-  iframe.style.transform=`scale(${scale}) translateY(0)`;
-  iframe.style.setProperty('--thumb-scale',scale);
-  // Re-apply animation with correct scale
-  iframe.style.animationName='none';
-  requestAnimationFrame(()=>{
-    iframe.style.animationName='thumbScroll';
+// ═══════════════════════════════════════════════════════
+// THUMBNAIL SCALING (FIXED)
+// ═══════════════════════════════════════════════════════
+function setThumbScale(iframe) {
+  const wrap = iframe.closest('.card-img');
+  if (!wrap) return;
+  
+  const w = wrap.offsetWidth;
+  const scale = (w / 375).toFixed(3);
+  
+  // Set both CSS variable and direct transform
+  iframe.style.setProperty('--thumb-scale', scale);
+  iframe.style.transform = `scale(${scale}) translateY(0)`;
+  
+  // Adjust container height dynamically to prevent cropping
+  const containerHeight = wrap.offsetHeight;
+  if (containerHeight > 0) {
+    iframe.style.height = `${containerHeight / parseFloat(scale)}px`;
+  }
+  
+  // Restart animation smoothly
+  iframe.style.animationName = 'none';
+  requestAnimationFrame(() => {
+    iframe.style.animationName = 'thumbScroll';
   });
 }
 
-// ── CATEGORIES ──
-function buildCategories(){
-  // Count per category from live products
-  const counts={};
-  products.forEach(p=>{
-    const c=p.category||'uncategorized';
-    counts[c]=(counts[c]||0)+1;
+// Debounced resize handler for thumbnails
+let resizeTimer = null;
+function handleThumbResize() {
+  if (resizeTimer) clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    document.querySelectorAll('.card-thumb-wrap iframe').forEach(setThumbScale);
+  }, 100);
+}
+
+// ═══════════════════════════════════════════════════════
+// CATEGORIES
+// ═══════════════════════════════════════════════════════
+function buildCategories() {
+  const counts = {};
+  products.forEach(p => {
+    const c = p.category || 'uncategorized';
+    counts[c] = (counts[c] || 0) + 1;
   });
-  categories=[{id:'all',name:'All',icon:'✦',count:products.length}];
-  Object.entries(CAT_META).forEach(([id,meta])=>{
-    if(id==='all') return;
-    const count=counts[id]||0;
-    if(count>0) categories.push({id,name:meta.name,icon:meta.icon,count});
+  
+  categories = [{ id: 'all', name: 'All', icon: '✦', count: products.length }];
+  
+  Object.entries(CAT_META).forEach(([id, meta]) => {
+    if (id === 'all') return;
+    const count = counts[id] || 0;
+    if (count > 0) categories.push({ id, name: meta.name, icon: meta.icon, count });
   });
-  // Show uncategorized if any
-  if(counts['uncategorized']>0){
-    categories.push({id:'uncategorized',name:'Other',icon:'📁',count:counts['uncategorized']});
+  
+  if (counts['uncategorized'] > 0) {
+    categories.push({ id: 'uncategorized', name: 'Other', icon: '📁', count: counts['uncategorized'] });
   }
 }
 
-function renderCats(){
-  document.getElementById('catBar').innerHTML=categories.map(c=>`
-    <button class="cat-btn ${c.id===activeCat?'active':''}" onclick="filterCat('${c.id}')">
+function renderCats() {
+  const catBar = document.getElementById('catBar');
+  if (!catBar) return;
+  
+  catBar.innerHTML = categories.map(c => `
+    <button class="cat-btn ${c.id === activeCat ? 'active' : ''}" onclick="filterCat('${c.id}')">
       <span>${c.icon}</span>${c.name}
       <span class="cat-count">${c.count}</span>
-    </button>`).join('');
+    </button>
+  `).join('');
 }
 
-function filterCat(id){
-  activeCat=id; renderCats(); renderGrid();
-  document.getElementById('templates').scrollIntoView({behavior:'smooth',block:'start'});
+function filterCat(id) {
+  activeCat = id;
+  renderCats();
+  renderGrid();
+  document.getElementById('templates').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ── SKELETONS ──
-function showSkeletons(n){
-  document.getElementById('grid').innerHTML=Array(n).fill(`
+// ═══════════════════════════════════════════════════════
+// SKELETONS
+// ═══════════════════════════════════════════════════════
+function showSkeletons(n) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = Array(n).fill(`
     <div class="skeleton-card">
       <div class="skeleton-img"></div>
       <div class="skeleton-body">
         <div class="skeleton-line"></div>
         <div class="skeleton-line short"></div>
       </div>
-    </div>`).join('');
+    </div>
+  `).join('');
 }
 
-// ── RENDER GRID ──
-function getFiltered(){
-  let p=[...products];
-  if(activeCat!=='all') p=p.filter(x=>x.category===activeCat);
-  if(activeTier!=='all') p=p.filter(x=>x.tier===activeTier);
-  if(searchQ){const q=searchQ.toLowerCase();p=p.filter(x=>x.name.toLowerCase().includes(q)||x.desc.toLowerCase().includes(q)||x.category.toLowerCase().includes(q));}
-  p=p.filter(x=>x.price<=maxPrice);
-  switch(sortBy){
-    case'price-low':p.sort((a,b)=>a.price-b.price);break;
-    case'price-high':p.sort((a,b)=>b.price-a.price);break;
-    case'newest':p.sort((a,b)=>b.id-a.id);break;
-    case'rating':p.sort((a,b)=>b.rating-a.rating);break;
-    default:p.sort((a,b)=>b.orders-a.orders);
+// ═══════════════════════════════════════════════════════
+// FILTERING & RENDERING
+// ═══════════════════════════════════════════════════════
+function getFiltered() {
+  let filtered = [...products];
+  
+  if (activeCat !== 'all') {
+    filtered = filtered.filter(x => x.category === activeCat);
   }
-  return p;
+  if (activeTier !== 'all') {
+    filtered = filtered.filter(x => x.tier === activeTier);
+  }
+  if (searchQ) {
+    const q = searchQ.toLowerCase();
+    filtered = filtered.filter(x => 
+      x.name.toLowerCase().includes(q) || 
+      (x.desc || '').toLowerCase().includes(q) || 
+      (x.category || '').toLowerCase().includes(q)
+    );
+  }
+  
+  filtered = filtered.filter(x => x.price <= maxPrice);
+  
+  switch (sortBy) {
+    case 'price-low':  filtered.sort((a, b) => a.price - b.price); break;
+    case 'price-high': filtered.sort((a, b) => b.price - a.price); break;
+    case 'newest':     filtered.sort((a, b) => (b.id || 0) - (a.id || 0)); break;
+    case 'rating':     filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0)); break;
+    default:           filtered.sort((a, b) => (b.orders || 0) - (a.orders || 0));
+  }
+  
+  return filtered;
 }
 
-function renderGrid(){
-  const grid=document.getElementById('grid');
-  const filtered=getFiltered();
-  document.getElementById('resultsCount').textContent=`${filtered.length} template${filtered.length!==1?'s':''}`;
-  if(!filtered.length){
-    grid.innerHTML=`<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><p>No templates found</p><button class="btn btn-ghost btn-sm" onclick="resetFilters()">Clear Filters</button></div>`;
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const filtered = getFiltered();
+  
+  const resultsEl = document.getElementById('resultsCount');
+  if (resultsEl) {
+    resultsEl.textContent = `${filtered.length} template${filtered.length !== 1 ? 's' : ''}`;
+  }
+  
+  if (!filtered.length) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <p>No templates found</p>
+        <button class="btn btn-ghost btn-sm" onclick="resetFilters()">Clear Filters</button>
+      </div>
+    `;
     return;
   }
-  grid.innerHTML=filtered.map((p,i)=>{
-    const inWish=wishlist.has(p.id);
-    const catName=CAT_META[p.category]?.name||p.category||'';
-    return`<div class="card fade-in" style="transition-delay:${i*.03}s" onclick="openPreview(${p.id})" role="button" tabindex="0">
-      <div class="card-img">
-        <div class="card-thumb-wrap">
-          <div class="card-thumb-shimmer" id="shim-${p.id}"></div>
-          <iframe src="${p.url}" loading="lazy"
-            onload="this.previousElementSibling.classList.add('loaded');window.__setScale&&window.__setScale(this)"
-            sandbox="allow-scripts allow-same-origin"
-            title="Preview ${p.name}"></iframe>
+  
+  // Use DocumentFragment for better performance
+  const fragment = document.createDocumentFragment();
+  const tempDiv = document.createElement('div');
+  
+  tempDiv.innerHTML = filtered.map((p, i) => {
+    const inWish = wishlist.has(p.id);
+    const catName = CAT_META[p.category]?.name || p.category || '';
+    const tierClass = (p.tier || 'standard').toLowerCase();
+    
+    return `
+      <div class="card fade-in" style="transition-delay: ${i * 0.03}s" onclick="openPreview(${p.id})" role="button" tabindex="0">
+        <div class="card-img">
+          <div class="card-thumb-wrap">
+            <div class="card-thumb-shimmer" id="shim-${p.id}"></div>
+            <iframe src="${p.url}" loading="lazy"
+              onload="this.previousElementSibling.classList.add('loaded'); window.__setScale(this)"
+              sandbox="allow-scripts allow-same-origin"
+              title="Preview ${p.name}"></iframe>
+          </div>
+          <div class="card-thumb-fade"></div>
+          <span class="tier tier-${tierClass}">${p.tier || 'Standard'}</span>
+          ${p.trending ? '<span class="trending-badge">🔥</span>' : ''}
+          ${!p.trending && isNew(p.added) ? '<span class="new-badge">New</span>' : ''}
+          <button class="fav-btn ${inWish ? 'active' : ''}" onclick="event.stopPropagation(); toggleWish(${p.id}, this)">
+            <svg viewBox="0 0 24 24" fill="${inWish ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <div class="card-overlay">
+            <button class="card-action card-action-preview" onclick="event.stopPropagation(); openPreview(${p.id})">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg> Preview
+            </button>
+            <button class="card-action card-action-cart" onclick="event.stopPropagation(); addToCart(${p.id})">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg> Add
+            </button>
+          </div>
         </div>
-        <div class="card-thumb-fade"></div>
-        <span class="tier tier-${(p.tier||'standard').toLowerCase()}">${p.tier||'Standard'}</span>
-        ${p.trending?`<span class="trending-badge">🔥</span>`:''}
-        ${!p.trending&&isNew(p.added)?`<span class="new-badge">New</span>`:''}
-        <button class="fav-btn ${inWish?'active':''}" onclick="event.stopPropagation();toggleWish(${p.id},this)">
-          <svg viewBox="0 0 24 24" fill="${inWish?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-        <div class="card-overlay">
-          <button class="card-action card-action-preview" onclick="event.stopPropagation();openPreview(${p.id})">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Preview
-          </button>
-          <button class="card-action card-action-cart" onclick="event.stopPropagation();addToCart(${p.id})">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add
-          </button>
+        <div class="card-body">
+          <h3 class="card-name">${p.name}</h3>
+          <div class="card-foot">
+            <div>
+              <span class="price"><span class="cur">₹</span>${p.price}</span>
+              ${p.oldPrice ? `<span class="price-old">₹${p.oldPrice}</span>` : ''}
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-      <div class="card-body">
-        <h3 class="card-name">${p.name}</h3>
-        <div class="card-foot">
-          <div><span class="price"><span class="cur">₹</span>${p.price}</span><span class="price-old">₹${p.oldPrice||''}</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart(${p.id})">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>`;
+    `;
   }).join('');
-
-  // Set scale and trigger fade
-  window.__setScale=setThumbScale;
-  setTimeout(()=>{
-    document.querySelectorAll('.card.fade-in').forEach(el=>el.classList.add('visible'));
+  
+  while (tempDiv.firstChild) {
+    fragment.appendChild(tempDiv.firstChild);
+  }
+  
+  grid.innerHTML = '';
+  grid.appendChild(fragment);
+  
+  window.__setScale = setThumbScale;
+  
+  // Trigger fade-in and scale calculation
+  setTimeout(() => {
+    document.querySelectorAll('.card.fade-in').forEach(el => el.classList.add('visible'));
     document.querySelectorAll('.card-thumb-wrap iframe').forEach(setThumbScale);
-  },80);
+  }, 80);
 }
 
-// ── FILTER DRAWER ──
-function openFilterDrawer(){document.getElementById('filterDrawer').classList.add('open');document.getElementById('filterDrBg').classList.add('open');}
-function closeFilterDrawer(){document.getElementById('filterDrawer').classList.remove('open');document.getElementById('filterDrBg').classList.remove('open');activeTier=drawerTier;sortBy=drawerSort;maxPrice=drawerPrice;renderGrid();}
-function setDrawerTier(t,el){drawerTier=t;document.querySelectorAll('[data-tier]').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
-function setDrawerSort(s,el){drawerSort=s;document.querySelectorAll('[data-sort]').forEach(c=>c.classList.remove('active'));el.classList.add('active');document.getElementById('sortQuickBtn').textContent=sortLabels[s]||'Sort';}
-function setDrawerPrice(v){drawerPrice=parseInt(v);document.getElementById('drawerPriceVal').textContent=v;}
+// ═══════════════════════════════════════════════════════
+// FILTER DRAWER
+// ═══════════════════════════════════════════════════════
+function openFilterDrawer() {
+  document.getElementById('filterDrawer').classList.add('open');
+  document.getElementById('filterDrBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
-function cycleSortQuick(){
-  sortCycleIdx=(sortCycleIdx+1)%sortCycle.length;
-  sortBy=sortCycle[sortCycleIdx];
-  drawerSort=sortBy;
-  document.getElementById('sortQuickBtn').innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>${sortLabels[sortBy]}`;
-  // Sync drawer chip
-  document.querySelectorAll('[data-sort]').forEach(c=>{c.classList.toggle('active',c.dataset.sort===sortBy);});
+function closeFilterDrawer() {
+  document.getElementById('filterDrawer').classList.remove('open');
+  document.getElementById('filterDrBg').classList.remove('open');
+  document.body.style.overflow = '';
+  
+  activeTier = drawerTier;
+  sortBy = drawerSort;
+  maxPrice = drawerPrice;
   renderGrid();
 }
 
-function handleSearch(v){searchQ=v.trim();renderGrid();}
-function resetFilters(){
-  activeCat='all';activeTier='all';searchQ='';sortBy='popular';maxPrice=500;
-  drawerTier='all';drawerSort='popular';drawerPrice=500;
-  sortCycleIdx=0;
-  const si=document.getElementById('searchInput');if(si)si.value='';
-  const pf=document.getElementById('drawerPriceFilter');if(pf){pf.value=500;document.getElementById('drawerPriceVal').textContent='500';}
-  document.querySelectorAll('[data-tier]').forEach(c=>c.classList.toggle('active',c.dataset.tier==='all'));
-  document.querySelectorAll('[data-sort]').forEach(c=>c.classList.toggle('active',c.dataset.sort==='popular'));
-  document.getElementById('sortQuickBtn').innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>Popular`;
-  buildCategories();renderCats();renderGrid();
+function setDrawerTier(t, el) {
+  drawerTier = t;
+  document.querySelectorAll('[data-tier]').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
 }
 
-// ── PREVIEW ──
-function openInBrowser(){if(currentProduct?.url)window.open(currentProduct.url,'_blank');}
-
-function openPreview(id){
-  const p=products.find(x=>x.id===id);if(!p) return;
-  currentProduct=p;
-  document.getElementById('mCat').textContent=CAT_META[p.category]?.name||p.category||'';
-  document.getElementById('mTitle').textContent=p.name;
-  document.getElementById('mDesc').textContent=p.desc;
-  document.getElementById('mPrice').textContent=p.price;
-  document.getElementById('mPriceOld').textContent='₹'+(p.oldPrice||'');
-  document.getElementById('mDisc').textContent=p.discount||'';
-  document.getElementById('mRating').textContent=p.rating;
-  document.getElementById('mOrders').textContent=` · ${p.orders||0} sold`;
-  const full=Math.floor(p.rating||5);
-  document.getElementById('mStars').innerHTML=Array(5).fill(0).map((_,i)=>`<svg class="star" viewBox="0 0 24 24" fill="${i<full?'#f59e0b':'none'}" stroke="#f59e0b" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`).join('');
-  const icons={Style:`<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>`,Animations:`<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,Sections:`<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>`,Countdown:`<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>`};
-  document.getElementById('mFeats').innerHTML=Object.entries(p.features||{}).map(([k,v])=>`
-    <div class="feat-item">
-      <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${icons[k]||''}</svg></div>
-      <div><div class="feat-lbl">${k}</div><div class="feat-val">${v}</div></div>
-    </div>`).join('');
-  const phone=document.getElementById('phoneScreen');
-  if(p.url){
-    phone.innerHTML=`<iframe src="${p.url}?v=${Date.now()}" style="width:100%;height:100%;border:none;display:block;" title="${p.name}" scrolling="yes" loading="lazy"></iframe>`;
-  } else {
-    phone.innerHTML=`<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:14px;padding:28px;text-align:center"><div style="font-size:40px">${CAT_META[p.category]?.icon||'✦'}</div><div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--txt-gold)">${p.name}</div></div>`;
+function setDrawerSort(s, el) {
+  drawerSort = s;
+  document.querySelectorAll('[data-sort]').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  
+  const sortBtn = document.getElementById('sortQuickBtn');
+  if (sortBtn) {
+    sortBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>${sortLabels[s] || 'Sort'}`;
   }
+}
+
+function setDrawerPrice(v) {
+  drawerPrice = parseInt(v, 10);
+  const valEl = document.getElementById('drawerPriceVal');
+  if (valEl) valEl.textContent = v;
+}
+
+function cycleSortQuick() {
+  sortCycleIdx = (sortCycleIdx + 1) % sortCycle.length;
+  sortBy = sortCycle[sortCycleIdx];
+  drawerSort = sortBy;
+  
+  const sortBtn = document.getElementById('sortQuickBtn');
+  if (sortBtn) {
+    sortBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>${sortLabels[sortBy]}`;
+  }
+  
+  document.querySelectorAll('[data-sort]').forEach(c => {
+    c.classList.toggle('active', c.dataset.sort === sortBy);
+  });
+  
+  renderGrid();
+}
+
+function handleSearchDebounced(value) {
+  if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
+  searchDebounceTimer = setTimeout(() => {
+    searchQ = value.trim();
+    renderGrid();
+  }, DEBOUNCE_DELAY);
+}
+
+function handleSearch(value) {
+  // Legacy direct handler - use debounced version instead
+  handleSearchDebounced(value);
+}
+
+function resetFilters() {
+  activeCat = 'all';
+  activeTier = 'all';
+  searchQ = '';
+  sortBy = 'popular';
+  maxPrice = 500;
+  drawerTier = 'all';
+  drawerSort = 'popular';
+  drawerPrice = 500;
+  sortCycleIdx = 0;
+  
+  const searchInputs = ['searchInput', 'mobSearchInput'];
+  searchInputs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  
+  const priceFilter = document.getElementById('drawerPriceFilter');
+  if (priceFilter) {
+    priceFilter.value = 500;
+    document.getElementById('drawerPriceVal').textContent = '500';
+  }
+  
+  document.querySelectorAll('[data-tier]').forEach(c => {
+    c.classList.toggle('active', c.dataset.tier === 'all');
+  });
+  document.querySelectorAll('[data-sort]').forEach(c => {
+    c.classList.toggle('active', c.dataset.sort === 'popular');
+  });
+  
+  const sortBtn = document.getElementById('sortQuickBtn');
+  if (sortBtn) {
+    sortBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>Popular`;
+  }
+  
+  buildCategories();
+  renderCats();
+  renderGrid();
+}
+
+// ═══════════════════════════════════════════════════════
+// PREVIEW MODAL
+// ═══════════════════════════════════════════════════════
+function openInBrowser() {
+  if (currentProduct?.url) {
+    window.open(currentProduct.url, '_blank');
+  }
+}
+
+function openPreview(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) {
+    showToast('Template not found', 'error');
+    return;
+  }
+  
+  currentProduct = p;
+  
+  // Populate modal fields
+  document.getElementById('mCat').textContent = CAT_META[p.category]?.name || p.category || '';
+  document.getElementById('mTitle').textContent = p.name;
+  document.getElementById('mDesc').textContent = p.desc || '';
+  document.getElementById('mPrice').textContent = p.price;
+  document.getElementById('mPriceOld').textContent = p.oldPrice ? `₹${p.oldPrice}` : '';
+  document.getElementById('mDisc').textContent = p.discount || '';
+  document.getElementById('mRating').textContent = (p.rating || 5.0).toFixed(1);
+  document.getElementById('mOrders').textContent = ` · ${p.orders || 0} sold`;
+  
+  // Stars
+  const full = Math.floor(p.rating || 5);
+  document.getElementById('mStars').innerHTML = Array(5).fill(0).map((_, i) => `
+    <svg class="star" viewBox="0 0 24 24" fill="${i < full ? '#f59e0b' : 'none'}" stroke="#f59e0b" stroke-width="2">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    </svg>
+  `).join('');
+  
+  // Features
+  const icons = {
+    Style: `<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>`,
+    Animations: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,
+    Sections: `<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>`,
+    Countdown: `<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>`
+  };
+  
+  const feats = p.features || { Style: 'Custom', Animations: 'Yes', Sections: 'Multiple', Countdown: 'No' };
+  document.getElementById('mFeats').innerHTML = Object.entries(feats).map(([k, v]) => `
+    <div class="feat-item">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          ${icons[k] || ''}
+        </svg>
+      </div>
+      <div>
+        <div class="feat-lbl">${k}</div>
+        <div class="feat-val">${v}</div>
+      </div>
+    </div>
+  `).join('');
+  
+  // Phone preview
+  const phoneScreen = document.getElementById('phoneScreen');
+  if (p.url) {
+    phoneScreen.innerHTML = `<iframe src="${p.url}?v=${Date.now()}" style="width:100%;height:100%;border:none;display:block;" title="${p.name}" scrolling="yes" loading="lazy"></iframe>`;
+  } else {
+    phoneScreen.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:14px;padding:28px;text-align:center">
+        <div style="font-size:40px">${CAT_META[p.category]?.icon || '✦'}</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--txt-gold)">${p.name}</div>
+      </div>
+    `;
+  }
+  
   document.getElementById('previewModal').classList.add('open');
-  document.body.style.overflow='hidden';
-  const seed=id*7+new Date().getHours();
-  document.getElementById('viewerCount').textContent=3+(seed%24);
+  document.body.style.overflow = 'hidden';
+  
+  // Random viewer count
+  const seed = id * 7 + new Date().getHours();
+  document.getElementById('viewerCount').textContent = 3 + (seed % 24);
 }
 
-function closePreview(){
+function closePreview() {
   document.getElementById('previewModal').classList.remove('open');
-  document.body.style.overflow='';
-  if(isFS) toggleFullscreen();
-  setTimeout(()=>{document.getElementById('phoneScreen').innerHTML='';},350);
+  document.body.style.overflow = '';
+  
+  if (isFS) {
+    toggleFullscreen();
+  }
+  
+  setTimeout(() => {
+    document.getElementById('phoneScreen').innerHTML = '';
+  }, 350);
 }
-function scrollPhone(pos){
-  const iframe=document.querySelector('#phoneScreen iframe');
-  if(iframe){try{iframe.contentWindow.scrollTo({top:pos,behavior:'smooth'});}catch(e){}}
-}
-function toggleFullscreen(){
-  const frame=document.getElementById('phoneFrame');
-  const btn=document.getElementById('fsBtn');
-  isFS=!isFS;
-  frame.classList.toggle('fs',isFS);
-  btn.innerHTML=isFS?'Exit Fullscreen':'Fullscreen';
-}
-function addToCartFromPreview(){if(currentProduct)addToCart(currentProduct.id);}
 
-// ── WISHLIST ──
-function toggleWish(id,btn){
-  if(wishlist.has(id)){wishlist.delete(id);showToast('Removed from wishlist','info');}
-  else{wishlist.add(id);showToast('Added to wishlist ♥','success');}
-  btn.classList.toggle('active',wishlist.has(id));
-  btn.querySelector('svg').setAttribute('fill',wishlist.has(id)?'currentColor':'none');
-  localStorage.setItem('ss_wish',JSON.stringify([...wishlist]));
+function scrollPhone(pos) {
+  const iframe = document.querySelector('#phoneScreen iframe');
+  if (iframe) {
+    try {
+      iframe.contentWindow?.scrollTo({ top: pos, behavior: 'smooth' });
+    } catch (e) {
+      // Cross-origin iframe - can't scroll programmatically
+    }
+  }
+}
+
+function toggleFullscreen() {
+  const frame = document.getElementById('phoneFrame');
+  const btn = document.getElementById('fsBtn');
+  isFS = !isFS;
+  frame.classList.toggle('fs', isFS);
+  btn.innerHTML = isFS ? 'Exit Fullscreen' : 'Fullscreen';
+}
+
+function addToCartFromPreview() {
+  if (currentProduct) {
+    addToCart(currentProduct.id);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// WISHLIST
+// ═══════════════════════════════════════════════════════
+function loadWishlist() {
+  const stored = localStorage.getItem('ss_wish');
+  wishlist = new Set(stored ? safeJsonParse(stored, []) : []);
   updateWishUI();
 }
-function updateWishUI(){const b=document.getElementById('wishBadge');b.textContent=wishlist.size;b.classList.toggle('on',wishlist.size>0);}
-function toggleWishlist(){if(!wishlist.size){showToast('No items in wishlist yet','info');return;}showToast(`${wishlist.size} item${wishlist.size>1?'s':''} saved`,'info');}
 
-// ── CART ──
-function addToCart(id){
-  const p=products.find(x=>x.id===id);if(!p) return;
-  if(cart.find(c=>c.id===id)){showToast('Already in cart!','info');return;}
-  cart.push({...p});
-  localStorage.setItem('ss_cart',JSON.stringify(cart));
-  updateCartUI();showToast(`"${p.name}" added!`,'success');
+function toggleWish(id, btn) {
+  if (wishlist.has(id)) {
+    wishlist.delete(id);
+    showToast('Removed from wishlist', 'info');
+  } else {
+    wishlist.add(id);
+    showToast('Added to wishlist ♥', 'success');
+  }
+  
+  btn.classList.toggle('active', wishlist.has(id));
+  btn.querySelector('svg').setAttribute('fill', wishlist.has(id) ? 'currentColor' : 'none');
+  
+  localStorage.setItem('ss_wish', JSON.stringify([...wishlist]));
+  updateWishUI();
 }
-function removeFromCart(id){
-  cart=cart.filter(c=>c.id!==id);
-  localStorage.setItem('ss_cart',JSON.stringify(cart));
+
+function updateWishUI() {
+  const badge = document.getElementById('wishBadge');
+  if (badge) {
+    badge.textContent = wishlist.size;
+    badge.classList.toggle('on', wishlist.size > 0);
+  }
+}
+
+function toggleWishlist() {
+  if (!wishlist.size) {
+    showToast('No items in wishlist yet', 'info');
+    return;
+  }
+  showToast(`${wishlist.size} item${wishlist.size > 1 ? 's' : ''} saved`, 'info');
+}
+
+// ═══════════════════════════════════════════════════════
+// CART (FIXED TAX CALCULATION)
+// ═══════════════════════════════════════════════════════
+function loadCart() {
+  const stored = localStorage.getItem('ss_cart');
+  cart = stored ? safeJsonParse(stored, []) : [];
   updateCartUI();
 }
-function updateCartUI(){
-  const badge=document.getElementById('cartBadge');
-  badge.textContent=cart.length;badge.classList.toggle('on',cart.length>0);
-  document.getElementById('cartCount').textContent=`${cart.length} item${cart.length!==1?'s':''}`;
-  const itemsEl=document.getElementById('cartItems');
-  const emptyEl=document.getElementById('cartEmpty');
-  const footEl=document.getElementById('cartFoot');
-  if(!cart.length){itemsEl.innerHTML='';itemsEl.appendChild(emptyEl);emptyEl.style.display='flex';footEl.style.display='none';return;}
-  emptyEl.style.display='none';footEl.style.display='block';
-  itemsEl.innerHTML=cart.map(item=>`
-    <div class="cart-item">
-      <div class="ci-img"><div style="width:100%;height:100%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;font-size:20px">${CAT_META[item.category]?.icon||'✦'}</div></div>
-      <div class="ci-info"><div class="ci-name">${item.name}</div><div class="ci-cat">${item.tier} · ${CAT_META[item.category]?.name||item.category}</div><div class="ci-price">₹${item.price}</div></div>
-      <button class="ci-rm" onclick="removeFromCart(${item.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-    </div>`).join('');
-  const sub=cart.reduce((s,c)=>s+c.price,0);
-  const tax=Math.round(sub*TAX_RATE);
-  document.getElementById('cartSub').textContent='₹'+sub;
-  document.getElementById('cartTax').textContent='₹'+tax;
-  document.getElementById('cartTotal').textContent='₹'+(sub+tax);
-}
-function toggleCart(){
-  const overlay=document.getElementById('cartOverlay');
-  const drawer=document.getElementById('cartDrawer');
-  const isOpen=drawer.classList.contains('open');
-  overlay.classList.toggle('open',!isOpen);drawer.classList.toggle('open',!isOpen);
-  document.body.style.overflow=isOpen?'':'hidden';
-}
-function handleCheckout(){
-  if(!cart.length) return;
-  const total=cart.reduce((s,c)=>s+c.price,0);
-  const tax=Math.round(total*TAX_RATE);
-  showToast(`Total ₹${total+tax} · Opening chat…`,'info');
-  toggleCart();
-  setTimeout(()=>{openChat();addBotMsg(`🛒 I see you have ${cart.length} template${cart.length>1?'s':''} in your cart (₹${total+tax} total). Please share your name so I can process your order!`);},600);
-}
 
-// ── CHAT ──
-function toggleChat(){chatOpen=!chatOpen;document.getElementById('chatWin').classList.toggle('open',chatOpen);if(chatOpen){document.getElementById('chatBadge').style.display='none';document.getElementById('chatInp').focus();}}
-function openChat(){if(!chatOpen)toggleChat();}
-function sendQuick(text){addUserMsg(text);document.getElementById('quickReplies').style.display='none';setTimeout(()=>botReply(text),700);}
-function sendMsg(){const inp=document.getElementById('chatInp');const text=inp.value.trim();if(!text)return;addUserMsg(text);inp.value='';document.getElementById('quickReplies').style.display='none';showTyping();setTimeout(()=>{hideTyping();botReply(text);},900);}
-function addBotMsg(text){const c=document.getElementById('chatMsgs');const now=new Date();const t=`${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;const d=document.createElement('div');d.className='msg bot';d.innerHTML=`${text}<div class="msg-time">${t}</div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
-function addUserMsg(text){const c=document.getElementById('chatMsgs');const now=new Date();const t=`${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;const d=document.createElement('div');d.className='msg user';d.innerHTML=`${text}<div class="msg-time">${t}</div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;}
-let typingEl=null;
-function showTyping(){const c=document.getElementById('chatMsgs');typingEl=document.createElement('div');typingEl.className='typing';typingEl.innerHTML='<div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>';c.appendChild(typingEl);c.scrollTop=c.scrollHeight;}
-function hideTyping(){if(typingEl){typingEl.remove();typingEl=null;}}
-function botReply(txt){
-  const t=txt.toLowerCase();let reply='';
-  if(t.includes('birthday')) reply="🎂 Great! Birthday templates range from playful to sleek. Premium (₹499) gives you up to 12 animations. Want me to show only birthday templates?";
-  else if(t.includes('wedding')) reply="💍 Weddings are our specialty! Minimalist, glassmorphism, royal luxury -- all mobile-optimised. Prices from ₹199.";
-  else if(t.includes('price')||t.includes('cost')||t.includes('₹')) reply="Our pricing:<br>🔵 <b>Basic -- ₹199</b><br>🟣 <b>Standard -- ₹299</b><br>🟡 <b>Premium -- ₹499</b><br><br>Custom orders from ₹599.";
-  else if(t.includes('custom')) reply="✨ Tell me the occasion, colour theme, and any names/dates -- I'll get back with a plan within 30 mins.";
-  else if(t.includes('pay')) reply="We accept UPI, bank transfer, and major wallets. File delivered within 5 minutes of payment!";
-  else if(t.includes('deliver')) reply="⚡ Pre-made templates delivered within 5 minutes. Custom orders up to 24 hours.";
-  else if(t.includes('hi')||t.includes('hello')) reply="Hey! 👋 What occasion are you looking for?";
-  else reply="Thanks! I'll follow up shortly. Meanwhile browse templates and use Preview to see them live.";
-  addBotMsg(reply);
-  if(document.querySelectorAll('.msg.user').length>=3) setTimeout(()=>addBotMsg("📌 I've been notified and will personally follow up soon."),2500);
-}
-
-// ── MOBILE MENU ──
-function toggleMobMenu(){mobMenuOpen=!mobMenuOpen;document.getElementById('mobMenu').classList.toggle('open',mobMenuOpen);document.body.style.overflow=mobMenuOpen?'hidden':'';}
-function closeMobMenu(){mobMenuOpen=false;document.getElementById('mobMenu').classList.remove('open');document.body.style.overflow='';}
-function toggleMobSearch(){document.getElementById('mobSearchPanel').classList.toggle('open');}
-
-// ── SCROLL ──
-function initScroll(){
-  window.addEventListener('scroll',()=>{
-    document.getElementById('header').classList.toggle('scrolled',scrollY>40);
-    document.querySelectorAll('.fade-in').forEach(el=>{if(el.getBoundingClientRect().top<innerHeight-30)el.classList.add('visible');});
-  });
-}
-
-// ── STATS ANIMATION ──
-function animateStats(){
-  document.querySelectorAll('.stat-val[data-target]').forEach(el=>{
-    const target=+el.dataset.target;const suffix=el.dataset.suffix||'';let cur=0;
-    const step=Math.ceil(target/50);
-    const iv=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=cur+suffix;if(cur>=target)clearInterval(iv);},25);
-  });
-}
-
-// ── TOAST ──
-function showToast(message,type='info'){
-  const c=document.getElementById('toasts');const t=document.createElement('div');t.className=`toast ${type}`;
-  const icons={success:`<svg class="toast-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>`,info:`<svg class="toast-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>`,error:`<svg class="toast-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>`};
-  t.innerHTML=`${icons[type]||icons.info}<span>${message}</span>`;
-  c.appendChild(t);setTimeout(()=>t.remove(),3200);
-}
-
-// ── KEYBOARD ──
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    if(isFS)toggleFullscreen();
-    else if(document.getElementById('previewModal').classList.contains('open'))closePreview();
-    else if(document.getElementById('cartDrawer').classList.contains('open'))toggleCart();
-    else if(chatOpen)toggleChat();
-    else if(mobMenuOpen)closeMobMenu();
-    else if(document.getElementById('filterDrawer').classList.contains('open'))closeFilterDrawer();
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) {
+    showToast('Template not found', 'error');
+    return;
   }
-});
-document.getElementById('previewModal').addEventListener('click',e=>{if(e.target===document.getElementById('previewModal'))closePreview();});
+  
+  if (cart.find(c => c.id === id)) {
+    showToast('Already in cart!', 'info');
+    return;
+  }
+  
+  cart.push({ ...p });
+  localStorage.setItem('ss_cart', JSON.stringify(cart));
+  updateCartUI();
+  showToast(`"${p.name}" added!`, 'success');
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  localStorage.setItem('ss_cart', JSON.stringify(cart));
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const badge = document.getElementById('cartBadge');
+  if (badge) {
+    badge.textContent = cart.length;
+    badge.classList.toggle('on', cart.length > 0);
+  }
+  
+  const countEl = document.getElementById('cartCount');
+  if (countEl) {
+    countEl.textContent = `${cart.length} item${cart.length !== 1 ? 's' : ''}`;
+  }
+  
+  const itemsEl = document.getElementById('cartItems');
+  const emptyEl = document.getElementById('cartEmpty');
+  const footEl = document.getElementById('cartFoot');
+  
+  if (!cart.length) {
+    if (itemsEl) {
+      itemsEl.innerHTML = '';
+      itemsEl.appendChild(emptyEl);
+    }
+    if (emptyEl) emptyEl.style.display = 'flex';
+    if (footEl) footEl.style.display = 'none';
+    return;
+  }
+  
+  if (emptyEl) emptyEl.style.display = 'none';
+  if (footEl) footEl.style.display = 'block';
+  
+  if (itemsEl) {
+    itemsEl.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="ci-img">
+          <div style="width:100%;height:100%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;font-size:20px">
+            ${CAT_META[item.category]?.icon || '✦'}
+          </div>
+        </div>
+        <div class="ci-info">
+          <div class="ci-name">${item.name}</div>
+          <div class="ci-cat">${item.tier || 'Standard'} · ${CAT_META[item.category]?.name || item.category || ''}</div>
+          <div class="ci-price">₹${item.price}</div>
+        </div>
+        <button class="ci-rm" onclick="removeFromCart(${item.id})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    `).join('');
+  }
+  
+  const sub = cart.reduce((s, c) => s + (c.price || 0), 0);
+  // Fixed tax calculation: use ceiling for GST compliance
+  const tax = Math.ceil(sub * TAX_RATE);
+  const total = sub + tax;
+  
+  document.getElementById('cartSub').textContent = formatPrice(sub);
+  document.getElementById('cartTax').textContent = formatPrice(tax);
+  document.getElementById('cartTotal').textContent = formatPrice(total);
+}
+
+function toggleCart() {
+  const overlay = document.getElementById('cartOverlay');
+  const drawer = document.getElementById('cartDrawer');
+  const isOpen = drawer.classList.contains('open');
+  
+  overlay.classList.toggle('open', !isOpen);
+  drawer.classList.toggle('open', !isOpen);
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+
+function handleCheckout() {
+  if (!cart.length) return;
+  
+  const sub = cart.reduce((s, c) => s + (c.price || 0), 0);
+  const tax = Math.ceil(sub * TAX_RATE);
+  const total = sub + tax;
+  
+  showToast(`Total ${formatPrice(total)} · Opening chat…`, 'info');
+  toggleCart();
+  
+  setTimeout(() => {
+    openChat();
+    addBotMsg(`🛒 I see you have ${cart.length} template${cart.length > 1 ? 's' : ''} in your cart (${formatPrice(total)} total). Please share your name so I can process your order!`);
+  }, 600);
+}
+
+// ═══════════════════════════════════════════════════════
+// CHAT
+// ═══════════════════════════════════════════════════════
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const chatWin = document.getElementById('chatWin');
+  chatWin.classList.toggle('open', chatOpen);
+  
+  if (chatOpen) {
+    document.getElementById('chatBadge').style.display = 'none';
+    document.getElementById('chatInp').focus();
+  }
+}
+
+function openChat() {
+  if (!chatOpen) toggleChat();
+}
+
+function sendQuick(text) {
+  addUserMsg(text);
+  document.getElementById('quickReplies').style.display = 'none';
+  setTimeout(() => botReply(text), 700);
+}
+
+function sendMsg() {
+  const inp = document.getElementById('chatInp');
+  const text = inp.value.trim();
+  if (!text) return;
+  
+  addUserMsg(text);
+  inp.value = '';
+  document.getElementById('quickReplies').style.display = 'none';
+  
+  showTyping();
+  setTimeout(() => {
+    hideTyping();
+    botReply(text);
+  }, 900);
+}
+
+function addBotMsg(text) {
+  const container = document.getElementById('chatMsgs');
+  const now = new Date();
+  const time = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+  
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'msg bot';
+  msgDiv.innerHTML = `${text}<div class="msg-time">${time}</div>`;
+  
+  container.appendChild(msgDiv);
+  container.scrollTop = container.scrollHeight;
+}
+
+function addUserMsg(text) {
+  const container = document.getElementById('chatMsgs');
+  const now = new Date();
+  const time = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+  
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'msg user';
+  msgDiv.innerHTML = `${text}<div class="msg-time">${time}</div>`;
+  
+  container.appendChild(msgDiv);
+  container.scrollTop = container.scrollHeight;
+}
+
+let typingEl = null;
+
+function showTyping() {
+  const container = document.getElementById('chatMsgs');
+  typingEl = document.createElement('div');
+  typingEl.className = 'typing';
+  typingEl.innerHTML = '<div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>';
+  container.appendChild(typingEl);
+  container.scrollTop = container.scrollHeight;
+}
+
+function hideTyping() {
+  if (typingEl) {
+    typingEl.remove();
+    typingEl = null;
+  }
+}
+
+function botReply(txt) {
+  const t = txt.toLowerCase();
+  let reply = '';
+  
+  if (t.includes('birthday')) {
+    reply = "🎂 Great! Birthday templates range from playful to sleek. Premium (₹499) gives you up to 12 animations. Want me to show only birthday templates?";
+  } else if (t.includes('wedding')) {
+    reply = "💍 Weddings are our specialty! Minimalist, glassmorphism, royal luxury -- all mobile-optimised. Prices from ₹199.";
+  } else if (t.includes('price') || t.includes('cost') || t.includes('₹')) {
+    reply = "Our pricing:<br>🔵 <b>Basic -- ₹199</b><br>🟣 <b>Standard -- ₹299</b><br>🟡 <b>Premium -- ₹499</b><br><br>Custom orders from ₹599.";
+  } else if (t.includes('custom')) {
+    reply = "✨ Tell me the occasion, colour theme, and any names/dates -- I'll get back with a plan within 30 mins.";
+  } else if (t.includes('pay')) {
+    reply = "We accept UPI, bank transfer, and major wallets. File delivered within 5 minutes of payment!";
+  } else if (t.includes('deliver')) {
+    reply = "⚡ Pre-made templates delivered within 5 minutes. Custom orders up to 24 hours.";
+  } else if (t.includes('hi') || t.includes('hello')) {
+    reply = "Hey! 👋 What occasion are you looking for?";
+  } else {
+    reply = "Thanks! I'll follow up shortly. Meanwhile browse templates and use Preview to see them live.";
+  }
+  
+  addBotMsg(reply);
+  
+  if (document.querySelectorAll('.msg.user').length >= 3) {
+    setTimeout(() => addBotMsg("📌 I've been notified and will personally follow up soon."), 2500);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// MOBILE MENU (FIXED SCROLL RESTORATION)
+// ═══════════════════════════════════════════════════════
+function toggleMobMenu() {
+  mobMenuOpen = !mobMenuOpen;
+  const menu = document.getElementById('mobMenu');
+  
+  if (mobMenuOpen) {
+    scrollYPosition = window.scrollY;
+    menu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = `-${scrollYPosition}px`;
+  } else {
+    menu.classList.remove('open');
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.top = '';
+    window.scrollTo(0, scrollYPosition);
+  }
+}
+
+function closeMobMenu() {
+  if (mobMenuOpen) {
+    toggleMobMenu();
+  }
+}
+
+function toggleMobSearch() {
+  document.getElementById('mobSearchPanel').classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════════════════
+// SCROLL
+// ═══════════════════════════════════════════════════════
+function initScroll() {
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
+    
+    document.querySelectorAll('.fade-in').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 30) {
+        el.classList.add('visible');
+      }
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// STATS ANIMATION
+// ═══════════════════════════════════════════════════════
+function animateStats() {
+  document.querySelectorAll('.stat-val[data-target]').forEach(el => {
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    let current = 0;
+    const step = Math.ceil(target / 50);
+    
+    const interval = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current + suffix;
+      if (current >= target) clearInterval(interval);
+    }, 25);
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════
+function showToast(message, type = 'info') {
+  const container = document.getElementById('toasts');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  
+  const icons = {
+    success: `<svg class="toast-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>`,
+    info: `<svg class="toast-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>`,
+    error: `<svg class="toast-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>`
+  };
+  
+  toast.innerHTML = `${icons[type] || icons.info}<span>${message}</span>`;
+  container.appendChild(toast);
+  
+  setTimeout(() => toast.remove(), 3200);
+}
+
+// ═══════════════════════════════════════════════════════
+// KEYBOARD HANDLING
+// ═══════════════════════════════════════════════════════
+function handleKeydown(e) {
+  if (e.key === 'Escape') {
+    if (isFS) {
+      toggleFullscreen();
+    } else if (document.getElementById('previewModal').classList.contains('open')) {
+      closePreview();
+    } else if (document.getElementById('cartDrawer').classList.contains('open')) {
+      toggleCart();
+    } else if (chatOpen) {
+      toggleChat();
+    } else if (mobMenuOpen) {
+      closeMobMenu();
+    } else if (document.getElementById('filterDrawer').classList.contains('open')) {
+      closeFilterDrawer();
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// INITIALIZATION
+// ═══════════════════════════════════════════════════════
+async function initialize() {
+  initScroll();
+  animateStats();
+  loadCart();
+  loadWishlist();
+  updateWishUI();
+  
+  // Mobile search button visibility
+  const mobSearchBtn = document.getElementById('mobSearchBtn');
+  if (mobSearchBtn && window.innerWidth <= 1100) {
+    mobSearchBtn.style.display = 'flex';
+  }
+  
+  // Chat welcome message
+  setTimeout(() => {
+    const badge = document.getElementById('chatBadge');
+    if (badge) badge.style.display = 'flex';
+  }, 4000);
+  
+  setTimeout(() => {
+    addBotMsg("👋 Hey! Welcome to Scripted Surprise. How can I help you today?");
+  }, 500);
+  
+  // Show skeletons while loading
+  showSkeletons(6);
+  
+  // Fetch templates
+  try {
+    const response = await fetch('templates.json?v=' + Date.now());
+    if (response.ok) {
+      products = await response.json();
+    }
+  } catch (e) {
+    console.warn('templates.json fetch failed, using empty array', e);
+    products = [];
+  }
+  
+  buildCategories();
+  renderCats();
+  renderGrid();
+  
+  // Update stats
+  const statCount = document.getElementById('statCount');
+  if (statCount) {
+    statCount.textContent = products.length + '+';
+  }
+  
+  const statCats = document.getElementById('statCats');
+  if (statCats) {
+    const uniqueCats = categories.filter(c => c.id !== 'all' && c.count > 0).length;
+    statCats.textContent = uniqueCats;
+  }
+  
+  // Event listeners
+  window.addEventListener('resize', () => {
+    const btn = document.getElementById('mobSearchBtn');
+    if (btn) {
+      btn.style.display = window.innerWidth <= 1100 ? 'flex' : 'none';
+    }
+    handleThumbResize();
+  });
+  
+  document.addEventListener('keydown', handleKeydown);
+  
+  const modal = document.getElementById('previewModal');
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closePreview();
+  });
+}
+
+// Start the app
+document.addEventListener('DOMContentLoaded', initialize);
 </script>
 </body>
 </html>
