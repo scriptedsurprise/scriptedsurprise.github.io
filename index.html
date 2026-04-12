@@ -34,15 +34,17 @@ a{color:inherit;text-decoration:none;}
 button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 16px;}
 
+/* Bottleneck Fix: Removed CSS filter blurs, used radial-gradients instead for huge performance gain */
 .bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.bg-orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.035;animation:orbDrift 30s ease-in-out infinite;}
-.bg-orb:nth-child(1){width:600px;height:600px;background:#c9973a;top:-200px;left:-100px;}
-.bg-orb:nth-child(2){width:500px;height:500px;background:#7c3aed;top:40%;right:-100px;animation-delay:-10s;}
-.bg-orb:nth-child(3){width:400px;height:400px;background:#2563eb;bottom:-100px;left:40%;animation-delay:-20s;}
+.bg-orb{position:absolute;border-radius:50%;opacity:0.6;animation:orbDrift 30s ease-in-out infinite;}
+.bg-orb:nth-child(1){width:600px;height:600px;background:radial-gradient(circle, rgba(201,151,58,0.12) 0%, transparent 70%);top:-200px;left:-100px;}
+.bg-orb:nth-child(2){width:500px;height:500px;background:radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);top:40%;right:-100px;animation-delay:-10s;}
+.bg-orb:nth-child(3){width:400px;height:400px;background:radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);bottom:-100px;left:40%;animation-delay:-20s;}
 @keyframes orbDrift{0%,100%{transform:translate(0,0);}33%{transform:translate(30px,-30px);}66%{transform:translate(-20px,20px);}}
 
-.header{position:fixed;top:0;left:0;width:100%;height:var(--hdr);z-index:1000;background:rgba(5,5,10,0.85);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--border-0);transition:all .3s ease;}
-.header.scrolled{background:rgba(5,5,10,0.97);box-shadow:0 2px 20px rgba(0,0,0,.5);}
+/* Bottleneck Fix: Removed backdrop-filter to prevent iframe tearing */
+.header{position:fixed;top:0;left:0;width:100%;height:var(--hdr);z-index:1000;background:rgba(5,5,10,0.95);border-bottom:1px solid var(--border-0);transition:all .3s ease;}
+.header.scrolled{background:rgba(5,5,10,0.99);box-shadow:0 2px 20px rgba(0,0,0,.6);}
 .hdr-inner{max-width:var(--max);margin:0 auto;padding:0 16px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;}
 .logo{display:flex;align-items:center;gap:9px;flex-shrink:0;}
 .logo-icon{width:32px;height:32px;background:var(--gold-grad);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(201,151,58,.3);}
@@ -143,14 +145,18 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 .card:hover{transform:translateY(-3px) translateZ(0);border-color:var(--border-gold);box-shadow:var(--shadow-md);}
 .card:active{transform:scale(.98) translateZ(0);}
 
-/* FIXED THUMBNAIL (No constant animation for performance) */
+/* RESTORED: Auto-Scroll Animation optimized */
 .card-img{position:relative;overflow:hidden;background:var(--bg-2);aspect-ratio:9/14;}
 .card-thumb-wrap{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
-.card-thumb-wrap iframe{width:375px;height:812px;border:none;transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none;}
+.card-thumb-wrap iframe{width:375px;height:812px;border:none;transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none;will-change:transform;}
 .card-thumb-shimmer{position:absolute;inset:0;background:linear-gradient(90deg,var(--bg-2) 25%,var(--bg-3) 50%,var(--bg-2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;z-index:1;transition:opacity .6s ease;}
 .card-thumb-shimmer.loaded{opacity:0;pointer-events:none;}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .card-thumb-fade{position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,var(--bg-card),transparent);z-index:2;pointer-events:none;}
+@keyframes thumbScroll{
+  0%,100%{transform:scale(var(--ts,0.27)) translateY(0px);}
+  40%,60%{transform:scale(var(--ts,0.27)) translateY(-220px);}
+}
 
 .tier{position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:100px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;backdrop-filter:blur(8px);z-index:3;}
 .tier-basic{background:rgba(91,156,246,.2);color:#5b9cf6;border:1px solid rgba(91,156,246,.3);}
@@ -188,7 +194,7 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 .empty-state svg{width:48px;height:48px;opacity:.2;}
 .empty-state p{font-size:14px;color:var(--txt-3);}
 
-/* PREVIEW MODAL - Re-architected to avoid scroll lag and glitches */
+/* PREVIEW MODAL */
 .modal-bg{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.9);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s;}
 .modal-bg.open{opacity:1;visibility:visible;}
 .modal-bg.open .modal-box{transform:scale(1) translateY(0);opacity:1;}
@@ -200,7 +206,6 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 .phone-frame{width:280px;height:560px;background:var(--bg-0);border:2px solid rgba(255,255,255,.1);border-radius:36px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.7);display:flex;flex-direction:column;}
 .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:22px;z-index:10;background:var(--bg-0);border-radius:0 0 14px 14px;display:flex;align-items:center;justify-content:center;gap:4px;pointer-events:none;}
 .cam{width:8px;height:8px;border-radius:50%;background:var(--bg-2);border:1px solid var(--border-0);}
-/* Iframe handles scroll internally, fixes layout thrashing */
 .phone-screen{flex:1;width:100%;position:relative;z-index:1;overflow:hidden;border-radius:34px;background:var(--bg-0);}
 .phone-screen iframe{width:100%;height:100%;border:none;display:block;}
 .phone-ctrls{display:flex;gap:8px;margin-top:14px;}
@@ -240,7 +245,7 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 .social-proof{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--txt-3);justify-content:center;margin-top:8px;}
 .social-proof-dot{width:5px;height:5px;border-radius:50%;background:#4ade80;animation:blink 2s infinite;}
 
-/* FULLSCREEN -- top-level overlay, avoids stacking context bugs */
+/* FULLSCREEN */
 #fsOverlay{position:fixed;inset:0;z-index:9999;background:#000;display:none;flex-direction:column;}
 #fsOverlay.open{display:flex;}
 #fsCloseBtn{position:absolute;top:16px;right:16px;z-index:10000;width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;}
@@ -289,7 +294,7 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
 .custom-feat svg{width:15px;height:15px;color:var(--gold);}
 .custom-pricing{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;background:var(--gold-glow);border:1px solid var(--border-gold);font-size:12px;color:var(--txt-gold);font-weight:500;margin-bottom:20px;}
 
-/* CHAT -- stable z above filter drawer, no jitter */
+/* CHAT */
 .chat-fab{position:fixed;bottom:20px;right:20px;z-index:1600;width:52px;height:52px;border-radius:50%;background:var(--gold-grad);color:var(--bg-0);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(201,151,58,.45);transition:all .3s;cursor:pointer;}
 .chat-fab:hover{transform:scale(1.1);}
 .chat-fab svg{width:22px;height:22px;}
@@ -531,7 +536,7 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;}
   </div>
 </div>
 
-<!-- Preview Modal -->
+<!-- Preview Modal - Fixed injection flash & animation stutter -->
 <div class="modal-bg" id="previewModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closePreview()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
@@ -646,7 +651,7 @@ let curProd=null,chatOpen=false,mobMenuOpen=false,sortIdx=0;
 let dTier='all',dSort='popular',dMaxP=700;
 let searchT=null, previewTimeout=null;
 
-// Intersection Observer for smooth, lag-free scroll animations
+// Intersection Observer for scroll fade-ins
 const fadeObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if(entry.isIntersecting) {
@@ -656,18 +661,52 @@ const fadeObserver = new IntersectionObserver((entries, observer) => {
   });
 }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
 
+// MOBILE FIX: Iframe Memory Manager. Only keeps iframes inside viewport loaded. 
+// Prevents GPU crashing and "black boxes" on iOS and Android.
+if(window.iframeObserver) window.iframeObserver.disconnect();
+window.iframeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const wrap = entry.target;
+    const iframe = wrap.querySelector('iframe');
+    const shimmer = wrap.querySelector('.card-thumb-shimmer');
+    if (!iframe) return;
+
+    if (entry.isIntersecting) {
+      // In view: load original template source
+      const src = iframe.getAttribute('data-src');
+      if (iframe.src !== src && !iframe.src.includes(src)) {
+        iframe.src = src;
+      }
+    } else {
+      // Out of view: Unload immediately to free GPU memory
+      if (iframe.src !== 'about:blank' && !iframe.src.endsWith('about:blank')) {
+        iframe.src = 'about:blank';
+        if (shimmer) shimmer.classList.remove('loaded');
+      }
+    }
+  });
+}, { rootMargin: '120% 0px 120% 0px' }); // Load iframes roughly 1 screen away
+
 // ── Category helpers
 function nc(c){return(c||'uncategorized').toLowerCase().trim();}
 function catName(c){return(CAT_META[nc(c)]||{n:nc(c)}).n;}
 function catIcon(c){return(CAT_META[nc(c)]||{i:'✦'}).i;}
 
-// ── Thumbnail scale -- Static scaling fixes GPU rendering crash
+// ── Thumbnail scale -- syncs scale and animation
 function setThumbScale(iframe){
   const wrap=iframe.closest('.card-img');
   if(!wrap||!wrap.offsetWidth)return;
   const s=(wrap.offsetWidth/375).toFixed(4);
   iframe.style.setProperty('--ts',s);
-  iframe.style.transform=`scale(${s})`;
+  
+  if (iframe.src !== 'about:blank' && !iframe.src.endsWith('about:blank')) {
+      iframe.style.animation = 'none';
+      iframe.offsetHeight; // trigger reflow
+      iframe.style.animation = 'thumbScroll 9s ease-in-out infinite';
+  } else {
+      iframe.style.animation = 'none';
+      iframe.style.transform=`scale(${s})`;
+  }
 }
 
 // ── Build & render categories
@@ -710,14 +749,16 @@ function renderGrid(){
   if(rc)rc.textContent=`${f.length} template${f.length!==1?'s':''}`;
   if(!f.length){g.innerHTML='<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><p>No templates found</p><button class="btn btn-ghost btn-sm" onclick="resetFilters()">Clear Filters</button></div>';return;}
   const isNew=d=>d&&(Date.now()-new Date(d))/86400000<=14;
+  
   g.innerHTML=f.map((p,i)=>{
     const iw=wishlist.has(p.id);
     const tc=(p.tier||'standard').toLowerCase();
+    // Injected iframe is about:blank natively, observer handles loading based on scroll
     return`<div class="card fade-in" style="transition-delay:${Math.min(i*.03, 0.3)}s" onclick="openPreview(${p.id})" role="button" tabindex="0">
 <div class="card-img">
-<div class="card-thumb-wrap">
+<div class="card-thumb-wrap" id="wrap-${p.id}">
 <div class="card-thumb-shimmer" id="shim${p.id}"></div>
-<iframe src="${p.url}" loading="lazy" onload="document.getElementById('shim${p.id}').classList.add('loaded');setThumbScale(this)" sandbox="allow-scripts allow-same-origin" scrolling="no" title="${p.name}"></iframe>
+<iframe data-src="${p.url}" src="about:blank" sandbox="allow-scripts allow-same-origin" scrolling="no" title="${p.name}" onload="if(this.src!=='about:blank' && !this.src.endsWith('about:blank')){document.getElementById('shim${p.id}').classList.add('loaded');setThumbScale(this);}"></iframe>
 </div>
 <div class="card-thumb-fade"></div>
 <span class="tier tier-${tc}">${p.tier||'Standard'}</span>
@@ -740,7 +781,7 @@ ${p.trending?'<span class="trending-badge">🔥</span>':(!p.trending&&isNew(p.ad
   
   setTimeout(()=>{
     document.querySelectorAll('.card.fade-in').forEach(el => fadeObserver.observe(el));
-    document.querySelectorAll('.card-thumb-wrap iframe').forEach(setThumbScale);
+    document.querySelectorAll('.card-thumb-wrap').forEach(wrap => window.iframeObserver.observe(wrap));
   },60);
 }
 
@@ -773,24 +814,24 @@ function openPreview(id){
   
   // Clean initialization
   const ps=document.getElementById('phoneScreen');
-  ps.innerHTML = '<div class="card-thumb-shimmer" style="width:100%;height:100%;"></div>';
+  ps.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;"><div class="t-dot" style="background:#5c596e;margin-right:4px;"></div><div class="t-dot" style="background:#5c596e;margin-right:4px;animation-delay:0.2s"></div><div class="t-dot" style="background:#5c596e;animation-delay:0.4s"></div></div>';
   document.getElementById('previewModal').classList.add('open');
   document.body.style.overflow='hidden';
   document.getElementById('viewerCount').textContent=3+(id*7+new Date().getHours())%24;
 
-  // Fixes erratic text animation: Defer iframe injection until slide-up animation is finished.
+  // Stutter Fix: Defer iframe injection until slide-up animation is finished.
   clearTimeout(previewTimeout);
   previewTimeout = setTimeout(() => {
     ps.innerHTML=p.url?`<iframe src="${p.url}?v=${Date.now()}" sandbox="allow-scripts allow-same-origin" title="${p.name}"></iframe>`:`<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:14px;padding:28px;text-align:center"><div style="font-size:48px">${catIcon(p.category)}</div><div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--txt-gold)">${p.name}</div></div>`;
-  }, 350); 
+  }, 400); 
 }
 
 function closePreview(){
   clearTimeout(previewTimeout);
   document.getElementById('previewModal').classList.remove('open');
   document.body.style.overflow='';
-  // Immediately clear iframe to prevent audio/video/animations continuing in background
-  document.getElementById('phoneScreen').innerHTML='';
+  // Wipe iframe completely to halt media/animations running in background
+  setTimeout(() => document.getElementById('phoneScreen').innerHTML='', 300);
 }
 
 // Fixed Scroll to control iframe instead of parent
@@ -927,5 +968,6 @@ document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
 </html>
+
 
 ```
