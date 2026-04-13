@@ -1,4 +1,3 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/>```html
 <meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -304,28 +303,6 @@
             gap: 2rem;
         }
 
-        .load-more-btn {
-            display: block;
-            margin: 3rem auto 0;
-            padding: 1rem 2.5rem;
-            background: transparent;
-            border: 2px solid var(--gold-primary);
-            color: var(--gold-primary);
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .load-more-btn:hover {
-            background: var(--gold-primary);
-            color: var(--black-primary);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Mobile: Two cards side by side */
         @media (max-width: 768px) {
             .templates-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -404,10 +381,19 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease, opacity 0.6s ease;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
         }
 
-        .template-card:hover .thumbnail-image {
+        .thumbnail-image.loaded {
+            opacity: 1;
+        }
+
+        .template-card:hover .thumbnail-image.loaded {
             transform: scale(1.05);
         }
 
@@ -420,6 +406,13 @@
             flex-direction: column;
             background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
             color: var(--gold-primary);
+            z-index: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .thumbnail-placeholder.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .thumbnail-placeholder .icon {
@@ -600,7 +593,6 @@
             color: var(--black-primary);
         }
 
-        /* Preview Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -735,7 +727,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* CHAT WIDGET STYLES */
         .chat-widget {
             position: fixed;
             bottom: 2rem;
@@ -875,6 +866,7 @@
             line-height: 1.5;
             position: relative;
             word-wrap: break-word;
+            white-space: pre-wrap;
         }
 
         .message.received {
@@ -929,6 +921,7 @@
             margin-bottom: 0.5rem;
             border-radius: 4px;
             opacity: 0.8;
+            white-space: pre-wrap;
         }
 
         .chat-input-area {
@@ -1048,7 +1041,6 @@
             transform: none;
         }
 
-        /* Recording indicator */
         .recording-indicator {
             display: none;
             align-items: center;
@@ -1078,7 +1070,6 @@
             50% { opacity: 0.3; }
         }
 
-        /* Typing indicator */
         .typing-indicator {
             display: none;
             align-items: center;
@@ -1110,6 +1101,31 @@
             30% { transform: translateY(-4px); }
         }
 
+        .notification-enable-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 50px;
+            color: var(--gold-primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            align-self: center;
+        }
+
+        .notification-enable-btn:hover {
+            background: rgba(212, 175, 55, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .notification-enable-btn:disabled {
+            transform: none;
+            opacity: 0.6;
+            cursor: default;
+        }
+
         .file-input {
             display: none;
         }
@@ -1125,41 +1141,12 @@
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
             border-radius: 16px;
-            height: 240px;
+            height: 400px;
         }
 
         @keyframes loading {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
-        }
-
-        /* Inline buttons for chat notification prompts */
-        .chat-btn-group {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .chat-btn-primary {
-            padding: 6px 16px;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: var(--black-primary);
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-
-        .chat-btn-secondary {
-            padding: 6px 16px;
-            background: transparent;
-            color: var(--gold-primary);
-            border: 1px solid var(--gold-primary);
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
         }
 
         footer {
@@ -1291,13 +1278,10 @@
             <h3>No templates found</h3>
         </div>
         <div class="error-state" id="errorState" style="display: none;">
-            <div class="error-icon">⚠</div>
+            <div class="error-icon">⚠ </div>
             <h3>Failed to load templates</h3>
             <button class="retry-btn" onclick="loadTemplates()">Retry</button>
         </div>
-        
-        <!-- Pagination Button -->
-        <button id="loadMoreBtn" class="load-more-btn" style="display: none;" onclick="loadMoreTemplates()">Load More Templates</button>
     </section>
 
     <footer>
@@ -1320,7 +1304,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 <span>Scripted Surprise</span>. All rights reserved.</p>
+            <p>&copy; 2026 <span>Scripted Surprise</span>. All rights reserved.</p>
         </div>
     </footer>
 
@@ -1408,73 +1392,31 @@
             telegramBotUsername: 'scriptedsurpise_bot'
         };
 
-        // State & Pagination
+        // State
         let allTemplates = [];
-        let currentFilteredTemplates = [];
         let currentCategory = 'all';
         let currentSort = 'newest';
         let currentSearch = '';
         let currentPreviewId = null;
         
-        let currentPage = 1;
-        const templatesPerPage = 10;
-        
-        // Chat Flow State
-        let chatUser = { id: '', name: '', email: '', interest: '' };
-        let botFlowState = 'init'; // init, asking_name, asking_email, asking_interest, asking_notification, completed
+        // Chat State
+        let chatUser = null;
+        let chatState = 'not_started'; // 'not_started', 'collecting_name', 'collecting_email', 'collecting_interest', 'completed'
         let messages = [];
         let replyingTo = null;
         let mediaRecorder = null;
         let audioChunks = [];
         let recordingStartTime = null;
         let recordingInterval = null;
+        let pendingPurchaseTemplateId = null;
         let pollingInterval = null;
+        let lastMessageId = 0;
         let notificationPermission = false;
 
         const categoryIcons = {
             wedding: "💍", birthday: "🎂", anniversary: "❤️", love: "🌹",
             baby: "👶", graduation: "🎓", engagement: "💎", congrats: "🏆",
-            farewell: "👋", festival: "🎆", uncategorized: "📁", all: "✦"
-        };
-
-        // Advanced Fallback Image Generator inside Canvas (100% Reliable without external API)
-        window.handleImageError = function(imgElement, title) {
-            imgElement.onerror = null; // Prevent infinite loop
-            
-            const canvas = document.createElement('canvas');
-            canvas.width = 600;
-            canvas.height = 400;
-            const ctx = canvas.getContext('2d');
-            
-            // Background gradient
-            const grad = ctx.createLinearGradient(0, 0, 600, 400);
-            grad.addColorStop(0, '#1A1A1A');
-            grad.addColorStop(1, '#0A0A0A');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, 600, 400);
-            
-            // Inner gold border
-            ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
-            ctx.lineWidth = 4;
-            ctx.strokeRect(20, 20, 560, 360);
-            
-            // Text rendering
-            ctx.fillStyle = '#D4AF37';
-            ctx.font = 'bold 36px "Playfair Display", serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            
-            // Truncate text nicely
-            let displayText = title || 'Template';
-            if (displayText.length > 25) displayText = displayText.substring(0, 25) + '...';
-            ctx.fillText(displayText, 300, 190);
-            
-            // Subtitle
-            ctx.font = '16px "Inter", sans-serif';
-            ctx.fillStyle = '#888888';
-            ctx.fillText('Live Preview Available', 300, 240);
-            
-            imgElement.src = canvas.toDataURL('image/jpeg', 0.8);
+            farewell: "👋", festival: "🎉", uncategorized: "📁", all: "✦"
         };
 
         // Initialize
@@ -1483,9 +1425,6 @@
             setupEventListeners();
             await loadTemplates();
             initChat();
-            if ('Notification' in window && Notification.permission === 'granted') {
-                notificationPermission = true;
-            }
         }
 
         function createParticles() {
@@ -1499,18 +1438,11 @@
             }
         }
 
-        async function requestNotificationPermission() {
-            if ('Notification' in window) {
-                const permission = await Notification.requestPermission();
-                notificationPermission = permission === 'granted';
-            }
-        }
-
         function showNotification(title, body) {
             if (notificationPermission && 'Notification' in window) {
                 new Notification(title, {
                     body: body,
-                    icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="50" cy="50" r="45" fill="%23D4AF37"/%3E%3Ctext x="50" y="65" font-size="40" text-anchor="middle" fill="%230A0A0A"%3E✦%3C/text%3E%3C/svg%3E'
+                    icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="50" cy="50" r="45" fill="%23D4AF37"/%3E%3Ctext x="50" y="65" font-size="40" text-anchor="middle" fill="%230A0A0A"%3E%E2%9C%A6%3C/text%3E%3C/svg%3E'
                 });
             }
         }
@@ -1529,7 +1461,7 @@
                 allTemplates = templates.map(t => ({
                     ...t,
                     previewUrl: `https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/${t.filename}`,
-                    thumbnailUrl: `https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/thumbnails/${t.filename.replace('.html', '.jpg')}`
+                    thumbnailUrl: `https://image.thum.io/get/width/600/crop/400/noanimate/https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/${t.filename}`
                 }));
 
                 renderCategories();
@@ -1596,41 +1528,23 @@
                 }
             });
 
-            // Reset pagination on new filter
-            currentPage = 1;
-            currentFilteredTemplates = filtered;
-            
-            renderPaginatedGrid(true); // true = reset grid
+            renderTemplates(filtered);
+            updateCounts(filtered.length, allTemplates.length);
         }
 
-        function loadMoreTemplates() {
-            currentPage++;
-            renderPaginatedGrid(false); // false = append to grid
-        }
-
-        function renderPaginatedGrid(reset = true) {
+        function renderTemplates(templates) {
             const grid = document.getElementById('templatesGrid');
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            
-            if (currentFilteredTemplates.length === 0) {
+            if (templates.length === 0) {
                 grid.innerHTML = '';
                 document.getElementById('emptyState').style.display = 'block';
-                loadMoreBtn.style.display = 'none';
-                updateCounts(0, 0);
                 return;
             }
             document.getElementById('emptyState').style.display = 'none';
 
-            // Calculate current slice
-            const startIndex = reset ? 0 : (currentPage - 1) * templatesPerPage;
-            const endIndex = currentPage * templatesPerPage;
-            const paginatedItems = currentFilteredTemplates.slice(startIndex, endIndex);
-
-            const html = paginatedItems.map(t => {
+            grid.innerHTML = templates.map(t => {
                 const price = t.price || 299;
                 const oldPrice = t.oldPrice || 449;
                 const discount = t.discount || `${Math.round((1 - price/oldPrice) * 100)}% OFF`;
-                const safeName = (t.name || 'Template').replace(/'/g, "\\'"); // escape for onerror func
                 
                 return `
                 <div class="template-card" data-id="${t.id}">
@@ -1638,16 +1552,16 @@
                         ${t.trending ? '<span class="card-badge trending">Trending</span>' : ''}
                         ${t.tier === 'Premium' ? '<span class="card-badge premium">Premium</span>' : ''}
                         
-                        <div class="thumbnail-placeholder">
+                        <div class="thumbnail-placeholder" id="placeholder-${t.id}">
                             <div class="icon">✦</div>
-                            <span>${t.category || 'Loading...'}</span>
+                            <span>${t.category || 'Template'}</span>
                         </div>
                         <img src="${t.thumbnailUrl}" 
                              alt="${t.name}" 
                              class="thumbnail-image" 
                              loading="lazy"
-                             onerror="handleImageError(this, '${safeName}')"
-                             onload="this.previousElementSibling.style.display='none'">
+                             onerror="this.style.display='none'"
+                             onload="document.getElementById('placeholder-${t.id}').classList.add('hidden'); this.classList.add('loaded');">
                         
                         <div class="thumbnail-overlay">
                             <button class="preview-btn" onclick="openPreview(${t.id})">
@@ -1678,23 +1592,6 @@
                     </div>
                 </div>`;
             }).join('');
-
-            if (reset) {
-                grid.innerHTML = html;
-            } else {
-                grid.insertAdjacentHTML('beforeend', html);
-            }
-
-            // Show/Hide Load More Button
-            if (currentFilteredTemplates.length > endIndex) {
-                loadMoreBtn.style.display = 'block';
-            } else {
-                loadMoreBtn.style.display = 'none';
-            }
-
-            // Update Counts
-            const currentlyShowing = Math.min(endIndex, currentFilteredTemplates.length);
-            updateCounts(currentlyShowing, currentFilteredTemplates.length);
         }
 
         function updateCounts(showing, total) {
@@ -1742,13 +1639,12 @@
             const t = allTemplates.find(x => x.id === id);
             if (!t) return;
             
-            if (botFlowState === 'completed') {
+            if (chatState === 'completed' && chatUser && chatUser.email) {
                 redirectToTelegramPurchase(t);
             } else {
-                toggleChat(true);
-                const input = document.getElementById('chatInput');
-                input.value = `I want to purchase template: ${t.name} (ID: #${t.id})`;
-                input.focus();
+                pendingPurchaseTemplateId = id;
+                closeModal();
+                toggleChat();
             }
         }
 
@@ -1764,9 +1660,20 @@
 
         function initChat() {
             const savedUser = localStorage.getItem('chatUser');
-            const savedState = localStorage.getItem('botFlowState');
-            if (savedUser) chatUser = JSON.parse(savedUser);
-            if (savedState) botFlowState = savedState;
+            const savedState = localStorage.getItem('chatState');
+
+            if (savedUser) {
+                chatUser = JSON.parse(savedUser);
+            }
+
+            if (savedState) {
+                chatState = savedState;
+            } else if (chatUser && chatUser.name && chatUser.email) {
+                chatState = 'completed';
+                localStorage.setItem('chatState', 'completed');
+            }
+
+            notificationPermission = 'Notification' in window && Notification.permission === 'granted';
             
             const input = document.getElementById('chatInput');
             input.addEventListener('input', function() {
@@ -1785,16 +1692,11 @@
             startPolling();
         }
 
-        function saveChatState() {
-            localStorage.setItem('chatUser', JSON.stringify(chatUser));
-            localStorage.setItem('botFlowState', botFlowState);
-        }
-
         function startPolling() {
             if (pollingInterval) clearInterval(pollingInterval);
             
             pollingInterval = setInterval(async () => {
-                if (chatUser && chatUser.id && botFlowState === 'completed') {
+                if (chatUser && chatUser.id) {
                     await checkForNewMessages();
                 }
             }, 3000);
@@ -1802,87 +1704,79 @@
 
         async function checkForNewMessages() {
             try {
-                // Fetch latest messages without offset to avoid stealing from other active clients
-                const url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/getUpdates`;
+                let url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/getUpdates`;
+                const params = [];
+                if (lastMessageId > 0) params.push(`offset=${lastMessageId + 1}`);
+                if (params.length) url += '?' + params.join('&');
+
                 const response = await fetch(url);
                 const data = await response.json();
                 
                 if (data.ok && data.result) {
-                    let processedIds = JSON.parse(localStorage.getItem('processedTelegramIds') || '[]');
-                    
                     for (const update of data.result) {
-                        // Check if it's a direct message reply from the admin
-                        if (update.message && update.message.text && update.message.reply_to_message) {
-                            const msgId = update.message.message_id;
+                        lastMessageId = Math.max(lastMessageId, update.update_id);
+                        
+                        if (update.message && update.message.reply_to_message) {
+                            const replyText = update.message.reply_to_message.text || '';
+                            const userIdMatch = replyText.match(/ID: ([A-Z0-9]+)/);
                             
-                            // Prevent duplicating processed messages locally
-                            if (!processedIds.includes(msgId)) {
-                                const replyText = update.message.reply_to_message.text || '';
-                                
-                                // robust regex for finding ID (matches markdown-stripped plain text)
-                                const userIdMatch = replyText.match(/ID:\s*([A-Za-z0-9]+)/i);
-                                
-                                if (userIdMatch && userIdMatch[1].toUpperCase() === chatUser.id.toUpperCase()) {
-                                    // It's a reply addressed to this user specifically!
-                                    simulateBotReply(update.message.text, 0); 
-                                    showNotification('New message from support', update.message.text.substring(0, 100));
-                                    document.getElementById('chatButton').classList.add('has-new');
+                            if (userIdMatch && userIdMatch[1] === chatUser.id) {
+                                const adminMessage = update.message.text || '';
+                                if (adminMessage) {
+                                    addMessage({
+                                        type: 'received',
+                                        text: adminMessage,
+                                        time: new Date(update.message.date * 1000),
+                                        isAdminReply: true
+                                    });
                                     
-                                    // Register message as processed globally in local storage
-                                    processedIds.push(msgId);
+                                    showNotification('New reply from admin', adminMessage.substring(0, 100));
+                                    document.getElementById('chatButton').classList.add('has-new');
+
+                                    const chatWindow = document.getElementById('chatWindow');
+                                    if (!chatWindow.classList.contains('active')) {
+                                        showNotification('Scripted Surprise', 'Admin replied to your message. Open chat to view.');
+                                    }
                                 }
                             }
                         }
                     }
-                    
-                    // Cleanup stored IDs to prevent localstorage bloat (keep last 100)
-                    if (processedIds.length > 100) processedIds = processedIds.slice(-100);
-                    localStorage.setItem('processedTelegramIds', JSON.stringify(processedIds));
                 }
             } catch (err) {
                 console.error('Polling error:', err);
             }
         }
 
-        function toggleChat(forceOpen = false) {
-            const window = document.getElementById('chatWindow');
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
             
-            if (!window.classList.contains('active') || forceOpen) {
-                window.classList.add('active');
+            if (!chatWindow.classList.contains('active')) {
+                chatWindow.classList.add('active');
                 document.getElementById('chatButton').classList.remove('has-new');
-                if (botFlowState === 'init') {
-                    startBotFlow();
+                
+                if (chatState === 'not_started') {
+                    chatState = 'collecting_name';
+                    localStorage.setItem('chatState', chatState);
+                    
+                    addMessage({
+                        type: 'received',
+                        text: "Hi! 👋 Welcome to Scripted Surprise.\n\nTo get started, could you please tell me your name?",
+                        time: new Date()
+                    });
+                    scrollToBottom();
                 }
-                scrollToBottom();
             } else {
-                window.classList.remove('active');
+                chatWindow.classList.remove('active');
             }
         }
 
-        async function startBotFlow() {
-            botFlowState = 'asking_name';
-            chatUser.id = 'SS' + Date.now().toString(36).toUpperCase();
-            saveChatState();
-            await simulateBotReply("Hi! Welcome to Scripted Surprise ✦. I'm the bot assistant. Could you please tell me your name?", 1000);
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').classList.add('active');
+            scrollToBottom();
         }
 
-        async function simulateBotReply(text, delay = 1000, isHtml = false) {
-            if (delay > 0) {
-                document.getElementById('typingIndicator').classList.add('active');
-                document.getElementById('chatMessages').appendChild(document.getElementById('typingIndicator'));
-                scrollToBottom();
-                await new Promise(r => setTimeout(r, delay));
-                document.getElementById('typingIndicator').classList.remove('active');
-            }
-            
-            const msg = {
-                type: 'received',
-                text: !isHtml ? text : undefined,
-                htmlContent: isHtml ? text : undefined,
-                isHtml: isHtml,
-                time: new Date()
-            };
-            addMessage(msg);
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').classList.remove('active');
         }
 
         function loadChatHistory() {
@@ -1890,6 +1784,10 @@
             if (history) {
                 messages = JSON.parse(history);
                 renderMessages();
+            }
+
+            if (chatState === 'completed' && !notificationPermission && 'Notification' in window && Notification.permission !== 'denied') {
+                addNotificationButton();
             }
         }
 
@@ -1908,8 +1806,6 @@
             const container = document.getElementById('chatMessages');
             container.innerHTML = '';
             messages.forEach(m => renderMessage(m));
-            // Keep typing indicator at the bottom
-            container.appendChild(document.getElementById('typingIndicator'));
         }
 
         function renderMessage(msg) {
@@ -1923,9 +1819,7 @@
                 content += `<div class="reply-to">${escapeHtml(msg.replyTo.text)}</div>`;
             }
             
-            if (msg.isHtml && msg.htmlContent) {
-                content += msg.htmlContent;
-            } else if (msg.text) {
+            if (msg.text) {
                 content += escapeHtml(msg.text);
             }
             
@@ -1945,8 +1839,7 @@
             content += `<span class="message-time">${time}</span>`;
             
             div.innerHTML = content;
-            // Insert before typing indicator
-            container.insertBefore(div, document.getElementById('typingIndicator'));
+            container.appendChild(div);
         }
 
         function escapeHtml(text) {
@@ -1967,17 +1860,6 @@
             document.getElementById('replyIndicator').classList.remove('active');
         }
 
-        async function requestNotificationFromChat(agreed) {
-            if (agreed) {
-                await requestNotificationPermission();
-                await simulateBotReply("Thanks! We'll notify you via your browser when the admin replies. Have a great day!", 800);
-            } else {
-                await simulateBotReply("No problem! We'll just email you when we reply. Have a great day!", 800);
-            }
-            botFlowState = 'completed';
-            saveChatState();
-        }
-
         async function sendMessage() {
             const input = document.getElementById('chatInput');
             const text = input.value.trim();
@@ -1995,71 +1877,187 @@
             input.value = '';
             input.style.height = 'auto';
             cancelReply();
-
-            // Bot flow state machine logic
-            if (botFlowState === 'asking_name') {
-                chatUser.name = text;
-                botFlowState = 'asking_email';
-                saveChatState();
-                await simulateBotReply(`Nice to meet you, ${chatUser.name}! What's your email address? (We'll contact you through email if our admin doesn't connect through the bot itself)`);
-                return;
-            } else if (botFlowState === 'asking_email') {
-                if (!text.includes('@') || !text.includes('.')) {
-                    await simulateBotReply("That doesn't look like a valid email. Could you please provide your email address?");
-                    return;
-                }
-                chatUser.email = text;
-                botFlowState = 'asking_interest';
-                saveChatState();
-                await simulateBotReply("Great! Lastly, what are you interested in? (Are you looking for a specific template, or do you have custom requirements?)");
-                return;
-            } else if (botFlowState === 'asking_interest') {
-                chatUser.interest = text;
-                botFlowState = 'asking_notification';
-                saveChatState();
-                
-                // Send Lead info
-                await sendToTelegram(`🆕 *New Lead Collected*\n\n*ID:* ${chatUser.id}\n*Name:* ${chatUser.name}\n*Email:* ${chatUser.email}\n*Interest:* ${chatUser.interest}`);
-                
-                await simulateBotReply("Thank you! All your necessary information has been sent to the admin and you will be contacted soon.", 1500);
-
-                if ('Notification' in window && Notification.permission !== 'granted' && Notification.permission !== 'denied') {
-                    const htmlContent = `
-                        <p style="margin-bottom:8px;">Would you like to enable push notifications so you are notified using browser notification when the admin replies?</p>
-                        <div class="chat-btn-group">
-                            <button class="chat-btn-primary" onclick="requestNotificationFromChat(true)">Yes, Notify Me</button>
-                            <button class="chat-btn-secondary" onclick="requestNotificationFromChat(false)">No Thanks</button>
-                        </div>
-                    `;
-                    await simulateBotReply(htmlContent, 1000, true);
-                } else {
-                    botFlowState = 'completed';
-                    saveChatState();
-                }
-                return;
-            }
             
-            // Standard forwarding once flow is complete
-            if (botFlowState === 'completed' || botFlowState === 'asking_notification') {
-                let telegramText = `💬 *Message from ${chatUser.name || 'User'}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}\n${text}`;
-                if (replyingTo) telegramText += `\n\n_Reply to: ${replyingTo.text}_`;
-                await sendToTelegram(telegramText);
+            await handleChatInput(text);
+        }
+
+        async function handleChatInput(text) {
+            switch (chatState) {
+                case 'collecting_name': {
+                    if (!chatUser) {
+                        chatUser = {
+                            id: 'SS' + Date.now().toString(36).toUpperCase(),
+                            registeredAt: new Date().toISOString()
+                        };
+                    }
+                    chatUser.name = text;
+                    localStorage.setItem('chatUser', JSON.stringify(chatUser));
+
+                    chatState = 'collecting_email';
+                    localStorage.setItem('chatState', chatState);
+
+                    showTypingIndicator();
+                    setTimeout(() => {
+                        hideTypingIndicator();
+                        addMessage({
+                            type: 'received',
+                            text: `Nice to meet you, ${text}! 📧\n\nWhat's your email address? Our team will use this to contact you.`,
+                            time: new Date()
+                        });
+                    }, 800);
+                    break;
+                }
+
+                case 'collecting_email': {
+                    if (!text.includes('@') || !text.includes('.')) {
+                        showTypingIndicator();
+                        setTimeout(() => {
+                            hideTypingIndicator();
+                            addMessage({
+                                type: 'received',
+                                text: "That doesn't look like a valid email address. Could you please provide a correct one?",
+                                time: new Date()
+                            });
+                        }, 500);
+                        return;
+                    }
+
+                    chatUser.email = text;
+                    localStorage.setItem('chatUser', JSON.stringify(chatUser));
+
+                    chatState = 'collecting_interest';
+                    localStorage.setItem('chatState', chatState);
+
+                    showTypingIndicator();
+                    setTimeout(() => {
+                        hideTypingIndicator();
+                        addMessage({
+                            type: 'received',
+                            text: "Got it! 🎯\n\nNow, could you tell us what you're looking for? Are you interested in a specific template category (wedding, birthday, anniversary, etc.), a custom design, or something else?\n\nPlease share your requirements below.",
+                            time: new Date()
+                        });
+                    }, 800);
+                    break;
+                }
+
+                case 'collecting_interest': {
+                    chatUser.interest = text;
+                    localStorage.setItem('chatUser', JSON.stringify(chatUser));
+
+                    chatState = 'completed';
+                    localStorage.setItem('chatState', chatState);
+
+                    await sendToTelegram(
+                        `🆕 *New Lead -- Scripted Surprise*\n\n` +
+                        `*Name:* ${chatUser.name}\n` +
+                        `*ID:* ${chatUser.id}\n` +
+                        `*Email:* ${chatUser.email}\n` +
+                        `*Interest/Requirements:* ${text}\n` +
+                        `*Time:* ${new Date().toLocaleString()}`
+                    );
+
+                    showTypingIndicator();
+                    setTimeout(() => {
+                        hideTypingIndicator();
+
+                        addMessage({
+                            type: 'received',
+                            text: `✅ Thank you, ${chatUser.name}! All your information has been sent to our admin.\n\n` +
+                                  `📧 You will be contacted soon via email at ${chatUser.email}. If the admin doesn't connect through this chat directly, our team will still reach out to you through email.\n\n` +
+                                  `If the admin responds through this chat, you'll be notified here as well.\n\n` +
+                                  `You can also reach us directly on Telegram: @${CONFIG.telegramBotUsername}`,
+                            time: new Date()
+                        });
+
+                        addNotificationButton();
+                        scrollToBottom();
+
+                        if (pendingPurchaseTemplateId) {
+                            const t = allTemplates.find(x => x.id === pendingPurchaseTemplateId);
+                            if (t) {
+                                setTimeout(() => {
+                                    addMessage({
+                                        type: 'received',
+                                        text: `Redirecting you to complete your purchase for "${t.name}"...`,
+                                        time: new Date()
+                                    });
+                                    setTimeout(() => redirectToTelegramPurchase(t), 1200);
+                                }, 1500);
+                            }
+                            pendingPurchaseTemplateId = null;
+                        }
+                    }, 1000);
+                    break;
+                }
+
+                case 'completed': {
+                    await sendToTelegram(
+                        `💬 *Follow-up from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Email:* ${chatUser.email}\n\n${text}`
+                    );
+                    break;
+                }
             }
+        }
+
+        function addNotificationButton() {
+            const container = document.getElementById('chatMessages');
+            
+            const existing = container.querySelector('.notification-enable-btn');
+            if (existing) return;
+
+            const wrapper = document.createElement('div');
+            wrapper.style.padding = '0.5rem 0';
+            wrapper.style.textAlign = 'center';
+            wrapper.style.alignSelf = 'center';
+
+            const btn = document.createElement('button');
+            btn.className = 'notification-enable-btn';
+            btn.innerHTML = '🔔 Enable Push Notifications';
+            btn.onclick = async () => {
+                if ('Notification' in window) {
+                    const permission = await Notification.requestPermission();
+                    if (permission === 'granted') {
+                        notificationPermission = true;
+                        btn.innerHTML = '✅ Notifications Enabled';
+                        btn.disabled = true;
+
+                        addMessage({
+                            type: 'received',
+                            text: "🔔 Push notifications are now enabled! You'll be notified right away when the admin replies to you here.",
+                            time: new Date()
+                        });
+                    } else {
+                        btn.innerHTML = '❌ Notifications Blocked';
+                        btn.disabled = true;
+                    }
+                }
+            };
+
+            wrapper.appendChild(btn);
+            container.appendChild(wrapper);
         }
 
         async function handleFileSelect(event, type) {
             const file = event.target.files[0];
             if (!file) return;
 
-            if (botFlowState !== 'completed' && botFlowState !== 'asking_notification') {
-                await simulateBotReply("Please answer the current question first before sending files.", 500);
+            if (chatState !== 'completed') {
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    addMessage({
+                        type: 'received',
+                        text: "Please complete the quick info steps first (name, email, requirements) before sending files. 📝",
+                        time: new Date()
+                    });
+                }, 400);
                 event.target.value = '';
                 return;
             }
-            
+
             const formData = new FormData();
             formData.append('chat_id', CONFIG.telegramAdminChatId);
-            formData.append('caption', `📎 *File from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}*File:* ${file.name}\n*Size:* ${(file.size / 1024).toFixed(1)} KB`);
+            formData.append('caption', `📎 *File from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Email:* ${chatUser.email}\n*File:* ${file.name}\n*Size:* ${(file.size / 1024).toFixed(1)} KB`);
             formData.append('parse_mode', 'Markdown');
             
             if (type === 'media') {
@@ -2114,11 +2112,8 @@
             }
         }
 
-        // Audio Recording
         async function startRecording() {
-            if (botFlowState !== 'completed' && botFlowState !== 'asking_notification') {
-                return; 
-            }
+            if (chatState !== 'completed') return;
 
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -2143,7 +2138,7 @@
                     const formData = new FormData();
                     formData.append('chat_id', CONFIG.telegramAdminChatId);
                     formData.append('voice', audioBlob, 'voice.webm');
-                    formData.append('caption', `🎤 *Voice message from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}*Duration:* ${document.getElementById('recordingTime').textContent}`);
+                    formData.append('caption', `🎤 *Voice from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Email:* ${chatUser.email}\n*Duration:* ${document.getElementById('recordingTime').textContent}`);
                     formData.append('parse_mode', 'Markdown');
                     
                     await fetch(`https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendVoice`, {
@@ -2168,7 +2163,6 @@
                 
             } catch (err) {
                 console.error('Recording failed:', err);
-                alert('Could not access microphone');
             }
         }
 
@@ -2190,6 +2184,7 @@
 
         async function sendToTelegram(text) {
             const url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendMessage`;
+            
             try {
                 await fetch(url, {
                     method: 'POST',
@@ -2205,7 +2200,6 @@
             }
         }
 
-        // Setup event listeners
         function setupEventListeners() {
             document.getElementById('searchInput').addEventListener('input', (e) => {
                 currentSearch = e.target.value;
@@ -2231,11 +2225,7 @@
             });
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
-
-
-```
