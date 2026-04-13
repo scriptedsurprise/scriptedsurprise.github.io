@@ -304,6 +304,27 @@
             gap: 2rem;
         }
 
+        .load-more-btn {
+            display: block;
+            margin: 3rem auto 0;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 2px solid var(--gold-primary);
+            color: var(--gold-primary);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            background: var(--gold-primary);
+            color: var(--black-primary);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+
         /* Mobile: Two cards side by side */
         @media (max-width: 768px) {
             .templates-grid {
@@ -1104,7 +1125,7 @@
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
             border-radius: 16px;
-            height: 400px;
+            height: 240px;
         }
 
         @keyframes loading {
@@ -1274,6 +1295,9 @@
             <h3>Failed to load templates</h3>
             <button class="retry-btn" onclick="loadTemplates()">Retry</button>
         </div>
+        
+        <!-- Pagination Button -->
+        <button id="loadMoreBtn" class="load-more-btn" style="display: none;" onclick="loadMoreTemplates()">Load More Templates</button>
     </section>
 
     <footer>
@@ -1384,12 +1408,16 @@
             telegramBotUsername: 'scriptedsurpise_bot'
         };
 
-        // State
+        // State & Pagination
         let allTemplates = [];
+        let currentFilteredTemplates = [];
         let currentCategory = 'all';
         let currentSort = 'newest';
         let currentSearch = '';
         let currentPreviewId = null;
+        
+        let currentPage = 1;
+        const templatesPerPage = 10;
         
         // Chat Flow State
         let chatUser = { id: '', name: '', email: '', interest: '' };
@@ -1401,13 +1429,52 @@
         let recordingStartTime = null;
         let recordingInterval = null;
         let pollingInterval = null;
-        let lastMessageId = 0;
         let notificationPermission = false;
 
         const categoryIcons = {
             wedding: "💍", birthday: "🎂", anniversary: "❤️", love: "🌹",
             baby: "👶", graduation: "🎓", engagement: "💎", congrats: "🏆",
             farewell: "👋", festival: "🎆", uncategorized: "📁", all: "✦"
+        };
+
+        // Advanced Fallback Image Generator inside Canvas (100% Reliable without external API)
+        window.handleImageError = function(imgElement, title) {
+            imgElement.onerror = null; // Prevent infinite loop
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 400;
+            const ctx = canvas.getContext('2d');
+            
+            // Background gradient
+            const grad = ctx.createLinearGradient(0, 0, 600, 400);
+            grad.addColorStop(0, '#1A1A1A');
+            grad.addColorStop(1, '#0A0A0A');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 600, 400);
+            
+            // Inner gold border
+            ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(20, 20, 560, 360);
+            
+            // Text rendering
+            ctx.fillStyle = '#D4AF37';
+            ctx.font = 'bold 36px "Playfair Display", serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Truncate text nicely
+            let displayText = title || 'Template';
+            if (displayText.length > 25) displayText = displayText.substring(0, 25) + '...';
+            ctx.fillText(displayText, 300, 190);
+            
+            // Subtitle
+            ctx.font = '16px "Inter", sans-serif';
+            ctx.fillStyle = '#888888';
+            ctx.fillText('Live Preview Available', 300, 240);
+            
+            imgElement.src = canvas.toDataURL('image/jpeg', 0.8);
         };
 
         // Initialize
@@ -1529,24 +1596,41 @@
                 }
             });
 
-            renderTemplates(filtered);
-            updateCounts(filtered.length, allTemplates.length);
+            // Reset pagination on new filter
+            currentPage = 1;
+            currentFilteredTemplates = filtered;
+            
+            renderPaginatedGrid(true); // true = reset grid
         }
 
-        function renderTemplates(templates) {
+        function loadMoreTemplates() {
+            currentPage++;
+            renderPaginatedGrid(false); // false = append to grid
+        }
+
+        function renderPaginatedGrid(reset = true) {
             const grid = document.getElementById('templatesGrid');
-            if (templates.length === 0) {
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            
+            if (currentFilteredTemplates.length === 0) {
                 grid.innerHTML = '';
                 document.getElementById('emptyState').style.display = 'block';
+                loadMoreBtn.style.display = 'none';
+                updateCounts(0, 0);
                 return;
             }
             document.getElementById('emptyState').style.display = 'none';
 
-            grid.innerHTML = templates.map(t => {
+            // Calculate current slice
+            const startIndex = reset ? 0 : (currentPage - 1) * templatesPerPage;
+            const endIndex = currentPage * templatesPerPage;
+            const paginatedItems = currentFilteredTemplates.slice(startIndex, endIndex);
+
+            const html = paginatedItems.map(t => {
                 const price = t.price || 299;
                 const oldPrice = t.oldPrice || 449;
                 const discount = t.discount || `${Math.round((1 - price/oldPrice) * 100)}% OFF`;
-                const fallbackImage = `https://placehold.co/600x400/1a1a1a/D4AF37?text=${encodeURIComponent(t.name || 'Template')}`;
+                const safeName = (t.name || 'Template').replace(/'/g, "\\'"); // escape for onerror func
                 
                 return `
                 <div class="template-card" data-id="${t.id}">
@@ -1556,13 +1640,13 @@
                         
                         <div class="thumbnail-placeholder">
                             <div class="icon">✦</div>
-                            <span>${t.category || 'Template'}</span>
+                            <span>${t.category || 'Loading...'}</span>
                         </div>
                         <img src="${t.thumbnailUrl}" 
                              alt="${t.name}" 
                              class="thumbnail-image" 
                              loading="lazy"
-                             onerror="this.onerror=null; this.src='${fallbackImage}';"
+                             onerror="handleImageError(this, '${safeName}')"
                              onload="this.previousElementSibling.style.display='none'">
                         
                         <div class="thumbnail-overlay">
@@ -1594,6 +1678,23 @@
                     </div>
                 </div>`;
             }).join('');
+
+            if (reset) {
+                grid.innerHTML = html;
+            } else {
+                grid.insertAdjacentHTML('beforeend', html);
+            }
+
+            // Show/Hide Load More Button
+            if (currentFilteredTemplates.length > endIndex) {
+                loadMoreBtn.style.display = 'block';
+            } else {
+                loadMoreBtn.style.display = 'none';
+            }
+
+            // Update Counts
+            const currentlyShowing = Math.min(endIndex, currentFilteredTemplates.length);
+            updateCounts(currentlyShowing, currentFilteredTemplates.length);
         }
 
         function updateCounts(showing, total) {
@@ -1701,30 +1802,42 @@
 
         async function checkForNewMessages() {
             try {
+                // Fetch latest messages without offset to avoid stealing from other active clients
                 const url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/getUpdates`;
                 const response = await fetch(url);
                 const data = await response.json();
                 
                 if (data.ok && data.result) {
+                    let processedIds = JSON.parse(localStorage.getItem('processedTelegramIds') || '[]');
+                    
                     for (const update of data.result) {
-                        if (update.update_id > lastMessageId) {
-                            lastMessageId = update.update_id;
+                        // Check if it's a direct message reply from the admin
+                        if (update.message && update.message.text && update.message.reply_to_message) {
+                            const msgId = update.message.message_id;
                             
-                            if (update.message && update.message.reply_to_message) {
+                            // Prevent duplicating processed messages locally
+                            if (!processedIds.includes(msgId)) {
                                 const replyText = update.message.reply_to_message.text || '';
-                                const userIdMatch = replyText.match(/ID: ([A-Z0-9]+)/);
                                 
-                                if (userIdMatch && userIdMatch[1] === chatUser.id) {
-                                    const adminMessage = update.message.text || '';
-                                    if (adminMessage) {
-                                        simulateBotReply(adminMessage, 0); // No typing delay for polled messages
-                                        showNotification('New message from support', adminMessage.substring(0, 100));
-                                        document.getElementById('chatButton').classList.add('has-new');
-                                    }
+                                // robust regex for finding ID (matches markdown-stripped plain text)
+                                const userIdMatch = replyText.match(/ID:\s*([A-Za-z0-9]+)/i);
+                                
+                                if (userIdMatch && userIdMatch[1].toUpperCase() === chatUser.id.toUpperCase()) {
+                                    // It's a reply addressed to this user specifically!
+                                    simulateBotReply(update.message.text, 0); 
+                                    showNotification('New message from support', update.message.text.substring(0, 100));
+                                    document.getElementById('chatButton').classList.add('has-new');
+                                    
+                                    // Register message as processed globally in local storage
+                                    processedIds.push(msgId);
                                 }
                             }
                         }
                     }
+                    
+                    // Cleanup stored IDs to prevent localstorage bloat (keep last 100)
+                    if (processedIds.length > 100) processedIds = processedIds.slice(-100);
+                    localStorage.setItem('processedTelegramIds', JSON.stringify(processedIds));
                 }
             } catch (err) {
                 console.error('Polling error:', err);
@@ -2004,7 +2117,7 @@
         // Audio Recording
         async function startRecording() {
             if (botFlowState !== 'completed' && botFlowState !== 'asking_notification') {
-                return; // Silently fail or you could alert the user here
+                return; 
             }
 
             try {
@@ -2123,5 +2236,6 @@
     </script>
 </body>
 </html>
+
 
 ```
