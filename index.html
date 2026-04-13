@@ -411,33 +411,6 @@
             50% { opacity: 1; transform: scale(1.1); }
         }
 
-        .thumbnail-image {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 10;
-        }
-
-        .thumb-static {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .thumb-static svg {
-            width: 100%;
-            height: 100%;
-        }
-
         .thumbnail-overlay {
             position: absolute;
             inset: 0;
@@ -452,34 +425,7 @@
             z-index: 20;
         }
 
-        .template-card:hover .thumbnail-image {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 10;
-        }
-
-        .thumb-static {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .thumb-static svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .thumbnail-overlay {
+        .template-card:hover .thumbnail-overlay {
             opacity: 1;
         }
 
@@ -1488,7 +1434,28 @@
     <input type="file" class="file-input" id="imageInput" accept="image/*,video/*" onchange="handleFileSelect(event, 'media')">
     <input type="file" class="file-input" id="fileInput" accept=".pdf,.doc,.docx,.txt,.zip" onchange="handleFileSelect(event, 'file')">
 
-<!-- info modal removed - now in-chat -->
+    <!-- Name/Email Collection Modal -->
+    <div class="info-modal-overlay" id="infoModal">
+        <div class="info-modal-container">
+            <h2 class="info-modal-title" id="infoModalTitle">Let's Get Started</h2>
+            <p class="info-modal-subtitle" id="infoModalSubtitle">I'm a bot assistant. Please share your details so our team can contact you.</p>
+            
+            <div class="form-group">
+                <label class="form-label">Your Name *</label>
+                <input type="text" class="form-input" id="userName" placeholder="Enter your name">
+            </div>
+            
+            <div class="form-group" id="emailGroup" style="display: none;">
+                <label class="form-label">Email Address *</label>
+                <input type="email" class="form-input" id="userEmail" placeholder="your@email.com">
+                <p class="form-hint" style="color: var(--gray-dark); font-size: 0.75rem; margin-top: 0.25rem;">We'll use this to contact you about your order</p>
+            </div>
+            
+            <div class="info-modal-buttons">
+                <button class="btn-primary" id="infoModalBtn" onclick="submitInfoModal()">Continue</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Configuration
@@ -1652,70 +1619,6 @@
             updateCounts(filtered.length, allTemplates.length);
         }
 
-        // ── THUMBNAIL GENERATOR ──
-        const THUMB_COLORS = {
-            wedding:'#D4AF37', birthday:'#a855f7', anniversary:'#ef4444',
-            love:'#f43f5e', baby:'#38bdf8', graduation:'#f59e0b',
-            engagement:'#D4AF37', congrats:'#4ade80', farewell:'#94a3b8',
-            festival:'#fb923c', uncategorized:'#D4AF37'
-        };
-        const THUMB_ICONS = {
-            wedding:'💍', birthday:'🎂', anniversary:'❤️', love:'🌹',
-            baby:'👶', graduation:'🎓', engagement:'💎', congrats:'🏆',
-            farewell:'👋', festival:'🎆', uncategorized:'✦'
-        };
-
-        function makeThumbSVG(t) {
-            const cat = (t.category||'uncategorized').toLowerCase();
-            const col = THUMB_COLORS[cat] || '#D4AF37';
-            const icon = THUMB_ICONS[cat] || '✦';
-            const name = (t.name||'Template').replace(/[<>&"]/g,'');
-            const tier = t.tier || 'Standard';
-            const price = t.price || 299;
-            // Create a rich mock-template card as SVG
-            return \`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 420" preserveAspectRatio="xMidYMid slice">
-                <defs>
-                    <linearGradient id="bg\${t.id}" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#0f0f14"/>
-                        <stop offset="100%" stop-color="#1a1a24"/>
-                    </linearGradient>
-                    <linearGradient id="glow\${t.id}" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="\${col}" stop-opacity="0.25"/>
-                        <stop offset="100%" stop-color="\${col}" stop-opacity="0.05"/>
-                    </linearGradient>
-                </defs>
-                <!-- Background -->
-                <rect width="320" height="420" fill="url(#bg\${t.id})"/>
-                <rect width="320" height="420" fill="url(#glow\${t.id})"/>
-                <!-- Top decorative bar -->
-                <rect width="320" height="3" fill="\${col}" opacity="0.8"/>
-                <!-- Center glow circle -->
-                <circle cx="160" cy="170" r="90" fill="\${col}" opacity="0.06"/>
-                <!-- Icon area -->
-                <rect x="100" y="100" width="120" height="120" rx="20" fill="\${col}" fill-opacity="0.12" stroke="\${col}" stroke-opacity="0.3" stroke-width="1"/>
-                <!-- Big icon -->
-                <text x="160" y="178" font-size="52" text-anchor="middle" dominant-baseline="middle">\${icon}</text>
-                <!-- Category tag -->
-                <rect x="110" y="240" width="100" height="22" rx="11" fill="\${col}" fill-opacity="0.18" stroke="\${col}" stroke-opacity="0.4" stroke-width="1"/>
-                <text x="160" y="255" fill="\${col}" font-size="9" text-anchor="middle" font-family="Inter,sans-serif" font-weight="600" letter-spacing="1.5">\${cat.toUpperCase()}</text>
-                <!-- Template name -->
-                <text x="160" y="290" fill="#ede9df" font-size="13" text-anchor="middle" font-family="Georgia,serif" font-weight="600" dominant-baseline="middle">
-                    \${name.length > 28 ? name.substring(0,26)+'…' : name}
-                </text>
-                <!-- Divider -->
-                <line x1="60" y1="310" x2="260" y2="310" stroke="\${col}" stroke-opacity="0.2" stroke-width="1"/>
-                <!-- Tier and price -->
-                <text x="80" y="335" fill="\${col}" font-size="10" font-family="Inter,sans-serif" font-weight="500" opacity="0.8">\${tier}</text>
-                <text x="240" y="335" fill="\${col}" font-size="14" text-anchor="end" font-family="Georgia,serif" font-weight="700">₹\${price}</text>
-                <!-- Bottom decorative dots -->
-                <circle cx="148" cy="370" r="2.5" fill="\${col}" opacity="0.4"/>
-                <circle cx="160" cy="370" r="2.5" fill="\${col}" opacity="0.7"/>
-                <circle cx="172" cy="370" r="2.5" fill="\${col}" opacity="0.4"/>
-                <!-- Shimmer line -->
-                <rect x="0" y="0" width="320" height="420" fill="none" stroke="\${col}" stroke-opacity="0.08" stroke-width="1" rx="0"/>
-            </svg>\`;
-        }
-
         function renderTemplates(templates) {
             const grid = document.getElementById('templatesGrid');
             if (templates.length === 0) {
@@ -1736,16 +1639,16 @@
                         ${t.trending ? '<span class="card-badge trending">Trending</span>' : ''}
                         ${t.tier === 'Premium' ? '<span class="card-badge premium">Premium</span>' : ''}
                         
-                        <div class="thumbnail-placeholder" style="display:none"></div>
+                        <div class="thumbnail-placeholder">
+                            <div class="icon">✦</div>
+                            <span>${t.category || 'Template'}</span>
+                        </div>
                         <img src="${t.thumbnailUrl}" 
                              alt="${t.name}" 
                              class="thumbnail-image" 
                              loading="lazy"
                              onerror="this.style.display='none'"
-                             onload="this.style.opacity='1'">
-                        <div class="thumb-static" style="display:flex">
-                            ${makeThumbSVG(t)}
-                        </div>
+                             onload="this.previousElementSibling.style.display='none'">
                         
                         <div class="thumbnail-overlay">
                             <button class="preview-btn" onclick="openPreview(${t.id})">
@@ -1822,22 +1725,16 @@
         function buyTemplate(id) {
             const t = allTemplates.find(x => x.id === id);
             if (!t) return;
+            
             pendingAction = 'buy';
             pendingTemplateId = id;
-            // Open chat to handle purchase inquiry
-            openChat();
-            // If user done with info, send purchase message into chat
-            if (chatDone && chatUser && chatUser.name) {
-                setTimeout(() => {
-                    const buyMsg = "I'd like to buy: " + t.name + " (#" + String(t.id).padStart(5,'0') + ") — ₹" + (t.price||299);
-                    addMessage({ type: 'sent', text: buyMsg, time: new Date() });
-                    sendToTelegram('🛒 *Purchase Request from ' + chatUser.name + '*\n*ID:* ' + chatUser.id + '\n*Email:* ' + (chatUser.email||'N/A') + '\n*Template:* ' + t.name + '\n*Template ID:* #' + String(t.id).padStart(5,'0') + '\n*Price:* ₹' + (t.price||299));
-                    setTimeout(() => {
-                        addBotMsg("🛒 Purchase request for <b>" + escapeHtml(t.name) + "</b> (₹" + (t.price||299) + ") has been sent to our team!
-
-You will receive payment instructions at <b>" + escapeHtml(chatUser.email||'') + "</b> shortly.");
-                    }, 600);
-                }, 300);
+            
+            if (!chatUser || !chatUser.name) {
+                showInfoModal('name');
+            } else if (!chatUser.email) {
+                showInfoModal('email');
+            } else {
+                redirectToTelegramPurchase(t);
             }
         }
 
@@ -1847,7 +1744,7 @@ You will receive payment instructions at <b>" + escapeHtml(chatUser.email||'') +
         }
 
         function buyCurrent() {
-            if (currentPreviewId) { closeModal(); buyTemplate(currentPreviewId); }
+            if (currentPreviewId) buyTemplate(currentPreviewId);
         }
 
         // Info Modal Functions
@@ -1923,42 +1820,37 @@ You will receive payment instructions at <b>" + escapeHtml(chatUser.email||'') +
         }
 
         // ==================== CHAT SYSTEM ====================
-        // Chat states for in-chat info collection
-        const CHAT_STATE = {
-            IDLE: 'idle',
-            COLLECTING_NAME: 'collecting_name',
-            COLLECTING_EMAIL: 'collecting_email',
-            COLLECTING_INTEREST: 'collecting_interest',
-            COLLECTING_CUSTOM: 'collecting_custom',
-            DONE: 'done'
-        };
-        let chatState = CHAT_STATE.IDLE;
-        let chatDone = false; // once info sent, stop responding with bot replies
 
         function initChat() {
             const savedUser = localStorage.getItem('chatUser');
             if (savedUser) {
-                try { chatUser = JSON.parse(savedUser); } catch(e) {}
+                chatUser = JSON.parse(savedUser);
             }
+            
             const input = document.getElementById('chatInput');
             input.addEventListener('input', function() {
                 this.style.height = 'auto';
                 this.style.height = Math.min(this.scrollHeight, 100) + 'px';
             });
+            
             input.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
                     sendMessage();
                 }
             });
+            
             loadChatHistory();
             startPolling();
         }
 
         function startPolling() {
             if (pollingInterval) clearInterval(pollingInterval);
+            
             pollingInterval = setInterval(async () => {
-                if (chatUser && chatUser.id) await checkForNewMessages();
+                if (chatUser && chatUser.id) {
+                    await checkForNewMessages();
+                }
             }, 3000);
         }
 
@@ -1967,23 +1859,26 @@ You will receive payment instructions at <b>" + escapeHtml(chatUser.email||'') +
                 const url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/getUpdates`;
                 const response = await fetch(url);
                 const data = await response.json();
+                
                 if (data.ok && data.result) {
                     for (const update of data.result) {
                         if (update.update_id > lastMessageId) {
                             lastMessageId = update.update_id;
+                            
                             if (update.message && update.message.reply_to_message) {
                                 const replyText = update.message.reply_to_message.text || '';
                                 const userIdMatch = replyText.match(/ID: ([A-Z0-9]+)/);
+                                
                                 if (userIdMatch && userIdMatch[1] === chatUser.id) {
                                     const adminMessage = update.message.text || '';
                                     if (adminMessage) {
-                                        // Show "Admin replied" label
                                         addMessage({
                                             type: 'received',
-                                            text: '✦ Admin: ' + adminMessage,
+                                            text: adminMessage,
                                             time: new Date(update.message.date * 1000)
                                         });
-                                        showNotification('New reply from Scripted Surprise', adminMessage.substring(0, 100));
+                                        
+                                        showNotification('New message from support', adminMessage.substring(0, 100));
                                         document.getElementById('chatButton').classList.add('has-new');
                                     }
                                 }
@@ -1991,84 +1886,67 @@ You will receive payment instructions at <b>" + escapeHtml(chatUser.email||'') +
                         }
                     }
                 }
-            } catch (err) {}
+            } catch (err) {
+                console.error('Polling error:', err);
+            }
         }
 
         function toggleChat() {
-            const win = document.getElementById('chatWindow');
-            if (!win.classList.contains('active')) {
-                win.classList.add('active');
+            const window = document.getElementById('chatWindow');
+            
+            if (!chatUser || !chatUser.name) {
+                pendingAction = 'chat';
+                showInfoModal('name');
+                return;
+            }
+            
+            if (!window.classList.contains('active')) {
+                window.classList.add('active');
                 document.getElementById('chatButton').classList.remove('has-new');
-                if (messages.length === 0) {
-                    startChatFlow();
-                }
                 scrollToBottom();
             } else {
-                win.classList.remove('active');
+                window.classList.remove('active');
             }
-        }
-
-        function openChat() {
-            const win = document.getElementById('chatWindow');
-            win.classList.add('active');
-            document.getElementById('chatButton').classList.remove('has-new');
-            if (messages.length === 0) startChatFlow();
-            scrollToBottom();
-        }
-
-        function startChatFlow() {
-            // If user already has info saved, skip collection
-            if (chatUser && chatUser.name && chatUser.email && chatDone) {
-                addBotMsg("Welcome back, " + chatUser.name + "! How can I help you today?");
-                return;
-            }
-            if (chatUser && chatUser.name && chatUser.email) {
-                addBotMsg("Welcome back, " + chatUser.name + "! 👋 Feel free to ask anything or leave a message for our team.");
-                chatState = CHAT_STATE.IDLE;
-                return;
-            }
-            // Fresh start - begin collection
-            setTimeout(() => {
-                addBotMsg("👋 Hello! Welcome to <b>Scripted Surprise</b>.
-
-I'm a bot assistant. To help you better, I'll ask a few quick questions. Our team will contact you personally.
-
-First — <b>what's your name?</b>");
-                chatState = CHAT_STATE.COLLECTING_NAME;
-            }, 400);
         }
 
         function openChatWithWelcome() {
-            openChat();
+            const window = document.getElementById('chatWindow');
+            window.classList.add('active');
+            
+            if (messages.length === 0) {
+                addMessage({
+                    type: 'received',
+                    text: `Welcome ${chatUser.name}! I'm a bot assistant. Our team will respond to you shortly. Feel free to send photos, videos, or files.`,
+                    time: new Date()
+                });
+                
+                sendToTelegram(`🆕 *New Chat Started*\n\n*ID:* ${chatUser.id}\n*Name:* ${chatUser.name}\n${chatUser.email ? `*Email:* ${chatUser.email}` : '*Email:* Not provided'}`);
+            }
+            
+            scrollToBottom();
         }
 
-        function showInfoModal(step) {
-            // Redirect to in-chat flow instead of modal
-            openChat();
+        function openChat() {
+            if (!chatUser || !chatUser.name) {
+                pendingAction = 'chat';
+                showInfoModal('name');
+                return;
+            }
+            
+            document.getElementById('chatWindow').classList.add('active');
+            scrollToBottom();
         }
-
-        function hideInfoModal() {}
-        function submitInfoModal() {}
 
         function loadChatHistory() {
             const history = localStorage.getItem('chatHistory');
             if (history) {
-                try {
-                    messages = JSON.parse(history);
-                    renderMessages();
-                    // Restore chat state
-                    const savedState = localStorage.getItem('chatState');
-                    if (savedState === 'done') chatDone = true;
-                } catch(e) {}
+                messages = JSON.parse(history);
+                renderMessages();
             }
         }
 
         function saveChatHistory() {
-            localStorage.setItem('chatHistory', JSON.stringify(messages.slice(-50)));
-        }
-
-        function addBotMsg(text) {
-            addMessage({ type: 'received', text: text, time: new Date() });
+            localStorage.setItem('chatHistory', JSON.stringify(messages));
         }
 
         function addMessage(msg) {
@@ -2087,51 +1965,47 @@ First — <b>what's your name?</b>");
         function renderMessage(msg) {
             const container = document.getElementById('chatMessages');
             const div = document.createElement('div');
-            div.className = 'message ' + msg.type;
+            div.className = `message ${msg.type}`;
+            
             let content = '';
+            
             if (msg.replyTo) {
-                content += '<div class="reply-to">' + escapeHtml(msg.replyTo.text) + '</div>';
+                content += `<div class="reply-to">${escapeHtml(msg.replyTo.text)}</div>`;
             }
+            
             if (msg.text) {
-                // Allow basic HTML in bot messages
-                if (msg.type === 'received') {
-                    content += msg.text.replace(/\n/g, '<br>');
-                } else {
-                    content += escapeHtml(msg.text);
-                }
+                content += escapeHtml(msg.text);
             }
+            
             if (msg.mediaType === 'image') {
-                content += '<img src="' + msg.mediaUrl + '" class="message-media" onclick="window.open(this.src)">';
+                content += `<img src="${msg.mediaUrl}" class="message-media" onclick="window.open('${msg.mediaUrl}')">`;
             } else if (msg.mediaType === 'video') {
-                content += '<video src="' + msg.mediaUrl + '" class="message-media" controls></video>';
+                content += `<video src="${msg.mediaUrl}" class="message-media" controls></video>`;
             } else if (msg.mediaType === 'audio') {
-                content += '<audio src="' + msg.mediaUrl + '" class="message-audio" controls></audio>';
+                content += `<audio src="${msg.mediaUrl}" class="message-audio" controls></audio>`;
             } else if (msg.fileName) {
-                content += '<div class="message-file" onclick="window.open('' + msg.fileUrl + '')">📄 ' + escapeHtml(msg.fileName) + '</div>';
+                content += `<div class="message-file" onclick="window.open('${msg.fileUrl}')">
+                    📄 ${escapeHtml(msg.fileName)}
+                </div>`;
             }
+            
             const time = new Date(msg.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-            content += '<span class="message-time">' + time + '</span>';
+            content += `<span class="message-time">${time}</span>`;
+            
             div.innerHTML = content;
-
-            // Notification bell icon for admin replies
-            if (msg.type === 'received' && (msg.text||'').startsWith('✦ Admin:')) {
-                div.style.borderLeft = '3px solid var(--gold-primary)';
-                div.style.paddingLeft = '0.75rem';
-            }
-
             container.appendChild(div);
         }
 
         function escapeHtml(text) {
             const div = document.createElement('div');
-            div.textContent = text || '';
+            div.textContent = text;
             return div.innerHTML;
         }
 
         function setReply(index) {
             replyingTo = messages[index];
             document.getElementById('replyIndicator').classList.add('active');
-            document.querySelector('.reply-indicator-text').textContent = 'Replying to: ' + (replyingTo.text||'').substring(0, 30) + '...';
+            document.querySelector('.reply-indicator-text').textContent = 'Replying to: ' + replyingTo.text.substring(0, 30) + '...';
             document.getElementById('chatInput').focus();
         }
 
@@ -2143,150 +2017,164 @@ First — <b>what's your name?</b>");
         async function sendMessage() {
             const input = document.getElementById('chatInput');
             const text = input.value.trim();
+            
             if (!text) return;
-
-            // Show user's message
-            addMessage({ type: 'sent', text: text, time: new Date(), replyTo: replyingTo });
+            
+            if (!chatUser || !chatUser.name) {
+                pendingAction = 'chat';
+                showInfoModal('name');
+                return;
+            }
+            
+            const msg = {
+                type: 'sent',
+                text: text,
+                time: new Date(),
+                replyTo: replyingTo
+            };
+            
+            addMessage(msg);
             input.value = '';
             input.style.height = 'auto';
             cancelReply();
-
-            // ── In-chat info collection flow ──
-            if (chatState === CHAT_STATE.COLLECTING_NAME) {
-                if (text.length < 2) {
-                    addBotMsg("Please enter a valid name (at least 2 characters).");
-                    return;
-                }
-                if (!chatUser) chatUser = { id: 'SS' + Date.now().toString(36).toUpperCase(), registeredAt: new Date().toISOString() };
-                chatUser.name = text;
-                localStorage.setItem('chatUser', JSON.stringify(chatUser));
-                setTimeout(() => {
-                    addBotMsg("Nice to meet you, <b>" + escapeHtml(text) + "</b>! 😊
-
-What's your <b>email address</b>? We'll use this to contact you in case we can't reach you on chat.
-
-<i>Don't worry — we won't spam you.</i>");
-                    chatState = CHAT_STATE.COLLECTING_EMAIL;
-                }, 500);
-                return;
-            }
-
-            if (chatState === CHAT_STATE.COLLECTING_EMAIL) {
-                if (!text.includes('@') || !text.includes('.')) {
-                    addBotMsg("That doesn't look like a valid email. Please try again (e.g. your@email.com).");
-                    return;
-                }
-                chatUser.email = text;
-                localStorage.setItem('chatUser', JSON.stringify(chatUser));
-                setTimeout(() => {
-                    addBotMsg("Got it! 📧
-
-Now tell me — <b>what are you looking for?</b>
-
-• A specific template (mention the ID or occasion)
-• Custom design
-• Just browsing
-
-Type anything!");
-                    chatState = CHAT_STATE.COLLECTING_INTEREST;
-                }, 500);
-                return;
-            }
-
-            if (chatState === CHAT_STATE.COLLECTING_INTEREST) {
-                chatUser.interest = text;
-                localStorage.setItem('chatUser', JSON.stringify(chatUser));
-                const isCustom = text.toLowerCase().includes('custom');
-                if (isCustom) {
-                    setTimeout(() => {
-                        addBotMsg("✨ <b>Custom orders</b> are our specialty!
-
-Please describe what you need:
-• Occasion
-• Colour theme
-• Any names, dates or text to include
-• Any special requirements");
-                        chatState = CHAT_STATE.COLLECTING_CUSTOM;
-                    }, 500);
-                } else {
-                    finishCollection(text);
-                }
-                return;
-            }
-
-            if (chatState === CHAT_STATE.COLLECTING_CUSTOM) {
-                chatUser.customDetails = text;
-                localStorage.setItem('chatUser', JSON.stringify(chatUser));
-                finishCollection(text);
-                return;
-            }
-
-            // ── Normal message after collection is done ──
-            if (chatDone) {
-                addMessage({ type: 'sent', text: text, time: new Date() });
-                // Still forward to Telegram
-                await sendToTelegram('💬 *Follow-up from ' + chatUser.name + '*\n*ID:* ' + chatUser.id + '\n*Email:* ' + (chatUser.email||'N/A') + '\n\n' + text);
-                return;
-            }
-
-            // Forward to Telegram if user is set up
-            if (chatUser && chatUser.name) {
-                await sendToTelegram('💬 *Message from ' + chatUser.name + '*\n*ID:* ' + chatUser.id + '\n*Email:* ' + (chatUser.email||'N/A') + '\n\n' + text);
-            }
-        }
-
-        async function finishCollection(lastMsg) {
-            // Send all info to Telegram
-            const summary = '🆕 *New Inquiry — Scripted Surprise*\n\n' +
-                '*Name:* ' + chatUser.name + '\n' +
-                '*Email:* ' + chatUser.email + '\n' +
-                '*ID:* ' + chatUser.id + '\n' +
-                '*Interest:* ' + (chatUser.interest || lastMsg) + '\n' +
-                (chatUser.customDetails ? '*Custom Details:* ' + chatUser.customDetails + '\n' : '') +
-                '*Time:* ' + new Date().toLocaleString();
             
-            await sendToTelegram(summary);
-            chatDone = true;
-            localStorage.setItem('chatState', 'done');
-            chatState = CHAT_STATE.DONE;
-
-            setTimeout(() => {
-                addBotMsg("✅ <b>All done!</b> Your information has been sent to our team.
-
-📩 You will be contacted at <b>" + escapeHtml(chatUser.email) + "</b> if the admin doesn't connect through chat directly.
-
-We usually respond within a few hours!");
-            }, 400);
-
-            setTimeout(() => {
-                addBotMsg("🔔 <b>One last thing</b> — would you like to <b>enable push notifications</b>? So if our team replies here, you'll get a browser notification even if this tab is in the background.
-
-<button onclick='requestNotifPermission()' style='margin-top:6px;padding:6px 14px;background:var(--gold-primary);color:#000;border:none;border-radius:20px;font-size:0.8rem;font-weight:600;cursor:pointer'>🔔 Enable Notifications</button>");
-            }, 1800);
+            let telegramText = `💬 *Message from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}\n${text}`;
+            if (replyingTo) {
+                telegramText += `\n\n_Reply to: ${replyingTo.text}_`;
+            }
+            
+            await sendToTelegram(telegramText);
         }
 
-        function requestNotifPermission() {
-            if (!('Notification' in window)) {
-                addBotMsg("Your browser doesn't support notifications. But we'll still reach you by email! 😊");
+        async function handleFileSelect(event, type) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (!chatUser || !chatUser.name) {
+                pendingAction = 'chat';
+                showInfoModal('name');
+                event.target.value = '';
                 return;
             }
-            Notification.requestPermission().then(permission => {
-                if (permission === 'granted') {
-                    new Notification('Scripted Surprise', {
-                        body: 'Notifications enabled! We will notify you when our team replies.',
-                        icon: 'https://scriptedsurprise.github.io/favicon.ico'
+            
+            const formData = new FormData();
+            formData.append('chat_id', CONFIG.telegramAdminChatId);
+            formData.append('caption', `📎 *File from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}*File:* ${file.name}\n*Size:* ${(file.size / 1024).toFixed(1)} KB`);
+            formData.append('parse_mode', 'Markdown');
+            
+            if (type === 'media') {
+                if (file.type.startsWith('image/')) {
+                    formData.append('photo', file);
+                    await sendTelegramMedia('sendPhoto', formData);
+                    
+                    const url = URL.createObjectURL(file);
+                    addMessage({
+                        type: 'sent',
+                        mediaType: 'image',
+                        mediaUrl: url,
+                        time: new Date()
                     });
-                    addBotMsg("🎉 Notifications enabled! You're all set. We'll ping you when we reply.");
-                } else {
-                    addBotMsg("No worries! We'll reach you via email at <b>" + escapeHtml(chatUser.email||'') + "</b>. Chat window stays open too.");
+                } else if (file.type.startsWith('video/')) {
+                    formData.append('video', file);
+                    await sendTelegramMedia('sendVideo', formData);
+                    
+                    const url = URL.createObjectURL(file);
+                    addMessage({
+                        type: 'sent',
+                        mediaType: 'video',
+                        mediaUrl: url,
+                        time: new Date()
+                    });
                 }
-            });
+            } else {
+                formData.append('document', file);
+                await sendTelegramMedia('sendDocument', formData);
+                
+                const url = URL.createObjectURL(file);
+                addMessage({
+                    type: 'sent',
+                    fileName: file.name,
+                    fileUrl: url,
+                    time: new Date()
+                });
+            }
+            
+            event.target.value = '';
         }
 
-        function showNotification(title, body) {
-            if (Notification.permission === 'granted') {
-                new Notification(title, { body: body, icon: 'https://scriptedsurprise.github.io/favicon.ico' });
+        async function sendTelegramMedia(method, formData) {
+            try {
+                const url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/${method}`;
+                await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                });
+            } catch (err) {
+                console.error('Failed to send media:', err);
             }
+        }
+
+        // Audio Recording
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+                
+                mediaRecorder.ondataavailable = (e) => {
+                    audioChunks.push(e.data);
+                };
+                
+                mediaRecorder.onstop = async () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    
+                    addMessage({
+                        type: 'sent',
+                        mediaType: 'audio',
+                        mediaUrl: audioUrl,
+                        time: new Date()
+                    });
+                    
+                    const formData = new FormData();
+                    formData.append('chat_id', CONFIG.telegramAdminChatId);
+                    formData.append('voice', audioBlob, 'voice.webm');
+                    formData.append('caption', `🎤 *Voice message from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}*Duration:* ${document.getElementById('recordingTime').textContent}`);
+                    formData.append('parse_mode', 'Markdown');
+                    
+                    await fetch(`https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendVoice`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    stream.getTracks().forEach(track => track.stop());
+                };
+                
+                mediaRecorder.start();
+                recordingStartTime = Date.now();
+                document.getElementById('recordingIndicator').classList.add('active');
+                
+                recordingInterval = setInterval(() => {
+                    const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+                    const mins = Math.floor(elapsed / 60);
+                    const secs = elapsed % 60;
+                    document.getElementById('recordingTime').textContent = 
+                        `${mins}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+                
+            } catch (err) {
+                console.error('Recording failed:', err);
+                alert('Could not access microphone');
+            }
+        }
+
+        function stopRecording() {
+            if (!mediaRecorder || mediaRecorder.state === 'inactive') return;
+            
+            mediaRecorder.stop();
+            clearInterval(recordingInterval);
+            document.getElementById('recordingIndicator').classList.remove('active');
+            document.getElementById('recordingTime').textContent = '0:00';
         }
 
         function scrollToBottom() {
@@ -2330,11 +2218,14 @@ We usually respond within a few hours!");
                 if (e.target === e.currentTarget) closeModal();
             });
 
-
+            document.getElementById('infoModal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) hideInfoModal();
+            });
 
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeModal();
+                    hideInfoModal();
                     if (document.getElementById('chatWindow').classList.contains('active')) {
                         document.getElementById('chatWindow').classList.remove('active');
                     }
