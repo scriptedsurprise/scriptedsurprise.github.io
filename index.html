@@ -17,7 +17,7 @@
         @keyframes pfloat{0%{transform:translateY(100vh) rotate(0);opacity:0}10%{opacity:.2}90%{opacity:.2}100%{transform:translateY(-100vh) rotate(720deg);opacity:0}}
         header{position:fixed;top:3px;left:0;right:0;z-index:1000;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,175,55,.15);padding:.75rem 2rem}
         .header-content{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-        .logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;cursor:pointer}
+        .logo{display:flex;align-items:center;gap:.75rem;cursor:pointer}
         .logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--gold-primary),var(--gold-dark));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 3px 15px rgba(212,175,55,.3)}
         .logo-text{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:600;background:linear-gradient(135deg,var(--gold-light),var(--gold-primary),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .header-right{display:flex;align-items:center;gap:1.5rem}
@@ -34,7 +34,7 @@
         .hero-search{position:relative;max-width:520px;margin:0 auto}
         .hero-search input{width:100%;padding:.9rem 1.25rem .9rem 3rem;background:var(--black-secondary);border:1px solid rgba(212,175,55,.25);border-radius:50px;color:var(--white);font-size:.9rem;transition:all .3s}
         .hero-search input:focus{outline:none;border-color:var(--gold-primary);box-shadow:0 0 20px rgba(212,175,55,.15)}
-        .hero-search::before{content:"🔍";position:absolute;left:1.1rem;top:50%;transform:translateY(-50%);font-size:.9rem;opacity:.5}
+        .hero-search::before{content:"\F52D";font-family:'bootstrap-icons';position:absolute;left:1.1rem;top:50%;transform:translateY(-50%);font-size:.9rem;opacity:.5;color:var(--gray-light)}
         .sticky-nav{position:fixed;top:58px;left:0;right:0;z-index:999;background:rgba(10,10,10,.95);backdrop-filter:blur(15px);border-bottom:1px solid rgba(212,175,55,.1);padding:.6rem 2rem;transform:translateY(-100%);transition:transform .3s ease;pointer-events:none}
         .sticky-nav.visible{transform:translateY(0);pointer-events:all}
         .sticky-nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:.5rem;overflow-x:auto;scrollbar-width:none}
@@ -78,8 +78,6 @@
         .carousel-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1rem}
         .carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--gray-dark);cursor:pointer;transition:all .3s;border:none}
         .carousel-dot.active{background:var(--gold-primary);width:24px;border-radius:4px}
-
-        /* ═══ TEMPLATE CARD ═══ */
         .template-card{background:var(--black-secondary);border-radius:14px;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;flex-shrink:0;scroll-snap-align:start;width:300px;display:flex;flex-direction:column}
         .template-card.tier-premium{border:1.5px solid rgba(212,175,55,.35)}
         .template-card.tier-standard{border:1px solid rgba(212,175,55,.15)}
@@ -88,8 +86,6 @@
         .template-card.tier-premium:hover{box-shadow:0 15px 35px rgba(0,0,0,.4),0 0 30px rgba(212,175,55,.08)}
         .template-card.tier-standard:hover{box-shadow:0 12px 30px rgba(0,0,0,.4)}
         .template-card.tier-basic:hover{box-shadow:0 8px 20px rgba(0,0,0,.3)}
-
-        /* ═══ THUMBNAIL ═══ */
         .card-thumbnail{position:relative;width:100%;height:210px;overflow:hidden;cursor:pointer;flex-shrink:0}
         .card-placeholder{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--c1,#333) 0%,var(--c2,#222) 60%,var(--c1,#333) 100%);transition:opacity .6s ease}
         .card-placeholder::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(255,255,255,.02) 12px,rgba(255,255,255,.02) 24px)}
@@ -113,8 +109,6 @@
         .template-card:hover .thumbnail-overlay{opacity:1}
         .preview-btn{padding:.6rem 1.2rem;background:linear-gradient(135deg,var(--gold-primary),var(--gold-dark));color:var(--black-primary);border:none;border-radius:50px;font-weight:600;font-size:.75rem;cursor:pointer;display:flex;align-items:center;gap:.4rem;transition:all .3s;font-family:inherit;box-shadow:0 3px 12px rgba(212,175,55,.25)}
         .preview-btn:hover{transform:scale(1.05)}
-
-        /* ═══ CARD CONTENT ═══ */
         .card-content{padding:1rem 1.1rem;min-width:0;flex:1}
         .card-top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem;gap:.5rem}
         .template-id{font-size:.65rem;color:var(--gold-primary);font-weight:600;letter-spacing:.8px;white-space:nowrap;flex-shrink:0}
@@ -129,8 +123,6 @@
         .discount-badge{padding:.12rem .35rem;background:rgba(76,175,80,.15);color:var(--success);font-size:.62rem;font-weight:600;border-radius:3px;white-space:nowrap}
         .card-buy-btn{padding:.45rem .9rem;background:transparent;border:1.5px solid var(--gold-primary);color:var(--gold-primary);border-radius:6px;font-weight:600;font-size:.7rem;cursor:pointer;transition:all .3s;font-family:inherit;white-space:nowrap;flex-shrink:0}
         .card-buy-btn:hover{background:var(--gold-primary);color:var(--black-primary)}
-
-        /* ═══ EXPLORE GRID ═══ */
         .explore-section{padding:2rem 0 3rem}
         .explore-divider{text-align:center;margin-bottom:2rem;position:relative}
         .explore-divider::before{content:'';position:absolute;top:50%;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.25),transparent)}
@@ -145,8 +137,6 @@
         .explore-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
         .explore-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;font-size:.8rem;color:var(--gray-light)}
         .explore-toolbar span{color:var(--gold-primary);font-weight:600}
-
-        /* ═══ DETAIL PANEL ═══ */
         .detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:2000;opacity:0;visibility:hidden;transition:all .35s}
         .detail-overlay.active{opacity:1;visibility:visible}
         .detail-panel{position:fixed;top:0;right:0;bottom:0;width:560px;max-width:100%;background:var(--black-secondary);z-index:2001;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);overflow-y:auto;border-left:1px solid rgba(212,175,55,.15)}
@@ -189,13 +179,11 @@
         .similar-mini-info{padding:.5rem}
         .similar-mini-name{font-size:.7rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .similar-mini-price{font-size:.7rem;color:var(--gold-primary);font-weight:600;margin-top:.15rem}
-
-        /* ═══ PREVIEW MODAL ═══ */
         .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.95);backdrop-filter:blur(10px);z-index:3000;display:none;align-items:center;justify-content:center;padding:1rem}
         .modal-overlay.active{display:flex}
         .modal-container{width:100%;max-width:1200px;height:90vh;background:var(--black-secondary);border:1px solid rgba(212,175,55,.25);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;animation:modalIn .35s ease}
         @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(15px)}to{opacity:1;transform:scale(1) translateY(0)}}
-        .modal-header{display:flex;justify-content:space-between;align-items:center;padding:.85rem 1.25rem;border-bottom:1px solid rgba(212,175,55,.15);background:var(--black-tertiary)}
+        .modal-header{display:flex;justify-content:space-between;align-items:center;padding:.85rem 1.25rem;border-bottom:1px solid rgba(212,175,55,.15);background:var(--black-tertiary);flex-wrap:wrap;gap:.5rem}
         .modal-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold-primary)}
         .modal-actions{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
         .modal-price{font-size:1.1rem;font-weight:700;color:var(--gold-primary)}
@@ -208,8 +196,6 @@
         .modal-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--black-secondary);z-index:10}
         .modal-spinner{width:44px;height:44px;border:3px solid rgba(212,175,55,.15);border-top-color:var(--gold-primary);border-radius:50%;animation:spin 1s linear infinite}
         @keyframes spin{to{transform:rotate(360deg)}}
-
-        /* ═══ CHAT ═══ */
         .chat-widget{position:fixed;bottom:1.5rem;right:1.5rem;z-index:2500;font-family:'Inter',sans-serif}
         .chat-button{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold-primary),var(--gold-dark));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 18px rgba(212,175,55,.35);transition:all .3s;position:relative}
         .chat-button:hover{transform:scale(1.1);box-shadow:0 6px 25px rgba(212,175,55,.5)}
@@ -260,8 +246,6 @@
         .notification-enable-btn:hover{background:rgba(212,175,55,.18)}
         .notification-enable-btn:disabled{opacity:.5;cursor:default}
         .file-input{display:none}
-
-        /* ═══ FOOTER ═══ */
         .back-to-top{position:fixed;bottom:1.5rem;left:1.5rem;z-index:1500;width:42px;height:42px;border-radius:50%;background:var(--black-secondary);border:1px solid rgba(212,175,55,.25);color:var(--gold-primary);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s;box-shadow:0 4px 15px rgba(0,0,0,.3)}
         .back-to-top.visible{opacity:1;visibility:visible}
         .back-to-top:hover{background:rgba(212,175,55,.1);transform:translateY(-3px)}
@@ -291,253 +275,206 @@
         .footer-bottom{max-width:1400px;margin:0 auto;padding-top:1.5rem;border-top:1px solid rgba(212,175,55,.08);text-align:center;color:var(--gray-dark);font-size:.8rem}
         .footer-bottom span{color:var(--gold-primary)}
         .empty-state,.error-state{text-align:center;padding:3rem 2rem;color:var(--gray-light)}
-        .skeleton-loader{background:linear-gradient(90deg,var(--black-secondary) 25%,var(--black-tertiary) 50%,var(--black-secondary) 75%);background-size:200% 100%;animation:sload 1.5s infinite;border-radius:14px;height:360px}
+        .skeleton-loader{background:linear-gradient(90deg,#1a1a1a 25%,rgba(212,175,55,.06) 50%,#1a1a1a 75%);background-size:200% 100%;animation:sload 1.5s infinite;border-radius:14px;height:360px}
         @keyframes sload{0%{background-position:200% 0}100%{background-position:-200% 0}}
         .fade-in-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
         .fade-in-up.visible{opacity:1;transform:translateY(0)}
-
-        /* ═══ RESPONSIVE -- KEY FIX: single column on mobile ═══ */
-        @media(max-width:768px){
-            .header-stats{display:none}
-            .hero{padding:6rem 1.25rem 2rem}
-            .hero h1{font-size:clamp(1.8rem,6vw,2.5rem)}
-            .content-wrap{padding:0 1rem}
-            .scroll-arrow{display:none}
-            .explore-grid{grid-template-columns:1fr;gap:1rem}
-            .template-card{width:100%}
-            .card-thumbnail{height:200px}
-            .card-content{padding:.85rem 1rem}
-            .template-name{font-size:.95rem;-webkit-line-clamp:2}
-            .carousel-card-inner{flex-direction:column;min-height:auto}
-            .carousel-visual{height:200px;flex:none}
-            .carousel-info{padding:1.25rem}
-            .carousel-name{font-size:1.2rem}
-            .detail-panel{width:100%}
-            .detail-preview-area{margin:0 .75rem;height:220px}
-            .detail-body{padding:1.25rem}
-            .features-grid{grid-template-columns:1fr}
-            .chat-window{width:calc(100vw - 1.5rem);height:65vh;right:-.5rem;bottom:65px}
-            .chat-widget{right:.75rem;bottom:.75rem}
-            .steps-row{gap:1rem}
-            .step-arrow{display:none}
-        }
-        @media(max-width:480px){
-            .card-thumbnail{height:170px}
-            .placeholder-icon{font-size:2rem}
-            .filter-bar{gap:.35rem}
-            .filter-pill{padding:.35rem .65rem;font-size:.7rem}
-        }
+        @media(max-width:768px){.header-stats{display:none}.hero{padding:6rem 1.25rem 2rem}.hero h1{font-size:clamp(1.8rem,6vw,2.5rem)}.content-wrap{padding:0 1rem}.scroll-arrow{display:none}.explore-grid{grid-template-columns:1fr;gap:1rem}.template-card{width:100%}.card-thumbnail{height:200px}.card-content{padding:.85rem 1rem}.template-name{font-size:.95rem;-webkit-line-clamp:2}.carousel-card-inner{flex-direction:column;min-height:auto}.carousel-visual{height:200px;flex:none}.carousel-info{padding:1.25rem}.carousel-name{font-size:1.2rem}.detail-panel{width:100%}.detail-preview-area{margin:0 .75rem;height:220px}.detail-body{padding:1.25rem}.features-grid{grid-template-columns:1fr}.chat-window{width:calc(100vw - 1.5rem);height:65vh;right:-.5rem;bottom:65px}.chat-widget{right:.75rem;bottom:.75rem}.steps-row{gap:1rem}.step-arrow{display:none}}
+        @media(max-width:480px){.card-thumbnail{height:170px}.placeholder-icon{font-size:2rem}.filter-bar{gap:.35rem}.filter-pill{padding:.35rem .65rem;font-size:.7rem}}
     </style>
 </head>
 <body>
-    <div id="scrollProgress"></div>
-    <div class="bg-animation"></div>
-    <div class="gold-particles" id="particles"></div>
-
-    <header>
-        <div class="header-content">
-            <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-                <div class="logo-icon">✦</div>
-                <span class="logo-text">Scripted Surprise</span>
-            </div>
-            <div class="header-right">
-                <div class="header-stats">
-                    <div class="stat-item"><div class="stat-value" id="totalTemplates">-</div><div class="stat-label">Templates</div></div>
-                    <div class="stat-item"><div class="stat-value" id="totalCategories">-</div><div class="stat-label">Categories</div></div>
-                    <div class="stat-item"><div class="stat-value" id="avgPrice">-</div><div class="stat-label">Avg Price</div></div>
-                </div>
-                <button class="header-fav-btn" onclick="scrollToExplore('favorites')" title="Favorites">♡<span class="fav-count-badge" id="favCountBadge">0</span></button>
-            </div>
-        </div>
-    </header>
-
-    <nav class="sticky-nav" id="stickyNav"><div class="sticky-nav-inner" id="stickyNavInner"></div></nav>
-
-    <section class="hero" id="heroSection">
-        <div class="hero-badge">✦ Premium Digital Experiences</div>
-        <h1>Celebrate Moments That Matter</h1>
-        <p>Exquisite animated templates for weddings, birthdays, anniversaries, and every special occasion.</p>
-        <div class="hero-search"><input type="text" id="searchInput" placeholder="Search templates..."></div>
-    </section>
-
-    <main class="content-wrap">
-        <div id="recentlyViewedSection" class="section-block" style="display:none">
-            <div class="section-header"><h2 class="section-title"><span class="cat-icon">🕐</span> Continue Browsing</h2><button class="section-see-all" onclick="clearRecentlyViewed()">Clear</button></div>
-            <div class="scroll-wrapper"><div class="scroll-row" id="recentlyViewedRow"></div></div>
-        </div>
-        <div id="carouselSection" class="carousel-section section-block" style="display:none">
-            <div class="section-header"><h2 class="section-title"><span class="cat-icon">🔥</span> Trending This Week</h2></div>
-            <div class="carousel-container"><div class="carousel-track" id="carouselTrack"></div></div>
-            <div class="carousel-dots" id="carouselDots"></div>
-        </div>
-        <div id="premiumSection" class="section-block fade-in-up" style="display:none">
-            <div class="section-header"><h2 class="section-title"><span class="cat-icon">💎</span> Premium Collection</h2><button class="section-see-all" onclick="scrollToExplore('tier:premium')">See All →</button></div>
-            <div class="scroll-wrapper"><button class="scroll-arrow left" onclick="scrollRow(this,-1)">‹</button><div class="scroll-row" id="premiumRow"></div><button class="scroll-arrow right" onclick="scrollRow(this,1)">›</button></div>
-        </div>
-        <div id="categorySections"></div>
-        <div id="budgetSection" class="section-block fade-in-up" style="display:none">
-            <div class="section-header"><h2 class="section-title"><span class="cat-icon">🔵</span> Budget Picks</h2><button class="section-see-all" onclick="scrollToExplore('tier:basic')">See All →</button></div>
-            <div class="scroll-wrapper"><button class="scroll-arrow left" onclick="scrollRow(this,-1)">‹</button><div class="scroll-row" id="budgetRow"></div><button class="scroll-arrow right" onclick="scrollRow(this,1)">›</button></div>
-        </div>
-        <section class="explore-section" id="exploreSection">
-            <div class="explore-divider"><span>Explore All Templates</span></div>
-            <div class="filter-bar" id="filterBar"></div>
-            <div class="explore-toolbar"><div>Showing <span id="showingCount">0</span> of <span id="totalCount">0</span></div></div>
-            <div class="explore-grid" id="exploreGrid"><div class="skeleton-loader"></div><div class="skeleton-loader"></div><div class="skeleton-loader"></div><div class="skeleton-loader"></div></div>
-            <div class="empty-state" id="emptyState" style="display:none"><div style="font-size:2.5rem;margin-bottom:.75rem">✦</div><h3>No templates found</h3><p style="font-size:.85rem;margin-top:.5rem">Try a different filter or search term.</p></div>
-            <div class="error-state" id="errorState" style="display:none"><div style="font-size:2.5rem;margin-bottom:.75rem">⚠</div><h3>Failed to load templates</h3><button class="card-buy-btn" style="margin:1rem auto 0" onclick="loadTemplates()">Retry</button></div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="how-it-works"><h3>How It Works</h3><div class="steps-row">
-                <div class="step-item"><div class="step-num">1</div><div class="step-label">Browse</div><div class="step-desc">Explore our curated collection</div></div>
-                <div class="step-arrow">→</div>
-                <div class="step-item"><div class="step-num">2</div><div class="step-label">Choose</div><div class="step-desc">Find the perfect template</div></div>
-                <div class="step-arrow">→</div>
-                <div class="step-item"><div class="step-num">3</div><div class="step-label">Order</div><div class="step-desc">Purchase via Telegram bot</div></div>
-                <div class="step-arrow">→</div>
-                <div class="step-item"><div class="step-num">4</div><div class="step-label">Receive</div><div class="step-desc">Get your template instantly</div></div>
-            </div></div>
-            <div class="faq-section"><h4>Frequently Asked Questions</h4>
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">How do I purchase a template?<span class="faq-arrow">▼</span></button><div class="faq-answer"><p>Click "Buy" on any template to be redirected to our Telegram bot. Complete the purchase there and receive your template instantly.</p></div></div>
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Can I request a custom design?<span class="faq-arrow">▼</span></button><div class="faq-answer"><p>Absolutely! Use the chat widget to share your requirements, theme, colors, and references. We will create a custom template just for you.</p></div></div>
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">How will I receive my template?<span class="faq-arrow">▼</span></button><div class="faq-answer"><p>Templates are delivered as HTML files via Telegram. Open them in any browser, share the link, or host on your own website.</p></div></div>
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">What payment methods are accepted?<span class="faq-arrow">▼</span></button><div class="faq-answer"><p>We accept UPI, bank transfer, and other popular Indian payment methods via our Telegram bot.</p></div></div>
-            </div>
-            <div class="footer-grid">
-                <div class="footer-section"><h4>Scripted Surprise</h4><p>Crafting digital elegance for life's most precious moments.</p></div>
-                <div class="footer-section"><h4>Categories</h4><a href="#" onclick="scrollToExplore('wedding');return false">Wedding</a><a href="#" onclick="scrollToExplore('birthday');return false">Birthday</a><a href="#" onclick="scrollToExplore('anniversary');return false">Anniversary</a><a href="#" onclick="scrollToExplore('love');return false">Love</a></div>
-                <div class="footer-section"><h4>Support</h4><a href="https://t.me/scriptedsurpise_bot" target="_blank">Telegram Bot</a><a href="mailto:orders@scriptedsurprise.com">Email Us</a></div>
-            </div>
-        </div>
-        <div class="footer-bottom"><p>&copy; 2026 <span>Scripted Surprise</span>. All rights reserved.</p></div>
-    </footer>
-
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-    <div class="detail-overlay" id="detailOverlay" onclick="closeDetail()"></div>
-    <div class="detail-panel" id="detailPanel"></div>
-    <div class="modal-overlay" id="previewModal">
-        <div class="modal-container">
-            <div class="modal-header"><h3 class="modal-title" id="modalTitle">Preview</h3><div class="modal-actions"><span class="modal-price" id="modalPrice">₹0</span><button class="modal-buy" onclick="buyCurrent()">Buy via Telegram</button><button class="modal-close" onclick="closeModal()">×</button></div></div>
-            <div class="modal-body"><div class="modal-loading" id="modalLoading"><div class="modal-spinner"></div></div><iframe class="preview-iframe" id="previewFrame"></iframe></div>
-        </div>
-    </div>
-    <div class="chat-widget">
-        <button class="chat-button" id="chatButton" onclick="toggleChat()">💬</button>
-        <div class="chat-window" id="chatWindow">
-            <div class="chat-header"><div class="chat-header-info"><div class="chat-avatar">🤖</div><div class="chat-header-text"><h4>Support Bot</h4><p id="chatStatus">Online</p></div></div><button class="chat-close" onclick="toggleChat()">×</button></div>
-            <div class="chat-messages" id="chatMessages"></div>
-            <div class="typing-indicator" id="typingIndicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
-            <div class="chat-input-area">
-                <div class="reply-indicator" id="replyIndicator"><span class="reply-indicator-text">Replying to...</span><button class="reply-indicator-close" onclick="cancelReply()">×</button></div>
-                <div class="recording-indicator" id="recordingIndicator"><div class="recording-dot"></div><span>Recording... <span id="recordingTime">0:00</span></span></div>
-                <div class="chat-input-wrapper">
-                    <textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1"></textarea>
-                    <div class="chat-actions">
-                        <button class="chat-action-btn" onclick="document.getElementById('imageInput').click()">📷</button>
-                        <button class="chat-action-btn" onclick="document.getElementById('fileInput').click()">📎</button>
-                        <button class="chat-action-btn" onmousedown="startRecording()" onmouseup="stopRecording()" onmouseleave="stopRecording()" ontouchstart="startRecording()" ontouchend="stopRecording()">🎤</button>
-                        <button class="chat-send-btn" onclick="sendMessage()">➤</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <input type="file" class="file-input" id="imageInput" accept="image/*,video/*" onchange="handleFileSelect(event,'media')">
-    <input type="file" class="file-input" id="fileInput" accept=".pdf,.doc,.docx,.txt,.zip" onchange="handleFileSelect(event,'file')">
-
+<div id="scrollProgress"></div>
+<div class="bg-animation"></div>
+<div class="gold-particles" id="particles"></div>
+<header><div class="header-content"><div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})"><div class="logo-icon">✦</div><span class="logo-text">Scripted Surprise</span></div><div class="header-right"><div class="header-stats"><div class="stat-item"><div class="stat-value" id="totalTemplates">-</div><div class="stat-label">Templates</div></div><div class="stat-item"><div class="stat-value" id="totalCategories">-</div><div class="stat-label">Categories</div></div><div class="stat-item"><div class="stat-value" id="avgPrice">-</div><div class="stat-label">Avg Price</div></div></div><button class="header-fav-btn" onclick="scrollToExplore('favorites')" title="Favorites">♡<span class="fav-count-badge" id="favCountBadge">0</span></button></div></div></header>
+<nav class="sticky-nav" id="stickyNav"><div class="sticky-nav-inner" id="stickyNavInner"></div></nav>
+<section class="hero" id="heroSection"><div class="hero-badge">✦ Premium Digital Experiences</div><h1>Celebrate Moments That Matter</h1><p>Exquisite animated templates for weddings, birthdays, anniversaries, and every special occasion.</p><div class="hero-search"><input type="text" id="searchInput" placeholder="Search templates..."></div></section>
+<main class="content-wrap">
+<div id="recentlyViewedSection" class="section-block" style="display:none"><div class="section-header"><h2 class="section-title"><span class="cat-icon">🕐</span> Continue Browsing</h2><button class="section-see-all" onclick="clearRecentlyViewed()">Clear</button></div><div class="scroll-wrapper"><div class="scroll-row" id="recentlyViewedRow"></div></div></div>
+<div id="carouselSection" class="carousel-section section-block" style="display:none"><div class="section-header"><h2 class="section-title"><span class="cat-icon">🔥</span> Trending This Week</h2></div><div class="carousel-container"><div class="carousel-track" id="carouselTrack"></div></div><div class="carousel-dots" id="carouselDots"></div></div>
+<div id="premiumSection" class="section-block fade-in-up" style="display:none"><div class="section-header"><h2 class="section-title"><span class="cat-icon">💎</span> Premium Collection</h2><button class="section-see-all" onclick="scrollToExplore('tier:premium')">See All →</button></div><div class="scroll-wrapper"><button class="scroll-arrow left" onclick="scrollRow(this,-1)">‹</button><div class="scroll-row" id="premiumRow"></div><button class="scroll-arrow right" onclick="scrollRow(this,1)">›</button></div></div>
+<div id="categorySections"></div>
+<div id="budgetSection" class="section-block fade-in-up" style="display:none"><div class="section-header"><h2 class="section-title"><span class="cat-icon">🔵</span> Budget Picks</h2><button class="section-see-all" onclick="scrollToExplore('tier:basic')">See All →</button></div><div class="scroll-wrapper"><button class="scroll-arrow left" onclick="scrollRow(this,-1)">‹</button><div class="scroll-row" id="budgetRow"></div><button class="scroll-arrow right" onclick="scrollRow(this,1)">›</button></div></div>
+<section class="explore-section" id="exploreSection"><div class="explore-divider"><span>Explore All Templates</span></div><div class="filter-bar" id="filterBar"></div><div class="explore-toolbar"><div>Showing <span id="showingCount">0</span> of <span id="totalCount">0</span></div></div><div class="explore-grid" id="exploreGrid"></div><div class="empty-state" id="emptyState" style="display:none"><div style="font-size:2.5rem;margin-bottom:.75rem">✦</div><h3>No templates found</h3><p style="font-size:.85rem;margin-top:.5rem">Try a different filter or search term.</p></div><div class="error-state" id="errorState" style="display:none"><div style="font-size:2.5rem;margin-bottom:.75rem">⚠</div><h3>Failed to load templates</h3><p id="errorDetail" style="font-size:.8rem;margin-top:.5rem;color:var(--gray-dark)"></p><button class="card-buy-btn" style="margin:1rem auto 0" onclick="loadTemplates()">Retry</button></div></section>
+</main>
+<footer><div class="footer-content">
+<div class="how-it-works"><h3>How It Works</h3><div class="steps-row"><div class="step-item"><div class="step-num">1</div><div class="step-label">Browse</div><div class="step-desc">Explore our curated collection</div></div><div class="step-arrow">→</div><div class="step-item"><div class="step-num">2</div><div class="step-label">Choose</div><div class="step-desc">Find the perfect template</div></div><div class="step-arrow">→</div><div class="step-item"><div class="step-num">3</div><div class="step-label">Order</div><div class="step-desc">Purchase via Telegram bot</div></div><div class="step-arrow">→</div><div class="step-item"><div class="step-num">4</div><div class="step-label">Receive</div><div class="step-desc">Get your template instantly</div></div></div></div>
+<div class="faq-section"><h4>Frequently Asked Questions</h4><div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">How do I purchase a template?<span class="faq-arrow">▼</span></button><div class="faq-answer"><p>Click "Buy" on any template to be redirected to our Telegram bot. Complete the purchase there and receive your template instantly.</p></div></div><div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Can I request a custom design?<span class="faq-arrow">▼</span></button><div class="faq-answer"><p>Absolutely! Use the chat widget to share your requirements, theme, colors, and references. We will create a custom template just for you.</p></div></div><div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">How will I receive my template?<span class="faq-arrow">▼</span></button><div class="faq-answer"><p>Templates are delivered as HTML files via Telegram. Open them in any browser, share the link, or host on your own website.</p></div></div><div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">What payment methods are accepted?<span class="faq-arrow">▼</span></button><div class="faq-answer"><p>We accept UPI, bank transfer, and other popular Indian payment methods via our Telegram bot.</p></div></div></div>
+<div class="footer-grid"><div class="footer-section"><h4>Scripted Surprise</h4><p>Crafting digital elegance for life's most precious moments.</p></div><div class="footer-section"><h4>Categories</h4><a href="#" onclick="scrollToExplore('wedding');return false">Wedding</a><a href="#" onclick="scrollToExplore('birthday');return false">Birthday</a><a href="#" onclick="scrollToExplore('anniversary');return false">Anniversary</a><a href="#" onclick="scrollToExplore('love');return false">Love</a></div><div class="footer-section"><h4>Support</h4><a href="https://t.me/scriptedsurpise_bot" target="_blank">Telegram Bot</a><a href="mailto:orders@scriptedsurprise.com">Email Us</a></div></div>
+</div><div class="footer-bottom"><p>&copy; 2026 <span>Scripted Surprise</span>. All rights reserved.</p></div></footer>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail()"></div>
+<div class="detail-panel" id="detailPanel"></div>
+<div class="modal-overlay" id="previewModal"><div class="modal-container"><div class="modal-header"><h3 class="modal-title" id="modalTitle">Preview</h3><div class="modal-actions"><span class="modal-price" id="modalPrice">₹0</span><button class="modal-buy" onclick="buyCurrent()">Buy via Telegram</button><button class="modal-close" onclick="closeModal()">×</button></div></div><div class="modal-body"><div class="modal-loading" id="modalLoading"><div class="modal-spinner"></div></div><iframe class="preview-iframe" id="previewFrame"></iframe></div></div></div>
+<div class="chat-widget"><button class="chat-button" id="chatButton" onclick="toggleChat()">💬</button><div class="chat-window" id="chatWindow"><div class="chat-header"><div class="chat-header-info"><div class="chat-avatar">🤖</div><div class="chat-header-text"><h4>Support Bot</h4><p id="chatStatus">Online</p></div></div><button class="chat-close" onclick="toggleChat()">×</button></div><div class="chat-messages" id="chatMessages"></div><div class="typing-indicator" id="typingIndicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div><div class="chat-input-area"><div class="reply-indicator" id="replyIndicator"><span class="reply-indicator-text">Replying to...</span><button class="reply-indicator-close" onclick="cancelReply()">×</button></div><div class="recording-indicator" id="recordingIndicator"><div class="recording-dot"></div><span>Recording... <span id="recordingTime">0:00</span></span></div><div class="chat-input-wrapper"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1"></textarea><div class="chat-actions"><button class="chat-action-btn" onclick="document.getElementById('imageInput').click()">📷</button><button class="chat-action-btn" onclick="document.getElementById('fileInput').click()">📎</button><button class="chat-action-btn" onmousedown="startRecording()" onmouseup="stopRecording()" onmouseleave="stopRecording()" ontouchstart="startRecording()" ontouchend="stopRecording()">🎤</button><button class="chat-send-btn" onclick="sendMessage()">➤</button></div></div></div></div></div>
+<input type="file" class="file-input" id="imageInput" accept="image/*,video/*" onchange="handleFileSelect(event,'media')">
+<input type="file" class="file-input" id="fileInput" accept=".pdf,.doc,.docx,.txt,.zip" onchange="handleFileSelect(event,'file')">
 <script>
-const CONFIG={githubUser:'scriptedsurprise',githubRepo:'scriptedsurprise.github.io',branch:'main',templatesJsonPath:'templates.json',templatesFolder:'templates',telegramBotToken:'8308614113:AAEy2rsJnLhFwgqtGM1Ko2CdRQfQsnJg3yg',telegramAdminChatId:'1116079836',telegramBotUsername:'scriptedsurpise_bot'};
-let allTemplates=[],currentExploreCategory='all',currentExploreTier='all',currentExplorePrice='all',currentExploreSort='newest',currentSearch='',currentPreviewId=null,currentDetailId=null,carouselIndex=0,carouselInterval=null,carouselTemplates=[];
-let chatUser=null,chatState='not_started',messages=[],replyingTo=null,mediaRecorder=null,audioChunks=[],recordingStartTime=null,recordingInterval=null,pendingPurchaseTemplateId=null,pollingInterval=null,lastMessageId=0,notificationPermission=false;
-const CAT_THEMES={wedding:{icon:'💍',c1:'#E8B4B8',c2:'#C9876E',label:'Wedding'},birthday:{icon:'🎂',c1:'#C39BD3',c2:'#8E44AD',label:'Birthday'},anniversary:{icon:'❤️',c1:'#F1948A',c2:'#C0392B',label:'Anniversary'},love:{icon:'🌹',c1:'#FF6B81',c2:'#C0392B',label:'Love'},baby:{icon:'👶',c1:'#AED6F1',c2:'#5DADE2',label:'Baby Shower'},graduation:{icon:'🎓',c1:'#2C3E50',c2:'#D4AF37',label:'Graduation'},engagement:{icon:'💎',c1:'#85C1E9',c2:'#AAB7B8',label:'Engagement'},congrats:{icon:'🏆',c1:'#D4AF37',c2:'#27AE60',label:'Congrats'},farewell:{icon:'👋',c1:'#BB8FCE',c2:'#7D3C98',label:'Farewell'},festival:{icon:'🎆',c1:'#F39C12',c2:'#E74C3C',label:'Festival'},uncategorized:{icon:'📁',c1:'#7F8C8D',c2:'#566573',label:'Other'}};
-const SECTION_CAT_ORDER=['wedding','birthday','anniversary','love','engagement','baby','graduation','congrats','festival','farewell'];
+var CONFIG={githubUser:'scriptedsurprise',githubRepo:'scriptedsurprise.github.io',branch:'main',templatesJsonPath:'templates.json',templatesFolder:'templates',telegramBotToken:'8308614113:AAEy2rsJnLhFwgqtGM1Ko2CdRQfQsnJg3yg',telegramAdminChatId:'1116079836',telegramBotUsername:'scriptedsurpise_bot'};
+var allTemplates=[],currentExploreCategory='all',currentExploreTier='all',currentExplorePrice='all',currentExploreSort='newest',currentSearch='',currentPreviewId=null,currentDetailId=null,carouselIndex=0,carouselInterval=null,carouselTemplates=[];
+var chatUser=null,chatState='not_started',messages=[],replyingTo=null,mediaRecorder=null,audioChunks=[],recordingStartTime=null,recordingInterval=null,pendingPurchaseTemplateId=null,pollingInterval=null,lastMessageId=0,notificationPermission=false;
 
-async function init(){createParticles();setupEventListeners();setupStickyNav();setupScrollProgress();setupFadeIn();await loadTemplates();initChat()}
-function createParticles(){const c=document.getElementById('particles');for(let i=0;i<40;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*25+'s';c.appendChild(p)}}
+var CAT_THEMES={wedding:{icon:'💍',c1:'#E8B4B8',c2:'#C9876E',label:'Wedding'},birthday:{icon:'🎂',c1:'#C39BD3',c2:'#8E44AD',label:'Birthday'},anniversary:{icon:'❤️',c1:'#F1948A',c2:'#C0392B',label:'Anniversary'},love:{icon:'🌹',c1:'#FF6B81',c2:'#C0392B',label:'Love'},baby:{icon:'👶',c1:'#AED6F1',c2:'#5DADE2',label:'Baby Shower'},graduation:{icon:'🎓',c1:'#2C3E50',c2:'#D4AF37',label:'Graduation'},engagement:{icon:'💎',c1:'#85C1E9',c2:'#AAB7B8',label:'Engagement'},congrats:{icon:'🏆',c1:'#D4AF37',c2:'#27AE60',label:'Congrats'},farewell:{icon:'👋',c1:'#BB8FCE',c2:'#7D3C98',label:'Farewell'},festival:{icon:'🎆',c1:'#F39C12',c2:'#E74C3C',label:'Festival'},uncategorized:{icon:'📁',c1:'#7F8C8D',c2:'#566573',label:'Other'}};
+var SECTION_CAT_ORDER=['wedding','birthday','anniversary','love','engagement','baby','graduation','congrats','festival','farewell','uncategorized'];
+
+function init(){createParticles();setupEventListeners();setupStickyNav();setupScrollProgress();setupFadeIn();loadTemplates();initChat()}
+function createParticles(){var c=document.getElementById('particles');for(var i=0;i<40;i++){var p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*25+'s';c.appendChild(p)}}
+
+/* ===== FETCH -- exact same approach as the old working version ===== */
+var RAW_URL='https://raw.githubusercontent.com/'+CONFIG.githubUser+'/'+CONFIG.githubRepo+'/'+CONFIG.branch+'/'+CONFIG.templatesJsonPath;
+var CDN_URL='https://cdn.jsdelivr.net/gh/'+CONFIG.githubUser+'/'+CONFIG.githubRepo+'@'+CONFIG.branch+'/'+CONFIG.templatesJsonPath;
+
+function fetchWithTimeout(url,ms){
+    return new Promise(function(resolve,reject){
+        var timer=setTimeout(function(){reject(new Error('Timeout after '+ms+'ms'))},ms);
+        fetch(url,{cache:'no-cache'}).then(function(r){clearTimeout(timer);resolve(r)}).catch(function(e){clearTimeout(timer);reject(e)})
+    })
+}
 
 async function loadTemplates(){
-    document.getElementById('exploreGrid').innerHTML=Array(4).fill('<div class="skeleton-loader"></div>').join('');
-    try{const url=`https://raw.githubusercontent.com/${CONFIG.githubUser}/${CONFIG.githubRepo}/${CONFIG.branch}/${CONFIG.templatesJsonPath}`;const res=await fetch(url,{cache:'no-cache'});if(!res.ok)throw 0;const data=await res.json();if(!Array.isArray(data))throw 0;allTemplates=data.map(t=>({...t,previewUrl:`https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/${t.filename}`}));updateStats();renderAllSections();renderExploreGrid()}catch(e){document.getElementById('exploreGrid').innerHTML='';document.getElementById('errorState').style.display='block'}
+    var grid=document.getElementById('exploreGrid');
+    grid.innerHTML='<div class="skeleton-loader"></div><div class="skeleton-loader"></div><div class="skeleton-loader"></div><div class="skeleton-loader"></div>';
+    document.getElementById('errorState').style.display='none';
+    document.getElementById('emptyState').style.display='none';
+
+    var data=null;
+    try{
+        var r=await fetchWithTimeout(RAW_URL,10000);
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        data=await r.json()
+    }catch(e1){
+        console.warn('[SS] Raw failed:',e1.message,'trying CDN...');
+        try{
+            var r2=await fetchWithTimeout(CDN_URL,10000);
+            if(!r2.ok) throw new Error('HTTP '+r2.status);
+            data=await r2.json()
+        }catch(e2){
+            console.error('[SS] CDN also failed:',e2.message);
+            grid.innerHTML='';
+            document.getElementById('errorDetail').textContent='Could not reach GitHub ('+e1.message+'). CDN also failed ('+e2.message+')';
+            document.getElementById('errorState').style.display='block';
+            return
+        }
+    }
+
+    if(!Array.isArray(data)){grid.innerHTML='';document.getElementById('errorDetail').textContent='Data is not a valid array';document.getElementById('errorState').style.display='block';return}
+    console.log('[SS] Loaded',data.length,'templates successfully');
+    allTemplates=data.map(function(t){
+        var fn=t.filename||'';
+        return Object.assign({},t,{
+            id:t.id||0,
+            previewUrl:fn?'https://'+CONFIG.githubUser+'.github.io/'+CONFIG.templatesFolder+'/'+fn:''
+        })
+    });
+    updateStats();renderAllSections();renderExploreGrid()
 }
-function updateStats(){document.getElementById('totalTemplates').textContent=allTemplates.length;document.getElementById('totalCategories').textContent=new Set(allTemplates.map(t=>t.category).filter(Boolean)).size;const avg=allTemplates.length?Math.round(allTemplates.reduce((s,t)=>s+(t.price||0),0)/allTemplates.length):0;document.getElementById('avgPrice').textContent='₹'+avg}
+
+function updateStats(){document.getElementById('totalTemplates').textContent=allTemplates.length;var cs=new Set(allTemplates.map(function(t){return t.category}).filter(Boolean));document.getElementById('totalCategories').textContent=cs.size;var avg=allTemplates.length?Math.round(allTemplates.reduce(function(s,t){return s+(t.price||0)},0)/allTemplates.length):0;document.getElementById('avgPrice').textContent='\u20B9'+avg}
 function getTheme(c){return CAT_THEMES[c]||CAT_THEMES.uncategorized}
-function getFavorites(){try{return JSON.parse(localStorage.getItem('ss_favs')||'[]')}catch{return[]}}
+function getFavorites(){try{return JSON.parse(localStorage.getItem('ss_favs')||'[]')}catch(e){return[]}}
 function saveFavorites(f){localStorage.setItem('ss_favs',JSON.stringify(f));updateFavBadge()}
-function isFav(id){return getFavorites().includes(id)}
-function toggleFav(id,e){if(e){e.stopPropagation();e.preventDefault()}let f=getFavorites();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];saveFavorites(f);document.querySelectorAll(`.fav-btn[data-id="${id}"]`).forEach(b=>b.classList.toggle('active',f.includes(id)))}
-function updateFavBadge(){const c=getFavorites().length;const b=document.getElementById('favCountBadge');b.textContent=c;b.classList.toggle('visible',c>0)}
+function isFav(id){return getFavorites().indexOf(id)!==-1}
+function toggleFav(id,e){if(e){e.stopPropagation();e.preventDefault()}var f=getFavorites();var idx=f.indexOf(id);if(idx===-1)f.push(id);else f.splice(idx,1);saveFavorites(f);document.querySelectorAll('.fav-btn[data-id="'+id+'"]').forEach(function(b){b.classList.toggle('active',f.indexOf(id)!==-1)})}
+function updateFavBadge(){var c=getFavorites().length;var b=document.getElementById('favCountBadge');b.textContent=c;b.classList.toggle('visible',c>0)}
+function getThumbUrl(fn){if(!fn)return '';return'https://image.thum.io/get/width/600/crop/400/wait/3/https://'+CONFIG.githubUser+'.github.io/'+CONFIG.templatesFolder+'/'+fn}
 
-// thum.io URL with wait/3 to let CSS animations finish
-function getThumbUrl(filename){return`https://image.thum.io/get/width/600/crop/400/wait/3/https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/${filename}`}
-
-function createCardHTML(t){
-    const th=getTheme(t.category),tier=(t.tier||'standard').toLowerCase(),price=t.price||299,oldPrice=t.oldPrice||449,disc=t.discount||(oldPrice>price?`${Math.round((1-price/oldPrice)*100)}% OFF`:''),favd=isFav(t.id);
-    let badges='';if(t.trending)badges+='<span class="card-badge trending">Trending</span>';if(tier==='premium')badges+='<span class="card-badge premium-badge">💎 Premium</span>';else if(tier==='standard')badges+='<span class="card-badge standard-badge">⭐ Standard</span>';else badges+='<span class="card-badge basic-badge">Basic</span>';
-    const thumbUrl=getThumbUrl(t.filename);
-    return`<div class="template-card tier-${tier}" data-id="${t.id}"><div class="card-thumbnail" onclick="openDetail(${t.id})"><div class="card-placeholder" id="ph-${t.id}" style="--c1:${th.c1};--c2:${th.c2}"><div class="placeholder-icon">${th.icon}</div><div class="placeholder-label">${th.label}</div></div><img class="thumbnail-img" src="${thumbUrl}" alt="${t.name||''}" loading="lazy" onerror="this.style.display='none'" onload="this.classList.add('loaded');document.getElementById('ph-${t.id}').classList.add('hidden')"><div class="card-badges">${badges}</div><button class="fav-btn${favd?' active':''}" data-id="${t.id}" onclick="toggleFav(${t.id},event)">♡</button><div class="thumbnail-overlay"><button class="preview-btn" onclick="event.stopPropagation();openPreview(${t.id})"><span>▶</span> Live Preview</button></div></div><div class="card-content" onclick="openDetail(${t.id})"><div class="card-top-row"><span class="template-id">#${String(t.id).padStart(5,'0')}</span><div class="card-stats">${t.rating?`<span>⭐ ${t.rating}</span>`:''}<span>👥 ${t.orders||0}</span></div></div><h3 class="template-name">${t.name||'Untitled'}</h3><div class="template-style"><span class="style-dot"></span>${t.desc||'Custom Design'}</div><div class="card-footer"><div class="price-section"><span class="price-current">₹${price}</span>${oldPrice>price?`<span class="price-original">₹${oldPrice}</span>`:''}${disc?`<span class="discount-badge">${disc}</span>`:''}</div><button class="card-buy-btn" onclick="event.stopPropagation();buyTemplate(${t.id})">Buy</button></div></div></div>`;
+function createCardHTML(t,pfx){
+    pfx=pfx||'c';
+    var th=getTheme(t.category),tier=(t.tier||'standard').toLowerCase(),price=t.price||299,oldPrice=t.oldPrice||449,disc=t.discount||(oldPrice>price?Math.round((1-price/oldPrice)*100)+'% OFF':''),favd=isFav(t.id),badges='';
+    if(t.trending)badges+='<span class="card-badge trending">Trending</span>';
+    if(tier==='premium')badges+='<span class="card-badge premium-badge">\uD83D\uDC8E Premium</span>';
+    else if(tier==='standard')badges+='<span class="card-badge standard-badge">\u2B50 Standard</span>';
+    else badges+='<span class="card-badge basic-badge">Basic</span>';
+    var tu=t.filename?getThumbUrl(t.filename):'';
+    var pid=pfx+'_'+t.id+'_'+Math.random().toString(36).substr(2,6);
+    var imgH='';
+    if(tu){imgH='<img class="thumbnail-img" src="'+tu+'" alt="" loading="lazy" onerror="this.style.display=\'none\'" onload="this.classList.add(\'loaded\');var el=document.getElementById(\''+pid+'\');if(el)el.classList.add(\'hidden\')">'}
+    var sid=typeof t.id==='number'?t.id:0;
+    return '<div class="template-card tier-'+tier+'" data-id="'+sid+'"><div class="card-thumbnail" onclick="openDetail('+sid+')"><div class="card-placeholder" id="'+pid+'" style="--c1:'+th.c1+';--c2:'+th.c2+'"><div class="placeholder-icon">'+th.icon+'</div><div class="placeholder-label">'+th.label+'</div></div>'+imgH+'<div class="card-badges">'+badges+'</div><button class="fav-btn'+(favd?' active':'')+'" data-id="'+sid+'" onclick="toggleFav('+sid+',event)">\u2661</button><div class="thumbnail-overlay"><button class="preview-btn" onclick="event.stopPropagation();openPreview('+sid+')"><span>\u25B6</span> Live Preview</button></div></div><div class="card-content" onclick="openDetail('+sid+')"><div class="card-top-row"><span class="template-id">#'+String(sid).padStart(5,'0')+'</span><div class="card-stats">'+(t.rating?'<span>\u2B50 '+t.rating+'</span>':'')+'<span>\uD83D\uDC65 '+(t.orders||0)+'</span></div></div><h3 class="template-name">'+(t.name||'Untitled')+'</h3><div class="template-style"><span class="style-dot"></span>'+(t.desc||'Custom Design')+'</div><div class="card-footer"><div class="price-section"><span class="price-current">\u20B9'+price+'</span>'+(oldPrice>price?'<span class="price-original">\u20B9'+oldPrice+'</span>':'')+(disc?'<span class="discount-badge">'+disc+'</span>':'')+'</div><button class="card-buy-btn" onclick="event.stopPropagation();buyTemplate('+sid+')">Buy</button></div></div></div>'
 }
 
-function createMiniCardHTML(t){const th=getTheme(t.category),thumbUrl=getThumbUrl(t.filename);return`<div class="similar-mini-card" onclick="openDetail(${t.id})"><div class="similar-mini-thumb card-placeholder" id="sm-${t.id}" style="--c1:${th.c1};--c2:${th.c2}"><img class="thumbnail-img" src="${thumbUrl}" alt="" loading="lazy" style="opacity:0" onerror="this.style.display='none'" onload="this.classList.add('loaded');document.getElementById('sm-${t.id}').classList.add('hidden')"><div class="placeholder-icon" style="font-size:1.5rem">${th.icon}</div></div><div class="similar-mini-info"><div class="similar-mini-name">${t.name||'Untitled'}</div><div class="similar-mini-price">₹${t.price||299}</div></div></div>`}
+function createMiniCardHTML(t){
+    var th=getTheme(t.category),tu=t.filename?getThumbUrl(t.filename):'',mid='sm_'+t.id+'_'+Math.random().toString(36).substr(2,6);
+    var imgH='';if(tu){imgH='<img class="thumbnail-img" src="'+tu+'" alt="" loading="lazy" style="opacity:0" onerror="this.style.display=\'none\'" onload="this.classList.add(\'loaded\');var el=document.getElementById(\''+mid+'\');if(el)el.classList.add(\'hidden\')">'}
+    var sid=typeof t.id==='number'?t.id:0;
+    return '<div class="similar-mini-card" onclick="openDetail('+sid+')"><div class="similar-mini-thumb card-placeholder" id="'+mid+'" style="--c1:'+th.c1+';--c2:'+th.c2+'">'+imgH+'<div class="placeholder-icon" style="font-size:1.5rem">'+th.icon+'</div></div><div class="similar-mini-info"><div class="similar-mini-name">'+(t.name||'Untitled')+'</div><div class="similar-mini-price">\u20B9'+(t.price||299)+'</div></div></div>'
+}
 
 function renderAllSections(){renderRecentlyViewed();renderCarousel();renderPremiumSection();renderCategorySections();renderBudgetSection();renderFilterBar();renderStickyNav();updateFavBadge();setupFadeIn()}
-
-function getRecentlyViewed(){try{return JSON.parse(localStorage.getItem('ss_recent')||'[]')}catch{return[]}}
-function addToRecentlyViewed(id){let r=getRecentlyViewed().filter(x=>x!==id);r.unshift(id);r=r.slice(0,15);localStorage.setItem('ss_recent',JSON.stringify(r))}
+function getRecentlyViewed(){try{return JSON.parse(localStorage.getItem('ss_recent')||'[]')}catch(e){return[]}}
+function addToRecentlyViewed(id){var r=getRecentlyViewed().filter(function(x){return x!==id});r.unshift(id);if(r.length>15)r=r.slice(0,15);localStorage.setItem('ss_recent',JSON.stringify(r))}
 function clearRecentlyViewed(){localStorage.removeItem('ss_recent');document.getElementById('recentlyViewedSection').style.display='none'}
-function renderRecentlyViewed(){const ids=getRecentlyViewed(),tpls=ids.map(id=>allTemplates.find(t=>t.id===id)).filter(Boolean),sec=document.getElementById('recentlyViewedSection');if(tpls.length<2){sec.style.display='none';return}sec.style.display='block';document.getElementById('recentlyViewedRow').innerHTML=tpls.map(t=>createCardHTML(t)).join('')}
+function renderRecentlyViewed(){var ids=getRecentlyViewed(),tpls=ids.map(function(id){return allTemplates.find(function(t){return t.id===id})}).filter(Boolean),sec=document.getElementById('recentlyViewedSection');if(tpls.length<2){sec.style.display='none';return}sec.style.display='block';document.getElementById('recentlyViewedRow').innerHTML=tpls.map(function(t){return createCardHTML(t,'rv')}).join('')}
 
-function renderCarousel(){carouselTemplates=allTemplates.filter(t=>t.trending).sort((a,b)=>(b.orders||0)-(a.orders||0)).slice(0,6);const sec=document.getElementById('carouselSection');if(!carouselTemplates.length){sec.style.display='none';return}sec.style.display='block';document.getElementById('carouselTrack').innerHTML=carouselTemplates.map(t=>{const th=getTheme(t.category),tier=(t.tier||'standard').toLowerCase(),price=t.price||299,oldPrice=t.oldPrice||449,disc=oldPrice>price?`${Math.round((1-price/oldPrice)*100)}% OFF`:'',thumbUrl=getThumbUrl(t.filename);return`<div class="carousel-card"><div class="carousel-card-inner" onclick="openDetail(${t.id})"><div class="carousel-visual"><div class="card-placeholder" id="cr-${t.id}" style="--c1:${th.c1};--c2:${th.c2};border-radius:0"><img class="thumbnail-img" src="${thumbUrl}" alt="" loading="lazy" style="opacity:0" onerror="this.style.display='none'" onload="this.classList.add('loaded');document.getElementById('cr-${t.id}').classList.add('hidden')"><div class="placeholder-icon" style="font-size:4rem">${th.icon}</div><div class="placeholder-label" style="font-size:.8rem">${th.label}</div></div></div><div class="carousel-info"><span class="carousel-tier-badge ${tier}">${tier==='premium'?'💎':tier==='standard'?'⭐':'•'} ${tier}</span><h3 class="carousel-name">${t.name||'Untitled'}</h3><p class="carousel-desc">${t.desc||'A beautifully crafted animated template.'}</p><div class="carousel-stats"><span>⭐ ${t.rating||5.0}</span><span>👥 ${t.orders||0} orders</span></div><div class="carousel-price-row"><span class="carousel-price">₹${price}</span>${oldPrice>price?`<span class="carousel-old-price">₹${oldPrice}</span>`:''}${disc?`<span class="carousel-discount">${disc}</span>`:''}</div><button class="carousel-buy-btn" onclick="event.stopPropagation();buyTemplate(${t.id})">Buy Now →</button></div></div></div>`}).join('');carouselIndex=0;document.getElementById('carouselDots').innerHTML=carouselTemplates.map((_,i)=>`<button class="carousel-dot${i===0?' active':''}" onclick="goToSlide(${i})"></button>`).join('');startCarouselAuto()}
-function goToSlide(i){carouselIndex=i;document.getElementById('carouselTrack').style.transform=`translateX(-${i*100}%)`;document.querySelectorAll('.carousel-dot').forEach((d,j)=>d.classList.toggle('active',j===i))}
-function startCarouselAuto(){if(carouselInterval)clearInterval(carouselInterval);carouselInterval=setInterval(()=>{if(carouselTemplates.length<2)return;goToSlide((carouselIndex+1)%carouselTemplates.length)},4500);const c=document.querySelector('.carousel-container');c.onmouseenter=()=>clearInterval(carouselInterval);c.onmouseleave=startCarouselAuto}
-function renderPremiumSection(){const t=allTemplates.filter(t=>(t.tier||'').toLowerCase()==='premium');document.getElementById('premiumSection').style.display=t.length?'block':'none';if(t.length)document.getElementById('premiumRow').innerHTML=t.map(x=>createCardHTML(x)).join('')}
-function renderCategorySections(){const c=document.getElementById('categorySections');c.innerHTML='';const cc={};allTemplates.forEach(t=>{cc[t.category||'uncategorized']=(cc[t.category||'uncategorized']||0)+1});SECTION_CAT_ORDER.forEach(cat=>{if(!cc[cat])return;const tpls=allTemplates.filter(t=>(t.category||'uncategorized')===cat),th=getTheme(cat),s=document.createElement('div');s.className='section-block fade-in-up';s.innerHTML=`<div class="section-header"><h2 class="section-title"><span class="cat-icon">${th.icon}</span> ${th.label} Collection</h2><button class="section-see-all" onclick="scrollToExplore('${cat}')">See All →</button></div><div class="scroll-wrapper"><button class="scroll-arrow left" onclick="scrollRow(this,-1)">‹</button><div class="scroll-row">${tpls.map(x=>createCardHTML(x)).join('')}</div><button class="scroll-arrow right" onclick="scrollRow(this,1)">›</button></div>`;c.appendChild(s)})}
-function renderBudgetSection(){const t=allTemplates.filter(t=>(t.tier||'').toLowerCase()==='basic');document.getElementById('budgetSection').style.display=t.length?'block':'none';if(t.length)document.getElementById('budgetRow').innerHTML=t.map(x=>createCardHTML(x)).join('')}
+function renderCarousel(){carouselTemplates=allTemplates.filter(function(t){return t.trending}).sort(function(a,b){return(b.orders||0)-(a.orders||0)}).slice(0,6);var sec=document.getElementById('carouselSection');if(!carouselTemplates.length){sec.style.display='none';return}sec.style.display='block';document.getElementById('carouselTrack').innerHTML=carouselTemplates.map(function(t){var th=getTheme(t.category),tier=(t.tier||'standard').toLowerCase(),price=t.price||299,oldPrice=t.oldPrice||449,disc=oldPrice>price?Math.round((1-price/oldPrice)*100)+'% OFF':'',tu=t.filename?getThumbUrl(t.filename):'',cid='cr_'+t.id+'_'+Math.random().toString(36).substr(2,6),sid=typeof t.id==='number'?t.id:0;var imgH='';if(tu){imgH='<img class="thumbnail-img" src="'+tu+'" alt="" loading="lazy" style="opacity:0" onerror="this.style.display=\'none\'" onload="this.classList.add(\'loaded\');var el=document.getElementById(\''+cid+'\');if(el)el.classList.add(\'hidden\')">'}return '<div class="carousel-card"><div class="carousel-card-inner" onclick="openDetail('+sid+')"><div class="carousel-visual"><div class="card-placeholder" id="'+cid+'" style="--c1:'+th.c1+';--c2:'+th.c2+';border-radius:0">'+imgH+'<div class="placeholder-icon" style="font-size:4rem">'+th.icon+'</div><div class="placeholder-label" style="font-size:.8rem">'+th.label+'</div></div></div><div class="carousel-info"><span class="carousel-tier-badge '+tier+'">'+(tier==='premium'?'\uD83D\uDC8E':tier==='standard'?'\u2B50':'\u2022')+' '+tier+'</span><h3 class="carousel-name">'+(t.name||'Untitled')+'</h3><p class="carousel-desc">'+(t.desc||'A beautifully crafted animated template.')+'</p><div class="carousel-stats"><span>\u2B50 '+(t.rating||5.0)+'</span><span>\uD83D\uDC65 '+(t.orders||0)+' orders</span></div><div class="carousel-price-row"><span class="carousel-price">\u20B9'+price+'</span>'+(oldPrice>price?'<span class="carousel-old-price">\u20B9'+oldPrice+'</span>':'')+(disc?'<span class="carousel-discount">'+disc+'</span>':'')+'</div><button class="carousel-buy-btn" onclick="event.stopPropagation();buyTemplate('+sid+')">Buy Now \u2192</button></div></div></div>'}).join('');carouselIndex=0;document.getElementById('carouselDots').innerHTML=carouselTemplates.map(function(_,i){return '<button class="carousel-dot'+(i===0?' active':'')+'" onclick="goToSlide('+i+')"></button>'}).join('');startCarouselAuto()}
+
+function goToSlide(i){carouselIndex=i;document.getElementById('carouselTrack').style.transform='translateX(-'+i*100+'%)';document.querySelectorAll('.carousel-dot').forEach(function(d,j){d.classList.toggle('active',j===i)})}
+function startCarouselAuto(){if(carouselInterval)clearInterval(carouselInterval);carouselInterval=setInterval(function(){if(carouselTemplates.length<2)return;goToSlide((carouselIndex+1)%carouselTemplates.length)},4500);var c=document.querySelector('.carousel-container');c.onmouseenter=function(){clearInterval(carouselInterval)};c.onmouseleave=function(){startCarouselAuto()}}
+function renderPremiumSection(){var t=allTemplates.filter(function(t){return(t.tier||'').toLowerCase()==='premium'});document.getElementById('premiumSection').style.display=t.length?'block':'none';if(t.length)document.getElementById('premiumRow').innerHTML=t.map(function(x){return createCardHTML(x,'pm')}).join('')}
+
+function renderCategorySections(){
+    var c=document.getElementById('categorySections');
+    c.innerHTML='';
+    var cc={};
+    allTemplates.forEach(function(t){var cat=t.category||'uncategorized';cc[cat]=(cc[cat]||0)+1});
+    SECTION_CAT_ORDER.forEach(function(cat){
+        if(!cc[cat])return;
+        var tpls=allTemplates.filter(function(t){return(t.category||'uncategorized')===cat});
+        var th=getTheme(cat);
+        var s=document.createElement('div');
+        s.className='section-block fade-in-up';
+        /* FIXED: scroll arrow buttons have proper HTML -- no characters leaking into onclick */
+        var cardsHtml=tpls.map(function(x){return createCardHTML(x,'cat_'+cat)}).join('');
+        s.innerHTML='<div class="section-header"><h2 class="section-title"><span class="cat-icon">'+th.icon+'</span> '+th.label+' Collection</h2><button class="section-see-all" onclick="scrollToExplore(\''+cat+'\')">See All \u2192</button></div><div class="scroll-wrapper"><button class="scroll-arrow left" onclick="scrollRow(this,-1)">\u2039</button><div class="scroll-row">'+cardsHtml+'</div><button class="scroll-arrow right" onclick="scrollRow(this,1)">\u203A</button></div>';
+        c.appendChild(s)
+    })
+}
+
+function renderBudgetSection(){var t=allTemplates.filter(function(t){return(t.tier||'').toLowerCase()==='basic'});document.getElementById('budgetSection').style.display=t.length?'block':'none';if(t.length)document.getElementById('budgetRow').innerHTML=t.map(function(x){return createCardHTML(x,'bd')}).join('')}
 function scrollRow(b,d){b.parentElement.querySelector('.scroll-row').scrollBy({left:d*320,behavior:'smooth'})}
 
-function renderFilterBar(){const bar=document.getElementById('filterBar'),cc={};allTemplates.forEach(t=>{cc[t.category||'uncategorized']=(cc[t.category||'uncategorized']||0)+1});let h=`<button class="filter-pill${currentExploreCategory==='all'?' active':''}" onclick="setExploreFilter('category','all')">All <span class="count">${allTemplates.length}</span></button>`;SECTION_CAT_ORDER.forEach(cat=>{if(!cc[cat])return;const th=getTheme(cat);h+=`<button class="filter-pill${currentExploreCategory===cat?' active':''}" onclick="setExploreFilter('category','${cat}')">${th.icon} ${th.label} <span class="count">${cc[cat]}</span></button>`});h+=`<div class="filter-separator"></div><button class="filter-pill${currentExploreTier==='all'?' active':''}" onclick="setExploreFilter('tier','all')">All Tiers</button><button class="filter-pill${currentExploreTier==='premium'?' active':''}" onclick="setExploreFilter('tier','premium')">💎 Premium</button><button class="filter-pill${currentExploreTier==='standard'?' active':''}" onclick="setExploreFilter('tier','standard')">⭐ Standard</button><button class="filter-pill${currentExploreTier==='basic'?' active':''}" onclick="setExploreFilter('tier','basic')">Basic</button><div class="filter-separator"></div><button class="filter-pill${currentExplorePrice==='all'?' active':''}" onclick="setExploreFilter('price','all')">Any Price</button><button class="filter-pill${currentExplorePrice==='low'?' active':''}" onclick="setExploreFilter('price','low')">Under ₹200</button><button class="filter-pill${currentExplorePrice==='mid'?' active':''}" onclick="setExploreFilter('price','mid')">₹200-400</button><button class="filter-pill${currentExplorePrice==='high'?' active':''}" onclick="setExploreFilter('price','high')">₹400+</button><div class="filter-separator"></div>`;if(getFavorites().length)h+=`<button class="filter-pill${currentExploreCategory==='favorites'?' active':''}" onclick="setExploreFilter('category','favorites')">♡ Favorites <span class="count">${getFavorites().length}</span></button>`;h+=`<select class="sort-select" onchange="currentExploreSort=this.value;renderExploreGrid()"><option value="newest"${currentExploreSort==='newest'?' selected':''}>Newest</option><option value="price-low"${currentExploreSort==='price-low'?' selected':''}>Price ↑</option><option value="price-high"${currentExploreSort==='price-high'?' selected':''}>Price ↓</option><option value="popular"${currentExploreSort==='popular'?' selected':''}>Popular</option></select>`;bar.innerHTML=h}
+function renderFilterBar(){var bar=document.getElementById('filterBar'),cc={};allTemplates.forEach(function(t){cc[t.category||'uncategorized']=(cc[t.category||'uncategorized']||0)+1});var h='<button class="filter-pill'+(currentExploreCategory==='all'?' active':'')+'" onclick="setExploreFilter(\'category\',\'all\')">All <span class="count">'+allTemplates.length+'</span></button>';SECTION_CAT_ORDER.forEach(function(cat){if(!cc[cat])return;var th=getTheme(cat);h+='<button class="filter-pill'+(currentExploreCategory===cat?' active':'')+'" onclick="setExploreFilter(\'category\',\''+cat+'\')">'+th.icon+' '+th.label+' <span class="count">'+cc[cat]+'</span></button>'});h+='<div class="filter-separator"></div><button class="filter-pill'+(currentExploreTier==='all'?' active':'')+'" onclick="setExploreFilter(\'tier\',\'all\')">All Tiers</button><button class="filter-pill'+(currentExploreTier==='premium'?' active':'')+'" onclick="setExploreFilter(\'tier\',\'premium\')">\uD83D\uDC8E Premium</button><button class="filter-pill'+(currentExploreTier==='standard'?' active':'')+'" onclick="setExploreFilter(\'tier\',\'standard\')">\u2B50 Standard</button><button class="filter-pill'+(currentExploreTier==='basic'?' active':'')+'" onclick="setExploreFilter(\'tier\',\'basic\')">Basic</button><div class="filter-separator"></div><button class="filter-pill'+(currentExplorePrice==='all'?' active':'')+'" onclick="setExploreFilter(\'price\',\'all\')">Any Price</button><button class="filter-pill'+(currentExplorePrice==='low'?' active':'')+'" onclick="setExploreFilter(\'price\',\'low\')">Under \u20B9200</button><button class="filter-pill'+(currentExplorePrice==='mid'?' active':'')+'" onclick="setExploreFilter(\'price\',\'mid\')">\u20B9200-400</button><button class="filter-pill'+(currentExplorePrice==='high'?' active':'')+'" onclick="setExploreFilter(\'price\',\'high\')">\u20B9400+</button><div class="filter-separator"></div>';if(getFavorites().length)h+='<button class="filter-pill'+(currentExploreCategory==='favorites'?' active':'')+'" onclick="setExploreFilter(\'category\',\'favorites\')">\u2661 Favorites <span class="count">'+getFavorites().length+'</span></button>';h+='<select class="sort-select" onchange="currentExploreSort=this.value;renderExploreGrid()"><option value="newest"'+(currentExploreSort==='newest'?' selected':'')+'>Newest</option><option value="price-low"'+(currentExploreSort==='price-low'?' selected':'')+'>Price \u2191</option><option value="price-high"'+(currentExploreSort==='price-high'?' selected':'')+'>Price \u2193</option><option value="popular"'+(currentExploreSort==='popular'?' selected':'')+'>Popular</option></select>';bar.innerHTML=h}
 function setExploreFilter(type,val){if(type==='category')currentExploreCategory=val;else if(type==='tier')currentExploreTier=val;else if(type==='price')currentExplorePrice=val;renderFilterBar();renderExploreGrid()}
-function scrollToExplore(f){if(f&&f.startsWith('tier:')){currentExploreTier=f.split(':')[1];currentExploreCategory='all'}else if(f==='favorites')currentExploreCategory='favorites';else if(f)currentExploreCategory=f;renderFilterBar();renderExploreGrid();document.getElementById('exploreSection').scrollIntoView({behavior:'smooth',block:'start'})}
-function renderExploreGrid(){let f=[...allTemplates];if(currentExploreCategory==='favorites')f=f.filter(t=>getFavorites().includes(t.id));else if(currentExploreCategory!=='all')f=f.filter(t=>(t.category||'uncategorized')===currentExploreCategory);if(currentExploreTier!=='all')f=f.filter(t=>(t.tier||'standard').toLowerCase()===currentExploreTier);if(currentExplorePrice==='low')f=f.filter(t=>(t.price||299)<200);else if(currentExplorePrice==='mid')f=f.filter(t=>{const p=t.price||299;return p>=200&&p<=400});else if(currentExplorePrice==='high')f=f.filter(t=>(t.price||299)>=400);if(currentSearch){const s=currentSearch.toLowerCase();f=f.filter(t=>(t.name||'').toLowerCase().includes(s)||(t.category||'').toLowerCase().includes(s)||(t.desc||'').toLowerCase().includes(s))}f.sort((a,b)=>{switch(currentExploreSort){case'price-low':return(a.price||299)-(b.price||299);case'price-high':return(b.price||299)-(a.price||299);case'popular':return(b.orders||0)-(a.orders||0);default:return new Date(b.added||0)-new Date(a.added||0)}});const g=document.getElementById('exploreGrid'),e=document.getElementById('emptyState');document.getElementById('errorState').style.display='none';if(!f.length){g.innerHTML='';e.style.display='block'}else{e.style.display='none';g.innerHTML=f.map(t=>createCardHTML(t)).join('')}document.getElementById('showingCount').textContent=f.length;document.getElementById('totalCount').textContent=allTemplates.length}
+function scrollToExplore(f){if(f&&f.indexOf('tier:')===0){currentExploreTier=f.split(':')[1];currentExploreCategory='all'}else if(f==='favorites')currentExploreCategory='favorites';else if(f)currentExploreCategory=f;renderFilterBar();renderExploreGrid();document.getElementById('exploreSection').scrollIntoView({behavior:'smooth',block:'start'})}
+function renderExploreGrid(){var f=allTemplates.slice();if(currentExploreCategory==='favorites'){var favs=getFavorites();f=f.filter(function(t){return favs.indexOf(t.id)!==-1})}else if(currentExploreCategory!=='all')f=f.filter(function(t){return(t.category||'uncategorized')===currentExploreCategory});if(currentExploreTier!=='all')f=f.filter(function(t){return(t.tier||'standard').toLowerCase()===currentExploreTier});if(currentExplorePrice==='low')f=f.filter(function(t){return(t.price||299)<200});else if(currentExplorePrice==='mid')f=f.filter(function(t){var p=t.price||299;return p>=200&&p<=400});else if(currentExplorePrice==='high')f=f.filter(function(t){return(t.price||299)>=400});if(currentSearch){var s=currentSearch.toLowerCase();f=f.filter(function(t){return(t.name||'').toLowerCase().indexOf(s)!==-1||(t.category||'').toLowerCase().indexOf(s)!==-1||(t.desc||'').toLowerCase().indexOf(s)!==-1})}f.sort(function(a,b){switch(currentExploreSort){case'price-low':return(a.price||299)-(b.price||299);case'price-high':return(b.price||299)-(a.price||299);case'popular':return(b.orders||0)-(a.orders||0);default:return new Date(b.added||0)-new Date(a.added||0)}});var g=document.getElementById('exploreGrid'),e=document.getElementById('emptyState');document.getElementById('errorState').style.display='none';if(!f.length){g.innerHTML='';e.style.display='block'}else{e.style.display='none';g.innerHTML=f.map(function(t){return createCardHTML(t,'ex')}).join('')}document.getElementById('showingCount').textContent=f.length;document.getElementById('totalCount').textContent=allTemplates.length}
 
-function setupStickyNav(){new IntersectionObserver(([e])=>{document.getElementById('stickyNav').classList.toggle('visible',!e.isIntersecting)},{threshold:.15}).observe(document.getElementById('heroSection'))}
-function renderStickyNav(){const inner=document.getElementById('stickyNavInner'),cc={};allTemplates.forEach(t=>{cc[t.category||'uncategorized']=(cc[t.category||'uncategorized']||0)+1});let h=`<button class="sticky-pill active" onclick="document.getElementById('exploreSection').scrollIntoView({behavior:'smooth'})">All</button>`;SECTION_CAT_ORDER.forEach(cat=>{if(!cc[cat])return;const th=getTheme(cat);h+=`<button class="sticky-pill" onclick="scrollToExplore('${cat}')">${th.icon} ${th.label}</button>`});inner.innerHTML=h}
-function setupScrollProgress(){const bar=document.getElementById('scrollProgress'),btn=document.getElementById('backToTop');window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=h>0?(window.scrollY/h*100)+'%':'0%';btn.classList.toggle('visible',window.scrollY>500)},{passive:true})}
-function setupFadeIn(){new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');this.unobserve(e.target)}})},{threshold:.1}).observe(document.querySelectorAll('.fade-in-up'))}
-function toggleFaq(btn){const a=btn.nextElementSibling,open=btn.classList.contains('open');document.querySelectorAll('.faq-question.open').forEach(q=>{q.classList.remove('open');q.nextElementSibling.style.maxHeight='0'});if(!open){btn.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}}
+function setupStickyNav(){new IntersectionObserver(function(entries){document.getElementById('stickyNav').classList.toggle('visible',!entries[0].isIntersecting)},{threshold:.15}).observe(document.getElementById('heroSection'))}
+function renderStickyNav(){var inner=document.getElementById('stickyNavInner'),cc={};allTemplates.forEach(function(t){cc[t.category||'uncategorized']=(cc[t.category||'uncategorized']||0)+1});var h='<button class="sticky-pill active" onclick="document.getElementById(\'exploreSection\').scrollIntoView({behavior:\'smooth\'})">All</button>';SECTION_CAT_ORDER.forEach(function(cat){if(!cc[cat])return;var th=getTheme(cat);h+='<button class="sticky-pill" onclick="scrollToExplore(\''+cat+'\')">'+th.icon+' '+th.label+'</button>'});inner.innerHTML=h}
+function setupScrollProgress(){var bar=document.getElementById('scrollProgress'),btn=document.getElementById('backToTop');window.addEventListener('scroll',function(){var h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=h>0?(window.scrollY/h*100)+'%':'0%';btn.classList.toggle('visible',window.scrollY>500)},{passive:true})}
+function setupFadeIn(){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});document.querySelectorAll('.fade-in-up').forEach(function(el){obs.observe(el)})}
+function toggleFaq(btn){var a=btn.nextElementSibling,open=btn.classList.contains('open');document.querySelectorAll('.faq-question.open').forEach(function(q){q.classList.remove('open');q.nextElementSibling.style.maxHeight='0'});if(!open){btn.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}}
 
-function openDetail(id){const t=allTemplates.find(x=>x.id===id);if(!t)return;currentDetailId=id;addToRecentlyViewed(id);renderRecentlyViewed();const th=getTheme(t.category),tier=(t.tier||'standard').toLowerCase(),price=t.price||299,oldPrice=t.oldPrice||449,disc=oldPrice>price?`${Math.round((1-price/oldPrice)*100)}% OFF`:'',feat=t.features||{};let featH='';if(Object.keys(feat).length)featH=`<div class="detail-features"><div class="detail-features-title">Features</div><div class="features-grid">${Object.entries(feat).map(([k,v])=>`<div class="feature-item"><span class="feature-key">${k}</span><span class="feature-val">${v}</span></div>`).join('')}</div></div>`;const sim=allTemplates.filter(x=>x.id!==id&&(x.category||'uncategorized')===(t.category||'uncategorized')).slice(0,6);let simH='';if(sim.length)simH=`<div class="detail-similar"><div class="detail-similar-title">Similar Templates</div><div class="detail-similar-row">${sim.map(x=>createMiniCardHTML(x)).join('')}</div></div>`;const thumbUrl=getThumbUrl(t.filename);document.getElementById('detailPanel').innerHTML=`<div class="detail-close"><button class="detail-close-btn" onclick="closeDetail()">×</button></div><div class="detail-preview-area" onclick="openPreview(${id})"><div class="card-placeholder" id="dp-${t.id}" style="--c1:${th.c1};--c2:${th.c2};border-radius:14px"><img class="thumbnail-img" src="${thumbUrl}" alt="" loading="lazy" style="opacity:0" onerror="this.style.display='none'" onload="this.classList.add('loaded');document.getElementById('dp-${t.id}').classList.add('hidden')"><div class="placeholder-icon" style="font-size:3.5rem">${th.icon}</div><div class="placeholder-label">${th.label}</div></div><div class="detail-preview-overlay"><button class="detail-preview-btn" onclick="event.stopPropagation();openPreview(${id})">▶ Live Preview</button></div></div><div class="detail-body"><span class="detail-tier-badge ${tier}">${tier==='premium'?'💎':tier==='standard'?'⭐':'•'} ${tier}</span><h2 class="detail-name">${t.name||'Untitled'}</h2><p class="detail-desc">${t.desc||'A beautifully crafted animated template for your special occasion.'}</p>${featH}<div class="detail-stats-row"><span>⭐ ${t.rating||5.0}</span><span>👥 ${t.orders||0} orders</span><span>📂 ${th.label}</span></div><div class="detail-price-row"><span class="detail-price">₹${price}</span>${oldPrice>price?`<span class="detail-old-price">₹${oldPrice}</span>`:''}${disc?`<span class="detail-discount">${disc}</span>`:''}</div><button class="detail-buy-btn" onclick="buyTemplate(${id})">Buy Now -- ₹${price}</button>${simH}</div>`;document.getElementById('detailOverlay').classList.add('active');document.getElementById('detailPanel').classList.add('active');document.body.style.overflow='hidden'}
+function openDetail(id){var t=allTemplates.find(function(x){return x.id===id});if(!t)return;currentDetailId=id;addToRecentlyViewed(id);renderRecentlyViewed();var th=getTheme(t.category),tier=(t.tier||'standard').toLowerCase(),price=t.price||299,oldPrice=t.oldPrice||449,disc=oldPrice>price?Math.round((1-price/oldPrice)*100)+'% OFF':'',feat=t.features||{},featH='';if(Object.keys(feat).length)featH='<div class="detail-features"><div class="detail-features-title">Features</div><div class="features-grid">'+Object.keys(feat).map(function(k){return '<div class="feature-item"><span class="feature-key">'+k+'</span><span class="feature-val">'+feat[k]+'</span></div>'}).join('')+'</div></div>';var sim=allTemplates.filter(function(x){return x.id!==id&&(x.category||'uncategorized')===(t.category||'uncategorized')}).slice(0,6),simH='';if(sim.length)simH='<div class="detail-similar"><div class="detail-similar-title">Similar Templates</div><div class="detail-similar-row">'+sim.map(function(x){return createMiniCardHTML(x)}).join('')+'</div></div>';var tu=t.filename?getThumbUrl(t.filename):'',dpid='dp_'+t.id+'_'+Math.random().toString(36).substr(2,6);var imgH='';if(tu){imgH='<img class="thumbnail-img" src="'+tu+'" alt="" loading="lazy" style="opacity:0" onerror="this.style.display=\'none\'" onload="this.classList.add(\'loaded\');var el=document.getElementById(\''+dpid+'\');if(el)el.classList.add(\'hidden\')">'}var sid=typeof t.id==='number'?t.id:0;document.getElementById('detailPanel').innerHTML='<div class="detail-close"><button class="detail-close-btn" onclick="closeDetail()">\u00D7</button></div><div class="detail-preview-area" onclick="openPreview('+sid+')"><div class="card-placeholder" id="'+dpid+'" style="--c1:'+th.c1+';--c2:'+th.c2+';border-radius:14px">'+imgH+'<div class="placeholder-icon" style="font-size:3.5rem">'+th.icon+'</div><div class="placeholder-label">'+th.label+'</div></div><div class="detail-preview-overlay"><button class="detail-preview-btn" onclick="event.stopPropagation();openPreview('+sid+')">\u25B6 Live Preview</button></div></div><div class="detail-body"><span class="detail-tier-badge '+tier+'">'+(tier==='premium'?'\uD83D\uDC8E':tier==='standard'?'\u2B50':'\u2022')+' '+tier+'</span><h2 class="detail-name">'+(t.name||'Untitled')+'</h2><p class="detail-desc">'+(t.desc||'A beautifully crafted animated template for your special occasion.')+'</p>'+featH+'<div class="detail-stats-row"><span>\u2B50 '+(t.rating||5.0)+'</span><span>\uD83D\uDC65 '+(t.orders||0)+' orders</span><span>\uD83D\uDCC2 '+th.label+'</span></div><div class="detail-price-row"><span class="detail-price">\u20B9'+price+'</span>'+(oldPrice>price?'<span class="detail-old-price">\u20B9'+oldPrice+'</span>':'')+(disc?'<span class="detail-discount">'+disc+'</span>':'')+'</div><button class="detail-buy-btn" onclick="buyTemplate('+sid+')">Buy Now \u2014 \u20B9'+price+'</button>'+simH+'</div>';document.getElementById('detailOverlay').classList.add('active');document.getElementById('detailPanel').classList.add('active');document.body.style.overflow='hidden'}
 function closeDetail(){document.getElementById('detailOverlay').classList.remove('active');document.getElementById('detailPanel').classList.remove('active');document.body.style.overflow='';currentDetailId=null}
-function openPreview(id){const t=allTemplates.find(x=>x.id===id);if(!t)return;currentPreviewId=id;document.getElementById('modalTitle').textContent=t.name;document.getElementById('modalPrice').textContent='₹'+(t.price||299);document.getElementById('previewModal').classList.add('active');document.getElementById('modalLoading').style.display='flex';const f=document.getElementById('previewFrame');f.style.opacity='0';f.src=t.previewUrl;f.onload=()=>{document.getElementById('modalLoading').style.display='none';f.style.opacity='1'};document.body.style.overflow='hidden'}
+function openPreview(id){var t=allTemplates.find(function(x){return x.id===id});if(!t||!t.previewUrl)return;currentPreviewId=id;document.getElementById('modalTitle').textContent=t.name||'Preview';document.getElementById('modalPrice').textContent='\u20B9'+(t.price||299);document.getElementById('previewModal').classList.add('active');document.getElementById('modalLoading').style.display='flex';var f=document.getElementById('previewFrame');f.style.opacity='0';f.src=t.previewUrl;f.onload=function(){document.getElementById('modalLoading').style.display='none';f.style.opacity='1'};setTimeout(function(){document.getElementById('modalLoading').style.display='none';f.style.opacity='1'},8000);document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('previewModal').classList.remove('active');document.getElementById('previewFrame').src='about:blank';currentPreviewId=null;document.body.style.overflow=''}
 function buyCurrent(){if(currentPreviewId)buyTemplate(currentPreviewId)}
-function buyTemplate(id){const t=allTemplates.find(x=>x.id===id);if(!t)return;if(chatState==='completed'&&chatUser&&chatUser.email)window.open(`https://t.me/${CONFIG.telegramBotUsername}?start=purchase_${t.id}`,'_blank');else{pendingPurchaseTemplateId=id;closeModal();closeDetail();toggleChat()}}
-function setupEventListeners(){document.getElementById('searchInput').addEventListener('input',e=>{currentSearch=e.target.value;renderExploreGrid()});document.getElementById('previewModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDetail();document.getElementById('chatWindow').classList.remove('active')}})}
+function buyTemplate(id){var t=allTemplates.find(function(x){return x.id===id});if(!t)return;if(chatState==='completed'&&chatUser&&chatUser.email){window.open('https://t.me/'+CONFIG.telegramBotUsername+'?start=purchase_'+t.id,'_blank')}else{pendingPurchaseTemplateId=id;closeModal();closeDetail();toggleChat()}}
+function setupEventListeners(){document.getElementById('searchInput').addEventListener('input',function(e){currentSearch=e.target.value;renderExploreGrid()});document.getElementById('previewModal').addEventListener('click',function(e){if(e.target===e.currentTarget)closeModal()});document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal();closeDetail();document.getElementById('chatWindow').classList.remove('active')}})}
 
-// ═══ CHAT ═══
-function initChat(){const su=localStorage.getItem('chatUser'),ss=localStorage.getItem('chatState');if(su)chatUser=JSON.parse(su);if(ss)chatState=ss;else if(chatUser&&chatUser.name&&chatUser.email){chatState='completed';localStorage.setItem('chatState','completed')}notificationPermission='Notification'in window&&Notification.permission==='granted';const inp=document.getElementById('chatInput');inp.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,90)+'px'});inp.addEventListener('keypress',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});loadChatHistory();startPolling()}
-function startPolling(){if(pollingInterval)clearInterval(pollingInterval);pollingInterval=setInterval(async()=>{if(chatUser&&chatUser.id)await checkNew()},3000)}
-async function checkNew(){try{let u=`https://api.telegram.org/bot${CONFIG.telegramBotToken}/getUpdates`;if(lastMessageId>0)u+=`?offset=${lastMessageId+1}`;const r=await fetch(u),d=await r.json();if(d.ok&&d.result)for(const x of d.result){lastMessageId=Math.max(lastMessageId,x.update_id);if(x.message&&x.message.reply_to_message){const m=x.message.reply_to_message.text||'',id=m.match(/ID: ([A-Z0-9]+)/);if(id&&id[1]===chatUser.id&&x.message.text){addMsg({type:'received',text:x.message.text,time:new Date(x.message.date*1000)});if(notificationPermission)new Notification('New reply from admin',{body:x.message.text.substring(0,100)});document.getElementById('chatButton').classList.add('has-new')}}}}catch(e){}}
-function toggleChat(){const w=document.getElementById('chatWindow');if(!w.classList.contains('active')){w.classList.add('active');document.getElementById('chatButton').classList.remove('has-new');if(chatState==='not_started'){chatState='collecting_name';localStorage.setItem('chatState',chatState);addMsg({type:'received',text:"Hi! 👋 Welcome to Scripted Surprise.\n\nTo get started, could you please tell me your name?",time:new Date()});scrollCB()}}else w.classList.remove('active')}
+function initChat(){var su=localStorage.getItem('chatUser'),ss=localStorage.getItem('chatState');if(su)chatUser=JSON.parse(su);if(ss)chatState=ss;else if(chatUser&&chatUser.name&&chatUser.email){chatState='completed';localStorage.setItem('chatState','completed')}notificationPermission='Notification'in window&&Notification.permission==='granted';var inp=document.getElementById('chatInput');inp.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,90)+'px'});inp.addEventListener('keypress',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});loadChatHistory();startPolling()}
+function startPolling(){if(pollingInterval)clearInterval(pollingInterval);pollingInterval=setInterval(function(){if(chatUser&&chatUser.id)checkNew()},3000)}
+function checkNew(){fetch('https://api.telegram.org/bot'+CONFIG.telegramBotToken+'/getUpdates'+(lastMessageId>0?'?offset='+(lastMessageId+1):'')).then(function(r){return r.json()}).then(function(d){if(d.ok&&d.result)for(var i=0;i<d.result.length;i++){var x=d.result[i];lastMessageId=Math.max(lastMessageId,x.update_id);if(x.message&&x.message.reply_to_message){var m=x.message.reply_to_message.text||'',id=m.match(/ID: ([A-Z0-9]+)/);if(id&&id[1]===chatUser.id&&x.message.text){addMsg({type:'received',text:x.message.text,time:new Date(x.message.date*1000)});if(notificationPermission)new Notification('New reply from admin',{body:x.message.text.substring(0,100)});document.getElementById('chatButton').classList.add('has-new')}}}}).catch(function(e){})}
+function toggleChat(){var w=document.getElementById('chatWindow');if(!w.classList.contains('active')){w.classList.add('active');document.getElementById('chatButton').classList.remove('has-new');if(chatState==='not_started'){chatState='collecting_name';localStorage.setItem('chatState',chatState);addMsg({type:'received',text:"Hi! \uD83D\uDC4B Welcome to Scripted Surprise.\n\nTo get started, could you please tell me your name?",time:new Date()});scrollCB()}}else w.classList.remove('active')}
 function showTyping(){document.getElementById('typingIndicator').classList.add('active');scrollCB()}
 function hideTyping(){document.getElementById('typingIndicator').classList.remove('active')}
-function loadChatHistory(){const h=localStorage.getItem('chatHistory');if(h){messages=JSON.parse(h);renderMsgs()}if(chatState==='completed'&&!notificationPermission&&'Notification'in window&&Notification.permission!=='denied')addNotifBtn()}
+function loadChatHistory(){var h=localStorage.getItem('chatHistory');if(h){messages=JSON.parse(h);renderMsgs()}if(chatState==='completed'&&!notificationPermission&&'Notification'in window&&Notification.permission!=='denied')addNotifBtn()}
 function saveChatHistory(){localStorage.setItem('chatHistory',JSON.stringify(messages))}
 function addMsg(m){messages.push(m);renderMsg(m);saveChatHistory();scrollCB()}
-function renderMsgs(){const c=document.getElementById('chatMessages');c.innerHTML='';messages.forEach(m=>renderMsg(m))}
-function renderMsg(m){const c=document.getElementById('chatMessages'),d=document.createElement('div');d.className=`message ${m.type}`;let h='';if(m.replyTo)h+=`<div class="reply-to">${esc(m.replyTo.text)}</div>`;if(m.text)h+=esc(m.text);if(m.mediaType==='image')h+=`<img src="${m.mediaUrl}" class="message-media">`;else if(m.mediaType==='video')h+=`<video src="${m.mediaUrl}" class="message-media" controls></video>`;else if(m.mediaType==='audio')h+=`<audio src="${m.mediaUrl}" class="message-audio" controls></audio>`;else if(m.fileName)h+=`<div class="message-file">📄 ${esc(m.fileName)}</div>`;h+=`<span class="message-time">${new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>`;d.innerHTML=h;c.appendChild(d)}
-function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML}
+function renderMsgs(){var c=document.getElementById('chatMessages');c.innerHTML='';messages.forEach(function(m){renderMsg(m)})}
+function renderMsg(m){var c=document.getElementById('chatMessages'),d=document.createElement('div');d.className='message '+m.type;var h='';if(m.replyTo)h+='<div class="reply-to">'+esc(m.replyTo.text)+'</div>';if(m.text)h+=esc(m.text);if(m.mediaType==='image')h+='<img src="'+m.mediaUrl+'" class="message-media">';else if(m.mediaType==='video')h+='<video src="'+m.mediaUrl+'" class="message-media" controls></video>';else if(m.mediaType==='audio')h+='<audio src="'+m.mediaUrl+'" class="message-audio" controls></audio>';else if(m.fileName)h+='<div class="message-file">\uD83D\uDCC4 '+esc(m.fileName)+'</div>';h+='<span class="message-time">'+new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+'</span>';d.innerHTML=h;c.appendChild(d)}
+function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
 function cancelReply(){replyingTo=null;document.getElementById('replyIndicator').classList.remove('active')}
-async function sendMessage(){const inp=document.getElementById('chatInput'),text=inp.value.trim();if(!text)return;addMsg({type:'sent',text,time:new Date(),replyTo:replyingTo});inp.value='';inp.style.height='auto';cancelReply();await handleChat(text)}
-async function handleChat(text){switch(chatState){case'collecting_name':if(!chatUser)chatUser={id:'SS'+Date.now().toString(36).toUpperCase(),registeredAt:new Date().toISOString()};chatUser.name=text;localStorage.setItem('chatUser',JSON.stringify(chatUser));chatState='collecting_email';localStorage.setItem('chatState',chatState);showTyping();setTimeout(()=>{hideTyping();addMsg({type:'received',text:`Nice to meet you, ${text}! 📧\n\nWhat's your email address? Our team will use this to contact you.`,time:new Date()})},800);break;case'collecting_email':if(!text.includes('@')||!text.includes('.')){showTyping();setTimeout(()=>{hideTyping();addMsg({type:'received',text:"That doesn't look like a valid email. Please provide a correct one.",time:new Date()})},500);return}chatUser.email=text;localStorage.setItem('chatUser',JSON.stringify(chatUser));chatState='collecting_interest';localStorage.setItem('chatState',chatState);showTyping();setTimeout(()=>{hideTyping();addMsg({type:'received',text:"Got it! 🎯\n\nCould you tell us what you're looking for? A specific template category, custom design, or something else?\n\nPlease share your requirements below.",time:new Date()})},800);break;case'collecting_interest':chatUser.interest=text;localStorage.setItem('chatUser',JSON.stringify(chatUser));chatState='completed';localStorage.setItem('chatState',chatState);await sendTG(`🆕 *New Lead*\n\n*Name:* ${chatUser.name}\n*ID:* ${chatUser.id}\n*Email:* ${chatUser.email}\n*Interest:* ${text}\n*Time:* ${new Date().toLocaleString()}`);showTyping();setTimeout(()=>{hideTyping();addMsg({type:'received',text:`✅ Thank you, ${chatUser.name}! All info sent to our admin.\n\n📧 You'll be contacted via email at ${chatUser.email}. If the admin doesn't reply here, our team will still reach out through email.\n\nAlso reach us: @${CONFIG.telegramBotUsername}`,time:new Date()});addNotifBtn();scrollCB();if(pendingPurchaseTemplateId){const t=allTemplates.find(x=>x.id===pendingPurchaseTemplateId);if(t)setTimeout(()=>{addMsg({type:'received',text:`Redirecting to purchase "${t.name}"...`,time:new Date()});setTimeout(()=>window.open(`https://t.me/${CONFIG.telegramBotUsername}?start=purchase_${t.id}`,'_blank'),1200)},1500);pendingPurchaseTemplateId=null}},1000);break;case'completed':await sendTG(`💬 *Follow-up from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Email:* ${chatUser.email}\n\n${text}`);break}}
-function addNotifBtn(){const c=document.getElementById('chatMessages');if(c.querySelector('.notification-enable-btn'))return;const w=document.createElement('div');w.style.cssText='padding:.5rem 0;text-align:center;align-self:center';const b=document.createElement('button');b.className='notification-enable-btn';b.innerHTML='🔔 Enable Push Notifications';b.onclick=async()=>{if('Notification'in window){const p=await Notification.requestPermission();if(p==='granted'){notificationPermission=true;b.innerHTML='✅ Enabled';b.disabled=true;addMsg({type:'received',text:"🔔 Notifications on! You'll be notified when admin replies.",time:new Date()})}else{b.innerHTML='❌ Blocked';b.disabled=true}}};w.appendChild(b);c.appendChild(w)}
-async function handleFileSelect(ev,type){const file=ev.target.files[0];if(!file)return;if(chatState!=='completed'){addMsg({type:'received',text:"Please complete the info steps first.",time:new Date()});ev.target.value='';return}const fd=new FormData();fd.append('chat_id',CONFIG.telegramAdminChatId);fd.append('caption',`📎 *File from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Email:* ${chatUser.email}\n*File:* ${file.name}`);fd.append('parse_mode','Markdown');if(type==='media'){if(file.type.startsWith('image/')){fd.append('photo',file);await fetch(`https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendPhoto`,{method:'POST',body:fd});addMsg({type:'sent',mediaType:'image',mediaUrl:URL.createObjectURL(file),time:new Date()})}else if(file.type.startsWith('video/')){fd.append('video',file);await fetch(`https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendVideo`,{method:'POST',body:fd});addMsg({type:'sent',mediaType:'video',mediaUrl:URL.createObjectURL(file),time:new Date()})}}else{fd.append('document',file);await fetch(`https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendDocument`,{method:'POST',body:fd});addMsg({type:'sent',fileName:file.name,fileUrl:URL.createObjectURL(file),time:new Date()})}ev.target.value=''}
-async function startRecording(){if(chatState!=='completed')return;try{const stream=await navigator.mediaDevices.getUserMedia({audio:true});mediaRecorder=new MediaRecorder(stream);audioChunks=[];mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);mediaRecorder.onstop=async()=>{const blob=new Blob(audioChunks,{type:'audio/webm'}),url=URL.createObjectURL(blob);addMsg({type:'sent',mediaType:'audio',mediaUrl:url,time:new Date()});const fd=new FormData();fd.append('chat_id',CONFIG.telegramAdminChatId);fd.append('voice',blob,'voice.webm');fd.append('caption',`🎤 *Voice from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Duration:* ${document.getElementById('recordingTime').textContent}`);fd.append('parse_mode','Markdown');await fetch(`https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendVoice`,{method:'POST',body:fd});stream.getTracks().forEach(t=>t.stop())};mediaRecorder.start();recordingStartTime=Date.now();document.getElementById('recordingIndicator').classList.add('active');recordingInterval=setInterval(()=>{const e=Math.floor((Date.now()-recordingStartTime)/1000);document.getElementById('recordingTime').textContent=`${Math.floor(e/60)}:${(e%60).toString().padStart(2,'0')}`},1000)}catch(e){}}
+function sendMessage(){var inp=document.getElementById('chatInput'),text=inp.value.trim();if(!text)return;addMsg({type:'sent',text:text,time:new Date(),replyTo:replyingTo});inp.value='';inp.style.height='auto';cancelReply();handleChat(text)}
+function handleChat(text){switch(chatState){case'collecting_name':if(!chatUser)chatUser={id:'SS'+Date.now().toString(36).toUpperCase(),registeredAt:new Date().toISOString()};chatUser.name=text;localStorage.setItem('chatUser',JSON.stringify(chatUser));chatState='collecting_email';localStorage.setItem('chatState',chatState);showTyping();setTimeout(function(){hideTyping();addMsg({type:'received',text:'Nice to meet you, '+text+'! \uD83D\uDCE7\n\nWhat\'s your email address? Our team will use this to contact you.',time:new Date()})},800);break;case'collecting_email':if(text.indexOf('@')===-1||text.indexOf('.')===-1){showTyping();setTimeout(function(){hideTyping();addMsg({type:'received',text:"That doesn't look like a valid email. Please provide a correct one.",time:new Date()})},500);return}chatUser.email=text;localStorage.setItem('chatUser',JSON.stringify(chatUser));chatState='collecting_interest';localStorage.setItem('chatState',chatState);showTyping();setTimeout(function(){hideTyping();addMsg({type:'received',text:"Got it! \uD83C\uDFAF\n\nCould you tell us what you're looking for? A specific template category, custom design, or something else?\n\nPlease share your requirements below.",time:new Date()})},800);break;case'collecting_interest':chatUser.interest=text;localStorage.setItem('chatUser',JSON.stringify(chatUser));chatState='completed';localStorage.setItem('chatState',chatState);sendTG('\uD83C\uDFE1 *New Lead*\n\n*Name:* '+chatUser.name+'\n*ID:* '+chatUser.id+'\n*Email:* '+chatUser.email+'\n*Interest:* '+text+'\n*Time:* '+new Date().toLocaleString());showTyping();setTimeout(function(){hideTyping();addMsg({type:'received',text:'\u2705 Thank you, '+chatUser.name+'! All info sent to our admin.\n\n\uD83D\uDCE7 You\'ll be contacted via email at '+chatUser.email+'. If the admin doesn\'t reply here, our team will still reach out through email.\n\nAlso reach us: @'+CONFIG.telegramBotUsername,time:new Date()});addNotifBtn();scrollCB();if(pendingPurchaseTemplateId){var t=allTemplates.find(function(x){return x.id===pendingPurchaseTemplateId});if(t)setTimeout(function(){addMsg({type:'received',text:'Redirecting to purchase "'+t.name+'"...',time:new Date()});setTimeout(function(){window.open('https://t.me/'+CONFIG.telegramBotUsername+'?start=purchase_'+t.id,'_blank')},1200)},1500);pendingPurchaseTemplateId=null}},1000);break;case'completed':sendTG('\uD83D\uDCAC *Follow-up from '+chatUser.name+'*\n*ID:* '+chatUser.id+'\n*Email:* '+chatUser.email+'\n\n'+text);break}}
+function addNotifBtn(){var c=document.getElementById('chatMessages');if(c.querySelector('.notification-enable-btn'))return;var w=document.createElement('div');w.style.cssText='padding:.5rem 0;text-align:center;align-self:center';var b=document.createElement('button');b.className='notification-enable-btn';b.innerHTML='\uD83D\uDD14 Enable Push Notifications';b.onclick=function(){if('Notification'in window){Notification.requestPermission().then(function(p){if(p==='granted'){notificationPermission=true;b.innerHTML='\u2705 Enabled';b.disabled=true;addMsg({type:'received',text:'\uD83D\uDD14 Notifications on! You\'ll be notified when admin replies.',time:new Date()})}else{b.innerHTML='\u274C Blocked';b.disabled=true}})};w.appendChild(b);c.appendChild(w)}
+function handleFileSelect(ev,type){var file=ev.target.files[0];if(!file)return;if(chatState!=='completed'){addMsg({type:'received',text:'Please complete the info steps first.',time:new Date()});ev.target.value='';return}var fd=new FormData();fd.append('chat_id',CONFIG.telegramAdminChatId);fd.append('caption','\uD83D\uDCE7 *File from '+chatUser.name+'*\n*ID:* '+chatUser.id+'\n*Email:* '+chatUser.email+'\n*File:* '+file.name);fd.append('parse_mode','Markdown');var url;if(type==='media'){if(file.type.indexOf('image/')===0){fd.append('photo',file);url='sendPhoto'}else{fd.append('video',file);url='sendVideo'}}else{fd.append('document',file);url='sendDocument'}fetch('https://api.telegram.org/bot'+CONFIG.telegramBotToken+'/'+url,{method:'POST',body:fd}).catch(function(){});if(type==='media')addMsg({type:'sent',mediaType:file.type.indexOf('image/')===0?'image':'video',mediaUrl:URL.createObjectURL(file),time:new Date()});else addMsg({type:'sent',fileName:file.name,fileUrl:URL.createObjectURL(file),time:new Date()});ev.target.value=''}
+function startRecording(){if(chatState!=='completed')return;navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){mediaRecorder=new MediaRecorder(stream);audioChunks=[];mediaRecorder.ondataavailable=function(e){audioChunks.push(e.data)};mediaRecorder.onstop=function(){var blob=new Blob(audioChunks,{type:'audio/webm'}),url=URL.createObjectURL(blob);addMsg({type:'sent',mediaType:'audio',mediaUrl:url,time:new Date()});var fd=new FormData();fd.append('chat_id',CONFIG.telegramAdminChatId);fd.append('voice',blob,'voice.webm');fd.append('caption','\uD83C\uDFA4 *Voice from '+chatUser.name+'*\n*ID:* '+chatUser.id+'\n*Duration:* '+document.getElementById('recordingTime').textContent);fd.append('parse_mode','Markdown');fetch('https://api.telegram.org/bot'+CONFIG.telegramBotToken+'/sendVoice',{method:'POST',body:fd}).catch(function(){});stream.getTracks().forEach(function(t){t.stop()})};mediaRecorder.start();recordingStartTime=Date.now();document.getElementById('recordingIndicator').classList.add('active');recordingInterval=setInterval(function(){var e=Math.floor((Date.now()-recordingStartTime)/1000);document.getElementById('recordingTime').textContent=Math.floor(e/60)+':'+(e%60<10?'0':'')+(e%60)},1000)}).catch(function(){})}
 function stopRecording(){if(!mediaRecorder||mediaRecorder.state==='inactive')return;mediaRecorder.stop();clearInterval(recordingInterval);document.getElementById('recordingIndicator').classList.remove('active');document.getElementById('recordingTime').textContent='0:00'}
-function scrollCB(){const c=document.getElementById('chatMessages');setTimeout(()=>{c.scrollTop=c.scrollHeight},100)}
-async function sendTG(text){try{await fetch(`https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:CONFIG.telegramAdminChatId,text,parse_mode:'Markdown'})})}catch(e){}}
+function scrollCB(){var c=document.getElementById('chatMessages');setTimeout(function(){c.scrollTop=c.scrollHeight},100)}
+function sendTG(text){fetch('https://api.telegram.org/bot'+CONFIG.telegramBotToken+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:CONFIG.telegramAdminChatId,text:text,parse_mode:'Markdown'})}).catch(function(){})}
+
 document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
