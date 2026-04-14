@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Forever Kind of Love</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+--forest-deep: #081c15;
+--forest-mid: #1b4332;
+--forest-main: #2d6a4f;
+--forest-light: #40916c;
+--mint-bright: #95d5b2;
+--mint-pale: #d8f3dc;
+--bg-cream: #f0fff4;
+--shadow-soft: 0 10px 30px rgba(45, 106, 79, 0.15);
+--shadow-inset: inset 0 2px 4px rgba(0,0,0,0.05);
+--gradient-forest: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+--gradient-shift: linear-gradient(270deg, #2d6a4f, #95d5b2, #1b4332, #40916c);
+}
+    html { box-sizing: border-box; scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: inherit; }
+
+    body {
+        margin: 0 auto;
+        padding: 0;
+        max-width: 430px;
+        overflow-x: hidden;
+        font-size: 18px;
+        -webkit-font-smoothing: antialiased;
+        background-color: var(--bg-cream);
+        color: var(--forest-deep);
+        font-family: 'Cormorant Garamond', serif;
+        line-height: 1.6;
+    }
+
+    /* --- Keyframes --- */
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(2deg); }
+        100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    @keyframes letterFade {
+        from { opacity: 0; filter: blur(10px); letter-spacing: 10px; }
+        to { opacity: 1; filter: blur(0); letter-spacing: 2px; }
+    }
+
+    @keyframes leafSway {
+        0%, 100% { transform: rotate(-5deg); }
+        50% { transform: rotate(5deg); }
+    }
+
+    @keyframes borderDraw {
+        0% { width: 0; height: 0; opacity: 0; }
+        50% { width: 100%; height: 0; opacity: 1; }
+        100% { width: 100%; height: 100%; opacity: 1; }
+    }
+
+    @keyframes revealLine {
+        from { clip-path: inset(0 100% 0 0); }
+        to { clip-path: inset(0 0 0 0); }
+    }
+
+    /* --- Global Elements --- */
+    .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    button {
+        transition: transform 0.1s ease;
+        cursor: pointer;
+        outline: none;
+        border: none;
+    }
+
+    button:active {
+        transform: scale(0.96);
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background: var(--bg-cream);
+        padding: 2rem;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 20px; left: 20px; right: 20px; bottom: 20px;
+        border: 1px solid var(--forest-main);
+        animation: borderDraw 2s forwards;
+        pointer-events: none;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        margin: 0;
+        font-weight: 300;
+        letter-spacing: 2px;
+        background: var(--gradient-shift);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientBG 8s ease infinite, letterFade 2s ease-out;
+    }
+
+    .hero h2 {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: var(--forest-light);
+        margin-top: 1rem;
+        opacity: 0;
+        animation: revealLine 1s ease 1s forwards;
+    }
+
+    /* --- Decorative SVG Section --- */
+    .svg-container {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem 0;
+    }
+
+    .leaf-icon {
+        width: 40px;
+        height: 40px;
+        fill: var(--forest-main);
+        animation: leafSway 4s ease-in-out infinite;
+    }
+
+    .leaf-icon:nth-child(2) { animation-delay: 0.5s; }
+    .leaf-icon:nth-child(3) { animation-delay: 1s; }
+
+    /* --- Message Section --- */
+    .message-box {
+        padding: 4rem 2rem;
+        background: white;
+        position: relative;
+    }
+
+    .typewriter-container {
+        min-height: 400px;
+        font-size: 1.4rem;
+        font-style: italic;
+        color: var(--forest-mid);
+    }
+
+    .line {
+        margin-bottom: 1.5rem;
+        display: block;
+        border-right: 2px solid transparent;
+        white-space: pre-wrap;
+        overflow: hidden;
+        opacity: 0;
+    }
+
+    .line.active {
+        opacity: 1;
+    }
+
+    /* --- Interaction Section --- */
+    .interactive-section {
+        padding: 3rem 2rem;
+        text-align: center;
+        background: var(--mint-pale);
+    }
+
+    .flower-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 0;
+        box-shadow: var(--shadow-soft);
+        perspective: 1000px;
+        margin-bottom: 2rem;
+        border: 0.5px solid var(--forest-light);
+    }
+
+    .inner-content {
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-cream);
+    }
+
+    .flower-card.flipped .inner-content {
+        transform: rotateY(180deg);
+    }
+
+    /* --- Countdown --- */
+    .timer-wrapper {
+        margin: 4rem 1rem;
+        padding: 2rem;
+        background: var(--forest-main);
+        color: white;
+        box-shadow: 20px 20px 0px var(--mint-bright);
+    }
+
+    .timer-title {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    /* --- Button --- */
+    #celebrate-btn {
+        background: var(--gradient-forest);
+        color: white;
+        padding: 1.2rem 3rem;
+        font-size: 1.1rem;
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 700;
+        border-radius: 0;
+        box-shadow: var(--shadow-soft);
+        display: block;
+        margin: 2rem auto 4rem auto;
+        border: 2px solid var(--forest-mid);
+    }
+
+    canvas#confetti {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 999;
+    }
+
+    .parallax-text {
+        font-size: 5rem;
+        opacity: 0.05;
+        position: absolute;
+        z-index: -1;
+        white-space: nowrap;
+        font-weight: 900;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<section class="hero">
+    <div class="parallax-text" id="para1">ETERNITY • ETERNITY</div>
+    <h1 class="reveal-on-scroll">For [Partner's Name]</h1>
+    <h2 class="reveal-on-scroll">A Secret Kept in Evergreen</h2>
+    
+    <div class="svg-container reveal-on-scroll" style="margin-top: 3rem;">
+        <svg class="leaf-icon" viewBox="0 0 24 24"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>
+        <svg class="leaf-icon" viewBox="0 0 24 24"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>
+        <svg class="leaf-icon" viewBox="0 0 24 24"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>
+    </div>
+</section>
+
+<section class="message-box">
+    <div class="typewriter-container" id="typewriter">
+        </div>
+</section>
+
+<section class="interactive-section reveal-on-scroll">
+    <div class="flower-card" onclick="this.classList.toggle('flipped')">
+        <div class="inner-content">
+            <div style="backface-visibility: hidden; position: absolute;">
+                <span style="font-size: 3rem;">🌿</span>
+                <p style="font-weight: 700; color: var(--forest-main);">Click to reveal a thought...</p>
+            </div>
+            <div style="backface-visibility: hidden; position: absolute; transform: rotateY(180deg); padding: 1rem; text-align: center;">
+                <p style="font-size: 1.2rem; color: var(--forest-deep);">"In every garden of life, you are the bloom that never fades."</p>
+                <span style="font-size: 1.5rem;">✨</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="timer-wrapper reveal-on-scroll">
+    <div class="timer-title">Until Our Next Chapter</div>
+    <div id="timer" style="font-size:1.8rem;font-weight:800;text-align:center;padding:1rem;">00d 00h 00m 00s</div>
+</section>
+
+<button id="celebrate-btn" class="reveal-on-scroll">✨ Celebrate Our Love! ✨</button>
+
+<footer style="opacity:0.25;font-size:12px;text-align:center;padding:1rem;">Template #00007</footer>
+
+<script>
+    // 1. Intersection Observer for Scroll Reveals
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+    // 2. Parallax Effect
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const para = document.getElementById('para1');
+        para.style.transform = `translateX(${scrolled * 0.2}px)`;
+    });
+
+    // 3. Typewriter Logic
+    const lines = [
+        "My dearest [Partner's Name],",
+        "They say time is a river, but with you,",
+        "it feels like a vast, calm ocean.",
+        "I found this space to tell you truly—",
+        "that every whisper of wind reminds me of us.",
+        "I am counting down the moments until",
+        "we begin our greatest adventure yet on [Date].",
+        "Always yours, [Your Name]"
+    ];
+
+    const container = document.getElementById('typewriter');
+    let lineIdx = 0;
+
+    function typeLine() {
+        if (lineIdx >= lines.length) return;
+        
+        const lineEl = document.createElement('span');
+        lineEl.className = 'line active';
+        container.appendChild(lineEl);
+        
+        let charIdx = 0;
+        const text = lines[lineIdx];
+        
+        function nextChar() {
+            if (charIdx < text.length) {
+                lineEl.textContent += text.charAt(charIdx);
+                charIdx++;
+                setTimeout(nextChar, 50);
+            } else {
+                lineIdx++;
+                setTimeout(typeLine, 600);
+            }
+        }
+        nextChar();
+    }
+
+    // Start typing when section is in view
+    const typeObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            typeLine();
+            typeObserver.disconnect();
+        }
+    });
+    typeObserver.observe(container);
+
+    // 4. Countdown Timer
+    (function(){
+      var ed=new Date("2026-06-10T10:00:00");
+      function tick(){
+        var diff=ed-new Date(),el=document.getElementById('timer');
+        if(!el)return;
+        if(diff<=0){el.textContent='🎉 The day is here!';return;}
+        var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),
+            m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+        el.textContent=d+'d '+h+'h '+m+'m '+s+'s';
+        setTimeout(tick,1000);
+      }
+      tick();
+    })();
+
+    // 5. Canvas Confetti (Pure Vanilla JS)
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let pieces = [];
+    const colors = ['#2d6a4f', '#40916c', '#95d5b2', '#d8f3dc', '#1b4332'];
+
+    function initConfetti() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        for (let i = 0; i < 100; i++) {
+            pieces.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                size: Math.random() * 8 + 4,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                speed: Math.random() * 3 + 2,
+                rotation: Math.random() * 360,
+                rotationSpeed: Math.random() * 10 - 5
+            });
+        }
+    }
+
+    function updateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach((p, i) => {
+            p.y += p.speed;
+            p.rotation += p.rotationSpeed;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation * Math.PI / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+
+            if (p.y > canvas.height) {
+                pieces[i].y = -20;
+                pieces[i].x = Math.random() * canvas.width;
+            }
+        });
+        requestAnimationFrame(updateConfetti);
+    }
+
+    document.getElementById('celebrate-btn').addEventListener('click', () => {
+        pieces = [];
+        initConfetti();
+        updateConfetti();
+        setTimeout(() => { pieces = []; ctx.clearRect(0,0,canvas.width, canvas.height); }, 5000);
+    });
+
+    // Resize handler
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+</script>
+</body>
+</html>
