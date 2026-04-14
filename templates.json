@@ -218,27 +218,5 @@
     "rating": 5.0,
     "trending": false,
     "added": "2026-04-09"
-  },
-  {
-    "id": 13,
-    "filename": "00024.html",
-    "name": "Paper-Cut Storybook | Baby Shower",
-    "url": "templates/00024.html",
-    "category": "uncategorized",
-    "tier": "Standard",
-    "price": 299,
-    "oldPrice": 449,
-    "discount": "33% OFF",
-    "desc": "Paper-Cut Storybook | Baby Shower",
-    "features": {
-      "Style": "Custom",
-      "Animations": "?",
-      "Sections": "?",
-      "Countdown": "No"
-    },
-    "orders": 0,
-    "rating": 5.0,
-    "trending": false,
-    "added": "2026-04-10"
   }
 ]
