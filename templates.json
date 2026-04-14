@@ -64,5 +64,27 @@
     "rating": 5.0,
     "trending": false,
     "added": "2026-04-14"
+  },
+  {
+    "id": 4,
+    "filename": "00013.html",
+    "name": "#4 Boom Pow Birthday",
+    "url": "templates/00013.html",
+    "category": "birthday",
+    "tier": "Basic",
+    "price": 199,
+    "oldPrice": 299,
+    "discount": "33% OFF",
+    "desc": "Boom Pow Birthday",
+    "features": {
+      "Style": "Custom",
+      "Animations": "?",
+      "Sections": "?",
+      "Countdown": "No"
+    },
+    "orders": 0,
+    "rating": 5.0,
+    "trending": false,
+    "added": "2026-04-14"
   }
 ]
