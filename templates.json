@@ -20,5 +20,27 @@
     "rating": 5.0,
     "trending": false,
     "added": "2026-04-14"
+  },
+  {
+    "id": 2,
+    "filename": "00008.html",
+    "name": "#2 Neon Milestone Celebration",
+    "url": "templates/00008.html",
+    "category": "birthday",
+    "tier": "Basic",
+    "price": 99,
+    "oldPrice": 299,
+    "discount": "67% OFF",
+    "desc": "Neon Milestone Celebration",
+    "features": {
+      "Style": "Custom",
+      "Animations": "?",
+      "Sections": "?",
+      "Countdown": "No"
+    },
+    "orders": 0,
+    "rating": 5.0,
+    "trending": false,
+    "added": "2026-04-14"
   }
 ]
