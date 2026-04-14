@@ -42,5 +42,27 @@
     "rating": 5.0,
     "trending": false,
     "added": "2026-04-14"
+  },
+  {
+    "id": 3,
+    "filename": "00009.html",
+    "name": "#3 Wedding Celebration - The Infinite Isometric Vow",
+    "url": "templates/00009.html",
+    "category": "wedding",
+    "tier": "Basic",
+    "price": 149,
+    "oldPrice": 299,
+    "discount": "50% OFF",
+    "desc": "Wedding Celebration - The Infinite Isometric Vow",
+    "features": {
+      "Style": "Custom",
+      "Animations": "?",
+      "Sections": "?",
+      "Countdown": "No"
+    },
+    "orders": 0,
+    "rating": 5.0,
+    "trending": false,
+    "added": "2026-04-14"
   }
 ]
