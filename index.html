@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -303,6 +303,7 @@
             gap: 2rem;
         }
 
+        /* Mobile: Two cards side by side */
         @media (max-width: 768px) {
             .templates-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -381,19 +382,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease, opacity 0.6s ease;
-            opacity: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
+            transition: transform 0.5s ease;
+            position: relative;
             z-index: 2;
         }
 
-        .thumbnail-image.loaded {
-            opacity: 1;
-        }
-
-        .template-card:hover .thumbnail-image.loaded {
+        .template-card:hover .thumbnail-image {
             transform: scale(1.05);
         }
 
@@ -407,12 +401,6 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
             color: var(--gold-primary);
             z-index: 1;
-            transition: opacity 0.4s ease;
-        }
-
-        .thumbnail-placeholder.hidden {
-            opacity: 0;
-            pointer-events: none;
         }
 
         .thumbnail-placeholder .icon {
@@ -593,6 +581,7 @@
             color: var(--black-primary);
         }
 
+        /* Preview Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -727,6 +716,7 @@
             to { transform: rotate(360deg); }
         }
 
+        /* CHAT WIDGET STYLES */
         .chat-widget {
             position: fixed;
             bottom: 2rem;
@@ -866,7 +856,6 @@
             line-height: 1.5;
             position: relative;
             word-wrap: break-word;
-            white-space: pre-wrap;
         }
 
         .message.received {
@@ -921,7 +910,6 @@
             margin-bottom: 0.5rem;
             border-radius: 4px;
             opacity: 0.8;
-            white-space: pre-wrap;
         }
 
         .chat-input-area {
@@ -1041,6 +1029,100 @@
             transform: none;
         }
 
+        /* Name/Email Collection Modal */
+        .info-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .info-modal-overlay.active {
+            display: flex;
+        }
+
+        .info-modal-container {
+            background: var(--black-secondary);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            animation: modalIn 0.4s ease;
+        }
+
+        .info-modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold-primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .info-modal-subtitle {
+            color: var(--gray-light);
+            font-size: 0.875rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--gray-light);
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--black-tertiary);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 0.875rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+        }
+
+        .info-modal-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: var(--black-primary);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Recording indicator */
         .recording-indicator {
             display: none;
             align-items: center;
@@ -1070,6 +1152,7 @@
             50% { opacity: 0.3; }
         }
 
+        /* Typing indicator */
         .typing-indicator {
             display: none;
             align-items: center;
@@ -1099,31 +1182,6 @@
         @keyframes typing {
             0%, 60%, 100% { transform: translateY(0); }
             30% { transform: translateY(-4px); }
-        }
-
-        .notification-enable-btn {
-            padding: 0.75rem 1.5rem;
-            background: rgba(212, 175, 55, 0.12);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 50px;
-            color: var(--gold-primary);
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            align-self: center;
-        }
-
-        .notification-enable-btn:hover {
-            background: rgba(212, 175, 55, 0.22);
-            transform: translateY(-1px);
-        }
-
-        .notification-enable-btn:disabled {
-            transform: none;
-            opacity: 0.6;
-            cursor: default;
         }
 
         .file-input {
@@ -1278,7 +1336,7 @@
             <h3>No templates found</h3>
         </div>
         <div class="error-state" id="errorState" style="display: none;">
-            <div class="error-icon">⚠ </div>
+            <div class="error-icon">⚠</div>
             <h3>Failed to load templates</h3>
             <button class="retry-btn" onclick="loadTemplates()">Retry</button>
         </div>
@@ -1304,7 +1362,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 <span>Scripted Surprise</span>. All rights reserved.</p>
+            <p>© 2026 <span>Scripted Surprise</span>. All rights reserved.</p>
         </div>
     </footer>
 
@@ -1379,6 +1437,19 @@
     <input type="file" class="file-input" id="imageInput" accept="image/*,video/*" onchange="handleFileSelect(event, 'media')">
     <input type="file" class="file-input" id="fileInput" accept=".pdf,.doc,.docx,.txt,.zip" onchange="handleFileSelect(event, 'file')">
 
+    <!-- Info Modal (hidden - info now collected via bot chat) -->
+    <div class="info-modal-overlay" id="infoModal" style="display:none!important">
+        <div class="info-modal-container">
+            <div class="form-group">
+                <input type="text" class="form-input" id="userName" placeholder="Enter your name">
+            </div>
+            <div class="form-group" id="emailGroup">
+                <input type="email" class="form-input" id="userEmail" placeholder="your@email.com">
+            </div>
+            <button class="btn-primary" id="infoModalBtn" onclick="submitInfoModal()">Continue</button>
+        </div>
+    </div>
+
     <script>
         // Configuration
         const CONFIG = {
@@ -1401,22 +1472,28 @@
         
         // Chat State
         let chatUser = null;
-        let chatState = 'not_started'; // 'not_started', 'collecting_name', 'collecting_email', 'collecting_interest', 'completed'
         let messages = [];
         let replyingTo = null;
         let mediaRecorder = null;
         let audioChunks = [];
         let recordingStartTime = null;
         let recordingInterval = null;
-        let pendingPurchaseTemplateId = null;
+        let pendingAction = null; // 'chat' or 'buy'
+        let pendingTemplateId = null;
         let pollingInterval = null;
         let lastMessageId = 0;
         let notificationPermission = false;
 
+        // Bot conversation flow state
+        let botFlowStep = null; 
+        // Steps: null → 'ask_name' → 'ask_email' → 'ask_interest' → 'done'
+        let botCollecting = false; // true while bot is collecting info
+        let infoCollected = {}; // temp store during collection
+
         const categoryIcons = {
             wedding: "💍", birthday: "🎂", anniversary: "❤️", love: "🌹",
             baby: "👶", graduation: "🎓", engagement: "💎", congrats: "🏆",
-            farewell: "👋", festival: "🎉", uncategorized: "📁", all: "✦"
+            farewell: "👋", festival: "🎆", uncategorized: "📁", all: "✦"
         };
 
         // Initialize
@@ -1425,6 +1502,7 @@
             setupEventListeners();
             await loadTemplates();
             initChat();
+            requestNotificationPermission();
         }
 
         function createParticles() {
@@ -1438,11 +1516,18 @@
             }
         }
 
+        async function requestNotificationPermission() {
+            if ('Notification' in window) {
+                const permission = await Notification.requestPermission();
+                notificationPermission = permission === 'granted';
+            }
+        }
+
         function showNotification(title, body) {
             if (notificationPermission && 'Notification' in window) {
                 new Notification(title, {
                     body: body,
-                    icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="50" cy="50" r="45" fill="%23D4AF37"/%3E%3Ctext x="50" y="65" font-size="40" text-anchor="middle" fill="%230A0A0A"%3E%E2%9C%A6%3C/text%3E%3C/svg%3E'
+                    icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="50" cy="50" r="45" fill="%23D4AF37"/%3E%3Ctext x="50" y="65" font-size="40" text-anchor="middle" fill="%230A0A0A"%3E✦%3C/text%3E%3C/svg%3E'
                 });
             }
         }
@@ -1461,7 +1546,7 @@
                 allTemplates = templates.map(t => ({
                     ...t,
                     previewUrl: `https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/${t.filename}`,
-                    thumbnailUrl: `https://image.thum.io/get/width/600/crop/400/noanimate/https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/${t.filename}`
+                    thumbnailUrl: `https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/thumbnails/${t.filename.replace('.html', '.jpg')}`
                 }));
 
                 renderCategories();
@@ -1552,7 +1637,7 @@
                         ${t.trending ? '<span class="card-badge trending">Trending</span>' : ''}
                         ${t.tier === 'Premium' ? '<span class="card-badge premium">Premium</span>' : ''}
                         
-                        <div class="thumbnail-placeholder" id="placeholder-${t.id}">
+                        <div class="thumbnail-placeholder">
                             <div class="icon">✦</div>
                             <span>${t.category || 'Template'}</span>
                         </div>
@@ -1560,8 +1645,8 @@
                              alt="${t.name}" 
                              class="thumbnail-image" 
                              loading="lazy"
-                             onerror="this.style.display='none'"
-                             onload="document.getElementById('placeholder-${t.id}').classList.add('hidden'); this.classList.add('loaded');">
+                             onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';"
+                             onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
                         
                         <div class="thumbnail-overlay">
                             <button class="preview-btn" onclick="openPreview(${t.id})">
@@ -1639,16 +1724,18 @@
             const t = allTemplates.find(x => x.id === id);
             if (!t) return;
             
-            if (chatState === 'completed' && chatUser && chatUser.email) {
-                redirectToTelegramPurchase(t);
+            pendingAction = 'buy';
+            pendingTemplateId = id;
+            
+            if (!chatUser || !chatUser.name) {
+                startBotFlow('buy', id);
             } else {
-                pendingPurchaseTemplateId = id;
-                closeModal();
-                toggleChat();
+                redirectToTelegramPurchase(t);
             }
         }
 
         function redirectToTelegramPurchase(t) {
+            const message = `Hi! I want to purchase:%0A*Template:* ${t.name}%0A*ID:* #${String(t.id).padStart(5, '0')}%0A*Price:* ₹${t.price || 299}`;
             window.open(`https://t.me/${CONFIG.telegramBotUsername}?start=purchase_${t.id}`, '_blank');
         }
 
@@ -1656,24 +1743,22 @@
             if (currentPreviewId) buyTemplate(currentPreviewId);
         }
 
+        // loadChatHistory, saveChatHistory kept below
+
         // ==================== CHAT SYSTEM ====================
 
         function initChat() {
             const savedUser = localStorage.getItem('chatUser');
-            const savedState = localStorage.getItem('chatState');
-
             if (savedUser) {
                 chatUser = JSON.parse(savedUser);
             }
-
-            if (savedState) {
-                chatState = savedState;
-            } else if (chatUser && chatUser.name && chatUser.email) {
-                chatState = 'completed';
-                localStorage.setItem('chatState', 'completed');
+            
+            // Check if info was already collected (chat was completed before)
+            const chatCompleted = localStorage.getItem('chatCompleted');
+            if (chatCompleted === 'true') {
+                botFlowStep = 'done';
+                botCollecting = false;
             }
-
-            notificationPermission = 'Notification' in window && Notification.permission === 'granted';
             
             const input = document.getElementById('chatInput');
             input.addEventListener('input', function() {
@@ -1689,6 +1774,12 @@
             });
             
             loadChatHistory();
+            
+            // If chat was already completed and input should be locked
+            if (chatCompleted === 'true') {
+                lockChatInput();
+            }
+            
             startPolling();
         }
 
@@ -1704,38 +1795,39 @@
 
         async function checkForNewMessages() {
             try {
-                let url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/getUpdates`;
-                const params = [];
-                if (lastMessageId > 0) params.push(`offset=${lastMessageId + 1}`);
-                if (params.length) url += '?' + params.join('&');
-
+                const url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/getUpdates`;
                 const response = await fetch(url);
                 const data = await response.json();
                 
                 if (data.ok && data.result) {
                     for (const update of data.result) {
-                        lastMessageId = Math.max(lastMessageId, update.update_id);
-                        
-                        if (update.message && update.message.reply_to_message) {
-                            const replyText = update.message.reply_to_message.text || '';
-                            const userIdMatch = replyText.match(/ID: ([A-Z0-9]+)/);
+                        if (update.update_id > lastMessageId) {
+                            lastMessageId = update.update_id;
                             
-                            if (userIdMatch && userIdMatch[1] === chatUser.id) {
-                                const adminMessage = update.message.text || '';
-                                if (adminMessage) {
-                                    addMessage({
-                                        type: 'received',
-                                        text: adminMessage,
-                                        time: new Date(update.message.date * 1000),
-                                        isAdminReply: true
-                                    });
-                                    
-                                    showNotification('New reply from admin', adminMessage.substring(0, 100));
-                                    document.getElementById('chatButton').classList.add('has-new');
+                            if (update.message && update.message.reply_to_message) {
+                                const replyText = update.message.reply_to_message.text || '';
+                                const userIdMatch = replyText.match(/ID: ([A-Z0-9]+)/);
+                                
+                                if (userIdMatch && chatUser && userIdMatch[1] === chatUser.id) {
+                                    const adminMessage = update.message.text || '';
+                                    if (adminMessage) {
+                                        // Admin replied — unlock chat
+                                        const input = document.getElementById('chatInput');
+                                        if (input.disabled) {
+                                            input.disabled = false;
+                                            input.placeholder = 'Type a message...';
+                                            document.getElementById('sendBtn').disabled = false;
+                                            localStorage.removeItem('chatCompleted');
+                                        }
 
-                                    const chatWindow = document.getElementById('chatWindow');
-                                    if (!chatWindow.classList.contains('active')) {
-                                        showNotification('Scripted Surprise', 'Admin replied to your message. Open chat to view.');
+                                        addMessage({
+                                            type: 'received',
+                                            text: `🔔 *Admin replied:*\n${adminMessage}`,
+                                            time: new Date(update.message.date * 1000)
+                                        });
+                                        
+                                        showNotification('New message from Scripted Surprise', adminMessage.substring(0, 100));
+                                        document.getElementById('chatButton').classList.add('has-new');
                                     }
                                 }
                             }
@@ -1748,46 +1840,181 @@
         }
 
         function toggleChat() {
-            const chatWindow = document.getElementById('chatWindow');
+            const win = document.getElementById('chatWindow');
             
-            if (!chatWindow.classList.contains('active')) {
-                chatWindow.classList.add('active');
+            if (!win.classList.contains('active')) {
+                win.classList.add('active');
                 document.getElementById('chatButton').classList.remove('has-new');
                 
-                if (chatState === 'not_started') {
-                    chatState = 'collecting_name';
-                    localStorage.setItem('chatState', chatState);
-                    
-                    addMessage({
-                        type: 'received',
-                        text: "Hi! 👋 Welcome to Scripted Surprise.\n\nTo get started, could you please tell me your name?",
-                        time: new Date()
-                    });
-                    scrollToBottom();
+                // If first time opening (no messages, no user), start bot flow
+                if (messages.length === 0 && (!chatUser || !chatUser.name)) {
+                    startBotFlow();
                 }
+                scrollToBottom();
             } else {
-                chatWindow.classList.remove('active');
+                win.classList.remove('active');
             }
         }
 
-        function showTypingIndicator() {
-            document.getElementById('typingIndicator').classList.add('active');
+        function startBotFlow(action, templateId) {
+            if (action) pendingAction = action;
+            if (templateId) pendingTemplateId = templateId;
+            
+            botFlowStep = 'ask_name';
+            botCollecting = true;
+            infoCollected = {};
+            
+            // Open chat window
+            const win = document.getElementById('chatWindow');
+            win.classList.add('active');
+            
+            setTimeout(() => {
+                addBotMessage(`👋 Hello! Welcome to *Scripted Surprise*.\n\nI'm the support bot. Let me collect a few details so our team can assist you.\n\n*What's your name?*`);
+            }, 400);
+        }
+
+        async function handleBotFlowInput(userText) {
+            // User just typed — add their message to chat
+            addMessage({ type: 'sent', text: userText, time: new Date() });
+            
+            if (botFlowStep === 'ask_name') {
+                infoCollected.name = userText;
+                botFlowStep = 'ask_email';
+                await botTypingDelay();
+                addBotMessage(`Nice to meet you, *${infoCollected.name}*! 😊\n\nPlease share your *email address* so we can reach you in case we can't connect via this chat.`);
+
+            } else if (botFlowStep === 'ask_email') {
+                if (!isValidEmail(userText)) {
+                    await botTypingDelay(800);
+                    addBotMessage(`Hmm, that doesn't look like a valid email. Please enter a valid email address (e.g. yourname@example.com).`);
+                    return;
+                }
+                infoCollected.email = userText;
+                botFlowStep = 'ask_interest';
+                await botTypingDelay();
+
+                let interestPrompt = `Got it! ✅\n\nNow, please tell us:\n• *Which template are you interested in?* (e.g. template name or #ID)\n• *Any custom requirements or details?*\n\nFeel free to describe what you need!`;
+                if (pendingAction === 'buy' && pendingTemplateId) {
+                    const t = allTemplates.find(x => x.id === pendingTemplateId);
+                    if (t) {
+                        interestPrompt = `Got it! ✅\n\nYou're interested in purchasing *${t.name}* (₹${t.price || 299}).\n\nDo you have any *custom requirements or special details* you'd like to share for this template? (Or type "none" to skip)`;
+                    }
+                }
+                addBotMessage(interestPrompt);
+
+            } else if (botFlowStep === 'ask_interest') {
+                infoCollected.interest = userText;
+                botFlowStep = 'done';
+                botCollecting = false;
+
+                // Save user
+                chatUser = {
+                    id: 'SS' + Date.now().toString(36).toUpperCase(),
+                    name: infoCollected.name,
+                    email: infoCollected.email,
+                    registeredAt: new Date().toISOString()
+                };
+                localStorage.setItem('chatUser', JSON.stringify(chatUser));
+
+                // Send to Telegram
+                let tplInfo = '';
+                if (pendingAction === 'buy' && pendingTemplateId) {
+                    const t = allTemplates.find(x => x.id === pendingTemplateId);
+                    if (t) tplInfo = `\n*Template:* ${t.name} (#${String(t.id).padStart(5,'0')}) ₹${t.price||299}`;
+                }
+                const telegramText = `📋 *New Inquiry — Scripted Surprise*\n\n*Name:* ${chatUser.name}\n*Email:* ${chatUser.email}\n*ID:* ${chatUser.id}${tplInfo}\n*Interest/Details:* ${infoCollected.interest}\n*Action:* ${pendingAction || 'General Chat'}`;
+                await sendToTelegram(telegramText);
+
+                // Final bot messages
+                await botTypingDelay(1200);
+                addBotMessage(`✅ *All done, ${chatUser.name}!*\n\nYour information has been sent to our admin team. You'll be contacted via *${chatUser.email}*.\n\n_If our admin is available, they may also reply directly here in this chat._`);
+
+                await botTypingDelay(2000);
+                addBotMessage(`🔔 *Enable push notifications?*\n\nSo you don't miss a reply — click the button below to allow browser notifications.`, true);
+
+                // Lock input
+                lockChatInput();
+            }
+        }
+
+        function addBotMessage(text, showNotifBtn = false) {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = 'message received';
+
+            // Simple markdown: *bold*
+            const formatted = text
+                .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
+                .replace(/_(.*?)_/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+
+            let inner = formatted;
+            if (showNotifBtn) {
+                inner += `<br><br><button onclick="requestNotifAndShow()" style="margin-top:0.5rem;padding:0.5rem 1rem;background:linear-gradient(135deg,var(--gold-primary),var(--gold-dark));color:#0A0A0A;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.8rem;">🔔 Enable Notifications</button>`;
+            }
+
+            const time = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            div.innerHTML = inner + `<span class="message-time">${time}</span>`;
+            container.appendChild(div);
             scrollToBottom();
         }
 
-        function hideTypingIndicator() {
-            document.getElementById('typingIndicator').classList.remove('active');
+        function lockChatInput() {
+            const input = document.getElementById('chatInput');
+            input.disabled = true;
+            input.placeholder = 'Chat ended — You will be contacted via email';
+            document.getElementById('sendBtn').disabled = true;
+            localStorage.setItem('chatCompleted', 'true');
         }
+
+        function botTypingDelay(ms = 1200) {
+            const indicator = document.getElementById('typingIndicator');
+            indicator.classList.add('active');
+            scrollToBottom();
+            return new Promise(res => setTimeout(() => {
+                indicator.classList.remove('active');
+                res();
+            }, ms));
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        async function requestNotifAndShow() {
+            if ('Notification' in window) {
+                const permission = await Notification.requestPermission();
+                notificationPermission = permission === 'granted';
+                if (notificationPermission) {
+                    addBotMessage(`✅ Notifications enabled! You'll be notified when our team replies.`);
+                } else {
+                    addBotMessage(`Notifications not enabled. We'll still reach you via *${chatUser ? chatUser.email : 'your email'}*.`);
+                }
+            }
+        }
+
+        function openChatWithWelcome() {
+            // Legacy: if somehow called, just open chat
+            document.getElementById('chatWindow').classList.add('active');
+            scrollToBottom();
+        }
+
+        function openChat() {
+            const win = document.getElementById('chatWindow');
+            win.classList.add('active');
+            scrollToBottom();
+        }
+
+        // Info modal stubs (kept for compatibility, now unused)
+        function showInfoModal(step) { /* no-op: bot handles collection */ }
+        function hideInfoModal() { }
+        function submitInfoModal() { }
 
         function loadChatHistory() {
             const history = localStorage.getItem('chatHistory');
             if (history) {
                 messages = JSON.parse(history);
                 renderMessages();
-            }
-
-            if (chatState === 'completed' && !notificationPermission && 'Notification' in window && Notification.permission !== 'denied') {
-                addNotificationButton();
             }
         }
 
@@ -1865,6 +2092,22 @@
             const text = input.value.trim();
             
             if (!text) return;
+            if (input.disabled) return; // chat locked after info collected
+
+            // If bot is collecting info, handle via bot flow
+            if (botCollecting && botFlowStep && botFlowStep !== 'done') {
+                input.value = '';
+                input.style.height = 'auto';
+                cancelReply();
+                await handleBotFlowInput(text);
+                return;
+            }
+            
+            // Normal chat (admin already replied, chatUser exists)
+            if (!chatUser || !chatUser.name) {
+                startBotFlow('chat');
+                return;
+            }
             
             const msg = {
                 type: 'sent',
@@ -1878,186 +2121,28 @@
             input.style.height = 'auto';
             cancelReply();
             
-            await handleChatInput(text);
-        }
-
-        async function handleChatInput(text) {
-            switch (chatState) {
-                case 'collecting_name': {
-                    if (!chatUser) {
-                        chatUser = {
-                            id: 'SS' + Date.now().toString(36).toUpperCase(),
-                            registeredAt: new Date().toISOString()
-                        };
-                    }
-                    chatUser.name = text;
-                    localStorage.setItem('chatUser', JSON.stringify(chatUser));
-
-                    chatState = 'collecting_email';
-                    localStorage.setItem('chatState', chatState);
-
-                    showTypingIndicator();
-                    setTimeout(() => {
-                        hideTypingIndicator();
-                        addMessage({
-                            type: 'received',
-                            text: `Nice to meet you, ${text}! 📧\n\nWhat's your email address? Our team will use this to contact you.`,
-                            time: new Date()
-                        });
-                    }, 800);
-                    break;
-                }
-
-                case 'collecting_email': {
-                    if (!text.includes('@') || !text.includes('.')) {
-                        showTypingIndicator();
-                        setTimeout(() => {
-                            hideTypingIndicator();
-                            addMessage({
-                                type: 'received',
-                                text: "That doesn't look like a valid email address. Could you please provide a correct one?",
-                                time: new Date()
-                            });
-                        }, 500);
-                        return;
-                    }
-
-                    chatUser.email = text;
-                    localStorage.setItem('chatUser', JSON.stringify(chatUser));
-
-                    chatState = 'collecting_interest';
-                    localStorage.setItem('chatState', chatState);
-
-                    showTypingIndicator();
-                    setTimeout(() => {
-                        hideTypingIndicator();
-                        addMessage({
-                            type: 'received',
-                            text: "Got it! 🎯\n\nNow, could you tell us what you're looking for? Are you interested in a specific template category (wedding, birthday, anniversary, etc.), a custom design, or something else?\n\nPlease share your requirements below.",
-                            time: new Date()
-                        });
-                    }, 800);
-                    break;
-                }
-
-                case 'collecting_interest': {
-                    chatUser.interest = text;
-                    localStorage.setItem('chatUser', JSON.stringify(chatUser));
-
-                    chatState = 'completed';
-                    localStorage.setItem('chatState', chatState);
-
-                    await sendToTelegram(
-                        `🆕 *New Lead -- Scripted Surprise*\n\n` +
-                        `*Name:* ${chatUser.name}\n` +
-                        `*ID:* ${chatUser.id}\n` +
-                        `*Email:* ${chatUser.email}\n` +
-                        `*Interest/Requirements:* ${text}\n` +
-                        `*Time:* ${new Date().toLocaleString()}`
-                    );
-
-                    showTypingIndicator();
-                    setTimeout(() => {
-                        hideTypingIndicator();
-
-                        addMessage({
-                            type: 'received',
-                            text: `✅ Thank you, ${chatUser.name}! All your information has been sent to our admin.\n\n` +
-                                  `📧 You will be contacted soon via email at ${chatUser.email}. If the admin doesn't connect through this chat directly, our team will still reach out to you through email.\n\n` +
-                                  `If the admin responds through this chat, you'll be notified here as well.\n\n` +
-                                  `You can also reach us directly on Telegram: @${CONFIG.telegramBotUsername}`,
-                            time: new Date()
-                        });
-
-                        addNotificationButton();
-                        scrollToBottom();
-
-                        if (pendingPurchaseTemplateId) {
-                            const t = allTemplates.find(x => x.id === pendingPurchaseTemplateId);
-                            if (t) {
-                                setTimeout(() => {
-                                    addMessage({
-                                        type: 'received',
-                                        text: `Redirecting you to complete your purchase for "${t.name}"...`,
-                                        time: new Date()
-                                    });
-                                    setTimeout(() => redirectToTelegramPurchase(t), 1200);
-                                }, 1500);
-                            }
-                            pendingPurchaseTemplateId = null;
-                        }
-                    }, 1000);
-                    break;
-                }
-
-                case 'completed': {
-                    await sendToTelegram(
-                        `💬 *Follow-up from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Email:* ${chatUser.email}\n\n${text}`
-                    );
-                    break;
-                }
+            let telegramText = `💬 *Message from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}\n${text}`;
+            if (replyingTo) {
+                telegramText += `\n\n_Reply to: ${replyingTo.text}_`;
             }
-        }
-
-        function addNotificationButton() {
-            const container = document.getElementById('chatMessages');
             
-            const existing = container.querySelector('.notification-enable-btn');
-            if (existing) return;
-
-            const wrapper = document.createElement('div');
-            wrapper.style.padding = '0.5rem 0';
-            wrapper.style.textAlign = 'center';
-            wrapper.style.alignSelf = 'center';
-
-            const btn = document.createElement('button');
-            btn.className = 'notification-enable-btn';
-            btn.innerHTML = '🔔 Enable Push Notifications';
-            btn.onclick = async () => {
-                if ('Notification' in window) {
-                    const permission = await Notification.requestPermission();
-                    if (permission === 'granted') {
-                        notificationPermission = true;
-                        btn.innerHTML = '✅ Notifications Enabled';
-                        btn.disabled = true;
-
-                        addMessage({
-                            type: 'received',
-                            text: "🔔 Push notifications are now enabled! You'll be notified right away when the admin replies to you here.",
-                            time: new Date()
-                        });
-                    } else {
-                        btn.innerHTML = '❌ Notifications Blocked';
-                        btn.disabled = true;
-                    }
-                }
-            };
-
-            wrapper.appendChild(btn);
-            container.appendChild(wrapper);
+            await sendToTelegram(telegramText);
         }
 
         async function handleFileSelect(event, type) {
             const file = event.target.files[0];
             if (!file) return;
-
-            if (chatState !== 'completed') {
-                showTypingIndicator();
-                setTimeout(() => {
-                    hideTypingIndicator();
-                    addMessage({
-                        type: 'received',
-                        text: "Please complete the quick info steps first (name, email, requirements) before sending files. 📝",
-                        time: new Date()
-                    });
-                }, 400);
+            
+            if (!chatUser || !chatUser.name) {
+                pendingAction = 'chat';
+                startBotFlow('chat');
                 event.target.value = '';
                 return;
             }
-
+            
             const formData = new FormData();
             formData.append('chat_id', CONFIG.telegramAdminChatId);
-            formData.append('caption', `📎 *File from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Email:* ${chatUser.email}\n*File:* ${file.name}\n*Size:* ${(file.size / 1024).toFixed(1)} KB`);
+            formData.append('caption', `📎 *File from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}*File:* ${file.name}\n*Size:* ${(file.size / 1024).toFixed(1)} KB`);
             formData.append('parse_mode', 'Markdown');
             
             if (type === 'media') {
@@ -2112,9 +2197,8 @@
             }
         }
 
+        // Audio Recording
         async function startRecording() {
-            if (chatState !== 'completed') return;
-
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 mediaRecorder = new MediaRecorder(stream);
@@ -2138,7 +2222,7 @@
                     const formData = new FormData();
                     formData.append('chat_id', CONFIG.telegramAdminChatId);
                     formData.append('voice', audioBlob, 'voice.webm');
-                    formData.append('caption', `🎤 *Voice from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Email:* ${chatUser.email}\n*Duration:* ${document.getElementById('recordingTime').textContent}`);
+                    formData.append('caption', `🎤 *Voice message from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}*Duration:* ${document.getElementById('recordingTime').textContent}`);
                     formData.append('parse_mode', 'Markdown');
                     
                     await fetch(`https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendVoice`, {
@@ -2163,6 +2247,7 @@
                 
             } catch (err) {
                 console.error('Recording failed:', err);
+                alert('Could not access microphone');
             }
         }
 
@@ -2200,6 +2285,7 @@
             }
         }
 
+        // Setup event listeners
         function setupEventListeners() {
             document.getElementById('searchInput').addEventListener('input', (e) => {
                 currentSearch = e.target.value;
@@ -2215,9 +2301,14 @@
                 if (e.target === e.currentTarget) closeModal();
             });
 
+            document.getElementById('infoModal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) hideInfoModal();
+            });
+
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeModal();
+                    hideInfoModal();
                     if (document.getElementById('chatWindow').classList.contains('active')) {
                         document.getElementById('chatWindow').classList.remove('active');
                     }
@@ -2225,6 +2316,7 @@
             });
         }
 
+        // Initialize
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
