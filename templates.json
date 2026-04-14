@@ -108,5 +108,27 @@
     "rating": 5.0,
     "trending": false,
     "added": "2026-04-14"
+  },
+  {
+    "id": 6,
+    "filename": "00016_1.html",
+    "name": "#6 Farewell & Fond Memories",
+    "url": "templates/00016_1.html",
+    "category": "farewell",
+    "tier": "Basic",
+    "price": 99,
+    "oldPrice": 299,
+    "discount": "67% OFF",
+    "desc": "Farewell & Fond Memories",
+    "features": {
+      "Style": "Custom",
+      "Animations": "?",
+      "Sections": "?",
+      "Countdown": "No"
+    },
+    "orders": 0,
+    "rating": 5.0,
+    "trending": false,
+    "added": "2026-04-14"
   }
 ]
