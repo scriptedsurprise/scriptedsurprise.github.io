@@ -196,27 +196,5 @@
     "rating": 5.0,
     "trending": false,
     "added": "2026-04-09"
-  },
-  {
-    "id": 12,
-    "filename": "00021.html",
-    "name": "Father's Day Tribute",
-    "url": "templates/00021.html",
-    "category": "uncategorized",
-    "tier": "Standard",
-    "price": 299,
-    "oldPrice": 449,
-    "discount": "33% OFF",
-    "desc": "Father's Day Tribute",
-    "features": {
-      "Style": "Custom",
-      "Animations": "?",
-      "Sections": "?",
-      "Countdown": "No"
-    },
-    "orders": 0,
-    "rating": 5.0,
-    "trending": false,
-    "added": "2026-04-09"
   }
 ]
