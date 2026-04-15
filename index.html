@@ -1,2323 +1,1024 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scripted Surprise | Luxury Template Marketplace</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold-primary: #D4AF37;
-            --gold-light: #F4E4BC;
-            --gold-dark: #B8941F;
-            --black-primary: #0A0A0A;
-            --black-secondary: #141414;
-            --black-tertiary: #1A1A1A;
-            --white: #FFFFFF;
-            --gray-light: #888888;
-            --gray-dark: #444444;
-            --success: #4CAF50;
-            --danger: #f44336;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--black-primary);
-            color: var(--white);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(ellipse at 20% 80%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 40% 40%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
-        }
-
-        .gold-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--gold-primary);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 1rem 2rem;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header-stats {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--gold-primary);
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--gray-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero {
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50px;
-            font-size: 0.875rem;
-            color: var(--gold-primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 50%, var(--gold-primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            color: var(--gray-light);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-
-        .controls-section {
-            max-width: 1400px;
-            margin: 0 auto 3rem;
-            padding: 0 2rem;
-        }
-
-        .search-bar {
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 1rem 1.5rem 1rem 3rem;
-            background: var(--black-secondary);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50px;
-            color: var(--white);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-bar input:focus {
-            outline: none;
-            border-color: var(--gold-primary);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-        }
-
-        .search-bar::before {
-            content: "🔍";
-            position: absolute;
-            left: 1.25rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1rem;
-            opacity: 0.6;
-        }
-
-        .categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .category-pill {
-            padding: 0.625rem 1.25rem;
-            background: var(--black-secondary);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 50px;
-            color: var(--gray-light);
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .category-pill:hover {
-            border-color: var(--gold-primary);
-            color: var(--gold-primary);
-            transform: translateY(-2px);
-        }
-
-        .category-pill.active {
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: var(--black-primary);
-            border-color: transparent;
-            font-weight: 500;
-        }
-
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        .sort-select {
-            padding: 0.5rem 1rem;
-            background: var(--black-secondary);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 0.875rem;
-            cursor: pointer;
-        }
-
-        .results-count {
-            color: var(--gray-light);
-            font-size: 0.875rem;
-        }
-
-        .results-count span {
-            color: var(--gold-primary);
-            font-weight: 600;
-        }
-
-        .templates-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem 4rem;
-        }
-
-        .templates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 2rem;
-        }
-
-        /* Mobile: Two cards side by side */
-        @media (max-width: 768px) {
-            .templates-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-            
-            .template-card .card-content {
-                padding: 0.75rem;
-            }
-            
-            .template-card .template-name {
-                font-size: 1rem;
-            }
-            
-            .template-card .price-current {
-                font-size: 1.1rem;
-            }
-            
-            .template-card .buy-btn {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.75rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .templates-container {
-                padding: 0 0.5rem 2rem;
-            }
-            
-            .template-card .card-thumbnail {
-                height: 160px;
-            }
-        }
-
-        .template-card {
-            background: var(--black-secondary);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .template-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 10;
-        }
-
-        .template-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(212, 175, 55, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.1);
-        }
-
-        .template-card:hover::before {
-            opacity: 1;
-        }
-
-        .card-thumbnail {
-            position: relative;
-            width: 100%;
-            height: 240px;
-            background: var(--black-tertiary);
-            overflow: hidden;
-        }
-
-        .thumbnail-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-            position: relative;
-            z-index: 2;
-        }
-
-        .template-card:hover .thumbnail-image {
-            transform: scale(1.05);
-        }
-
-        .thumbnail-placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-            color: var(--gold-primary);
-            z-index: 1;
-        }
-
-        .thumbnail-placeholder .icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        .thumbnail-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.7) 50%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 1.5rem;
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: 20;
-        }
-
-        .template-card:hover .thumbnail-overlay {
-            opacity: 1;
-        }
-
-        .preview-btn {
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: var(--black-primary);
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .preview-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            padding: 0.375rem 0.875rem;
-            background: rgba(212, 175, 55, 0.9);
-            color: var(--black-primary);
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 30;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-badge.trending {
-            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
-            color: white;
-        }
-
-        .card-badge.premium {
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.75rem;
-        }
-
-        .template-id {
-            font-size: 0.75rem;
-            color: var(--gold-primary);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .template-tier {
-            padding: 0.25rem 0.75rem;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50px;
-            font-size: 0.75rem;
-            color: var(--gold-primary);
-            font-weight: 500;
-        }
-
-        .template-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--white);
-            line-height: 1.3;
-        }
-
-        .template-style {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--gray-light);
-            margin-bottom: 1rem;
-        }
-
-        .style-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--gold-primary);
-            border-radius: 50%;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        .price-section {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .price-current {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gold-primary);
-        }
-
-        .price-original {
-            font-size: 0.875rem;
-            color: var(--gray-dark);
-            text-decoration: line-through;
-        }
-
-        .discount-badge {
-            padding: 0.25rem 0.5rem;
-            background: rgba(76, 175, 80, 0.2);
-            color: #4CAF50;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 4px;
-        }
-
-        .buy-btn {
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: 2px solid var(--gold-primary);
-            color: var(--gold-primary);
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .buy-btn:hover {
-            background: var(--gold-primary);
-            color: var(--black-primary);
-        }
-
-        /* Preview Modal */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-container {
-            width: 100%;
-            max-width: 1200px;
-            height: 90vh;
-            background: var(--black-secondary);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            animation: modalIn 0.4s ease;
-        }
-
-        @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            background: var(--black-tertiary);
-        }
-
-        .modal-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            color: var(--gold-primary);
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .modal-price {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--gold-primary);
-        }
-
-        .modal-buy {
-            padding: 0.625rem 1.25rem;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: var(--black-primary);
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .modal-buy:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        .modal-close {
-            width: 36px;
-            height: 36px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50%;
-            color: var(--gold-primary);
-            font-size: 1.25rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .modal-close:hover {
-            background: rgba(212, 175, 55, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .preview-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: white;
-        }
-
-        .modal-loading {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: var(--black-secondary);
-            z-index: 10;
-        }
-
-        .modal-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(212, 175, 55, 0.2);
-            border-top-color: var(--gold-primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* CHAT WIDGET STYLES */
-        .chat-widget {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 3000;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .chat-button {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .chat-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(212, 175, 55, 0.6);
-        }
-
-        .chat-button.has-new::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 18px;
-            height: 18px;
-            background: var(--danger);
-            border-radius: 50%;
-            border: 2px solid var(--black-primary);
-            animation: pulse-badge 2s infinite;
-        }
-
-        @keyframes pulse-badge {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .chat-window {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 380px;
-            height: 600px;
-            background: var(--black-secondary);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-            overflow: hidden;
-            display: none;
-            flex-direction: column;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-        }
-
-        .chat-window.active {
-            display: flex;
-        }
-
-        .chat-header {
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .chat-header-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .chat-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--black-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-        }
-
-        .chat-header-text h4 {
-            color: var(--black-primary);
-            font-size: 1rem;
-            margin: 0;
-        }
-
-        .chat-header-text p {
-            color: rgba(0, 0, 0, 0.7);
-            font-size: 0.75rem;
-            margin: 0;
-        }
-
-        .chat-close {
-            background: none;
-            border: none;
-            color: var(--black-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-
-        .chat-close:hover {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .message {
-            max-width: 85%;
-            padding: 0.75rem 1rem;
-            border-radius: 16px;
-            font-size: 0.875rem;
-            line-height: 1.5;
-            position: relative;
-            word-wrap: break-word;
-        }
-
-        .message.received {
-            align-self: flex-start;
-            background: var(--black-tertiary);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-bottom-left-radius: 4px;
-        }
-
-        .message.sent {
-            align-self: flex-end;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: var(--black-primary);
-            border-bottom-right-radius: 4px;
-        }
-
-        .message-time {
-            font-size: 0.7rem;
-            opacity: 0.7;
-            margin-top: 0.25rem;
-            display: block;
-        }
-
-        .message-media {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-top: 0.5rem;
-        }
-
-        .message-file {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            margin-top: 0.5rem;
-            cursor: pointer;
-        }
-
-        .message-audio {
-            width: 100%;
-            margin-top: 0.5rem;
-            border-radius: 8px;
-        }
-
-        .reply-to {
-            font-size: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.1);
-            border-left: 3px solid var(--gold-primary);
-            margin-bottom: 0.5rem;
-            border-radius: 4px;
-            opacity: 0.8;
-        }
-
-        .chat-input-area {
-            padding: 1rem;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            background: var(--black-tertiary);
-        }
-
-        .reply-indicator {
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 0.75rem;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            font-size: 0.75rem;
-        }
-
-        .reply-indicator.active {
-            display: flex;
-        }
-
-        .reply-indicator-text {
-            color: var(--gold-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 200px;
-        }
-
-        .reply-indicator-close {
-            background: none;
-            border: none;
-            color: var(--gray-light);
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .chat-input-wrapper {
-            display: flex;
-            align-items: flex-end;
-            gap: 0.5rem;
-            background: var(--black-secondary);
-            border-radius: 24px;
-            padding: 0.5rem;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .chat-input {
-            flex: 1;
-            background: none;
-            border: none;
-            color: var(--white);
-            padding: 0.5rem 0.75rem;
-            font-size: 0.875rem;
-            resize: none;
-            max-height: 100px;
-            font-family: inherit;
-        }
-
-        .chat-input:focus {
-            outline: none;
-        }
-
-        .chat-input::placeholder {
-            color: var(--gray-dark);
-        }
-
-        .chat-actions {
-            display: flex;
-            gap: 0.25rem;
-        }
-
-        .chat-action-btn {
-            width: 36px;
-            height: 36px;
-            background: none;
-            border: none;
-            color: var(--gray-light);
-            cursor: pointer;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            font-size: 1.1rem;
-        }
-
-        .chat-action-btn:hover {
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--gold-primary);
-        }
-
-        .chat-send-btn {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            border: none;
-            border-radius: 50%;
-            color: var(--black-primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-
-        .chat-send-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        .chat-send-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Name/Email Collection Modal */
-        .info-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 4000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .info-modal-overlay.active {
-            display: flex;
-        }
-
-        .info-modal-container {
-            background: var(--black-secondary);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 400px;
-            width: 100%;
-            animation: modalIn 0.4s ease;
-        }
-
-        .info-modal-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--gold-primary);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .info-modal-subtitle {
-            color: var(--gray-light);
-            font-size: 0.875rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-label {
-            display: block;
-            color: var(--gray-light);
-            font-size: 0.75rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            background: var(--black-tertiary);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 0.875rem;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--gold-primary);
-        }
-
-        .info-modal-buttons {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
-        }
-
-        .btn-primary {
-            flex: 1;
-            padding: 0.875rem;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-            color: var(--black-primary);
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Recording indicator */
-        .recording-indicator {
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            background: rgba(244, 67, 54, 0.1);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            color: var(--danger);
-            font-size: 0.75rem;
-        }
-
-        .recording-indicator.active {
-            display: flex;
-        }
-
-        .recording-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--danger);
-            border-radius: 50%;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* Typing indicator */
-        .typing-indicator {
-            display: none;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.75rem 1rem;
-            background: var(--black-tertiary);
-            border-radius: 16px;
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
-
-        .typing-indicator.active {
-            display: flex;
-        }
-
-        .typing-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--gray-light);
-            border-radius: 50%;
-            animation: typing 1.4s infinite;
-        }
-
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-4px); }
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .empty-state, .error-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--gray-light);
-        }
-
-        .skeleton-loader {
-            background: linear-gradient(90deg, var(--black-secondary) 25%, var(--black-tertiary) 50%, var(--black-secondary) 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-            border-radius: 16px;
-            height: 400px;
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        footer {
-            background: var(--black-secondary);
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-        }
-
-        .footer-section h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--gold-primary);
-            margin-bottom: 1rem;
-        }
-
-        .footer-section p, .footer-section a {
-            color: var(--gray-light);
-            font-size: 0.875rem;
-            line-height: 1.8;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: var(--gold-primary);
-        }
-
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 3rem auto 0;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(212, 175, 55, 0.1);
-            text-align: center;
-            color: var(--gray-dark);
-            font-size: 0.875rem;
-        }
-
-        .footer-bottom span {
-            color: var(--gold-primary);
-        }
-
-        @media (max-width: 768px) {
-            .header-stats { display: none; }
-            .hero { padding: 6rem 1rem 2rem; }
-            .chat-window {
-                width: calc(100vw - 2rem);
-                height: 70vh;
-                right: -1rem;
-                bottom: 70px;
-            }
-            .chat-widget {
-                right: 1rem;
-                bottom: 1rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scripted Surprise | Luxury Template Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#D4AF37;--gold-l:#F4E4BC;--gold-d:#B8941F;--bk:#0A0A0A;--bk2:#141414;--bk3:#1A1A1A;--wh:#FFFFFF;--g1:#888;--g2:#444;--green:#4CAF50;--red:#f44336}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bk);color:var(--wh);min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bk)}
+::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:3px}
+
+/* Background */
+.bg-glow{position:fixed;inset:0;z-index:-1;pointer-events:none;
+background:radial-gradient(ellipse at 15% 85%,rgba(212,175,55,.12) 0%,transparent 50%),
+radial-gradient(ellipse at 85% 15%,rgba(212,175,55,.08) 0%,transparent 50%),
+radial-gradient(ellipse at 50% 50%,rgba(212,175,55,.03) 0%,transparent 60%)}
+.particles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.particle{position:absolute;width:3px;height:3px;background:var(--gold);border-radius:50%;opacity:.25;animation:pfloat 25s infinite linear}
+@keyframes pfloat{0%{transform:translateY(100vh) rotate(0);opacity:0}8%{opacity:.25}92%{opacity:.25}100%{transform:translateY(-100vh) rotate(720deg);opacity:0}}
+
+/* Header */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.92);backdrop-filter:blur(24px);border-bottom:1px solid rgba(212,175,55,.15);padding:.75rem 1.5rem}
+.hdr{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:1rem}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0}
+.logo-ic{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-d));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;box-shadow:0 4px 16px rgba(212,175,55,.3)}
+.logo-t{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;background:linear-gradient(135deg,var(--gold-l),var(--gold),var(--gold-d));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr-search{flex:1;max-width:480px;position:relative}
+.hdr-search input{width:100%;padding:.6rem 1rem .6rem 2.5rem;background:var(--bk2);border:1px solid rgba(212,175,55,.2);border-radius:50px;color:var(--wh);font-size:.875rem;transition:.3s}
+.hdr-search input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 16px rgba(212,175,55,.15)}
+.hdr-search::before{content:"🔍";position:absolute;left:.85rem;top:50%;transform:translateY(-50%);font-size:.85rem;opacity:.5}
+.hdr-stats{display:flex;gap:1.5rem;flex-shrink:0}
+.hdr-stat-v{font-size:1.1rem;font-weight:700;color:var(--gold);text-align:center}
+.hdr-stat-l{font-size:.65rem;color:var(--g1);text-transform:uppercase;letter-spacing:.8px;text-align:center}
+
+/* Hero Spotlight */
+.hero{min-height:92vh;display:flex;align-items:center;padding:6rem 2rem 3rem;max-width:1440px;margin:0 auto;gap:4rem}
+.hero-text{flex:1;max-width:560px}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .9rem;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.25);border-radius:50px;font-size:.8rem;color:var(--gold);margin-bottom:1.25rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.25rem,4.5vw,3.5rem);font-weight:600;line-height:1.15;margin-bottom:1rem;background:linear-gradient(135deg,var(--wh) 0%,var(--gold-l) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.05rem;color:var(--g1);line-height:1.7;margin-bottom:1.75rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-gold{padding:.8rem 1.75rem;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:var(--bk);border:none;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;transition:.3s;box-shadow:0 4px 20px rgba(212,175,55,.3)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,175,55,.45)}
+.btn-outline{padding:.8rem 1.75rem;background:transparent;border:2px solid rgba(212,175,55,.4);color:var(--gold);border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;transition:.3s}
+.btn-outline:hover{border-color:var(--gold);background:rgba(212,175,55,.08)}
+
+/* Phone Mockup */
+.hero-phone{flex:1;display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:400px}
+.phone{width:300px;height:600px;border-radius:44px;border:3px solid rgba(212,175,55,.35);overflow:hidden;position:relative;background:var(--bk2);box-shadow:0 0 80px rgba(212,175,55,.12),0 30px 80px rgba(0,0,0,.6);transition:box-shadow .5s}
+.phone:hover{box-shadow:0 0 100px rgba(212,175,55,.2),0 30px 80px rgba(0,0,0,.6)}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:130px;height:28px;background:var(--bk);border-radius:0 0 18px 18px;z-index:10}
+.phone-notch::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:60px;height:6px;background:var(--bk3);border-radius:3px}
+.phone iframe{width:100%;height:100%;border:none;background:#fff}
+.phone-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bk2);z-index:5;transition:opacity .4s}
+.phone-load.hidden{opacity:0;pointer-events:none}
+.phone-load .spin{width:40px;height:40px;border:3px solid rgba(212,175,55,.2);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.phone-dots{display:flex;gap:.5rem}
+.phone-dot{width:8px;height:8px;border-radius:50%;background:var(--g2);cursor:pointer;transition:.3s}
+.phone-dot.active{background:var(--gold);transform:scale(1.3)}
+
+/* Section Common */
+.sec{padding:3rem 2rem;max-width:1440px;margin:0 auto}
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.sec-hdr h2{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--wh)}
+.sec-hdr h2 span{color:var(--gold)}
+.sec-link{color:var(--gold);font-size:.875rem;text-decoration:none;cursor:pointer;transition:.3s;display:flex;align-items:center;gap:.3rem}
+.sec-link:hover{color:var(--gold-l)}
+
+/* Category Stories */
+.stories-bar{display:flex;gap:1.25rem;overflow-x:auto;padding:1rem 0 1.5rem;scrollbar-width:none}
+.stories-bar::-webkit-scrollbar{display:none}
+.story-circle{display:flex;flex-direction:column;align-items:center;gap:.5rem;cursor:pointer;flex-shrink:0;transition:.3s}
+.story-circle:hover{transform:translateY(-4px)}
+.story-ring{width:72px;height:72px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--gold),var(--gold-d),var(--gold-l));display:flex;align-items:center;justify-content:center;transition:.3s}
+.story-circle:hover .story-ring{box-shadow:0 0 20px rgba(212,175,55,.4);transform:scale(1.08)}
+.story-ring-inner{width:100%;height:100%;border-radius:50%;background:var(--bk2);display:flex;align-items:center;justify-content:center;font-size:1.75rem}
+.story-circle-label{font-size:.75rem;color:var(--g1);max-width:72px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Carousel */
+.cwl{position:relative}
+.cwl .car{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:.75rem .25rem}
+.cwl .car::-webkit-scrollbar{display:none}
+.cwl .car>*{scroll-snap-align:start;flex-shrink:0}
+.car-arr{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:44px;height:44px;border-radius:50%;background:rgba(10,10,10,.9);border:1px solid rgba(212,175,55,.3);color:var(--gold);font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;backdrop-filter:blur(8px)}
+.car-arr:hover{background:rgba(212,175,55,.15);border-color:var(--gold)}
+.car-arr.l{left:-8px}
+.car-arr.r{right:-8px}
+
+/* Reel Card */
+.reel{width:240px;height:400px;border-radius:20px;overflow:hidden;background:var(--bk2);border:1px solid rgba(212,175,55,.12);cursor:pointer;transition:.4s cubic-bezier(.4,0,.2,1);position:relative}
+.reel:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(212,175,55,.4);box-shadow:0 20px 50px rgba(0,0,0,.6),0 0 30px rgba(212,175,55,.1)}
+.reel-img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.reel:hover .reel-img{transform:scale(1.08)}
+.reel-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(135deg,var(--bk3),var(--bk));color:var(--gold);gap:.5rem;font-size:.8rem}
+.reel-ph .ic{font-size:2.5rem;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+.reel-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.3) 50%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.25rem;opacity:0;transition:.3s}
+.reel:hover .reel-ov{opacity:1}
+.reel-badge{position:absolute;top:.75rem;left:.75rem;padding:.3rem .7rem;background:rgba(212,175,55,.9);color:var(--bk);font-size:.7rem;font-weight:700;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;z-index:5}
+.reel-badge.hot{background:linear-gradient(135deg,#FF6B6B,#FF8E8E);color:#fff}
+.reel-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;margin-bottom:.25rem}
+.reel-meta{font-size:.8rem;color:var(--g1);margin-bottom:.75rem}
+.reel-play{align-self:flex-start;padding:.5rem 1rem;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:var(--bk);border:none;border-radius:50px;font-weight:600;font-size:.8rem;cursor:pointer;display:flex;align-items:center;gap:.4rem}
+
+/* Strip Card */
+.strip-card{width:260px;border-radius:16px;overflow:hidden;background:var(--bk2);border:1px solid rgba(212,175,55,.1);cursor:pointer;transition:.35s}
+.strip-card:hover{transform:translateY(-6px);border-color:rgba(212,175,55,.35);box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.strip-thumb{width:100%;height:170px;position:relative;overflow:hidden;background:var(--bk3)}
+.strip-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.strip-card:hover .strip-thumb img{transform:scale(1.06)}
+.strip-thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:2rem;background:linear-gradient(135deg,var(--bk3),var(--bk))}
+.strip-body{padding:1rem}
+.strip-body h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;margin-bottom:.35rem}
+.strip-body p{font-size:.8rem;color:var(--g1);margin-bottom:.6rem}
+.strip-foot{display:flex;justify-content:space-between;align-items:center}
+.strip-price{font-size:1.15rem;font-weight:700;color:var(--gold)}
+.strip-old{font-size:.75rem;color:var(--g2);text-decoration:line-through;margin-left:.4rem}
+.strip-buy{padding:.4rem .9rem;background:transparent;border:1.5px solid var(--gold);color:var(--gold);border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;transition:.3s}
+.strip-buy:hover{background:var(--gold);color:var(--bk)}
+
+/* All Templates Grid */
+.grid-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid rgba(212,175,55,.1)}
+.grid-count{color:var(--g1);font-size:.85rem}
+.grid-count span{color:var(--gold);font-weight:600}
+.grid-sort{padding:.45rem .85rem;background:var(--bk2);border:1px solid rgba(212,175,55,.25);border-radius:8px;color:var(--wh);font-size:.8rem;cursor:pointer}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+
+/* Grid Card */
+.gcard{background:var(--bk2);border:1px solid rgba(212,175,55,.1);border-radius:16px;overflow:hidden;cursor:pointer;transition:.4s cubic-bezier(.4,0,.2,1);position:relative}
+.gcard::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:.3s}
+.gcard:hover{transform:translateY(-6px);border-color:rgba(212,175,55,.35);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 30px rgba(212,175,55,.08)}
+.gcard:hover::after{opacity:1}
+.gcard-thumb{width:100%;height:200px;position:relative;overflow:hidden;background:var(--bk3)}
+.gcard-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.gcard:hover .gcard-thumb img{transform:scale(1.05)}
+.gcard-thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.4rem;color:var(--gold);font-size:.75rem;background:linear-gradient(135deg,var(--bk3),var(--bk))}
+.gcard-thumb .ph .ic{font-size:2rem;animation:pulse 2s infinite}
+.gcard-badge{position:absolute;top:.75rem;left:.75rem;padding:.25rem .65rem;font-size:.7rem;font-weight:700;border-radius:50px;text-transform:uppercase;z-index:5}
+.gcard-badge.prem{background:linear-gradient(135deg,var(--gold),var(--gold-d));color:var(--bk)}
+.gcard-badge.hot{background:linear-gradient(135deg,#FF6B6B,#FF8E8E);color:#fff}
+.gcard-body{padding:1.15rem}
+.gcard-id{font-size:.7rem;color:var(--gold);font-weight:600;letter-spacing:1px;margin-bottom:.4rem}
+.gcard-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;margin-bottom:.35rem;line-height:1.3}
+.gcard-style{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--g1);margin-bottom:.85rem}
+.gcard-style .dot{width:6px;height:6px;background:var(--gold);border-radius:50%}
+.gcard-foot{display:flex;justify-content:space-between;align-items:center;padding-top:.85rem;border-top:1px solid rgba(212,175,55,.08)}
+.gcard-price{font-size:1.3rem;font-weight:700;color:var(--gold)}
+.gcard-old{font-size:.8rem;color:var(--g2);text-decoration:line-through;margin-left:.4rem}
+.gcard-disc{padding:.2rem .45rem;background:rgba(76,175,80,.15);color:var(--green);font-size:.7rem;font-weight:600;border-radius:4px;margin-left:.5rem}
+.gcard-buy{padding:.55rem 1.1rem;background:transparent;border:1.5px solid var(--gold);color:var(--gold);border-radius:8px;font-weight:600;font-size:.8rem;cursor:pointer;transition:.3s}
+.gcard-buy:hover{background:var(--gold);color:var(--bk)}
+
+/* Peek indicator */
+.peek-hint{position:absolute;top:.75rem;right:.75rem;padding:.3rem .6rem;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);border-radius:6px;font-size:.65rem;color:var(--gold);z-index:5;opacity:0;transition:.3s;display:flex;align-items:center;gap:.3rem}
+.gcard:hover .peek-hint,.strip-card:hover .peek-hint{opacity:1}
+
+/* ===== STORY VIEWER ===== */
+.story-v{position:fixed;inset:0;background:#000;z-index:2000;display:none;flex-direction:column}
+.story-v.active{display:flex}
+.story-progress{display:flex;gap:4px;padding:.75rem .75rem 0;position:absolute;top:0;left:0;right:0;z-index:20}
+.story-pbar{flex:1;height:3px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}
+.story-pbar-fill{height:100%;background:var(--gold);width:0%;border-radius:2px;transition:width .15s linear}
+.story-pbar.done .story-pbar-fill{width:100%}
+.story-pbar.active .story-pbar-fill{animation:pbfill 8s linear forwards}
+@keyframes pbfill{to{width:100%}}
+.story-close{position:absolute;top:1.25rem;right:1rem;z-index:20;width:36px;height:36px;background:rgba(0,0,0,.5);border:none;border-radius:50%;color:#fff;font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;backdrop-filter:blur(8px)}
+.story-close:hover{background:rgba(255,255,255,.15)}
+.story-frame-wrap{flex:1;position:relative;overflow:hidden}
+.story-frame-wrap iframe{width:100%;height:100%;border:none;background:#fff}
+.story-frame-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bk2);z-index:5;transition:opacity .4s}
+.story-frame-load.hidden{opacity:0;pointer-events:none}
+.story-nav{position:absolute;top:0;bottom:0;width:35%;z-index:15;cursor:pointer}
+.story-nav.l{left:0}
+.story-nav.r{right:0}
+.story-info{position:absolute;bottom:0;left:0;right:0;z-index:15;padding:2rem 1.5rem 1.5rem;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,transparent 100%);display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+.story-info-text h3{font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:.25rem}
+.story-info-text p{font-size:.85rem;color:var(--g1)}
+.story-buy-btn{padding:.7rem 1.5rem;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:var(--bk);border:none;border-radius:10px;font-weight:700;font-size:.9rem;cursor:pointer;transition:.3s;flex-shrink:0;box-shadow:0 4px 20px rgba(212,175,55,.3)}
+.story-buy-btn:hover{transform:scale(1.05);box-shadow:0 6px 30px rgba(212,175,55,.5)}
+.story-cat-label{position:absolute;top:3.5rem;left:50%;transform:translateX(-50%);z-index:15;padding:.35rem .9rem;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border-radius:50px;font-size:.75rem;color:var(--gold);font-weight:500;letter-spacing:.5px;text-transform:uppercase}
+
+/* ===== QUICK PREVIEW PANEL ===== */
+.pp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1500;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(4px)}
+.pp-overlay.active{opacity:1;pointer-events:auto}
+.pp{position:fixed;top:0;right:0;width:50%;height:100vh;background:var(--bk2);border-left:1px solid rgba(212,175,55,.25);z-index:1501;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.pp.active{transform:translateX(0)}
+.pp-hdr{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;border-bottom:1px solid rgba(212,175,55,.15);background:var(--bk3);flex-shrink:0}
+.pp-hdr h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pp-close{width:34px;height:34px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.25);border-radius:50%;color:var(--gold);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;flex-shrink:0}
+.pp-close:hover{background:rgba(212,175,55,.2);transform:rotate(90deg)}
+.pp-preview{flex:1;position:relative;overflow:hidden;background:var(--bk)}
+.pp-preview iframe{width:100%;height:100%;border:none;background:#fff}
+.pp-preview .pp-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bk2);z-index:5;transition:opacity .3s}
+.pp-preview .pp-load.hidden{opacity:0;pointer-events:none}
+.pp-info{padding:1.25rem;border-top:1px solid rgba(212,175,55,.15);background:var(--bk3);flex-shrink:0}
+.pp-meta{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--g1);margin-bottom:.75rem}
+.pp-meta .dot{width:6px;height:6px;background:var(--gold);border-radius:50%}
+.pp-actions{display:flex;justify-content:space-between;align-items:center}
+.pp-price-group{display:flex;align-items:center;gap:.6rem}
+.pp-price{font-size:1.5rem;font-weight:700;color:var(--gold)}
+.pp-old{font-size:.85rem;color:var(--g2);text-decoration:line-through}
+.pp-disc{padding:.2rem .5rem;background:rgba(76,175,80,.15);color:var(--green);font-size:.7rem;font-weight:600;border-radius:4px}
+.pp-buy{padding:.7rem 1.75rem;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:var(--bk);border:none;border-radius:10px;font-weight:700;font-size:.9rem;cursor:pointer;transition:.3s;box-shadow:0 4px 16px rgba(212,175,55,.3)}
+.pp-buy:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(212,175,55,.45)}
+
+/* Random Button */
+.rand-btn{position:fixed;bottom:6rem;right:2rem;z-index:900;width:52px;height:52px;border-radius:50%;background:var(--bk2);border:1px solid rgba(212,175,55,.3);color:var(--gold);font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.rand-btn:hover{transform:scale(1.1) rotate(15deg);border-color:var(--gold);box-shadow:0 4px 20px rgba(212,175,55,.2)}
+
+/* Chat Widget */
+.chat-w{position:fixed;bottom:2rem;right:2rem;z-index:3000;font-family:'Inter',sans-serif}
+.chat-btn{width:58px;height:58px;background:linear-gradient(135deg,var(--gold),var(--gold-d));border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 20px rgba(212,175,55,.4);transition:.3s;position:relative}
+.chat-btn:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(212,175,55,.6)}
+.chat-btn.new::after{content:'';position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:var(--red);border-radius:50%;border:2px solid var(--bk);animation:pbadge 2s infinite}
+@keyframes pbadge{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.chat-win{position:absolute;bottom:76px;right:0;width:370px;height:580px;background:var(--bk2);border:1px solid rgba(212,175,55,.3);border-radius:20px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+.chat-win.active{display:flex}
+.chat-hdr{background:linear-gradient(135deg,var(--gold),var(--gold-d));padding:.9rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.chat-hdr-info{display:flex;align-items:center;gap:.65rem}
+.chat-av{width:36px;height:36px;background:var(--bk);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.chat-hdr-text h4{color:var(--bk);font-size:.9rem}
+.chat-hdr-text p{color:rgba(0,0,0,.6);font-size:.7rem}
+.chat-x{background:none;border:none;color:var(--bk);font-size:1.4rem;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.3s}
+.chat-x:hover{background:rgba(0,0,0,.1)}
+.chat-msgs{flex:1;overflow-y:auto;padding:.85rem;display:flex;flex-direction:column;gap:.75rem}
+.msg{max-width:85%;padding:.65rem .9rem;border-radius:16px;font-size:.85rem;line-height:1.5;word-wrap:break-word}
+.msg.recv{align-self:flex-start;background:var(--bk3);border:1px solid rgba(212,175,55,.15);border-bottom-left-radius:4px}
+.msg.sent{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:var(--bk);border-bottom-right-radius:4px}
+.msg-t{font-size:.65rem;opacity:.65;margin-top:.2rem;display:block}
+.msg-media{max-width:100%;border-radius:8px;margin-top:.4rem}
+.msg-file{display:flex;align-items:center;gap:.4rem;padding:.4rem;background:rgba(0,0,0,.15);border-radius:8px;margin-top:.4rem;cursor:pointer;font-size:.8rem}
+.msg-audio{width:100%;margin-top:.4rem;border-radius:8px}
+.reply-to{font-size:.7rem;padding:.35rem;background:rgba(0,0,0,.1);border-left:3px solid var(--gold);margin-bottom:.35rem;border-radius:4px;opacity:.8}
+.chat-input-area{padding:.85rem;border-top:1px solid rgba(212,175,55,.1);background:var(--bk3)}
+.reply-ind{display:none;align-items:center;justify-content:space-between;padding:.4rem .65rem;background:rgba(212,175,55,.08);border-radius:8px;margin-bottom:.4rem;font-size:.7rem}
+.reply-ind.active{display:flex}
+.reply-ind-t{color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.reply-ind-x{background:none;border:none;color:var(--g1);cursor:pointer;font-size:.9rem}
+.chat-iw{display:flex;align-items:flex-end;gap:.35rem;background:var(--bk2);border-radius:24px;padding:.4rem;border:1px solid rgba(212,175,55,.15)}
+.chat-i{flex:1;background:none;border:none;color:var(--wh);padding:.45rem .65rem;font-size:.85rem;resize:none;max-height:90px;font-family:inherit}
+.chat-i:focus{outline:none}
+.chat-i::placeholder{color:var(--g2)}
+.chat-i:disabled{opacity:.5}
+.chat-abs{display:flex;gap:.15rem}
+.chat-ab{width:32px;height:32px;background:none;border:none;color:var(--g1);cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.3s;font-size:1rem}
+.chat-ab:hover{background:rgba(212,175,55,.08);color:var(--gold)}
+.chat-sb{width:32px;height:32px;background:linear-gradient(135deg,var(--gold),var(--gold-d));border:none;border-radius:50%;color:var(--bk);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s;font-size:.9rem}
+.chat-sb:hover{transform:scale(1.1);box-shadow:0 4px 12px rgba(212,175,55,.4)}
+.chat-sb:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.rec-ind{display:none;align-items:center;gap:.4rem;padding:.4rem;background:rgba(244,67,54,.08);border-radius:8px;margin-bottom:.4rem;color:var(--red);font-size:.7rem}
+.rec-ind.active{display:flex}
+.rec-dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.typing{display:none;align-items:center;gap:.2rem;padding:.6rem .85rem;background:var(--bk3);border-radius:16px;align-self:flex-start;border-bottom-left-radius:4px}
+.typing.active{display:flex}
+.typing-d{width:5px;height:5px;background:var(--g1);border-radius:50%;animation:typ 1.4s infinite}
+.typing-d:nth-child(2){animation-delay:.2s}
+.typing-d:nth-child(3){animation-delay:.4s}
+@keyframes typ{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+.finput{display:none}
+
+/* Footer */
+footer{background:var(--bk2);border-top:1px solid rgba(212,175,55,.15);padding:3rem 2rem;margin-top:3rem}
+.ft{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2.5rem}
+.ft h4{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:.85rem}
+.ft p,.ft a{color:var(--g1);font-size:.85rem;line-height:1.8;text-decoration:none;display:block;transition:.3s}
+.ft a:hover{color:var(--gold)}
+.ft-bot{max-width:1440px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(212,175,55,.08);text-align:center;color:var(--g2);font-size:.8rem}
+.ft-bot span{color:var(--gold)}
+
+/* Skeleton */
+.skel{background:linear-gradient(90deg,var(--bk2) 25%,var(--bk3) 50%,var(--bk2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:16px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.empty-s{text-align:center;padding:4rem 2rem;color:var(--g1)}
+.err-s{text-align:center;padding:4rem 2rem;color:var(--g1)}
+
+/* Fade In */
+.fi{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.fi.vis{opacity:1;transform:translateY(0)}
+
+/* Responsive */
+@media(max-width:1024px){
+.pp{width:60%}
+.hero{flex-direction:column;text-align:center;padding:5rem 1.5rem 2rem;gap:2.5rem}
+.hero-text{max-width:100%}
+.hero-btns{justify-content:center}
+.hero-phone{max-width:320px}
+.phone{width:260px;height:520px}
+}
+@media(max-width:768px){
+.hdr-stats{display:none}
+.pp{width:100%}
+.reel{width:200px;height:340px}
+.strip-card{width:220px}
+.tgrid{grid-template-columns:repeat(2,1fr);gap:.85rem}
+.gcard-body{padding:.85rem}
+.gcard-name{font-size:.95rem}
+.gcard-thumb{height:150px}
+.gcard-price{font-size:1.1rem}
+.gcard-buy{padding:.45rem .7rem;font-size:.7rem}
+.chat-win{width:calc(100vw - 2rem);height:70vh;right:-1rem;bottom:66px}
+.chat-w{right:1rem;bottom:1rem}
+.rand-btn{right:1rem;bottom:5.5rem;width:44px;height:44px;font-size:1.1rem}
+.sec{padding:2rem 1rem}
+.stories-bar{gap:1rem}
+.story-ring{width:62px;height:62px}
+}
+@media(max-width:480px){
+.tgrid{grid-template-columns:1fr}
+.gcard-thumb{height:200px}
+.hero-phone{max-width:280px}
+.phone{width:240px;height:480px;border-radius:36px}
+.phone-notch{width:100px;height:22px;border-radius:0 0 14px 14px}
+}
+</style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-    <div class="gold-particles" id="particles"></div>
+<div class="bg-glow"></div>
+<div class="particles" id="particles"></div>
 
-    <header>
-        <div class="header-content">
-            <a href="#" class="logo" onclick="location.reload()">
-                <div class="logo-icon">✦</div>
-                <span class="logo-text">Scripted Surprise</span>
-            </a>
-            <div class="header-stats">
-                <div class="stat-item">
-                    <div class="stat-value" id="totalTemplates">-</div>
-                    <div class="stat-label">Templates</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="totalCategories">-</div>
-                    <div class="stat-label">Categories</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="avgPrice">-</div>
-                    <div class="stat-label">Avg Price</div>
-                </div>
+<header>
+<div class="hdr">
+<a href="#" class="logo" onclick="location.reload()">
+<div class="logo-ic">✦</div>
+<span class="logo-t">Scripted Surprise</span>
+</a>
+<div class="hdr-search">
+<input type="text" id="searchInput" placeholder="Search templates...">
+</div>
+<div class="hdr-stats">
+<div><div class="hdr-stat-v" id="sTot">-</div><div class="hdr-stat-l">Templates</div></div>
+<div><div class="hdr-stat-v" id="sCat">-</div><div class="hdr-stat-l">Categories</div></div>
+<div><div class="hdr-stat-v" id="sAvg">-</div><div class="hdr-stat-l">Avg Price</div></div>
+</div>
+</div>
+</header>
+
+<main>
+<!-- Hero Spotlight -->
+<section class="hero">
+<div class="hero-text">
+<div class="hero-badge">✦ Premium Digital Experiences</div>
+<h1>Celebrate Moments That Matter</h1>
+<p>Exquisite animated templates for weddings, birthdays, anniversaries, and every special occasion. Browse, preview live, and order instantly.</p>
+<div class="hero-btns">
+<button class="btn-gold" onclick="document.getElementById('catSections').scrollIntoView({behavior:'smooth'})">Browse Templates</button>
+<button class="btn-outline" onclick="document.getElementById('storyBar').scrollIntoView({behavior:'smooth'})">Explore Stories</button>
+</div>
+</div>
+<div class="hero-phone">
+<div class="phone">
+<div class="phone-notch"></div>
+<div class="phone-load" id="phoneLoad"><div class="spin"></div></div>
+<iframe id="phoneFrame"></iframe>
+</div>
+<div class="phone-dots" id="phoneDots"></div>
+</div>
+</section>
+
+<!-- Category Stories -->
+<section class="sec fi" id="storyBar">
+<div class="sec-hdr"><h2>Browse by <span>Category</span></h2></div>
+<div class="stories-bar" id="storiesBar"></div>
+</section>
+
+<!-- Trending Reels -->
+<section class="sec fi" id="trendingSec">
+<div class="sec-hdr">
+<h2>🔥 Trending <span>Now</span></h2>
+<a class="sec-link" onclick="currentCategory='all';filterGrid();document.getElementById('allGrid').scrollIntoView({behavior:'smooth'})">View all →</a>
+</div>
+<div class="cwl" id="reelsCwl">
+<button class="car-arr l" onclick="scrollCar('reelsCwl',-260)">‹</button>
+<div class="car" id="reelsCar"></div>
+<button class="car-arr r" onclick="scrollCar('reelsCwl',260)">›</button>
+</div>
+</section>
+
+<!-- Category Sections -->
+<section id="catSections"></section>
+
+<!-- All Templates Grid -->
+<section class="sec fi" id="allGrid">
+<div class="sec-hdr"><h2>All <span>Templates</span></h2></div>
+<div class="grid-toolbar">
+<div class="grid-count">Showing <span id="gShow">0</span> of <span id="gTot">0</span></div>
+<select class="grid-sort" id="sortSel">
+<option value="newest">Newest First</option>
+<option value="price-low">Price: Low → High</option>
+<option value="price-high">Price: High → Low</option>
+<option value="popular">Most Popular</option>
+<option value="trending">Trending</option>
+</select>
+</div>
+<div class="tgrid" id="tgrid">
+<div class="skel" style="height:340px"></div>
+<div class="skel" style="height:340px"></div>
+<div class="skel" style="height:340px"></div>
+<div class="skel" style="height:340px"></div>
+</div>
+<div class="empty-s" id="emptyS" style="display:none"><div style="font-size:3rem;margin-bottom:1rem">✦</div><h3>No templates found</h3></div>
+<div class="err-s" id="errS" style="display:none"><h3>Failed to load</h3><button class="btn-gold" style="margin-top:1rem" onclick="loadTemplates()">Retry</button></div>
+</section>
+</main>
+
+<footer>
+<div class="ft">
+<div><h4>Scripted Surprise</h4><p>Crafting digital elegance for life's most precious moments.</p></div>
+<div><h4>Categories</h4><div id="ftCats"></div></div>
+<div><h4>Support</h4><a href="https://t.me/scriptedsurpise_bot" target="_blank">Telegram Bot</a><a href="mailto:orders@scriptedsurprise.com">Email Us</a></div>
+</div>
+<div class="ft-bot">© 2026 <span>Scripted Surprise</span>. All rights reserved.</div>
+</footer>
+
+<!-- Story Viewer -->
+<div class="story-v" id="storyV">
+<div class="story-progress" id="storyProg"></div>
+<button class="story-close" onclick="closeStory()">×</button>
+<div class="story-cat-label" id="storyCatLabel"></div>
+<div class="story-frame-wrap">
+<div class="story-frame-load" id="storyLoad"><div class="spin" style="width:50px;height:50px;border-width:3px"></div></div>
+<iframe id="storyFrame"></iframe>
+</div>
+<div class="story-nav l" onclick="storyNav(-1)"></div>
+<div class="story-nav r" onclick="storyNav(1)"></div>
+<div class="story-info">
+<div class="story-info-text"><h3 id="storyName">-</h3><p id="storyMeta">-</p></div>
+<button class="story-buy-btn" id="storyBuyBtn" onclick="buyCurrentStory()">Buy Now</button>
+</div>
+</div>
+
+<!-- Quick Preview Panel -->
+<div class="pp-overlay" id="ppOverlay" onclick="closePP()"></div>
+<div class="pp" id="pp">
+<div class="pp-hdr">
+<h3 id="ppTitle">Preview</h3>
+<button class="pp-close" onclick="closePP()">×</button>
+</div>
+<div class="pp-preview">
+<div class="pp-load" id="ppLoad"><div class="spin" style="width:40px;height:40px;border-width:3px"></div></div>
+<iframe id="ppFrame"></iframe>
+</div>
+<div class="pp-info">
+<div class="pp-meta"><span class="dot"></span><span id="ppCat">-</span> • <span id="ppTier">-</span></div>
+<div class="pp-actions">
+<div class="pp-price-group">
+<span class="pp-price" id="ppPrice">₹0</span>
+<span class="pp-old" id="ppOld"></span>
+<span class="pp-disc" id="ppDisc"></span>
+</div>
+<button class="pp-buy" id="ppBuy" onclick="buyCurrentPP()">Buy via Telegram</button>
+</div>
+</div>
+</div>
+
+<!-- Random Button -->
+<button class="rand-btn" id="randBtn" onclick="randomTemplate()" title="Surprise Me!">🎲</button>
+
+<!-- Chat Widget -->
+<div class="chat-w">
+<button class="chat-btn" id="chatBtn" onclick="toggleChat()">💬</button>
+<div class="chat-win" id="chatWin">
+<div class="chat-hdr">
+<div class="chat-hdr-info"><div class="chat-av">🤖</div><div class="chat-hdr-text"><h4>Support Bot</h4><p id="chatStat">Online</p></div></div>
+<button class="chat-x" onclick="toggleChat()">×</button>
+</div>
+<div class="chat-msgs" id="chatMsgs"></div>
+<div class="typing" id="typingInd"><div class="typing-d"></div><div class="typing-d"></div><div class="typing-d"></div></div>
+<div class="chat-input-area">
+<div class="reply-ind" id="replyInd"><span class="reply-ind-t">Replying...</span><button class="reply-ind-x" onclick="cancelReply()">×</button></div>
+<div class="rec-ind" id="recInd"><div class="rec-dot"></div><span>Recording... <span id="recTime">0:00</span></span></div>
+<div class="chat-iw">
+<textarea class="chat-i" id="chatI" placeholder="Type a message..." rows="1"></textarea>
+<div class="chat-abs">
+<button class="chat-ab" onclick="document.getElementById('imgIn').click()">📷</button>
+<button class="chat-ab" onclick="document.getElementById('fileIn').click()">📎</button>
+<button class="chat-ab" id="recBtn" onmousedown="startRec()" onmouseup="stopRec()" onmouseleave="stopRec()" ontouchstart="startRec()" ontouchend="stopRec()">🎤</button>
+<button class="chat-sb" id="sendBtn" onclick="sendMsg()">➤</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<input type="file" class="finput" id="imgIn" accept="image/*,video/*" onchange="handleFile(event,'media')">
+<input type="file" class="finput" id="fileIn" accept=".pdf,.doc,.docx,.txt,.zip" onchange="handleFile(event,'file')">
+
+<script>
+const C={ghUser:'scriptedsurprise',ghRepo:'scriptedsurprise.github.io',branch:'main',jsonPath:'templates.json',tplFolder:'templates',tgToken:'8308614113:AAEy2rsJnLhFwgqtGM1Ko2CdRQfQsnJg3yg',tgAdmin:'1116079836',tgBot:'scriptedsurpise_bot'};
+const catIcons={wedding:"💍",birthday:"🎂",anniversary:"❤️",love:"🌹",baby:"👶",graduation:"🎓",engagement:"💎",congrats:"🏆",farewell:"👋",festival:"🎆",uncategorized:"📁",all:"✦"};
+
+let all=[],curCat='all',curSort='newest',curSearch='',heroIdx=0,heroTimer=null;
+let storyTemplates=[],storyIdx=0,storyTimer=null,storyCat='';
+let ppTemplateId=null,storyTemplateId=null;
+// Chat state
+let chatUser=null,msgs=[],replyTo=null,mediaRec=null,audioChunks=[],recStart=null,recInt=null;
+let pendAction=null,pendTplId=null,pollInt=null,lastUpd=0,notifPerm=false;
+let botStep=null,botCollecting=false,infoCol={};
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded',async()=>{
+    mkParticles();
+    setupEvts();
+    initChat();
+    reqNotif();
+    await loadTemplates();
+    initFadeIn();
+});
+
+function mkParticles(){const c=document.getElementById('particles');for(let i=0;i<40;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*25+'s';c.appendChild(p)}}
+
+function initFadeIn(){const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.1});document.querySelectorAll('.fi').forEach(el=>obs.observe(el))}
+
+async function reqNotif(){if('Notification'in window){notifPerm=(await Notification.requestPermission())==='granted'}}
+
+function showNotif(t,b){if(notifPerm&&'Notification'in window)new Notification(t,{body:b,icon:'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="50" cy="50" r="45" fill="%23D4AF37"/%3E%3Ctext x="50" y="65" font-size="40" text-anchor="middle" fill="%230A0A0A"%3E%E2%9C%A6%3C/text%3E%3C/svg%3E'})}
+
+// ===== DATA =====
+async function loadTemplates(){
+    document.getElementById('tgrid').innerHTML=Array(4).fill('<div class="skel" style="height:340px"></div>').join('');
+    try{
+        const r=await fetch(`https://raw.githubusercontent.com/${C.ghUser}/${C.ghRepo}/${C.branch}/${C.jsonPath}`,{cache:'no-cache'});
+        if(!r.ok)throw 0;
+        const d=await r.json();
+        if(!Array.isArray(d))throw 0;
+        all=d.map(t=>({...t,purl:`https://${C.ghUser}.github.io/${C.tplFolder}/${t.filename}`,turl:`https://${C.ghUser}.github.io/${C.tplFolder}/thumbnails/${t.filename.replace('.html','.jpg')}`}));
+        renderAll();
+    }catch(e){document.getElementById('tgrid').innerHTML='';document.getElementById('errS').style.display='block'}
+}
+
+function renderAll(){
+    const cats=[...new Set(all.map(t=>t.category).filter(Boolean))];
+    updateStats(cats.length);
+    renderStories(cats);
+    renderReels();
+    renderCatSections(cats);
+    renderFtCats(cats);
+    filterGrid();
+    startHero();
+}
+
+function updateStats(nc){
+    document.getElementById('sTot').textContent=all.length;
+    document.getElementById('sCat').textContent=nc;
+    const avg=all.length?Math.round(all.reduce((s,t)=>s+(t.price||0),0)/all.length):0;
+    document.getElementById('sAvg').textContent='₹'+avg;
+}
+
+// ===== HERO SPOTLIGHT =====
+function startHero(){
+    const featured=all.filter(t=>t.trending||t.tier==='Premium');
+    const pool=featured.length>=3?featured:all.slice(0,Math.min(5,all.length));
+    if(!pool.length)return;
+    renderHeroDots(pool.length);
+    showHeroTemplate(pool[0]);
+    heroIdx=0;
+    heroTimer=setInterval(()=>{
+        heroIdx=(heroIdx+1)%pool.length;
+        showHeroTemplate(pool[heroIdx]);
+        updateHeroDots(heroIdx);
+    },6000);
+}
+
+function renderHeroDots(n){
+    document.getElementById('phoneDots').innerHTML=Array.from({length:n},(_,i)=>`<div class="phone-dot${i===0?' active':''}" onclick="goHeroDot(${i})"></div>`).join('');
+}
+function updateHeroDots(idx){
+    document.querySelectorAll('.phone-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+function goHeroDot(idx){
+    const featured=all.filter(t=>t.trending||t.tier==='Premium');
+    const pool=featured.length>=3?featured:all.slice(0,Math.min(5,all.length));
+    heroIdx=idx;showHeroTemplate(pool[idx]);updateHeroDots(idx);
+    clearInterval(heroTimer);
+    heroTimer=setInterval(()=>{heroIdx=(heroIdx+1)%pool.length;showHeroTemplate(pool[heroIdx]);updateHeroDots(heroIdx)},6000);
+}
+
+function showHeroTemplate(t){
+    const frame=document.getElementById('phoneFrame');
+    const load=document.getElementById('phoneLoad');
+    load.classList.remove('hidden');
+    frame.src=t.purl;
+    frame.onload=()=>load.classList.add('hidden');
+}
+
+// ===== CATEGORY STORIES =====
+function renderStories(cats){
+    const bar=document.getElementById('storiesBar');
+    let html=`<div class="story-circle" onclick="openStoryAll()"><div class="story-ring"><div class="story-ring-inner">✦</div></div><div class="story-circle-label">All</div></div>`;
+    cats.forEach(c=>{
+        const cnt=all.filter(t=>t.category===c).length;
+        html+=`<div class="story-circle" onclick="openStory('${c}')"><div class="story-ring"><div class="story-ring-inner">${catIcons[c]||'📁'}</div></div><div class="story-circle-label">${c.charAt(0).toUpperCase()+c.slice(1)} (${cnt})</div></div>`;
+    });
+    bar.innerHTML=html;
+}
+
+function openStory(cat){
+    storyTemplates=cat==='all'?[...all]:all.filter(t=>t.category===cat);
+    if(!storyTemplates.length)return;
+    storyIdx=0;storyCat=cat;
+    document.getElementById('storyV').classList.add('active');
+    document.getElementById('storyCatLabel').textContent=(cat==='all'?'All Templates':cat.charAt(0).toUpperCase()+cat.slice(1))+' • '+storyTemplates.length+' templates';
+    document.body.style.overflow='hidden';
+    showStorySlide();
+}
+
+function openStoryAll(){openStory('all')}
+
+function showStorySlide(){
+    const t=storyTemplates[storyIdx];
+    if(!t)return;
+    storyTemplateId=t.id;
+    document.getElementById('storyName').textContent=t.name||'Untitled';
+    document.getElementById('storyMeta').textContent=`${t.category||''} • ₹${t.price||299}`;
+    const frame=document.getElementById('storyFrame');
+    const load=document.getElementById('storyLoad');
+    load.classList.remove('hidden');
+    frame.src=t.purl;
+    frame.onload=()=>load.classList.add('hidden');
+    renderStoryProgress();
+    clearInterval(storyTimer);
+    storyTimer=setTimeout(()=>storyNav(1),8000);
+}
+
+function renderStoryProgress(){
+    const c=document.getElementById('storyProg');
+    c.innerHTML=storyTemplates.map((_,i)=>`<div class="story-pbar${i<storyIdx?' done':''}${i===storyIdx?' active':''}"><div class="story-pbar-fill"></div></div>`).join('');
+}
+
+function storyNav(dir){
+    clearInterval(storyTimer);
+    if(dir===1){storyIdx++;if(storyIdx>=storyTemplates.length){closeStory();return}}
+    else{storyIdx--;if(storyIdx<0)storyIdx=0}
+    showStorySlide();
+}
+
+function closeStory(){
+    clearInterval(storyTimer);
+    document.getElementById('storyV').classList.remove('active');
+    document.getElementById('storyFrame').src='about:blank';
+    document.body.style.overflow='';
+    storyTemplateId=null;
+}
+
+function buyCurrentStory(){if(storyTemplateId)buyTemplate(storyTemplateId)}
+
+// Story keyboard/swipe
+document.addEventListener('keydown',e=>{
+    if(!document.getElementById('storyV').classList.contains('active'))return;
+    if(e.key==='ArrowRight')storyNav(1);
+    if(e.key==='ArrowLeft')storyNav(-1);
+    if(e.key==='Escape')closeStory();
+});
+let storyTouchX=0;
+document.getElementById('storyFrame').parentElement.addEventListener('touchstart',e=>{storyTouchX=e.touches[0].clientX},{passive:true});
+document.getElementById('storyFrame').parentElement.addEventListener('touchend',e=>{
+    const diff=e.changedTouches[0].clientX-storyTouchX;
+    if(Math.abs(diff)>50)storyNav(diff<0?1:-1);
+},{passive:true});
+
+// ===== TRENDING REELS =====
+function renderReels(){
+    const trending=all.filter(t=>t.trending).slice(0,10);
+    if(!trending.length)return;
+    document.getElementById('trendingSec').style.display='';
+    const car=document.getElementById('reelsCar');
+    car.innerHTML=trending.map(t=>{
+        const p=t.price||299,op=t.oldPrice||449;
+        return `<div class="reel" onclick="openPP(${t.id})">
+            ${t.trending?'<span class="reel-badge hot">Trending</span>':''}
+            <div class="reel-ph"><div class="ic">${catIcons[t.category]||'✦'}</div><span>${t.category||''}</span></div>
+            <img src="${t.turl}" alt="" loading="lazy" onerror="this.style.display='none';this.previousElementSibling.style.display='flex'" onload="this.previousElementSibling.style.display='none';this.style.display='block'">
+            <div class="reel-ov">
+                <div class="reel-name">${t.name||''}</div>
+                <div class="reel-meta">₹${p} ${op>p?'<s style="color:var(--g2);margin-left:.3rem">₹'+op+'</s>':''}</div>
+                <button class="reel-play">👁 Live Preview</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// ===== CATEGORY SECTIONS =====
+function renderCatSections(cats){
+    const wrap=document.getElementById('catSections');
+    wrap.innerHTML='';
+    cats.forEach((cat,ci)=>{
+        const tpls=all.filter(t=>t.category===cat);
+        if(!tpls.length)return;
+        const sec=document.createElement('section');
+        sec.className='sec fi';
+        sec.style.transitionDelay=(ci*.08)+'s';
+        sec.innerHTML=`
+        <div class="sec-hdr">
+            <h2>${catIcons[cat]||'📁'} ${cat.charAt(0).toUpperCase()+cat.slice(1)} <span>Templates</span></h2>
+            <a class="sec-link" onclick="curCat='${cat}';filterGrid();document.getElementById('allGrid').scrollIntoView({behavior:'smooth'})">View all →</a>
+        </div>
+        <div class="cwl" id="cwl_${cat}">
+            <button class="car-arr l" onclick="scrollCar('cwl_${cat}',-280)">‹</button>
+            <div class="car" id="car_${cat}">${tpls.map(t=>stripCardHTML(t)).join('')}</div>
+            <button class="car-arr r" onclick="scrollCar('cwl_${cat}',280)">›</button>
+        </div>`;
+        wrap.appendChild(sec);
+    });
+}
+
+function stripCardHTML(t){
+    const p=t.price||299,op=t.oldPrice||449,disc=op>p?Math.round((1-p/op)*100)+'% OFF':'';
+    return `<div class="strip-card" onclick="openPP(${t.id})">
+        <div class="strip-thumb">
+            <div class="ph">${catIcons[t.category]||'✦'}</div>
+            <img src="${t.turl}" alt="" loading="lazy" onerror="this.style.display='none';this.previousElementSibling.style.display='flex'" onload="this.previousElementSibling.style.display='none';this.style.display='block'">
+            <span class="peek-hint">👁 Peek</span>
+        </div>
+        <div class="strip-body">
+            <h4>${t.name||'Untitled'}</h4>
+            <p>${t.desc||t.style||'Custom Design'}</p>
+            <div class="strip-foot">
+                <div><span class="strip-price">₹${p}</span>${op>p?`<span class="strip-old">₹${op}</span>`:''}${disc?`<span style="color:var(--green);font-size:.7rem;font-weight:600;margin-left:.4rem">${disc}</span>`:''}</div>
+                <button class="strip-buy" onclick="event.stopPropagation();buyTemplate(${t.id})">Buy</button>
             </div>
         </div>
-    </header>
+    </div>`;
+}
 
-    <section class="hero">
-        <div class="hero-badge">Premium Digital Experiences</div>
-        <h1>Celebrate Moments That Matter</h1>
-        <p>Exquisite animated templates for weddings, birthdays, anniversaries, and every special occasion.</p>
-    </section>
+function renderFtCats(cats){
+    document.getElementById('ftCats').innerHTML=cats.map(c=>`<a href="#" onclick="curCat='${c}';filterGrid();document.getElementById('allGrid').scrollIntoView({behavior:'smooth'});return false">${catIcons[c]||''} ${c.charAt(0).toUpperCase()+c.slice(1)}</a>`).join('');
+}
 
-    <section class="controls-section">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search templates by name, category, or style...">
-        </div>
-        <div class="categories" id="categoryFilters">
-            <button class="category-pill active" data-category="all"><span>✦</span> All Templates</button>
-        </div>
-        <div class="toolbar">
-            <div class="results-count">Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> templates</div>
-            <select class="sort-select" id="sortSelect">
-                <option value="newest">Newest First</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="popular">Most Popular</option>
-                <option value="trending">Trending</option>
-            </select>
-        </div>
-    </section>
+// ===== ALL TEMPLATES GRID =====
+function filterGrid(){
+    let f=all.filter(t=>{
+        const mc=curCat==='all'||t.category===curCat;
+        const s=curSearch.toLowerCase();
+        const ms=!s||(t.name&&t.name.toLowerCase().includes(s))||(t.category&&t.category.toLowerCase().includes(s))||(t.desc&&t.desc.toLowerCase().includes(s));
+        return mc&&ms;
+    });
+    f.sort((a,b)=>{
+        switch(curSort){
+            case'price-low':return(a.price||0)-(b.price||0);
+            case'price-high':return(b.price||0)-(a.price||0);
+            case'popular':return(b.orders||0)-(a.orders||0);
+            case'trending':return(b.trending?1:0)-(a.trending?1:0);
+            default:return new Date(b.added||0)-new Date(a.added||0);
+        }
+    });
+    renderGrid(f);
+    document.getElementById('gShow').textContent=f.length;
+    document.getElementById('gTot').textContent=all.length;
+    document.getElementById('emptyS').style.display=f.length?'none':'block';
+}
 
-    <section class="templates-container">
-        <div class="templates-grid" id="templatesGrid">
-            <div class="skeleton-loader"></div>
-            <div class="skeleton-loader"></div>
-            <div class="skeleton-loader"></div>
-            <div class="skeleton-loader"></div>
-        </div>
-        <div class="empty-state" id="emptyState" style="display: none;">
-            <div class="empty-icon">✦</div>
-            <h3>No templates found</h3>
-        </div>
-        <div class="error-state" id="errorState" style="display: none;">
-            <div class="error-icon">⚠</div>
-            <h3>Failed to load templates</h3>
-            <button class="retry-btn" onclick="loadTemplates()">Retry</button>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Scripted Surprise</h4>
-                <p>Crafting digital elegance for life's most precious moments.</p>
+function renderGrid(tpls){
+    const g=document.getElementById('tgrid');
+    g.innerHTML=tpls.map(t=>{
+        const p=t.price||299,op=t.oldPrice||449,disc=op>p?Math.round((1-p/op)*100)+'% OFF':'';
+        return `<div class="gcard" onclick="openPP(${t.id})">
+            <div class="gcard-thumb">
+                ${t.tier==='Premium'?'<span class="gcard-badge prem">Premium</span>':''}
+                ${t.trending&&t.tier!=='Premium'?'<span class="gcard-badge hot">Trending</span>':''}
+                <div class="gcard-ph"><div class="ic">${catIcons[t.category]||'✦'}</div><span>${t.category||''}</span></div>
+                <img src="${t.turl}" alt="" loading="lazy" onerror="this.style.display='none';this.previousElementSibling.style.display='flex'" onload="this.previousElementSibling.style.display='none';this.style.display='block'">
+                <span class="peek-hint">👁 Click to Peek</span>
             </div>
-            <div class="footer-section">
-                <h4>Categories</h4>
-                <a href="#" onclick="filterCategory('wedding'); return false;">Wedding</a>
-                <a href="#" onclick="filterCategory('birthday'); return false;">Birthday</a>
-                <a href="#" onclick="filterCategory('anniversary'); return false;">Anniversary</a>
-                <a href="#" onclick="filterCategory('love'); return false;">Love</a>
-            </div>
-            <div class="footer-section">
-                <h4>Support</h4>
-                <a href="https://t.me/scriptedsurpise_bot" target="_blank">Telegram Bot</a>
-                <a href="mailto:orders@scriptedsurprise.com">Email Us</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 <span>Scripted Surprise</span>. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Preview Modal -->
-    <div class="modal-overlay" id="previewModal">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Template Preview</h3>
-                <div class="modal-actions">
-                    <span class="modal-price" id="modalPrice">₹0</span>
-                    <button class="modal-buy" onclick="buyCurrent()">Buy via Telegram</button>
-                    <button class="modal-close" onclick="closeModal()">×</button>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="modal-loading" id="modalLoading">
-                    <div class="modal-spinner"></div>
-                </div>
-                <iframe class="preview-iframe" id="previewFrame"></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Chat Widget -->
-    <div class="chat-widget">
-        <button class="chat-button" id="chatButton" onclick="toggleChat()">💬</button>
-        
-        <div class="chat-window" id="chatWindow">
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <div class="chat-avatar">🤖</div>
-                    <div class="chat-header-text">
-                        <h4>Support Bot</h4>
-                        <p id="chatStatus">Online</p>
+            <div class="gcard-body">
+                <div class="gcard-id">#${String(t.id).padStart(5,'0')}</div>
+                <div class="gcard-name">${t.name||'Untitled'}</div>
+                <div class="gcard-style"><span class="dot"></span>${t.desc||t.style||'Custom Design'}</div>
+                <div class="gcard-foot">
+                    <div style="display:flex;align-items:center;gap:.4rem">
+                        <span class="gcard-price">₹${p}</span>
+                        ${op>p?`<span class="gcard-old">₹${op}</span><span class="gcard-disc">${disc}</span>`:''}
                     </div>
-                </div>
-                <button class="chat-close" onclick="toggleChat()">×</button>
-            </div>
-            
-            <div class="chat-messages" id="chatMessages"></div>
-            
-            <div class="typing-indicator" id="typingIndicator">
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-            </div>
-            
-            <div class="chat-input-area">
-                <div class="reply-indicator" id="replyIndicator">
-                    <span class="reply-indicator-text">Replying to...</span>
-                    <button class="reply-indicator-close" onclick="cancelReply()">×</button>
-                </div>
-                
-                <div class="recording-indicator" id="recordingIndicator">
-                    <div class="recording-dot"></div>
-                    <span>Recording... <span id="recordingTime">0:00</span></span>
-                </div>
-                
-                <div class="chat-input-wrapper">
-                    <textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1"></textarea>
-                    <div class="chat-actions">
-                        <button class="chat-action-btn" onclick="document.getElementById('imageInput').click()">📷</button>
-                        <button class="chat-action-btn" onclick="document.getElementById('fileInput').click()">📎</button>
-                        <button class="chat-action-btn" id="recordBtn" onmousedown="startRecording()" onmouseup="stopRecording()" onmouseleave="stopRecording()" ontouchstart="startRecording()" ontouchend="stopRecording()">🎤</button>
-                        <button class="chat-send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
-                    </div>
+                    <button class="gcard-buy" onclick="event.stopPropagation();buyTemplate(${t.id})">Buy</button>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>`;
+    }).join('');
+}
 
-    <input type="file" class="file-input" id="imageInput" accept="image/*,video/*" onchange="handleFileSelect(event, 'media')">
-    <input type="file" class="file-input" id="fileInput" accept=".pdf,.doc,.docx,.txt,.zip" onchange="handleFileSelect(event, 'file')">
+// ===== QUICK PREVIEW PANEL =====
+function openPP(id){
+    const t=all.find(x=>x.id===id);
+    if(!t)return;
+    ppTemplateId=id;
+    const p=t.price||299,op=t.oldPrice||449;
+    document.getElementById('ppTitle').textContent=t.name||'Preview';
+    document.getElementById('ppCat').textContent=t.category||'';
+    document.getElementById('ppTier').textContent=t.tier||'Standard';
+    document.getElementById('ppPrice').textContent='₹'+p;
+    document.getElementById('ppOld').textContent=op>p?'₹'+op:'';
+    document.getElementById('ppDisc').textContent=op>p?Math.round((1-p/op)*100)+'% OFF':'';
+    document.getElementById('ppOverlay').classList.add('active');
+    document.getElementById('pp').classList.add('active');
+    const frame=document.getElementById('ppFrame');
+    const load=document.getElementById('ppLoad');
+    load.classList.remove('hidden');
+    frame.src=t.purl;
+    frame.onload=()=>load.classList.add('hidden');
+}
 
-    <!-- Info Modal (hidden - info now collected via bot chat) -->
-    <div class="info-modal-overlay" id="infoModal" style="display:none!important">
-        <div class="info-modal-container">
-            <div class="form-group">
-                <input type="text" class="form-input" id="userName" placeholder="Enter your name">
-            </div>
-            <div class="form-group" id="emailGroup">
-                <input type="email" class="form-input" id="userEmail" placeholder="your@email.com">
-            </div>
-            <button class="btn-primary" id="infoModalBtn" onclick="submitInfoModal()">Continue</button>
-        </div>
-    </div>
+function closePP(){
+    document.getElementById('ppOverlay').classList.remove('active');
+    document.getElementById('pp').classList.remove('active');
+    document.getElementById('ppFrame').src='about:blank';
+    ppTemplateId=null;
+}
 
-    <script>
-        // Configuration
-        const CONFIG = {
-            githubUser: 'scriptedsurprise',
-            githubRepo: 'scriptedsurprise.github.io',
-            branch: 'main',
-            templatesJsonPath: 'templates.json',
-            templatesFolder: 'templates',
-            telegramBotToken: '8308614113:AAEy2rsJnLhFwgqtGM1Ko2CdRQfQsnJg3yg',
-            telegramAdminChatId: '1116079836',
-            telegramBotUsername: 'scriptedsurpise_bot'
-        };
+function buyCurrentPP(){if(ppTemplateId)buyTemplate(ppTemplateId)}
 
-        // State
-        let allTemplates = [];
-        let currentCategory = 'all';
-        let currentSort = 'newest';
-        let currentSearch = '';
-        let currentPreviewId = null;
-        
-        // Chat State
-        let chatUser = null;
-        let messages = [];
-        let replyingTo = null;
-        let mediaRecorder = null;
-        let audioChunks = [];
-        let recordingStartTime = null;
-        let recordingInterval = null;
-        let pendingAction = null; // 'chat' or 'buy'
-        let pendingTemplateId = null;
-        let pollingInterval = null;
-        let lastMessageId = 0;
-        let notificationPermission = false;
+// ===== BUY =====
+function buyTemplate(id){
+    const t=all.find(x=>x.id===id);
+    if(!t)return;
+    pendAction='buy';pendTplId=id;
+    if(!chatUser||!chatUser.name){startBotFlow('buy',id);return}
+    window.open(`https://t.me/${C.tgBot}?start=purchase_${id}`,'_blank');
+}
 
-        // Bot conversation flow state
-        let botFlowStep = null; 
-        // Steps: null → 'ask_name' → 'ask_email' → 'ask_interest' → 'done'
-        let botCollecting = false; // true while bot is collecting info
-        let infoCollected = {}; // temp store during collection
+function randomTemplate(){
+    if(!all.length)return;
+    const t=all[Math.floor(Math.random()*all.length)];
+    openPP(t.id);
+}
 
-        const categoryIcons = {
-            wedding: "💍", birthday: "🎂", anniversary: "❤️", love: "🌹",
-            baby: "👶", graduation: "🎓", engagement: "💎", congrats: "🏆",
-            farewell: "👋", festival: "🎆", uncategorized: "📁", all: "✦"
-        };
+// ===== CAROUSEL SCROLL =====
+function scrollCar(id,amt){
+    const car=document.getElementById(id);
+    if(car)car.scrollBy({left:amt,behavior:'smooth'});
+}
 
-        // Initialize
-        async function init() {
-            createParticles();
-            setupEventListeners();
-            await loadTemplates();
-            initChat();
-            requestNotificationPermission();
-        }
+// ===== CHAT SYSTEM =====
+function initChat(){
+    const s=localStorage.getItem('chatUser');
+    if(s)chatUser=JSON.parse(s);
+    if(localStorage.getItem('chatCompleted')==='true'){botStep='done';botCollecting=false}
+    const inp=document.getElementById('chatI');
+    inp.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,90)+'px'});
+    inp.addEventListener('keypress',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}});
+    loadChatHist();
+    if(localStorage.getItem('chatCompleted')==='true')lockChat();
+    startPoll();
+}
 
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                container.appendChild(particle);
-            }
-        }
-
-        async function requestNotificationPermission() {
-            if ('Notification' in window) {
-                const permission = await Notification.requestPermission();
-                notificationPermission = permission === 'granted';
-            }
-        }
-
-        function showNotification(title, body) {
-            if (notificationPermission && 'Notification' in window) {
-                new Notification(title, {
-                    body: body,
-                    icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="50" cy="50" r="45" fill="%23D4AF37"/%3E%3Ctext x="50" y="65" font-size="40" text-anchor="middle" fill="%230A0A0A"%3E✦%3C/text%3E%3C/svg%3E'
-                });
-            }
-        }
-
-        // Template Loading
-        async function loadTemplates() {
-            showLoading();
-            try {
-                const url = `https://raw.githubusercontent.com/${CONFIG.githubUser}/${CONFIG.githubRepo}/${CONFIG.branch}/${CONFIG.templatesJsonPath}`;
-                const response = await fetch(url, { cache: 'no-cache' });
-                if (!response.ok) throw new Error('Failed to fetch');
-                
-                const templates = await response.json();
-                if (!Array.isArray(templates)) throw new Error('Invalid data');
-
-                allTemplates = templates.map(t => ({
-                    ...t,
-                    previewUrl: `https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/${t.filename}`,
-                    thumbnailUrl: `https://${CONFIG.githubUser}.github.io/${CONFIG.templatesFolder}/thumbnails/${t.filename.replace('.html', '.jpg')}`
-                }));
-
-                renderCategories();
-                updateStats();
-                filterAndRender();
-            } catch (error) {
-                showError();
-            }
-        }
-
-        function showLoading() {
-            document.getElementById('templatesGrid').innerHTML = 
-                Array(4).fill('<div class="skeleton-loader"></div>').join('');
-        }
-
-        function showError() {
-            document.getElementById('templatesGrid').innerHTML = '';
-            document.getElementById('errorState').style.display = 'block';
-        }
-
-        function renderCategories() {
-            const categories = [...new Set(allTemplates.map(t => t.category))].filter(Boolean);
-            const container = document.getElementById('categoryFilters');
-            const allBtn = container.querySelector('[data-category="all"]');
-            container.innerHTML = '';
-            container.appendChild(allBtn);
-            
-            categories.forEach(cat => {
-                const btn = document.createElement('button');
-                btn.className = 'category-pill';
-                btn.dataset.category = cat;
-                btn.innerHTML = `<span>${categoryIcons[cat] || '📁'}</span> ${cat.charAt(0).toUpperCase() + cat.slice(1)}`;
-                btn.onclick = () => filterCategory(cat);
-                container.appendChild(btn);
-            });
-        }
-
-        function filterCategory(category) {
-            currentCategory = category;
-            document.querySelectorAll('.category-pill').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.category === category);
-            });
-            filterAndRender();
-        }
-
-        function filterAndRender() {
-            let filtered = allTemplates.filter(t => {
-                const matchesCat = currentCategory === 'all' || t.category === currentCategory;
-                const search = currentSearch.toLowerCase();
-                const matchesSearch = !search || 
-                    (t.name && t.name.toLowerCase().includes(search)) ||
-                    (t.category && t.category.toLowerCase().includes(search)) ||
-                    (t.desc && t.desc.toLowerCase().includes(search));
-                return matchesCat && matchesSearch;
-            });
-
-            filtered.sort((a, b) => {
-                switch(currentSort) {
-                    case 'price-low': return (a.price || 0) - (b.price || 0);
-                    case 'price-high': return (b.price || 0) - (a.price || 0);
-                    case 'popular': return (b.orders || 0) - (a.orders || 0);
-                    case 'trending': return (b.trending ? 1 : 0) - (a.trending ? 1 : 0);
-                    default: return new Date(b.added || 0) - new Date(a.added || 0);
-                }
-            });
-
-            renderTemplates(filtered);
-            updateCounts(filtered.length, allTemplates.length);
-        }
-
-        function renderTemplates(templates) {
-            const grid = document.getElementById('templatesGrid');
-            if (templates.length === 0) {
-                grid.innerHTML = '';
-                document.getElementById('emptyState').style.display = 'block';
-                return;
-            }
-            document.getElementById('emptyState').style.display = 'none';
-
-            grid.innerHTML = templates.map(t => {
-                const price = t.price || 299;
-                const oldPrice = t.oldPrice || 449;
-                const discount = t.discount || `${Math.round((1 - price/oldPrice) * 100)}% OFF`;
-                
-                return `
-                <div class="template-card" data-id="${t.id}">
-                    <div class="card-thumbnail">
-                        ${t.trending ? '<span class="card-badge trending">Trending</span>' : ''}
-                        ${t.tier === 'Premium' ? '<span class="card-badge premium">Premium</span>' : ''}
-                        
-                        <div class="thumbnail-placeholder">
-                            <div class="icon">✦</div>
-                            <span>${t.category || 'Template'}</span>
-                        </div>
-                        <img src="${t.thumbnailUrl}" 
-                             alt="${t.name}" 
-                             class="thumbnail-image" 
-                             loading="lazy"
-                             onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';"
-                             onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
-                        
-                        <div class="thumbnail-overlay">
-                            <button class="preview-btn" onclick="openPreview(${t.id})">
-                                <span>👁</span> View Live Preview
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="template-id">#${String(t.id).padStart(5, '0')}</span>
-                            <span class="template-tier">${t.tier || 'Standard'}</span>
-                        </div>
-                        <h3 class="template-name">${t.name || 'Untitled'}</h3>
-                        <div class="template-style">
-                            <span class="style-dot"></span>
-                            ${t.desc || t.style || 'Custom Design'}
-                        </div>
-                        <div class="card-footer">
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <div class="price-section">
-                                    <span class="price-current">₹${price}</span>
-                                    ${oldPrice > price ? `<span class="price-original">₹${oldPrice}</span>` : ''}
-                                </div>
-                                ${oldPrice > price ? `<span class="discount-badge">${discount}</span>` : ''}
-                            </div>
-                            <button class="buy-btn" onclick="buyTemplate(${t.id})">Buy</button>
-                        </div>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
-        function updateCounts(showing, total) {
-            document.getElementById('showingCount').textContent = showing;
-            document.getElementById('totalCount').textContent = total;
-        }
-
-        function updateStats() {
-            document.getElementById('totalTemplates').textContent = allTemplates.length;
-            const cats = new Set(allTemplates.map(t => t.category).filter(Boolean)).size;
-            document.getElementById('totalCategories').textContent = cats;
-            const avg = allTemplates.length ? 
-                Math.round(allTemplates.reduce((s, t) => s + (t.price || 0), 0) / allTemplates.length) : 0;
-            document.getElementById('avgPrice').textContent = '₹' + avg;
-        }
-
-        function openPreview(id) {
-            const t = allTemplates.find(x => x.id === id);
-            if (!t) return;
-            currentPreviewId = id;
-            document.getElementById('modalTitle').textContent = t.name;
-            document.getElementById('modalPrice').textContent = '₹' + (t.price || 299);
-            document.getElementById('previewModal').classList.add('active');
-            document.getElementById('modalLoading').style.display = 'flex';
-            
-            const frame = document.getElementById('previewFrame');
-            frame.style.opacity = '0';
-            frame.src = t.previewUrl;
-            
-            frame.onload = () => {
-                document.getElementById('modalLoading').style.display = 'none';
-                frame.style.opacity = '1';
-            };
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('previewModal').classList.remove('active');
-            document.getElementById('previewFrame').src = 'about:blank';
-            currentPreviewId = null;
-            document.body.style.overflow = '';
-        }
-
-        function buyTemplate(id) {
-            const t = allTemplates.find(x => x.id === id);
-            if (!t) return;
-            
-            pendingAction = 'buy';
-            pendingTemplateId = id;
-            
-            if (!chatUser || !chatUser.name) {
-                startBotFlow('buy', id);
-            } else {
-                redirectToTelegramPurchase(t);
-            }
-        }
-
-        function redirectToTelegramPurchase(t) {
-            const message = `Hi! I want to purchase:%0A*Template:* ${t.name}%0A*ID:* #${String(t.id).padStart(5, '0')}%0A*Price:* ₹${t.price || 299}`;
-            window.open(`https://t.me/${CONFIG.telegramBotUsername}?start=purchase_${t.id}`, '_blank');
-        }
-
-        function buyCurrent() {
-            if (currentPreviewId) buyTemplate(currentPreviewId);
-        }
-
-        // loadChatHistory, saveChatHistory kept below
-
-        // ==================== CHAT SYSTEM ====================
-
-        function initChat() {
-            const savedUser = localStorage.getItem('chatUser');
-            if (savedUser) {
-                chatUser = JSON.parse(savedUser);
-            }
-            
-            // Check if info was already collected (chat was completed before)
-            const chatCompleted = localStorage.getItem('chatCompleted');
-            if (chatCompleted === 'true') {
-                botFlowStep = 'done';
-                botCollecting = false;
-            }
-            
-            const input = document.getElementById('chatInput');
-            input.addEventListener('input', function() {
-                this.style.height = 'auto';
-                this.style.height = Math.min(this.scrollHeight, 100) + 'px';
-            });
-            
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    sendMessage();
-                }
-            });
-            
-            loadChatHistory();
-            
-            // If chat was already completed and input should be locked
-            if (chatCompleted === 'true') {
-                lockChatInput();
-            }
-            
-            startPolling();
-        }
-
-        function startPolling() {
-            if (pollingInterval) clearInterval(pollingInterval);
-            
-            pollingInterval = setInterval(async () => {
-                if (chatUser && chatUser.id) {
-                    await checkForNewMessages();
-                }
-            }, 3000);
-        }
-
-        async function checkForNewMessages() {
-            try {
-                const url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/getUpdates`;
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                if (data.ok && data.result) {
-                    for (const update of data.result) {
-                        if (update.update_id > lastMessageId) {
-                            lastMessageId = update.update_id;
-                            
-                            if (update.message && update.message.reply_to_message) {
-                                const replyText = update.message.reply_to_message.text || '';
-                                const userIdMatch = replyText.match(/ID: ([A-Z0-9]+)/);
-                                
-                                if (userIdMatch && chatUser && userIdMatch[1] === chatUser.id) {
-                                    const adminMessage = update.message.text || '';
-                                    if (adminMessage) {
-                                        // Admin replied — unlock chat
-                                        const input = document.getElementById('chatInput');
-                                        if (input.disabled) {
-                                            input.disabled = false;
-                                            input.placeholder = 'Type a message...';
-                                            document.getElementById('sendBtn').disabled = false;
-                                            localStorage.removeItem('chatCompleted');
-                                        }
-
-                                        addMessage({
-                                            type: 'received',
-                                            text: `🔔 *Admin replied:*\n${adminMessage}`,
-                                            time: new Date(update.message.date * 1000)
-                                        });
-                                        
-                                        showNotification('New message from Scripted Surprise', adminMessage.substring(0, 100));
-                                        document.getElementById('chatButton').classList.add('has-new');
-                                    }
-                                }
+function startPoll(){
+    if(pollInt)clearInterval(pollInt);
+    pollInt=setInterval(async()=>{
+        if(!chatUser||!chatUser.id)return;
+        try{
+            const r=await fetch(`https://api.telegram.org/bot${C.tgToken}/getUpdates`);
+            const d=await r.json();
+            if(d.ok&&d.result)for(const u of d.result){
+                if(u.update_id>lastUpd){
+                    lastUpd=u.update_id;
+                    if(u.message&&u.message.reply_to_message){
+                        const rt=u.message.reply_to_message.text||'';
+                        const m=rt.match(/ID: ([A-Z0-9]+)/);
+                        if(m&&m[1]===chatUser.id){
+                            const txt=u.message.text||'';
+                            if(txt){
+                                const inp=document.getElementById('chatI');
+                                if(inp.disabled){inp.disabled=false;inp.placeholder='Type a message...';document.getElementById('sendBtn').disabled=false;localStorage.removeItem('chatCompleted')}
+                                addMsg({type:'recv',text:'🔔 Admin replied:\n'+txt,time:new Date(u.message.date*1000)});
+                                showNotif('New message from Scripted Surprise',txt.substring(0,100));
+                                document.getElementById('chatBtn').classList.add('new');
                             }
                         }
                     }
                 }
-            } catch (err) {
-                console.error('Polling error:', err);
             }
-        }
+        }catch(e){}
+    },3000);
+}
 
-        function toggleChat() {
-            const win = document.getElementById('chatWindow');
-            
-            if (!win.classList.contains('active')) {
-                win.classList.add('active');
-                document.getElementById('chatButton').classList.remove('has-new');
-                
-                // If first time opening (no messages, no user), start bot flow
-                if (messages.length === 0 && (!chatUser || !chatUser.name)) {
-                    startBotFlow();
-                }
-                scrollToBottom();
-            } else {
-                win.classList.remove('active');
-            }
-        }
+function toggleChat(){
+    const w=document.getElementById('chatWin');
+    if(!w.classList.contains('active')){
+        w.classList.add('active');
+        document.getElementById('chatBtn').classList.remove('new');
+        if(msgs.length===0&&(!chatUser||!chatUser.name))startBotFlow();
+        scrollChatBot();
+    }else w.classList.remove('active');
+}
 
-        function startBotFlow(action, templateId) {
-            if (action) pendingAction = action;
-            if (templateId) pendingTemplateId = templateId;
-            
-            botFlowStep = 'ask_name';
-            botCollecting = true;
-            infoCollected = {};
-            
-            // Open chat window
-            const win = document.getElementById('chatWindow');
-            win.classList.add('active');
-            
-            setTimeout(() => {
-                addBotMessage(`👋 Hello! Welcome to *Scripted Surprise*.\n\nI'm the support bot. Let me collect a few details so our team can assist you.\n\n*What's your name?*`);
-            }, 400);
-        }
+function startBotFlow(act,tid){
+    if(act)pendAction=act;if(tid)pendTplId=tid;
+    botStep='ask_name';botCollecting=true;infoCol={};
+    document.getElementById('chatWin').classList.add('active');
+    setTimeout(()=>addBotMsg('👋 Welcome to *Scripted Surprise*!\n\nLet me collect a few details so our team can assist you.\n\n*What\'s your name?*'),400);
+}
 
-        async function handleBotFlowInput(userText) {
-            // User just typed — add their message to chat
-            addMessage({ type: 'sent', text: userText, time: new Date() });
-            
-            if (botFlowStep === 'ask_name') {
-                infoCollected.name = userText;
-                botFlowStep = 'ask_email';
-                await botTypingDelay();
-                addBotMessage(`Nice to meet you, *${infoCollected.name}*! 😊\n\nPlease share your *email address* so we can reach you in case we can't connect via this chat.`);
+async function handleBotInput(txt){
+    addMsg({type:'sent',text:txt,time:new Date()});
+    if(botStep==='ask_name'){
+        infoCol.name=txt;botStep='ask_email';
+        await botDelay();addBotMsg(`Nice to meet you, *${infoCol.name}*! 😊\n\nPlease share your *email address* so we can reach you.`);
+    }else if(botStep==='ask_email'){
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(txt)){await botDelay(700);addBotMsg('That doesn\'t look like a valid email. Please try again (e.g. name@example.com).');return}
+        infoCol.email=txt;botStep='ask_interest';await botDelay();
+        let p='Got it! ✅\n\nPlease tell us:\n• *Which template interests you?* (name or #ID)\n• *Any custom requirements?*\n\nDescribe what you need!';
+        if(pendAction==='buy'&&pendTplId){const t=all.find(x=>x.id===pendTplId);if(t)p=`Got it! ✅\n\nYou're purchasing *${t.name}* (₹${t.price||299}).\n\nAny *custom requirements*? (Type "none" to skip)`}
+        addBotMsg(p);
+    }else if(botStep==='ask_interest'){
+        infoCol.interest=txt;botStep='done';botCollecting=false;
+        chatUser={id:'SS'+Date.now().toString(36).toUpperCase(),name:infoCol.name,email:infoCol.email,registeredAt:new Date().toISOString()};
+        localStorage.setItem('chatUser',JSON.stringify(chatUser));
+        let ti='';
+        if(pendAction==='buy'&&pendTplId){const t=all.find(x=>x.id===pendTplId);if(t)ti=`\n*Template:* ${t.name} (#${String(t.id).padStart(5,'0')}) ₹${t.price||299}`}
+        await sendTG(`📋 *New Inquiry -- Scripted Surprise*\n\n*Name:* ${chatUser.name}\n*Email:* ${chatUser.email}\n*ID:* ${chatUser.id}${ti}\n*Details:* ${infoCol.interest}\n*Action:* ${pendAction||'Chat'}`);
+        await botDelay(1100);addBotMsg(`✅ *Done, ${chatUser.name}!*\n\nYour info has been sent to our team. We'll contact you via *${chatUser.email}*.\n\n_If available, our admin may reply directly here._`);
+        await botDelay(1800);addBotMsg('🔔 *Enable notifications?* Click below to not miss a reply.',true);
+        lockChat();
+        if(pendAction==='buy'&&pendTplId){const t=all.find(x=>x.id===pendTplId);if(t)window.open(`https://t.me/${C.tgBot}?start=purchase_${pendTplId}`,'_blank')}
+        pendAction=null;pendTplId=null;
+    }
+}
 
-            } else if (botFlowStep === 'ask_email') {
-                if (!isValidEmail(userText)) {
-                    await botTypingDelay(800);
-                    addBotMessage(`Hmm, that doesn't look like a valid email. Please enter a valid email address (e.g. yourname@example.com).`);
-                    return;
-                }
-                infoCollected.email = userText;
-                botFlowStep = 'ask_interest';
-                await botTypingDelay();
+function addBotMsg(text,showBtn=false){
+    const c=document.getElementById('chatMsgs'),d=document.createElement('div');
+    d.className='msg recv';
+    let h=text.replace(/\*(.*?)\*/g,'<strong>$1</strong>').replace(/_(.*?)_/g,'<em>$1</em>').replace(/\n/g,'<br>');
+    if(showBtn)h+=`<br><br><button onclick="reqNotifBtn()" style="padding:.4rem .8rem;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:#0A0A0A;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:.75rem">🔔 Enable</button>`;
+    const tm=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    d.innerHTML=h+`<span class="msg-t">${tm}</span>`;
+    c.appendChild(d);scrollChatBot();
+}
 
-                let interestPrompt = `Got it! ✅\n\nNow, please tell us:\n• *Which template are you interested in?* (e.g. template name or #ID)\n• *Any custom requirements or details?*\n\nFeel free to describe what you need!`;
-                if (pendingAction === 'buy' && pendingTemplateId) {
-                    const t = allTemplates.find(x => x.id === pendingTemplateId);
-                    if (t) {
-                        interestPrompt = `Got it! ✅\n\nYou're interested in purchasing *${t.name}* (₹${t.price || 299}).\n\nDo you have any *custom requirements or special details* you'd like to share for this template? (Or type "none" to skip)`;
-                    }
-                }
-                addBotMessage(interestPrompt);
+function lockChat(){
+    const i=document.getElementById('chatI');i.disabled=true;i.placeholder='Chat ended -- We\'ll email you';
+    document.getElementById('sendBtn').disabled=true;localStorage.setItem('chatCompleted','true');
+}
 
-            } else if (botFlowStep === 'ask_interest') {
-                infoCollected.interest = userText;
-                botFlowStep = 'done';
-                botCollecting = false;
+function botDelay(ms=1100){const ind=document.getElementById('typingInd');ind.classList.add('active');scrollChatBot();return new Promise(r=>setTimeout(()=>{ind.classList.remove('active');r()},ms))}
 
-                // Save user
-                chatUser = {
-                    id: 'SS' + Date.now().toString(36).toUpperCase(),
-                    name: infoCollected.name,
-                    email: infoCollected.email,
-                    registeredAt: new Date().toISOString()
-                };
-                localStorage.setItem('chatUser', JSON.stringify(chatUser));
+async function reqNotifBtn(){if('Notification'in window){const p=await Notification.requestPermission();notifPerm=p==='granted';addBotMsg(notifPerm?'✅ Notifications enabled!':'ℹ️ We\'ll reach you via email instead.')}}
 
-                // Send to Telegram
-                let tplInfo = '';
-                if (pendingAction === 'buy' && pendingTemplateId) {
-                    const t = allTemplates.find(x => x.id === pendingTemplateId);
-                    if (t) tplInfo = `\n*Template:* ${t.name} (#${String(t.id).padStart(5,'0')}) ₹${t.price||299}`;
-                }
-                const telegramText = `📋 *New Inquiry — Scripted Surprise*\n\n*Name:* ${chatUser.name}\n*Email:* ${chatUser.email}\n*ID:* ${chatUser.id}${tplInfo}\n*Interest/Details:* ${infoCollected.interest}\n*Action:* ${pendingAction || 'General Chat'}`;
-                await sendToTelegram(telegramText);
+function loadChatHist(){const h=localStorage.getItem('chatHistory');if(h){msgs=JSON.parse(h);const c=document.getElementById('chatMsgs');c.innerHTML='';msgs.forEach(m=>renderMsg(m))}}
+function saveChatHist(){localStorage.setItem('chatHistory',JSON.stringify(msgs))}
+function addMsg(m){msgs.push(m);renderMsg(m);saveChatHist();scrollChatBot()}
+function renderMsg(m){
+    const c=document.getElementById('chatMsgs'),d=document.createElement('div');
+    d.className='msg '+(m.type==='sent'?'sent':'recv');
+    let h='';
+    if(m.replyTo)h+=`<div class="reply-to">${esc(m.replyTo.text)}</div>`;
+    if(m.text)h+=esc(m.text);
+    if(m.mediaType==='image')h+=`<img src="${m.mediaUrl}" class="msg-media">`;
+    else if(m.mediaType==='video')h+=`<video src="${m.mediaUrl}" class="msg-media" controls></video>`;
+    else if(m.mediaType==='audio')h+=`<audio src="${m.mediaUrl}" class="msg-audio" controls></audio>`;
+    else if(m.fileName)h+=`<div class="msg-file" onclick="window.open('${m.fileUrl}')">📄 ${esc(m.fileName)}</div>`;
+    h+=`<span class="msg-t">${new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span>`;
+    d.innerHTML=h;c.appendChild(d);
+}
+function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML}
+function setReply(i){replyTo=msgs[i];document.getElementById('replyInd').classList.add('active');document.querySelector('.reply-ind-t').textContent='Replying: '+replyTo.text.substring(0,25)+'...';document.getElementById('chatI').focus()}
+function cancelReply(){replyTo=null;document.getElementById('replyInd').classList.remove('active')}
 
-                // Final bot messages
-                await botTypingDelay(1200);
-                addBotMessage(`✅ *All done, ${chatUser.name}!*\n\nYour information has been sent to our admin team. You'll be contacted via *${chatUser.email}*.\n\n_If our admin is available, they may also reply directly here in this chat._`);
+async function sendMsg(){
+    const inp=document.getElementById('chatI'),txt=inp.value.trim();
+    if(!txt||inp.disabled)return;
+    if(botCollecting&&botStep&&botStep!=='done'){inp.value='';inp.style.height='auto';cancelReply();await handleBotInput(txt);return}
+    if(!chatUser||!chatUser.name){pendAction='chat';startBotFlow('chat');return}
+    addMsg({type:'sent',text:txt,time:new Date(),replyTo:replyTo});
+    inp.value='';inp.style.height='auto';cancelReply();
+    let tg=`💬 *Message from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email?'*Email:* '+chatUser.email+'\n':''}${txt}`;
+    if(replyTo)tg+=`\n\n_Reply to: ${replyTo.text}_`;
+    await sendTG(tg);
+}
 
-                await botTypingDelay(2000);
-                addBotMessage(`🔔 *Enable push notifications?*\n\nSo you don't miss a reply — click the button below to allow browser notifications.`, true);
+async function handleFile(ev,type){
+    const f=ev.target.files[0];if(!f)return;
+    if(!chatUser||!chatUser.name){pendAction='chat';startBotFlow('chat');ev.target.value='';return}
+    const fd=new FormData();fd.append('chat_id',C.tgAdmin);
+    fd.append('caption',`📎 *File from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email?'*Email:* '+chatUser.email+'\n':''}*File:* ${f.name} (${(f.size/1024).toFixed(1)} KB)`);
+    fd.append('parse_mode','Markdown');
+    if(type==='media'){
+        if(f.type.startsWith('image/')){fd.append('photo',f);await sendTGMedia('sendPhoto',fd);addMsg({type:'sent',mediaType:'image',mediaUrl:URL.createObjectURL(f),time:new Date()})}
+        else if(f.type.startsWith('video/')){fd.append('video',f);await sendTGMedia('sendVideo',fd);addMsg({type:'sent',mediaType:'video',mediaUrl:URL.createObjectURL(f),time:new Date()})}
+    }else{fd.append('document',f);await sendTGMedia('sendDocument',fd);addMsg({type:'sent',fileName:f.name,fileUrl:URL.createObjectURL(f),time:new Date()})}
+    ev.target.value='';
+}
 
-                // Lock input
-                lockChatInput();
-            }
-        }
+async function sendTGMedia(m,fd){try{await fetch(`https://api.telegram.org/bot${C.tgToken}/${m}`,{method:'POST',body:fd})}catch(e){console.error(e)}}
 
-        function addBotMessage(text, showNotifBtn = false) {
-            const container = document.getElementById('chatMessages');
-            const div = document.createElement('div');
-            div.className = 'message received';
+async function startRec(){
+    try{
+        const s=await navigator.mediaDevices.getUserMedia({audio:true});
+        mediaRec=new MediaRecorder(s);audioChunks=[];
+        mediaRec.ondataavailable=e=>audioChunks.push(e.data);
+        mediaRec.onstop=async()=>{
+            const b=new Blob(audioChunks,{type:'audio/webm'}),u=URL.createObjectURL(b);
+            addMsg({type:'sent',mediaType:'audio',mediaUrl:u,time:new Date()});
+            const fd=new FormData();fd.append('chat_id',C.tgAdmin);fd.append('voice',b,'voice.webm');
+            fd.append('caption',`🎤 *Voice from ${chatUser.name}*\n*ID:* ${chatUser.id}\n*Duration:* ${document.getElementById('recTime').textContent}`);
+            fd.append('parse_mode','Markdown');
+            await fetch(`https://api.telegram.org/bot${C.tgToken}/sendVoice`,{method:'POST',body:fd});
+            s.getTracks().forEach(t=>t.stop());
+        };
+        mediaRec.start();recStart=Date.now();document.getElementById('recInd').classList.add('active');
+        recInt=setInterval(()=>{const e=Math.floor((Date.now()-recStart)/1000);document.getElementById('recTime').textContent=`${Math.floor(e/60)}:${String(e%60).padStart(2,'0')}`},1000);
+    }catch(e){alert('Could not access microphone')}
+}
+function stopRec(){if(!mediaRec||mediaRec.state==='inactive')return;mediaRec.stop();clearInterval(recInt);document.getElementById('recInd').classList.remove('active');document.getElementById('recTime').textContent='0:00'}
 
-            // Simple markdown: *bold*
-            const formatted = text
-                .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
-                .replace(/_(.*?)_/g, '<em>$1</em>')
-                .replace(/\n/g, '<br>');
+function scrollChatBot(){const c=document.getElementById('chatMsgs');setTimeout(()=>c.scrollTop=c.scrollHeight,80)}
+async function sendTG(text){try{await fetch(`https://api.telegram.org/bot${C.tgToken}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:C.tgAdmin,text:text,parse_mode:'Markdown'})})}catch(e){console.error(e)}}
 
-            let inner = formatted;
-            if (showNotifBtn) {
-                inner += `<br><br><button onclick="requestNotifAndShow()" style="margin-top:0.5rem;padding:0.5rem 1rem;background:linear-gradient(135deg,var(--gold-primary),var(--gold-dark));color:#0A0A0A;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.8rem;">🔔 Enable Notifications</button>`;
-            }
-
-            const time = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-            div.innerHTML = inner + `<span class="message-time">${time}</span>`;
-            container.appendChild(div);
-            scrollToBottom();
-        }
-
-        function lockChatInput() {
-            const input = document.getElementById('chatInput');
-            input.disabled = true;
-            input.placeholder = 'Chat ended — You will be contacted via email';
-            document.getElementById('sendBtn').disabled = true;
-            localStorage.setItem('chatCompleted', 'true');
-        }
-
-        function botTypingDelay(ms = 1200) {
-            const indicator = document.getElementById('typingIndicator');
-            indicator.classList.add('active');
-            scrollToBottom();
-            return new Promise(res => setTimeout(() => {
-                indicator.classList.remove('active');
-                res();
-            }, ms));
-        }
-
-        function isValidEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-
-        async function requestNotifAndShow() {
-            if ('Notification' in window) {
-                const permission = await Notification.requestPermission();
-                notificationPermission = permission === 'granted';
-                if (notificationPermission) {
-                    addBotMessage(`✅ Notifications enabled! You'll be notified when our team replies.`);
-                } else {
-                    addBotMessage(`Notifications not enabled. We'll still reach you via *${chatUser ? chatUser.email : 'your email'}*.`);
-                }
-            }
-        }
-
-        function openChatWithWelcome() {
-            // Legacy: if somehow called, just open chat
-            document.getElementById('chatWindow').classList.add('active');
-            scrollToBottom();
-        }
-
-        function openChat() {
-            const win = document.getElementById('chatWindow');
-            win.classList.add('active');
-            scrollToBottom();
-        }
-
-        // Info modal stubs (kept for compatibility, now unused)
-        function showInfoModal(step) { /* no-op: bot handles collection */ }
-        function hideInfoModal() { }
-        function submitInfoModal() { }
-
-        function loadChatHistory() {
-            const history = localStorage.getItem('chatHistory');
-            if (history) {
-                messages = JSON.parse(history);
-                renderMessages();
-            }
-        }
-
-        function saveChatHistory() {
-            localStorage.setItem('chatHistory', JSON.stringify(messages));
-        }
-
-        function addMessage(msg) {
-            messages.push(msg);
-            renderMessage(msg);
-            saveChatHistory();
-            scrollToBottom();
-        }
-
-        function renderMessages() {
-            const container = document.getElementById('chatMessages');
-            container.innerHTML = '';
-            messages.forEach(m => renderMessage(m));
-        }
-
-        function renderMessage(msg) {
-            const container = document.getElementById('chatMessages');
-            const div = document.createElement('div');
-            div.className = `message ${msg.type}`;
-            
-            let content = '';
-            
-            if (msg.replyTo) {
-                content += `<div class="reply-to">${escapeHtml(msg.replyTo.text)}</div>`;
-            }
-            
-            if (msg.text) {
-                content += escapeHtml(msg.text);
-            }
-            
-            if (msg.mediaType === 'image') {
-                content += `<img src="${msg.mediaUrl}" class="message-media" onclick="window.open('${msg.mediaUrl}')">`;
-            } else if (msg.mediaType === 'video') {
-                content += `<video src="${msg.mediaUrl}" class="message-media" controls></video>`;
-            } else if (msg.mediaType === 'audio') {
-                content += `<audio src="${msg.mediaUrl}" class="message-audio" controls></audio>`;
-            } else if (msg.fileName) {
-                content += `<div class="message-file" onclick="window.open('${msg.fileUrl}')">
-                    📄 ${escapeHtml(msg.fileName)}
-                </div>`;
-            }
-            
-            const time = new Date(msg.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-            content += `<span class="message-time">${time}</span>`;
-            
-            div.innerHTML = content;
-            container.appendChild(div);
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        function setReply(index) {
-            replyingTo = messages[index];
-            document.getElementById('replyIndicator').classList.add('active');
-            document.querySelector('.reply-indicator-text').textContent = 'Replying to: ' + replyingTo.text.substring(0, 30) + '...';
-            document.getElementById('chatInput').focus();
-        }
-
-        function cancelReply() {
-            replyingTo = null;
-            document.getElementById('replyIndicator').classList.remove('active');
-        }
-
-        async function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const text = input.value.trim();
-            
-            if (!text) return;
-            if (input.disabled) return; // chat locked after info collected
-
-            // If bot is collecting info, handle via bot flow
-            if (botCollecting && botFlowStep && botFlowStep !== 'done') {
-                input.value = '';
-                input.style.height = 'auto';
-                cancelReply();
-                await handleBotFlowInput(text);
-                return;
-            }
-            
-            // Normal chat (admin already replied, chatUser exists)
-            if (!chatUser || !chatUser.name) {
-                startBotFlow('chat');
-                return;
-            }
-            
-            const msg = {
-                type: 'sent',
-                text: text,
-                time: new Date(),
-                replyTo: replyingTo
-            };
-            
-            addMessage(msg);
-            input.value = '';
-            input.style.height = 'auto';
-            cancelReply();
-            
-            let telegramText = `💬 *Message from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}\n${text}`;
-            if (replyingTo) {
-                telegramText += `\n\n_Reply to: ${replyingTo.text}_`;
-            }
-            
-            await sendToTelegram(telegramText);
-        }
-
-        async function handleFileSelect(event, type) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            if (!chatUser || !chatUser.name) {
-                pendingAction = 'chat';
-                startBotFlow('chat');
-                event.target.value = '';
-                return;
-            }
-            
-            const formData = new FormData();
-            formData.append('chat_id', CONFIG.telegramAdminChatId);
-            formData.append('caption', `📎 *File from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}*File:* ${file.name}\n*Size:* ${(file.size / 1024).toFixed(1)} KB`);
-            formData.append('parse_mode', 'Markdown');
-            
-            if (type === 'media') {
-                if (file.type.startsWith('image/')) {
-                    formData.append('photo', file);
-                    await sendTelegramMedia('sendPhoto', formData);
-                    
-                    const url = URL.createObjectURL(file);
-                    addMessage({
-                        type: 'sent',
-                        mediaType: 'image',
-                        mediaUrl: url,
-                        time: new Date()
-                    });
-                } else if (file.type.startsWith('video/')) {
-                    formData.append('video', file);
-                    await sendTelegramMedia('sendVideo', formData);
-                    
-                    const url = URL.createObjectURL(file);
-                    addMessage({
-                        type: 'sent',
-                        mediaType: 'video',
-                        mediaUrl: url,
-                        time: new Date()
-                    });
-                }
-            } else {
-                formData.append('document', file);
-                await sendTelegramMedia('sendDocument', formData);
-                
-                const url = URL.createObjectURL(file);
-                addMessage({
-                    type: 'sent',
-                    fileName: file.name,
-                    fileUrl: url,
-                    time: new Date()
-                });
-            }
-            
-            event.target.value = '';
-        }
-
-        async function sendTelegramMedia(method, formData) {
-            try {
-                const url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/${method}`;
-                await fetch(url, {
-                    method: 'POST',
-                    body: formData
-                });
-            } catch (err) {
-                console.error('Failed to send media:', err);
-            }
-        }
-
-        // Audio Recording
-        async function startRecording() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(stream);
-                audioChunks = [];
-                
-                mediaRecorder.ondataavailable = (e) => {
-                    audioChunks.push(e.data);
-                };
-                
-                mediaRecorder.onstop = async () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                    const audioUrl = URL.createObjectURL(audioBlob);
-                    
-                    addMessage({
-                        type: 'sent',
-                        mediaType: 'audio',
-                        mediaUrl: audioUrl,
-                        time: new Date()
-                    });
-                    
-                    const formData = new FormData();
-                    formData.append('chat_id', CONFIG.telegramAdminChatId);
-                    formData.append('voice', audioBlob, 'voice.webm');
-                    formData.append('caption', `🎤 *Voice message from ${chatUser.name}*\n*ID:* ${chatUser.id}\n${chatUser.email ? `*Email:* ${chatUser.email}\n` : ''}*Duration:* ${document.getElementById('recordingTime').textContent}`);
-                    formData.append('parse_mode', 'Markdown');
-                    
-                    await fetch(`https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendVoice`, {
-                        method: 'POST',
-                        body: formData
-                    });
-                    
-                    stream.getTracks().forEach(track => track.stop());
-                };
-                
-                mediaRecorder.start();
-                recordingStartTime = Date.now();
-                document.getElementById('recordingIndicator').classList.add('active');
-                
-                recordingInterval = setInterval(() => {
-                    const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
-                    const mins = Math.floor(elapsed / 60);
-                    const secs = elapsed % 60;
-                    document.getElementById('recordingTime').textContent = 
-                        `${mins}:${secs.toString().padStart(2, '0')}`;
-                }, 1000);
-                
-            } catch (err) {
-                console.error('Recording failed:', err);
-                alert('Could not access microphone');
-            }
-        }
-
-        function stopRecording() {
-            if (!mediaRecorder || mediaRecorder.state === 'inactive') return;
-            
-            mediaRecorder.stop();
-            clearInterval(recordingInterval);
-            document.getElementById('recordingIndicator').classList.remove('active');
-            document.getElementById('recordingTime').textContent = '0:00';
-        }
-
-        function scrollToBottom() {
-            const container = document.getElementById('chatMessages');
-            setTimeout(() => {
-                container.scrollTop = container.scrollHeight;
-            }, 100);
-        }
-
-        async function sendToTelegram(text) {
-            const url = `https://api.telegram.org/bot${CONFIG.telegramBotToken}/sendMessage`;
-            
-            try {
-                await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CONFIG.telegramAdminChatId,
-                        text: text,
-                        parse_mode: 'Markdown'
-                    })
-                });
-            } catch (err) {
-                console.error('Failed to send to Telegram:', err);
-            }
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
-            document.getElementById('searchInput').addEventListener('input', (e) => {
-                currentSearch = e.target.value;
-                filterAndRender();
-            });
-
-            document.getElementById('sortSelect').addEventListener('change', (e) => {
-                currentSort = e.target.value;
-                filterAndRender();
-            });
-
-            document.getElementById('previewModal').addEventListener('click', (e) => {
-                if (e.target === e.currentTarget) closeModal();
-            });
-
-            document.getElementById('infoModal').addEventListener('click', (e) => {
-                if (e.target === e.currentTarget) hideInfoModal();
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeModal();
-                    hideInfoModal();
-                    if (document.getElementById('chatWindow').classList.contains('active')) {
-                        document.getElementById('chatWindow').classList.remove('active');
-                    }
-                }
-            });
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+// ===== EVENTS =====
+function setupEvts(){
+    document.getElementById('searchInput').addEventListener('input',e=>{curSearch=e.target.value;filterGrid()});
+    document.getElementById('sortSel').addEventListener('change',e=>{curSort=e.target.value;filterGrid()});
+    document.getElementById('ppOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closePP()});
+    document.addEventListener('keydown',e=>{
+        if(e.key==='Escape'){closePP();closeStory();document.getElementById('chatWin').classList.remove('active')}
+    });
+    // Close story on overlay click (not on nav or info)
+    document.getElementById('storyFrame').addEventListener('click',e=>e.stopPropagation());
+}
+</script>
 </body>
 </html>
