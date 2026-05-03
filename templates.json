@@ -152,5 +152,27 @@
     "rating": 5.0,
     "trending": false,
     "added": "2026-04-15"
+  },
+  {
+    "id": 8,
+    "filename": "00019.html",
+    "name": "#8 New Beginning",
+    "url": "templates/00019.html",
+    "category": "uncategorized",
+    "tier": "Basic",
+    "price": 99,
+    "oldPrice": 299,
+    "discount": "67% OFF",
+    "desc": "New Beginning",
+    "features": {
+      "Style": "Custom",
+      "Animations": "?",
+      "Sections": "?",
+      "Countdown": "No"
+    },
+    "orders": 0,
+    "rating": 5.0,
+    "trending": false,
+    "added": "2026-05-03"
   }
 ]
